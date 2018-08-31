@@ -2,9 +2,9 @@
 
 El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nuestra cliente, Dora Elizabeth García Olivier, perteneciente del Centro Virtual de Aprendizajes. Dentro de sus actividades que actualmente realiza de manera manual se incluyen el: Dar de alta a alumnos, profesores y directivos asociados al servicio social Aprendizaje Verde.
 
-## Table of contents
+## Tabla de contenidos
 
-* [Client Details](#client-details)
+* [Detalles del Cliente](#client-details)
 * [Environment URLS](#environment-urls)
 * [Da Team](#team)
 * [Management resources](#management-resources)
@@ -16,8 +16,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 * [Running specs](#running-specs)
 * [Checking code for potential issues](#checking-code-for-potential-issues)
 
-
-### Client Details
+### Detalles del Cliente
 
 | Name               | Email             | Role |
 | ------------------ | ----------------- | ---- |
