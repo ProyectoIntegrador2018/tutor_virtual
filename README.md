@@ -5,8 +5,8 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 ## Tabla de contenidos
 
 * [Detalles del Cliente](#detalles-del-cliente)
-* [Environment URLS](#environment-urls)
-* [Da Team](#team)
+* [Ambientes del Sistema](#ambientes-del-sistema)
+* [Equipo de trabajo](#equipo-de-trabajo)
 * [Management resources](#management-resources)
 * [Setup the project](#setup-the-project)
 * [Running the stack for development](#running-the-stack-for-development)
@@ -23,7 +23,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 | Dora García Olivier | degolivier@itesm.mx | Coordinador CSA  |
 
 
-### Ligas a los diferentes ambientes
+### Ambientes del Sistema
 
 * **Producción** - [TBD](TBD)
 * **Desarrollo** - [TBD](TBD)
