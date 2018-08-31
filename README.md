@@ -4,7 +4,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 ## Tabla de contenidos
 
-* [Detalles del Cliente](#client-details)
+* [Detalles del Cliente](#detalles-del-cliente)
 * [Environment URLS](#environment-urls)
 * [Da Team](#team)
 * [Management resources](#management-resources)
