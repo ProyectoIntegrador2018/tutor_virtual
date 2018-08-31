@@ -18,23 +18,24 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 ### Detalles del Cliente
 
-| Name               | Email             | Role |
-| ------------------ | ----------------- | ---- |
-| Nombre del cliente | prueba@prueba.com | CEO  |
+| Nombre              | Email               | Rol              |
+| ------------------- | ------------------- | ---------------- |
+| Dora García Olivier | degolivier@itesm.mx | Coordinador CSA  |
 
 
-### Environment URLS
+### Ligas a los diferentes ambientes
 
-* **Production** - [TBD](TBD)
-* **Development** - [TBD](TBD)
+* **Producción** - [TBD](TBD)
+* **Desarrollo** - [TBD](TBD)
 
-### Da team
+### Equipo de trabajo
 
-| Name           | Email             | Role        |
-| -------------- | ----------------- | ----------- |
-| Nombre miembro | prueba@prueba.com | Development |
-| Nombre miembro | prueba@prueba.com | Development |
-| Nombre miembro | prueba@prueba.com | Development |
+| Nombre             | Email              | Rol          |
+| ------------------ | ------------------ | ------------ |
+| Elías Mera         | a01280762@itesm.mx | Desarrollo   |
+| Estafanía Guajardo | a00813202@itesm.mx | Desarrollo   |
+| Jorge Limón        | a01280734@itesm.mx | Scrum Master |
+| Roger Luna         | a00815024@itesm.mx | Desarrollo   |
 
 ### Management tools
 
