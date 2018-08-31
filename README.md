@@ -7,7 +7,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 * [Detalles del Cliente](#detalles-del-cliente)
 * [Ambientes del Sistema](#ambientes-del-sistema)
 * [Equipo de trabajo](#equipo-de-trabajo)
-* [Herramientas de Administración] (#herramientas-de-administración)
+* [Herramientas] (#herramientas)
 
 ### Detalles del Cliente
 
@@ -30,10 +30,10 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 | Jorge Limón        | a01280734@itesm.mx | Scrum Master |
 | Roger Luna         | a00815024@itesm.mx | Desarrollo   |
 
-### Herramientas de Administración
+### Herramientas
 
 Pide acceso a las siguientes herramientas de no ser que no lo tengas:
 
-* [Github repo](https://github.com/)
+* [Github repo](https://github.com/ProyectoIntegrador2018/tutor_virtual)
 * [Backlog]()
 * [Documentation](https://drive.com)
