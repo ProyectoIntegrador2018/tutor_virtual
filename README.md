@@ -13,7 +13,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 | Nombre              | Email               | Rol              |
 | ------------------- | ------------------- | ---------------- |
-| Dora García Olivier | degolivier@itesm.mx | Coordinador CSA  |
+| Dora García Olivier | degolivier@itesm.mx | Coordinador CVA  |
 
 
 ### Ambientes del Sistema
