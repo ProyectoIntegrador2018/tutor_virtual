@@ -5,3 +5,6 @@
 
 ## Pasos para reproducirse
 1. < Paso 1 para reproducirse >
+
+## Relaciones
+- #< id del issue relacionado >
