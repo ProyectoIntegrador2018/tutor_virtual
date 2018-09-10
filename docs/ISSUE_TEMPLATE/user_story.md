@@ -3,8 +3,11 @@ Como < tipo de usuario > se podrá < descripción de la funcionalidad > para < o
 ## Conversación
 < Detalles adicionales >
 
-## Tasks relacionadas
+## To Do
 - [ ] < Tareas por realizar >
 
 ## Criterios de aceptación
 - < Criterios a completar para asegurar que la historia es aceptada >
+
+## Relaciones
+#< id de la task relacionada >
