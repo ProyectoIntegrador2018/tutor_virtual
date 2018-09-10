@@ -1,4 +1,4 @@
-< Descripción breve de la historia de usuario >
+Como < tipo de usuario > se podrá < descripción de la funcionalidad > para < objetivo >
 
 ## Conversación
 < Detalles adicionales >
