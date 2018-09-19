@@ -1,0 +1,35 @@
+body {
+    background: #f7f7f7;
+}
+#principal {
+    position: fixed;
+    float: left;
+    width: 220px;
+    height: 100%;
+    background: #3D6D4B;
+}
+
+#principal ul,
+#principal ul li {
+    width: 100%;
+    line-height: .5px;
+    list-style-type: none;
+}
+
+#principal ul li a {
+    float: left;
+    width: 100%;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+#principal ul li a h3{
+    float: left;
+    width: 100%;
+    color: inherit;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+#principal ul li a:hover{
+    color: #8FF9AE;
+}

@@ -16,6 +16,11 @@ Route::get('/', function () {
     //return redirect('auth/login');
 });
 
+Route::get('menuLateral', function () {
+    return view('menuLateral');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
