@@ -9,8 +9,30 @@ body {
     background: #3D6D4B;
 }
 
-#principal ul,
-#principal ul li {
+.secondMenu {
+    position: fixed;
+    width: 220px;
+    left: 220px;
+    background: #67e478;
+    height: 100%;
+}
+
+#principal ul {
+    float: left;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.secondMenu ul {
+    float: left;
+    padding: 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#principal ul li,
+.secondMenu ul li {
+    float: left;
     width: 100%;
     line-height: .5px;
     list-style-type: none;
@@ -21,15 +43,37 @@ body {
     width: 100%;
     color: #ffffff;
     font-size: 24px;
+    text-align: center;
 }
 
 #principal ul li a h3{
     float: left;
     width: 100%;
     color: inherit;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#principal ul li a:hover{
-    color: #8FF9AE;
+.secondMenu ul li h2{
+    float: left;
+    width: 100%;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
+
+.menuHover li:hover {
+    background: #2d4e2d;
+  }
+
+.menuHover2:hover {
+    background: #31963f;
+}
+
+.searchInput {
+    padding-left: 20px;
+}
+
+#uploadExcel {
+    margin-top: 50px;
+}
+
