@@ -2,8 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- <div id="mainComponent"></div>
-<div class="container">
+<div id="mainComponent"></div>
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="">
