@@ -1,13 +1,16 @@
+<link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="mainComponent"></div>
+
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+            <div class="">
+                <div class="">Dashboard</div>
 
-                <div class="card-body">
+                <div class="">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -15,9 +18,12 @@
                     @endif
 
                     You are logged in!
+
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

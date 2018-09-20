@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Test from './Test';
 
 export default class MainComponent extends Component {
     render() {
         return (
+            <Router>
             <nav id="principal">
                 <ul className="menuHover">
                     <li>
-                        <a href="">
-                            <h3>Est. Acad.</h3>
+                        <a>
+                            <Link to="/test"><h3>Test</h3></Link>
+                            <Route exact path='/test' component={Test}/>
                         </a>
                     </li>
                     <li>
@@ -74,6 +80,7 @@ export default class MainComponent extends Component {
                     </ul>
                 </div>
             </nav>
+            </Router>
         );
     }
 }
