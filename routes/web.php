@@ -27,3 +27,4 @@ Route::get('/index/{path?}', 'HomeController@index')
     ->name('home');
 
 Route::get('/api/cursos', 'Api\\CursoController@index');
+Route::post('/api/curso/store', 'Api\\CursoController@store');
