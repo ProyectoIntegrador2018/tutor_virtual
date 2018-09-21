@@ -7,7 +7,7 @@ export default class Curso_Sub extends Component {
             <div className="col-2 pt-4 px-1 bg-primary" name="subNav">
                 <div className="row justify-content-center">
                     <div className="col-auto">
-                        <button type="button" class="btn btn-outline-light btn-lg">
+                        <button type="button" className="btn btn-outline-light btn-lg">
                             Subir<br/>Excel
                         </button>
                     </div>

@@ -25,3 +25,5 @@ Auth::routes();
 Route::get('/index/{path?}', 'HomeController@index')
     ->where('path', '.*')
     ->name('home');
+
+Route::get('/api/cursos', 'Api\\CursoController@index');

@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class Cursos_Listing extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            cursos : []
+        }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:4200/api/cursos').then(
+            response => {
+                this.setState({
+                    cursos: response.data
+                });
+        });
+    }
 
     render() {
         return (
@@ -16,7 +33,7 @@ export default class Cursos_Listing extends Component {
                             <div className="input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" id="basic-addon1">
-                                        <i class="material-icons">search</i>
+                                        <i className="material-icons">search</i>
                                     </span>
                                 </div>
                                 <input type="text" className="form-control" placeholder="Buscar curso por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
@@ -27,34 +44,33 @@ export default class Cursos_Listing extends Component {
                     {/*Content row*/}
                     <div className="row justify-content-center p-4">
                         <div className="col p-0">
-                            <table class="table table-hover">
-                                <thead class="thead-dark">
+                            <div className="row">
+                                <h1>Cursos</h1>
+                            </div>
+                            
+                            <table className="table table-hover">
+                                <thead className="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Clave</th>
+                                        <th scope="col">Fecha fin</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    {
+                                        this.state.cursos.map(curso => {
+                                            return (
+                                                <tr>
+                                                    <th scope="row">{curso.id}</th>
+                                                    <td>{curso.nombre}</td>
+                                                    <td>{curso.clave}</td>
+                                                    <td>{curso.fechaFin}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                    
                                 </tbody>
                             </table>
                         </div>
