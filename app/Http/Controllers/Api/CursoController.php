@@ -47,7 +47,16 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curso = new Curso();
+        $curso->nombre = $request->curso_nombre;
+        $curso->clave = $request->curso_clave;
+        $curso->fechaInicioInscripcion = $request->curso_fechaInicioInscripcion;
+        $curso->fechaFinInscripcion = $request->curso_fechaFinInscripcion;
+        $curso->fechaInicio = $request->curso_fechaInicio;
+        $curso->fechaFin = $request->curso_fechaFin;
+        $curso->reconocimiento = $request->curso_reconocimiento;
+        $curso->horas = $request->curso_horas;
+        $curso->save();
     }
 
     /**

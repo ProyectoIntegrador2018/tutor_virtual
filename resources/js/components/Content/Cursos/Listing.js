@@ -36,7 +36,7 @@ export default class Cursos_Listing extends Component {
                                         <i className="material-icons">search</i>
                                     </span>
                                 </div>
-                                <input type="text" className="form-control" placeholder="Buscar curso por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
+                                <input type="text" className="form-control form-control-lg" placeholder="Buscar curso por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
