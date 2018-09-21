@@ -1,85 +1,37 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router} from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import Test from './Test';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Curso_Sub from './SubNavbars/Curso_Sub';
+import Cursos_Listing from './Content/Cursos/Listing';
+import Cursos_New from './Content/Cursos/New';
 
 export default class MainComponent extends Component {
     render() {
         return (
-            <Router>
-            <nav id="principal">
-                <ul className="menuHover">
-                    <li>
-                        <a>
-                            <Link to="/test"><h3>Test</h3></Link>
-                            <Route exact path='/test' component={Test}/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <h3>Cursos</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <h3>Grupos</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <h3>Tutores</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <h3>Alumnos</h3>
-                        </a>
-                    </li>
-                </ul>
-                <div className="secondMenu">
-                    <ul id="uploadExcel">
-                        <li>
-                            <h2>Subir Excel</h2>
-                        </li>
-                        <li>
-                            <input type="file"/>
-                        </li>
-                        <li>
-                            <button type="submit">Submit</button>
-                        </li>
-                    </ul>
-                    <ul>
-                    <li className="menuHover2">
-                            <h2>Sub-sección</h2>
-                        </li>
-                        <li className="menuHover2">
-                            <h2>Sub-sección</h2>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h2>Filtro 1</h2>
-                        </li>
-                        <li className="searchInput">
-                            <input type="search"/>
-                        </li>
-                        <li>
-                            <h2>Filtro 2</h2>
-                        </li>
-                        <li className="searchInput">
-                            <input type="search"/>
-                        </li>
-                        <li>
-                            <h2>Filtro 3</h2>
-                        </li>
-                        <li className="searchInput">
-                            <input type="search"/>
-                        </li>
-                    </ul>
+            <Router basename="index">
+                <div className="container-fluid">
+                    <div className="row">
+
+                        {/* Main Navbar */}
+                        <div className="col-2 pt-4 px-1 bg-primary-dark" name="mainNav">
+                            <ul className="list-group list-group-flush bg-transparent">
+                                <li className="list-group-item bg-transparent text-center">
+                                    <Link to="/cursos" className="text-white h3">Cursos</Link>
+                                </li>
+                                <li className="list-group-item bg-transparent text-center">
+                                    <Link to="/cursos" className="text-white h3">Alumnos</Link>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Sub Navbars */}
+                        <Route path='/cursos' component={Curso_Sub}/>
+
+                        {/* Content Areas */}
+                        <Route exact path='/cursos' component={Cursos_Listing}/>
+                        <Route exact path='/cursos/nuevo' component={Cursos_New}/>
+                    </div>
                 </div>
-            </nav>
             </Router>
         );
     }

@@ -13,6 +13,6 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
 require('./components/MainComponent');
-require('./components/Test');
+require('./components/SubNavbars/Curso_Sub');
+require('./components/Content/Cursos/Listing');
