@@ -12,15 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('auth/login');
-    //return redirect('auth/login');
-});
-
-Route::get('menuLateral', function () {
-    return view('menuLateral');
+    if(Auth::check()) {
+        return redirect('/index');
+    }
+    else {
+        return view('/auth/login');
+    }
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/index/{path?}', 'HomeController@index')
+    ->where('path', '.*')
+    ->name('home');
 
+Route::get('/api/cursos', 'Api\\CursoController@index');
