@@ -15662,8 +15662,27 @@ var Cursos_Listing = function (_Component) {
             });
         }
     }, {
+        key: 'onDelete',
+        value: function onDelete(curso_id) {
+            var _this3 = this;
+
+            console.log(curso_id);
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/cursos/delete/' + curso_id).then(function (response) {
+
+                var cursos = _this3.state.cursos;
+                for (var i = 0; i < cursos.length; i++) {
+                    if (cursos[i].id == curso_id) {
+                        cursos.splice(i, 1);
+                        _this3.setState({ cursos: cursos });
+                    }
+                }
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this4 = this;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
                 null,
@@ -15739,6 +15758,11 @@ var Cursos_Listing = function (_Component) {
                                             'th',
                                             { scope: 'col' },
                                             'Fecha fin'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Action'
                                         )
                                     )
                                 ),
@@ -15768,6 +15792,15 @@ var Cursos_Listing = function (_Component) {
                                                 'td',
                                                 null,
                                                 curso.fechaFin
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this4.onDelete.bind(_this4, curso.id) },
+                                                    'Delete'
+                                                )
                                             )
                                         );
                                     })

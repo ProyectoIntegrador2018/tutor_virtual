@@ -101,6 +101,7 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::find($id);
+        $curso->delete();
     }
 }

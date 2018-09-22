@@ -21,6 +21,21 @@ export default class Cursos_Listing extends Component {
         });
     }
 
+    onDelete(curso_id){
+        console.log(curso_id);
+        axios.delete('http://localhost:4200/api/cursos/delete/' + curso_id)
+        .then(response =>{
+
+            var cursos = this.state.cursos;
+            for(var  i = 0; i< cursos.length; i++){
+                if(cursos[i].id == curso_id){
+                    cursos.splice(i,1);
+                    this.setState({cursos:cursos});
+                }
+            }
+        })
+    }
+
     render() {
         return (
             <Router>
@@ -55,6 +70,7 @@ export default class Cursos_Listing extends Component {
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Clave</th>
                                         <th scope="col">Fecha fin</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,6 +82,7 @@ export default class Cursos_Listing extends Component {
                                                     <td>{curso.nombre}</td>
                                                     <td>{curso.clave}</td>
                                                     <td>{curso.fechaFin}</td>
+                                                    <td><button onClick={this.onDelete.bind(this,curso.id)}>Delete</button></td>
                                                 </tr>
                                             )
                                         })
