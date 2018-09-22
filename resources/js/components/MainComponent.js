@@ -23,7 +23,7 @@ export default class MainComponent extends Component {
                                 </li>
                             </ul>
                         </div>
-
+                        
                         {/* Sub Navbars */}
                         <Route path='/cursos' component={Curso_Sub}/>
 
