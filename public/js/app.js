@@ -15807,6 +15807,19 @@ var Cursos_Listing = function (_Component) {
                                 )
                             )
                         )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+                            { to: '/cursos/nuevo' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'button',
+                                null,
+                                'Agregar Curso'
+                            )
+                        )
                     )
                 )
             );

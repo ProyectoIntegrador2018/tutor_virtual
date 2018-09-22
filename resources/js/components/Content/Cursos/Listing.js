@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
+
 export default class Cursos_Listing extends Component {
 
     constructor() {
@@ -91,6 +92,11 @@ export default class Cursos_Listing extends Component {
                                 </tbody>
                             </table>
                         </div>
+                        
+                    </div>
+                    <div>
+                    <Link to="/cursos/nuevo"><button>Agregar Curso</button></Link>
+                    
                     </div>
                 </div>
             </Router>
