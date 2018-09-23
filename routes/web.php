@@ -29,3 +29,4 @@ Route::get('/index/{path?}', 'HomeController@index')
 Route::get('/api/cursos', 'Api\\CursoController@index');
 Route::post('/api/curso/store', 'Api\\CursoController@store');
 Route::delete('/api/cursos/delete/{id}', 'Api\\CursoController@destroy');
+Route::get('/api/curso/{id}', 'Api\\CursoController@show');
