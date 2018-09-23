@@ -67,7 +67,8 @@ class CursoController extends Controller
      */
     public function show($id)
     {
-        //
+        $curso = Curso::where('id',$id)->get();
+        return $curso[0];
     }
 
     /**
@@ -102,6 +103,9 @@ class CursoController extends Controller
     public function destroy($id)
     {
         $curso = Curso::find($id);
+        echo "dsasffs";
+        echo $curso;
         $curso->delete();
     }
+    
 }
