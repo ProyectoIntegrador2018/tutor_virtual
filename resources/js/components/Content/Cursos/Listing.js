@@ -112,12 +112,12 @@ export default class Cursos_Listing extends Component {
                                                         <div className="form-group">
                                                         
                             <label htmlFor="curso_nombre">Nombre</label>
-                            <input type="text"
+                            <input readOnly type="text"
                             className="form-control"
                             id="curso_nombre"
                             aria-describedby="nombre"
-                            value={this.state.cursoEsp.nombre}
-                            onChange={this.onChangeCurso_Nombre}/>
+                            value={this.state.cursoEsp.nombre} 
+                            onChange={this.onChangeCurso_Nombre} />
                         </div>
 
                         <div className="form-group">
