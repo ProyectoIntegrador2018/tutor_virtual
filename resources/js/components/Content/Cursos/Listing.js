@@ -8,6 +8,14 @@ export default class Cursos_Listing extends Component {
 
     constructor() {
         super();
+        this.onChangeCurso_Nombre = this.onChangeCurso_Nombre.bind(this);
+        this.onChangeCurso_Clave = this.onChangeCurso_Clave.bind(this);
+        this.onChangeCurso_FechaInicioInscripcion = this.onChangeCurso_FechaInicioInscripcion.bind(this);
+        this.onChangeCurso_FechaFinInscripcion = this.onChangeCurso_FechaFinInscripcion.bind(this);
+        this.onChangeCurso_FechaInicio = this.onChangeCurso_FechaInicio.bind(this);
+        this.onChangeCurso_FechaFin = this.onChangeCurso_FechaFin.bind(this);
+        this.onChangeCurso_Reconocimiento = this.onChangeCurso_Reconocimiento.bind(this);
+        this.onChangeCurso_Horas = this.onChangeCurso_Horas.bind(this);
         this.state = {
             cursos : [],
             isActive : false,
@@ -24,6 +32,8 @@ export default class Cursos_Listing extends Component {
         });
         Modal.setAppElement('body');
     }
+
+
 
     onDelete(curso_id){
         console.log(curso_id);
@@ -58,6 +68,81 @@ export default class Cursos_Listing extends Component {
         
 
     }
+
+    onSubmit(e) {
+        
+        //e.preventDefault();
+        debugger;
+        var curso_id = this.state.cursoEsp.id;
+        const curso = {
+            curso_nombre : this.state.cursoEsp.nombre,
+            curso_clave : this.state.cursoEsp.clave,
+            curso_fechaInicioInscripcion : this.state.cursoEsp.fechaInicioInscripcion,
+            curso_fechaFinInscripcion : this.state.cursoEsp.fechaFinInscripcion,
+            curso_fechaInicio : this.state.cursoEsp.fechaInicio,
+            curso_fechaFin : this.state.cursoEsp.fechaFin,
+            curso_reconocimiento : this.state.cursoEsp.reconocimiento,
+            curso_horas : this.state.cursoEsp.horas
+        }
+        debugger;
+        axios.put('http://localhost:4200/api/curso/update/' + curso_id, curso).then(
+            response =>{
+                axios.get('http://localhost:4200/api/cursos').then(
+                    response => {
+                        this.setState({
+                            cursos: response.data
+                        });
+                });
+                }
+            
+        );
+        
+
+    }
+
+    onChangeCurso_Nombre(e) {
+        debugger;
+        this.state.cursoEsp.nombre = e.target.value;
+        this.forceUpdate();
+
+    }
+    onChangeCurso_Clave(e) {
+        debugger;
+        this.state.cursoEsp.clave = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeCurso_FechaInicioInscripcion(e) {
+        this.state.cursoEsp.fechaInicioInscripcion = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeCurso_FechaFinInscripcion(e) {
+        debugger;
+        this.state.cursoEsp.fechaFinInscripcion = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeCurso_FechaInicio(e) {
+        this.state.cursoEsp.fechaInicio = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeCurso_FechaFin(e) {
+        this.state.cursoEsp.fechaFin = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeCurso_Reconocimiento(e) {
+        this.state.cursoEsp.reconocimiento = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeCurso_Horas(e) {
+        this.state.cursoEsp.horas = e.target.value;
+        this.forceUpdate();
+    }
+
 
     render() {
         return (
@@ -116,8 +201,8 @@ export default class Cursos_Listing extends Component {
                             className="form-control"
                             id="curso_nombre"
                             aria-describedby="nombre"
-                            value={this.state.cursoEsp.nombre}
-                            onChange={this.onChangeCurso_Nombre}/>
+                            value={this.state.cursoEsp.nombre} 
+                            onChange={this.onChangeCurso_Nombre} />
                         </div>
 
                         <div className="form-group">
@@ -136,7 +221,7 @@ export default class Cursos_Listing extends Component {
                             className="form-control"
                             id="curso_fechaInicioInscripcion"
                             aria-describedby="fechaInicioInscripcion"
-                            value={this.state.cursoEsp.fechainicioinscripcion}
+                            value={this.state.cursoEsp.fechaInicioInscripcion}
                             onChange={this.onChangeCurso_FechaInicioInscripcion}
                             placeholder="AAAA-MM-DD"/>
                         </div>
@@ -147,7 +232,7 @@ export default class Cursos_Listing extends Component {
                             className="form-control"
                             id="curso_fechaFinInscripcion"
                             aria-describedby="fechaFinInscripcion"
-                            value={this.state.cursoEsp.fechafininscripcion}
+                            value={this.state.cursoEsp.fechaFinInscripcion}
                             onChange={this.onChangeCurso_FechaFinInscripcion}
                             placeholder="AAAA-MM-DD"/>
                         </div>
@@ -158,7 +243,7 @@ export default class Cursos_Listing extends Component {
                             className="form-control"
                             id="curso_fechaInicio"
                             aria-describedby="fechaInicio"
-                            value={this.state.cursoEsp.fechainicio}
+                            value={this.state.cursoEsp.fechaInicio}
                             onChange={this.onChangeCurso_FechaInicio}
                             placeholder="AAAA-MM-DD"/>
                         </div>
@@ -169,7 +254,7 @@ export default class Cursos_Listing extends Component {
                             className="form-control"
                             id="curso_fechaFin"
                             aria-describedby="fechaFin"
-                            value={this.state.cursoEsp.fechafin}
+                            value={this.state.cursoEsp.fechaFin}
                             onChange={this.onChangeCurso_FechaFin}
                             placeholder="AAAA-MM-DD"/>
                         </div>
@@ -193,6 +278,7 @@ export default class Cursos_Listing extends Component {
                             value={this.state.cursoEsp.horas}
                             onChange={this.onChangeCurso_Horas}/>
                         </div>
+                        <button onClick={this.onSubmit.bind(this,curso.id)}>Actualizar</button>
                                                     </Modal>
                                                 </tr>
                                             )
