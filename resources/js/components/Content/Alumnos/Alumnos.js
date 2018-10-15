@@ -39,9 +39,9 @@ export default class Alumnos extends Component {
 
     onEnter(e){
         var search_info = this.state.search_info;
-        debugger;
-        if (e.key == 'Enter' && search_info != "") {
-            debugger;
+        
+        if (search_info != "") {
+            
             axios.get('http://localhost:4200/api/search/alumnos/'+ search_info).then(
                 response => {
                     this.setState({
@@ -49,9 +49,8 @@ export default class Alumnos extends Component {
                     });
             });
             
-          }
-          else
-            if(search_info == "")
+         }
+           else
             {
                 axios.get('http://localhost:4200/api/alumnos').then(
                     response => {
@@ -59,7 +58,7 @@ export default class Alumnos extends Component {
                             alumnos: response.data
                         });
                 });
-            }
+            } 
         
 
     }
@@ -196,7 +195,7 @@ export default class Alumnos extends Component {
                 <i className="material-icons">search</i>
                 </span>
             </div>
-            <input value={this.state.search_info} onKeyPress={this.onEnter.bind(this)}
+            <input value={this.state.search_info} onKeyUp={this.onEnter.bind(this)}
             onChange={this.onChangeSearch} type="text" className="form-control form-control-lg" 
             placeholder="Buscar alumno por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
         </div>

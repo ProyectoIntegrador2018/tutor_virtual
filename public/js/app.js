@@ -63379,15 +63379,15 @@ var Alumnos = function (_Component) {
             var _this3 = this;
 
             var search_info = this.state.search_info;
-            debugger;
-            if (e.key == 'Enter' && search_info != "") {
-                debugger;
+
+            if (search_info != "") {
+
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/alumnos/' + search_info).then(function (response) {
                     _this3.setState({
                         alumnos: response.data
                     });
                 });
-            } else if (search_info == "") {
+            } else {
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/alumnos').then(function (response) {
                     _this3.setState({
                         alumnos: response.data
@@ -63558,7 +63558,7 @@ var Alumnos = function (_Component) {
                                         )
                                     )
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyPress: this.onEnter.bind(this),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyUp: this.onEnter.bind(this),
                                     onChange: this.onChangeSearch, type: 'text', className: 'form-control form-control-lg',
                                     placeholder: 'Buscar alumno por nombre...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
                             )
@@ -63903,7 +63903,7 @@ var Alumno_Sub = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h4',
                             null,
-                            'Pendientes 1000 alv'
+                            'Pendientes 1000'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h1',
