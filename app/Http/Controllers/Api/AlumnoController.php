@@ -17,7 +17,31 @@ class AlumnoController extends Controller
     {
         $result = Alumno::all();
         return $result;
+ /*        $request = "123";
+        $result = Alumno::where('nombre','LIKE','%'.$request."%")
+        ->orWhere('pais','LIKE','%'.$request."%")
+        ->get();
+        return $result; */
+ 
+
     }
+    public function search($alumno)
+    {
+        if($alumno == " "){
+            $result = Alumno::all();
+            return $result;
+        }
+        else{
+            $request = $alumno;
+            $result = Alumno::where('nombre','LIKE','%'.$request."%")
+            ->orWhere('correo','LIKE','%'.$request."%")
+            ->orWhere('pais','LIKE','%'.$request."%")
+            ->get();
+            return $result;
+        }
+
+    }
+    
 
     /**
      * Show the form for creating a new resource.

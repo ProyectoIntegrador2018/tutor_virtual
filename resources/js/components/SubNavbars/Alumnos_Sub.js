@@ -8,7 +8,7 @@ export default class Alumno_Sub extends Component {
                 <div className="row justify-content-center">
                     <div className="col-auto">
                         <h4>Asignados 0</h4>
-                        <h4>Pendientes 1000 alv</h4>
+                        <h4>Pendientes 1000</h4>
                         <h1>Filtros Rapidos </h1>
                         <div className="row p-0">
                         <div className="col-12 p-0">
