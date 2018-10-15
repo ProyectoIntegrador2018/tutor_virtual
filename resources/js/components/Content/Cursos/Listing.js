@@ -72,7 +72,7 @@ export default class Cursos_Listing extends Component {
     onSubmit(e) {
         
         //e.preventDefault();
-        debugger;
+        
         var curso_id = this.state.cursoEsp.id;
         const curso = {
             curso_nombre : this.state.cursoEsp.nombre,
@@ -84,7 +84,7 @@ export default class Cursos_Listing extends Component {
             curso_reconocimiento : this.state.cursoEsp.reconocimiento,
             curso_horas : this.state.cursoEsp.horas
         }
-        debugger;
+        
         axios.put('http://localhost:4200/api/curso/update/' + curso_id, curso).then(
             response =>{
                 axios.get('http://localhost:4200/api/cursos').then(
@@ -100,14 +100,12 @@ export default class Cursos_Listing extends Component {
 
     }
 
-    onChangeCurso_Nombre(e) {
-        debugger;
+    onChangeCurso_Nombre(e) { 
         this.state.cursoEsp.nombre = e.target.value;
         this.forceUpdate();
 
     }
     onChangeCurso_Clave(e) {
-        debugger;
         this.state.cursoEsp.clave = e.target.value;
         this.forceUpdate();
     }

@@ -61,7 +61,8 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        //
+        $alumno = Alumno::where('id',$id)->get();
+        return $alumno[0];
     }
 
     /**
@@ -84,7 +85,18 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $alumno = Alumno::find($id);
+        $alumno->nombre = $request->alumno_nombre;
+        $alumno->appellidoPaterno = $request->alumno_appellidoPaterno;
+        $alumno->apellidoMaterno = $request->alumno_apellidoMaterno;
+        $alumno->correo = $request->alumno_correo;
+        $alumno->pais = $request->alumno_pais;
+        $alumno->estado = $request->alumno_estado;
+        $alumno->ciudad = $request->alumno_ciudad;
+        $alumno->municipio = $request->alumno_municipio;
+        $alumno->genero = $request->alumno_genero;
+        $alumno->fechaNacimiento = $request->alumno_fechaNacimiento;
+        $alumno->save();
     }
 
     /**
