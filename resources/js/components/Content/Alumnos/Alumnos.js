@@ -18,10 +18,12 @@ export default class Alumnos extends Component {
         this.onChangeAlumno_Municipio = this.onChangeAlumno_Municipio.bind(this);
         this.onChangeAlumno_Genero = this.onChangeAlumno_Genero.bind(this);
         this.onChangeAlumno_FechaNacimiento = this.onChangeAlumno_FechaNacimiento.bind(this);
+        this.onChangeSearch = this.onChangeSearch.bind(this);
         this.state = {
             alumnos : [],
             isActive : false,
-            alumnoEsp : []
+            alumnoEsp : [],
+            search_info : ""
         }
     }
 
@@ -35,6 +37,32 @@ export default class Alumnos extends Component {
         //Modal.setAppElement('body');
     }
 
+    onEnter(e){
+        var search_info = this.state.search_info;
+        debugger;
+        if (e.key == 'Enter' && search_info != "") {
+            debugger;
+            axios.get('http://localhost:4200/api/search/alumnos/'+ search_info).then(
+                response => {
+                    this.setState({
+                        alumnos: response.data
+                    });
+            });
+            
+          }
+          else
+            if(search_info == "")
+            {
+                axios.get('http://localhost:4200/api/alumnos').then(
+                    response => {
+                        this.setState({
+                            alumnos: response.data
+                        });
+                });
+            }
+        
+
+    }
 
     onDelete(alumno_id){
         console.log(alumno_id);
@@ -118,6 +146,10 @@ export default class Alumnos extends Component {
         this.state.alumnoEsp.fechaNacimiento = e.target.value;
         this.forceUpdate();
     }
+    onChangeSearch(e){
+        this.state.search_info = e.target.value;
+        this.forceUpdate();
+    }
 
     onSubmit(e) {
         
@@ -164,7 +196,9 @@ export default class Alumnos extends Component {
                 <i className="material-icons">search</i>
                 </span>
             </div>
-            <input type="text" className="form-control form-control-lg" placeholder="Buscar alumno por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
+            <input value={this.state.search_info} onKeyPress={this.onEnter.bind(this)}
+            onChange={this.onChangeSearch} type="text" className="form-control form-control-lg" 
+            placeholder="Buscar alumno por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
         </div>
     </div>
     </div>

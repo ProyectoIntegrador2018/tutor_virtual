@@ -37,3 +37,5 @@ Route::delete('/api/alumnos/delete/{id}', 'Api\\AlumnoController@destroy');
 Route::post('/api/alumno/store', 'Api\\AlumnoController@store');
 Route::get('/api/alumno/{id}', 'Api\\AlumnoController@show');
 Route::put('/api/alumno/update/{id}', 'Api\\AlumnoController@update');
+
+Route::get('/api/search/alumnos/{search_info}', 'Api\\AlumnoController@search');

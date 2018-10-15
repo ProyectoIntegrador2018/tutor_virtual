@@ -63351,10 +63351,12 @@ var Alumnos = function (_Component) {
         _this.onChangeAlumno_Municipio = _this.onChangeAlumno_Municipio.bind(_this);
         _this.onChangeAlumno_Genero = _this.onChangeAlumno_Genero.bind(_this);
         _this.onChangeAlumno_FechaNacimiento = _this.onChangeAlumno_FechaNacimiento.bind(_this);
+        _this.onChangeSearch = _this.onChangeSearch.bind(_this);
         _this.state = {
             alumnos: [],
             isActive: false,
-            alumnoEsp: []
+            alumnoEsp: [],
+            search_info: ""
         };
         return _this;
     }
@@ -63372,18 +63374,40 @@ var Alumnos = function (_Component) {
             //Modal.setAppElement('body');
         }
     }, {
+        key: 'onEnter',
+        value: function onEnter(e) {
+            var _this3 = this;
+
+            var search_info = this.state.search_info;
+            debugger;
+            if (e.key == 'Enter' && search_info != "") {
+                debugger;
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/alumnos/' + search_info).then(function (response) {
+                    _this3.setState({
+                        alumnos: response.data
+                    });
+                });
+            } else if (search_info == "") {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/alumnos').then(function (response) {
+                    _this3.setState({
+                        alumnos: response.data
+                    });
+                });
+            }
+        }
+    }, {
         key: 'onDelete',
         value: function onDelete(alumno_id) {
-            var _this3 = this;
+            var _this4 = this;
 
             console.log(alumno_id);
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id).then(function (response) {
 
-                var alumnos = _this3.state.alumnos;
+                var alumnos = _this4.state.alumnos;
                 for (var i = 0; i < alumnos.length; i++) {
                     if (alumnos[i].id == alumno_id) {
                         alumnos.splice(i, 1);
-                        _this3.setState({ alumnos: alumnos });
+                        _this4.setState({ alumnos: alumnos });
                     }
                 }
             });
@@ -63391,12 +63415,12 @@ var Alumnos = function (_Component) {
     }, {
         key: 'toggleModal',
         value: function toggleModal(alumno_id) {
-            var _this4 = this;
+            var _this5 = this;
 
             console.log(alumno_id);
             this.setState({ isActive: true });
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/alumno/' + alumno_id).then(function (response) {
-                _this4.setState({
+                _this5.setState({
                     alumnoEsp: response.data
 
                 });
@@ -63468,9 +63492,15 @@ var Alumnos = function (_Component) {
             this.forceUpdate();
         }
     }, {
+        key: 'onChangeSearch',
+        value: function onChangeSearch(e) {
+            this.state.search_info = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
         key: 'onSubmit',
         value: function onSubmit(e) {
-            var _this5 = this;
+            var _this6 = this;
 
             var alumno_id = this.state.alumnoEsp.id;
             var alumno = {
@@ -63489,7 +63519,7 @@ var Alumnos = function (_Component) {
 
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('http://localhost:4200/api/alumno/update/' + alumno_id, alumno).then(function (response) {
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/alumnos').then(function (response) {
-                    _this5.setState({
+                    _this6.setState({
                         alumnos: response.data
                     });
                 });
@@ -63498,7 +63528,7 @@ var Alumnos = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this6 = this;
+            var _this7 = this;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
@@ -63528,7 +63558,9 @@ var Alumnos = function (_Component) {
                                         )
                                     )
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control form-control-lg', placeholder: 'Buscar alumno por nombre...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyPress: this.onEnter.bind(this),
+                                    onChange: this.onChangeSearch, type: 'text', className: 'form-control form-control-lg',
+                                    placeholder: 'Buscar alumno por nombre...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
                             )
                         )
                     ),
@@ -63615,7 +63647,7 @@ var Alumnos = function (_Component) {
                                                 null,
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
-                                                    { onClick: _this6.onDelete.bind(_this6, alumno.id) },
+                                                    { onClick: _this7.onDelete.bind(_this7, alumno.id) },
                                                     'Delete'
                                                 )
                                             ),
@@ -63624,16 +63656,16 @@ var Alumnos = function (_Component) {
                                                 null,
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
-                                                    { onClick: _this6.toggleModal.bind(_this6, alumno.id) },
+                                                    { onClick: _this7.toggleModal.bind(_this7, alumno.id) },
                                                     'Detalle'
                                                 )
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 __WEBPACK_IMPORTED_MODULE_4_react_modal___default.a,
-                                                { isOpen: _this6.state.isActive, onRequestClose: _this6.closeModal.isActive },
+                                                { isOpen: _this7.state.isActive, onRequestClose: _this7.closeModal.isActive },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
-                                                    { onClick: _this6.closeModal.bind(_this6) },
+                                                    { onClick: _this7.closeModal.bind(_this7) },
                                                     'Hide Modal'
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -63648,8 +63680,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_nombre',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.nombre,
-                                                        onChange: _this6.onChangeAlumno_Nombre })
+                                                        value: _this7.state.alumnoEsp.nombre,
+                                                        onChange: _this7.onChangeAlumno_Nombre })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63663,8 +63695,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_nombre',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.appellidoPaterno,
-                                                        onChange: _this6.onChangeAlumno_AppellidoPaterno })
+                                                        value: _this7.state.alumnoEsp.appellidoPaterno,
+                                                        onChange: _this7.onChangeAlumno_AppellidoPaterno })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63678,8 +63710,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_apellidoMaterno',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.apellidoMaterno,
-                                                        onChange: _this6.onChangeAlumno_ApellidoMaterno })
+                                                        value: _this7.state.alumnoEsp.apellidoMaterno,
+                                                        onChange: _this7.onChangeAlumno_ApellidoMaterno })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63693,8 +63725,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_correo',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.correo,
-                                                        onChange: _this6.onChangeAlumno_Correo })
+                                                        value: _this7.state.alumnoEsp.correo,
+                                                        onChange: _this7.onChangeAlumno_Correo })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63708,8 +63740,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_pais',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.pais,
-                                                        onChange: _this6.onChangeAlumno_Pais })
+                                                        value: _this7.state.alumnoEsp.pais,
+                                                        onChange: _this7.onChangeAlumno_Pais })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63723,8 +63755,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_estado',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.estado,
-                                                        onChange: _this6.onChangeAlumno_Estado })
+                                                        value: _this7.state.alumnoEsp.estado,
+                                                        onChange: _this7.onChangeAlumno_Estado })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63738,8 +63770,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_ciudad',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.ciudad,
-                                                        onChange: _this6.onChangeAlumno_Ciudad })
+                                                        value: _this7.state.alumnoEsp.ciudad,
+                                                        onChange: _this7.onChangeAlumno_Ciudad })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63753,8 +63785,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_municipio',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.municipio,
-                                                        onChange: _this6.onChangeAlumno_Municipio })
+                                                        value: _this7.state.alumnoEsp.municipio,
+                                                        onChange: _this7.onChangeAlumno_Municipio })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63768,8 +63800,8 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_genero',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.genero,
-                                                        onChange: _this6.onChangeAlumno_Genero })
+                                                        value: _this7.state.alumnoEsp.genero,
+                                                        onChange: _this7.onChangeAlumno_Genero })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -63783,12 +63815,12 @@ var Alumnos = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'alumno_fechaNacimiento',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this6.state.alumnoEsp.fechaNacimiento,
-                                                        onChange: _this6.onChangeAlumno_FechaNacimiento })
+                                                        value: _this7.state.alumnoEsp.fechaNacimiento,
+                                                        onChange: _this7.onChangeAlumno_FechaNacimiento })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
-                                                    { onClick: _this6.onSubmit.bind(_this6, alumno.id) },
+                                                    { onClick: _this7.onSubmit.bind(_this7, alumno.id) },
                                                     'Actualizar'
                                                 )
                                             )
