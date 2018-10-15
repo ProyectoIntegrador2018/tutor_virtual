@@ -35,3 +35,5 @@ Route::put('/api/curso/update/{id}', 'Api\\CursoController@update');
 Route::get('/api/alumnos', 'Api\\AlumnoController@index');
 Route::delete('/api/alumnos/delete/{id}', 'Api\\AlumnoController@destroy');
 Route::post('/api/alumno/store', 'Api\\AlumnoController@store');
+Route::get('/api/alumno/{id}', 'Api\\AlumnoController@show');
+Route::put('/api/alumno/update/{id}', 'Api\\AlumnoController@update');
