@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "react-modal": "^3.5.1",
-        "react-router-dom": "^4.3.1"
+        "react-router-dom": "^4.3.1",
+        "sweetalert2": "^7.28.5"
     }
 }

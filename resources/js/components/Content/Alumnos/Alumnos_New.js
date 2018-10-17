@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import swal from 'sweetalert2';
 
 export default class Alumnos_New extends Component {
 
@@ -108,8 +109,21 @@ export default class Alumnos_New extends Component {
         }
 
         axios.post('http://localhost:4200/api/alumno/store', alumno).then(
-            response => Console.log(response.data)
-        );
+            (response) => {
+            // Success
+            swal(
+                'Bien',
+                'Alumno creado con exito',
+                'success'
+              )
+        })
+        .catch((error) => {
+            swal({
+                type: 'error',
+                title: 'Error al agregar alumno',
+                text: 'Porfavor verifica la informacion y vuelve a intentar'
+              })
+        })
     }
 
     render() {
@@ -150,7 +164,7 @@ export default class Alumnos_New extends Component {
                             aria-describedby="apellidoMaterno"
                             value={this.state.alumno_apellidoMaterno}
                             onChange={this.onChangeAlumno_ApellidoMaterno}
-                            placeholder="AAAA-MM-DD"/>
+                            />
                         </div>
 
                         <div className="form-group">
@@ -161,7 +175,7 @@ export default class Alumnos_New extends Component {
                             aria-describedby="correo"
                             value={this.state.alumno_correo}
                             onChange={this.onChangeAlumno_Correo}
-                            placeholder="AAAA-MM-DD"/>
+                            />
                         </div>
 
                         <div className="form-group">
@@ -172,7 +186,7 @@ export default class Alumnos_New extends Component {
                             aria-describedby="pais"
                             value={this.state.alumno_pais}
                             onChange={this.onChangeAlumno_Pais}
-                            placeholder="AAAA-MM-DD"/>
+                            />
                         </div>
 
                         <div className="form-group">
@@ -183,7 +197,7 @@ export default class Alumnos_New extends Component {
                             aria-describedby="estado"
                             value={this.state.alumno_estado}
                             onChange={this.onChangeAlumno_Estado}
-                            placeholder="AAAA-MM-DD"/>
+                            />
                         </div>
 
                         <div className="form-group">
@@ -223,7 +237,8 @@ export default class Alumnos_New extends Component {
                             id="alumno_municipio"
                             aria-describedby="municipio"
                             value={this.state.alumno_fechaNacimiento}
-                            onChange={this.onChangeAlumno_FechaNacimiento}/>
+                            onChange={this.onChangeAlumno_FechaNacimiento}
+                            placeholder="AAAA-MM-DD"/>
                         </div>
 
                         <button type="submit" className="btn btn-primary btn-lg">Crear</button>

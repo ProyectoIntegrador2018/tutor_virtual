@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
+// ES6 Modules or TypeScript
+import swal from 'sweetalert2'
+
 
 export default class Cursos_Listing extends Component {
 
@@ -16,10 +19,12 @@ export default class Cursos_Listing extends Component {
         this.onChangeCurso_FechaFin = this.onChangeCurso_FechaFin.bind(this);
         this.onChangeCurso_Reconocimiento = this.onChangeCurso_Reconocimiento.bind(this);
         this.onChangeCurso_Horas = this.onChangeCurso_Horas.bind(this);
+        this.onChangeSearch = this.onChangeSearch.bind(this);
         this.state = {
             cursos : [],
             isActive : false,
-            cursoEsp : []
+            cursoEsp : [],
+            search_info : ""
         }
     }
 
@@ -34,20 +39,63 @@ export default class Cursos_Listing extends Component {
     }
 
 
+    onEnter(e){
+        var search_info = this.state.search_info;
+        
+        if (search_info != "") {
+            axios.get('http://localhost:4200/api/search/cursos/'+ search_info).then(
+                response => {
+                    this.setState({
+                        cursos: response.data
+                    });
+            });
+            
+         }
+           else
+            {
+                axios.get('http://localhost:4200/api/cursos').then(
+                    response => {
+                        this.setState({
+                            cursos: response.data
+                        });
+                });
+            } 
+        
+
+    }
 
     onDelete(curso_id){
         console.log(curso_id);
-        axios.delete('http://localhost:4200/api/cursos/delete/' + curso_id)
-        .then(response =>{
-
-            var cursos = this.state.cursos;
-            for(var  i = 0; i< cursos.length; i++){
-                if(cursos[i].id == curso_id){
-                    cursos.splice(i,1);
-                    this.setState({cursos:cursos});
-                }
+        swal({
+            title: 'Estas seguro de borrarlo?',
+            text: "Esta accion no es reversible",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminalo!',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.value) {
+                axios.delete('http://localhost:4200/api/cursos/delete/' + curso_id)
+                .then(response =>{
+        
+                    var cursos = this.state.cursos;
+                    for(var  i = 0; i< cursos.length; i++){
+                        if(cursos[i].id == curso_id){
+                            cursos.splice(i,1);
+                            this.setState({cursos:cursos});
+                        }
+                    }
+                })
+              swal(
+                'Eliminado!',
+                'El curso ha sido elimnado con exito',
+                'success'
+              )
             }
-        })
+          })
+
     }
 
 
@@ -141,7 +189,10 @@ export default class Cursos_Listing extends Component {
         this.forceUpdate();
     }
 
-
+    onChangeSearch(e){
+        this.state.search_info = e.target.value;
+        this.forceUpdate();
+    }
     render() {
         return (
             <Router>
@@ -157,7 +208,10 @@ export default class Cursos_Listing extends Component {
                                         <i className="material-icons">search</i>
                                     </span>
                                 </div>
-                                <input type="text" className="form-control form-control-lg" placeholder="Buscar curso por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
+                                <input value={this.state.search_info} onKeyUp={this.onEnter.bind(this)}
+                                onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
+                                placeholder="Buscar curso por nombre..." 
+                                aria-label="Username" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
