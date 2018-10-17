@@ -29,6 +29,19 @@ class CursoController extends Controller
         return $result;
     }
 
+    public function search($curso)
+    {
+
+        $request = $curso;
+        $result = Curso::where('nombre','LIKE','%'.$request."%")
+        ->orWhere('clave','LIKE','%'.$request."%")
+        ->orWhere('fechaFinInscripcion','LIKE','%'.$request."%")
+        ->get();
+        return $result;
+        
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -32,6 +32,8 @@ Route::delete('/api/cursos/delete/{id}', 'Api\\CursoController@destroy');
 Route::get('/api/curso/{id}', 'Api\\CursoController@show');
 Route::put('/api/curso/update/{id}', 'Api\\CursoController@update');
 
+Route::get('/api/search/cursos/{search_info}', 'Api\\CursoController@search');
+
 Route::get('/api/alumnos', 'Api\\AlumnoController@index');
 Route::delete('/api/alumnos/delete/{id}', 'Api\\AlumnoController@destroy');
 Route::post('/api/alumno/store', 'Api\\AlumnoController@store');
