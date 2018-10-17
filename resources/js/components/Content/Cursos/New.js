@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import swal from 'sweetalert2';
 
 export default class Cursos_New extends Component {
 
@@ -89,8 +90,22 @@ export default class Cursos_New extends Component {
         }
 
         axios.post('http://localhost:4200/api/curso/store', curso).then(
-            response => Console.log(response.data)
-        );
+            (response) => {
+            // Success
+            swal(
+                'Bien',
+                'Curso agregado con exito',
+                'success'
+              )
+        })
+        .catch((error) => {
+            swal({
+                type: 'error',
+                title: 'Error al agregar curso',
+                text: 'Porfavor verifica la informacion y vuelve a intentar'
+              })
+        })
+
     }
 
     render() {
