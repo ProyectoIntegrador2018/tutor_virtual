@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
+import swal from 'sweetalert2';
 
 export default class Alumnos extends Component {
 
@@ -65,17 +66,36 @@ export default class Alumnos extends Component {
 
     onDelete(alumno_id){
         console.log(alumno_id);
-        axios.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id)
-        .then(response =>{
-
-            var alumnos = this.state.alumnos;
-            for(var  i = 0; i< alumnos.length; i++){
-                if(alumnos[i].id == alumno_id){
-                    alumnos.splice(i,1);
-                    this.setState({alumnos:alumnos});
-                }
+        swal({
+            title: 'Estas seguro de borrarlo?',
+            text: "Esta accion no es reversible",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminalo!',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.value) {
+                axios.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id)
+                .then(response =>{
+        
+                    var alumnos = this.state.alumnos;
+                    for(var  i = 0; i< alumnos.length; i++){
+                        if(alumnos[i].id == alumno_id){
+                            alumnos.splice(i,1);
+                            this.setState({alumnos:alumnos});
+                        }
+                    }
+                })
+              swal(
+                'Eliminado!',
+                'El curso ha sido elimnado con exito',
+                'success'
+              )
             }
-        })
+          })
+
     }
 
     toggleModal(alumno_id){
