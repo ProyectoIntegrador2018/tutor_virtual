@@ -211,7 +211,7 @@ export default class Alumnos_New extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="alumno_municipio">Municpio</label>
+                            <label htmlFor="alumno_municipio">Municipio</label>
                             <input type="text"
                             className="form-control"
                             id="alumno_municipio"
@@ -221,7 +221,7 @@ export default class Alumnos_New extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="alumno_genero">Genero</label>
+                            <label htmlFor="alumno_genero">Género</label>
                             <input type="text"
                             className="form-control"
                             id="alumno_municipio"

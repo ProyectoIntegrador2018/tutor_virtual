@@ -225,7 +225,7 @@ export default class Alumnos extends Component {
     <div className="row justify-content-center p-4">
     <div className="col p-0">
         <div className="row">
-            <h1>alumno</h1>
+            <h1>Alumnos</h1>
         </div>
         <table className="table table-hover">
             <thead className="thead-dark">
@@ -233,8 +233,9 @@ export default class Alumnos extends Component {
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Pais fin</th>
-                <th scope="col">Action</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Acciones</th>
+                <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -246,10 +247,10 @@ export default class Alumnos extends Component {
                 <td>{alumno.nombre}</td>
                 <td>{alumno.correo}</td>
                 <td>{alumno.pais}</td>
-                <td><button onClick={this.onDelete.bind(this,alumno.id)}>Delete</button></td>
+                <td><button onClick={this.onDelete.bind(this,alumno.id)}>Eliminar</button></td>
                 <td><button onClick={this.toggleModal.bind(this, alumno.id)}>Detalle</button></td>
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                    <button onClick={this.closeModal.bind(this)}>Hide Modal</button>
+                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
                         <div className="form-group">                         
                             <label htmlFor="alumno_nombre">Nombre</label>
                                 <input type="text"

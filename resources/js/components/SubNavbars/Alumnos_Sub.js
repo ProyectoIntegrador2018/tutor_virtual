@@ -6,10 +6,10 @@ export default class Alumno_Sub extends Component {
         return (
             <div className="col-2 pt-4 px-1 bg-primary" name="subNav">
                 <div className="row justify-content-center">
-                    <div className="col-auto">
+                    <div className="col">
                         <h4>Asignados 0</h4>
                         <h4>Pendientes 1000</h4>
-                        <h1>Filtros Rapidos </h1>
+                        <h3>Filtros Rapidos </h3>
                         <div className="row p-0">
                         <div className="col-12 p-0">
                             <div className="input-group">
