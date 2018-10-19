@@ -230,7 +230,8 @@ export default class Cursos_Listing extends Component {
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Clave</th>
                                         <th scope="col">Fecha fin</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -242,10 +243,10 @@ export default class Cursos_Listing extends Component {
                                                     <td>{curso.nombre}</td>
                                                     <td>{curso.clave}</td>
                                                     <td>{curso.fechaFin}</td>
-                                                    <td><button onClick={this.onDelete.bind(this,curso.id)}>Delete</button></td>
+                                                    <td><button onClick={this.onDelete.bind(this,curso.id)}>Eliminar</button></td>
                                                     <td><button onClick={this.toggleModal.bind(this, curso.id)}>Detalle</button></td>
                                                     <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                                                        <button onClick={this.closeModal.bind(this)}>Hide Modal</button>
+                                                        <button onClick={this.closeModal.bind(this)}>Regresar</button>
                                                         <div className="form-group">
                                                         
                             <label htmlFor="curso_nombre">Nombre</label>

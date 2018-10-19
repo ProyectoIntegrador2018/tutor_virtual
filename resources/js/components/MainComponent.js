@@ -12,32 +12,30 @@ export default class MainComponent extends Component {
     render() {
         return (
             <Router basename="index">
-                <div className="container-fluid">
-                    <div className="row">
+                <div className="row h-100">
 
-                        {/* Main Navbar */}
-                        <div className="col-2 pt-4 px-1 bg-primary-dark" name="mainNav">
-                            <ul className="list-group list-group-flush bg-transparent">
-                                <li className="list-group-item bg-transparent text-center">
-                                    <Link to="/cursos" className="text-white h3">Cursos</Link>
-                                </li>
-                                <li className="list-group-item bg-transparent text-center">
-                                    <Link to="/alumnos" className="text-white h3">Alumnos</Link>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        {/* Sub Navbars */}
-                        <Route path='/cursos' component={Curso_Sub}/>
-                        <Route path='/alumnos' component={Alumno_Sub}/>
-
-                        {/* Content Areas */}
-                        <Route exact path='/cursos' component={Cursos_Listing}/>
-                        <Route exact path='/cursos/nuevo' component={Cursos_New}/>
-
-                        <Route exact path='/alumnos' component={Alumnos}/>
-                        <Route exact path='/alumnos/nuevo' component={Alumnos_New}/>
+                    {/* Main Navbar */}
+                    <div className="col-2 pt-4 px-1 bg-primary-dark h-100" name="mainNav">
+                        <ul className="list-group list-group-flush bg-transparent">
+                            <li className="list-group-item bg-transparent text-center">
+                                <Link to="/cursos" className="text-white h3">Cursos</Link>
+                            </li>
+                            <li className="list-group-item bg-transparent text-center">
+                                <Link to="/alumnos" className="text-white h3">Alumnos</Link>
+                            </li>
+                        </ul>
                     </div>
+                    
+                    {/* Sub Navbars */}
+                    <Route path='/cursos' component={Curso_Sub}/>
+                    <Route path='/alumnos' component={Alumno_Sub}/>
+
+                    {/* Content Areas */}
+                    <Route exact path='/cursos' component={Cursos_Listing}/>
+                    <Route exact path='/cursos/nuevo' component={Cursos_New}/>
+
+                    <Route exact path='/alumnos' component={Alumnos}/>
+                    <Route exact path='/alumnos/nuevo' component={Alumnos_New}/>
                 </div>
             </Router>
         );
