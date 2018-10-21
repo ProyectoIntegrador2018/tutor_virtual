@@ -1,29 +1,59 @@
 import React, { Component } from 'react';
+import axios, { post } from 'axios';
+import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
 
 export default class Curso_Sub extends Component {
 
     constructor() {
         super();
-        this.onChangeAlumno_Nombre = this.onChangeAlumno_Nombre.bind(this);
-        this.onChangeAlumno_AppellidoPaterno = this.onChangeAlumno_AppellidoPaterno.bind(this);
-        this.onChangeAlumno_ApellidoMaterno = this.onChangeAlumno_ApellidoMaterno.bind(this);
-        this.onChangeAlumno_Correo = this.onChangeAlumno_Correo.bind(this);
-        this.onChangeAlumno_Pais = this.onChangeAlumno_Pais.bind(this);
-        this.onChangeAlumno_Estado = this.onChangeAlumno_Estado.bind(this);
-        this.onChangeAlumno_Ciudad = this.onChangeAlumno_Ciudad.bind(this);
-        this.onChangeAlumno_Municipio = this.onChangeAlumno_Municipio.bind(this);
-        this.onChangeAlumno_Genero = this.onChangeAlumno_Genero.bind(this);
-        this.onChangeAlumno_FechaNacimiento = this.onChangeAlumno_FechaNacimiento.bind(this);
-        this.onChangeSearch = this.onChangeSearch.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.fileUpload = this.fileUpload.bind(this)
         this.state = {
-            alumnos : [],
             isActive : false,
-            alumnoEsp : [],
-            search_info : ""
+            image: ''
         }
     }
-    
+
+    onFormSubmit(e) {
+        e.preventDefault() 
+        this.fileUpload(this.state.image);
+    }
+
+    onChange(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length) {
+            return;
+        }
+        this.createImage(files[0]);
+    }
+
+    createImage(file) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            this.setState({
+            image: e.target.result
+            })
+        };
+        reader.readAsDataURL(file);
+    }
+
+    fileUpload(image){
+        const url = 'http://localhost:4200/api/fileupload';
+        const formData = {file: this.state.image}
+        return  post(url, formData)
+                .then(response => console.log(response))
+    }
+
+    toggleModal(){
+        this.setState({isActive: true});
+    }
+
+    closeModal(){
+        this.setState({isActive:false});
+    }
+
     render() {
         return (
             <div className="col-2 pt-4 px-1 bg-primary" name="subNav">
@@ -37,6 +67,13 @@ export default class Curso_Sub extends Component {
                 </div>
 
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
+                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+
+                    <form onSubmit={this.onFormSubmit}>
+                        <h1>Seleccionar archivo de excel</h1>
+                        <input type="file"  onChange={this.onChange} />
+                        <button type="submit">Agregar cursos</button>
+                    </form>
                 </Modal>
 
             </div>
