@@ -26,11 +26,11 @@ export default class MainComponent extends Component {
                         </ul>
                     </div>
                     
-                    {/* Sub Navbars */}
+                    {/* Sub Navbars - <div className="col-2 pt-4 px-1">*/}
                     <Route path='/cursos' component={Curso_Sub}/>
                     <Route path='/alumnos' component={Alumno_Sub}/>
 
-                    {/* Content Areas */}
+                    {/* Content Areas - <div className="col-8 p-0">*/}
                     <Route exact path='/cursos' component={Cursos_Listing}/>
                     <Route exact path='/cursos/nuevo' component={Cursos_New}/>
 
