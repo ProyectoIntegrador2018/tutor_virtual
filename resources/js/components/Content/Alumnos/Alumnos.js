@@ -222,9 +222,16 @@ export default class Alumnos extends Component {
                     <div className="row justify-content-center p-4">
                         <div className="col p-0">
 
-                            <div className="row">
-                                <h1>Alumnos</h1>
+                            <div className="row justify-content-between">
+                                <div className="col-auto">
+                                    <h1>Alumnos</h1>
+                                </div>
+
+                                <div className="col-auto">
+                                    <a href="/index/alumnos/nuevo" className="font-weight-bold">Agregar nuevo</a>
+                                </div>
                             </div>
+
                             <table className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr>
@@ -358,14 +365,10 @@ export default class Alumnos extends Component {
                                 </tbody>
                             </table>
                             
-                            <div className="row">
-                                <a href="/index/alumnos/nuevo">Agregar alumnos</a>
-                            </div>
-
                         </div> {/*Content column*/}
                     </div> {/*Content row*/}
-
-                </div> {/*Main column*/}
+                
+                </div>
             </Router>
         );
     }

@@ -147,7 +147,7 @@ export default class Alumnos_New extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="alumno_appellidoPaterno">Appellido Paterno</label>
+                            <label htmlFor="alumno_appellidoPaterno">Apellido Paterno</label>
                             <input type="text"
                             className="form-control"
                             id="alumno_appellidoPaterno"

@@ -183,7 +183,6 @@ export default class Cursos_Listing extends Component {
     render() {
         return (
             <Router>
-                {/*Content column*/}
                 <div className="col-8 p-0">
 
                     {/*Search bar*/}
@@ -206,8 +205,15 @@ export default class Cursos_Listing extends Component {
                     {/*Content row*/}
                     <div className="row justify-content-center p-4">
                         <div className="col p-0">
-                            <div className="row">
-                                <h1>Cursos</h1>
+
+                            <div className="row justify-content-between">
+                                <div className="col-auto">
+                                    <h1>Cursos</h1>
+                                </div>
+
+                                <div className="col-auto">
+                                    <a href="/index/cursos/nuevo" className="font-weight-bold">Agregar nuevo</a>
+                                </div>
                             </div>
                             
                             <table className="table table-hover">
@@ -323,15 +329,11 @@ export default class Cursos_Listing extends Component {
                                     })}
                                 </tbody>
                             </table>
-
-                            <div className="row">
-                                <a href="/index/cursos/nuevo">Agregar</a>
-                            </div>
                             
                         </div> {/*Content column*/}
                     </div> {/*Content row*/}
 
-                </div> {/*Main column*/}
+                </div>
             </Router>
         );
     }

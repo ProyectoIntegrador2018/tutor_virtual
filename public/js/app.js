@@ -19362,7 +19362,26 @@ var Curso_Sub = function (_Component) {
     function Curso_Sub() {
         _classCallCheck(this, Curso_Sub);
 
-        return _possibleConstructorReturn(this, (Curso_Sub.__proto__ || Object.getPrototypeOf(Curso_Sub)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Curso_Sub.__proto__ || Object.getPrototypeOf(Curso_Sub)).call(this));
+
+        _this.onChangeAlumno_Nombre = _this.onChangeAlumno_Nombre.bind(_this);
+        _this.onChangeAlumno_AppellidoPaterno = _this.onChangeAlumno_AppellidoPaterno.bind(_this);
+        _this.onChangeAlumno_ApellidoMaterno = _this.onChangeAlumno_ApellidoMaterno.bind(_this);
+        _this.onChangeAlumno_Correo = _this.onChangeAlumno_Correo.bind(_this);
+        _this.onChangeAlumno_Pais = _this.onChangeAlumno_Pais.bind(_this);
+        _this.onChangeAlumno_Estado = _this.onChangeAlumno_Estado.bind(_this);
+        _this.onChangeAlumno_Ciudad = _this.onChangeAlumno_Ciudad.bind(_this);
+        _this.onChangeAlumno_Municipio = _this.onChangeAlumno_Municipio.bind(_this);
+        _this.onChangeAlumno_Genero = _this.onChangeAlumno_Genero.bind(_this);
+        _this.onChangeAlumno_FechaNacimiento = _this.onChangeAlumno_FechaNacimiento.bind(_this);
+        _this.onChangeSearch = _this.onChangeSearch.bind(_this);
+        _this.state = {
+            alumnos: [],
+            isActive: false,
+            alumnoEsp: [],
+            search_info: ""
+        };
+        return _this;
     }
 
     _createClass(Curso_Sub, [{
@@ -19379,13 +19398,14 @@ var Curso_Sub = function (_Component) {
                         { className: 'col-auto' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: 'btn btn-outline-light btn-lg' },
+                            { type: 'button', className: 'btn btn-outline-light btn-lg', onClick: this.toggleModal.bind(this) },
                             'Subir',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
                             'Excel'
                         )
                     )
-                )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Modal, { isOpen: this.state.isActive, onRequestClose: this.closeModal.isActive })
             );
         }
     }]);
@@ -19477,7 +19497,6 @@ var Cursos_Listing = function (_Component) {
             var _this3 = this;
 
             var search_info = this.state.search_info;
-
             if (search_info != "") {
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/cursos/' + search_info).then(function (response) {
                     _this3.setState({
@@ -19510,7 +19529,6 @@ var Cursos_Listing = function (_Component) {
             }).then(function (result) {
                 if (result.value) {
                     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/cursos/delete/' + curso_id).then(function (response) {
-
                         var cursos = _this4.state.cursos;
                         for (var i = 0; i < cursos.length; i++) {
                             if (cursos[i].id == curso_id) {
@@ -19533,7 +19551,6 @@ var Cursos_Listing = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/curso/' + curso_id).then(function (response) {
                 _this5.setState({
                     cursoEsp: response.data
-
                 });
             });
         }
@@ -19548,7 +19565,6 @@ var Cursos_Listing = function (_Component) {
             var _this6 = this;
 
             //e.preventDefault();
-
             var curso_id = this.state.cursoEsp.id;
             var curso = {
                 curso_nombre: this.state.cursoEsp.nombre,
@@ -19590,7 +19606,6 @@ var Cursos_Listing = function (_Component) {
     }, {
         key: 'onChangeCurso_FechaFinInscripcion',
         value: function onChangeCurso_FechaFinInscripcion(e) {
-            debugger;
             this.state.cursoEsp.fechaFinInscripcion = e.target.value;
             this.forceUpdate();
         }
@@ -19672,11 +19687,24 @@ var Cursos_Listing = function (_Component) {
                             { className: 'col p-0' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'row' },
+                                { className: 'row justify-content-between' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'h1',
-                                    null,
-                                    'Cursos'
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h1',
+                                        null,
+                                        'Cursos'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/index/cursos/nuevo', className: 'font-weight-bold' },
+                                        'Agregar nuevo'
+                                    )
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -19904,16 +19932,9 @@ var Cursos_Listing = function (_Component) {
                                 )
                             )
                         ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'row' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'a',
-                                { href: '/index/cursos/nuevo' },
-                                'Agregar'
-                            )
-                        )
-                    )
+                        ' '
+                    ),
+                    ' '
                 )
             );
         }
@@ -67205,7 +67226,6 @@ var Alumnos = function (_Component) {
             var search_info = this.state.search_info;
 
             if (search_info != "") {
-
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/alumnos/' + search_info).then(function (response) {
                     _this3.setState({
                         alumnos: response.data
@@ -67237,8 +67257,8 @@ var Alumnos = function (_Component) {
             }).then(function (result) {
                 if (result.value) {
                     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id).then(function (response) {
-
                         var alumnos = _this4.state.alumnos;
+
                         for (var i = 0; i < alumnos.length; i++) {
                             if (alumnos[i].id == alumno_id) {
                                 alumnos.splice(i, 1);
@@ -67260,7 +67280,6 @@ var Alumnos = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/alumno/' + alumno_id).then(function (response) {
                 _this5.setState({
                     alumnoEsp: response.data
-
                 });
             });
         }
@@ -67410,11 +67429,24 @@ var Alumnos = function (_Component) {
                             { className: 'col p-0' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'row' },
+                                { className: 'row justify-content-between' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'h1',
-                                    null,
-                                    'Alumnos'
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h1',
+                                        null,
+                                        'Alumnos'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/index/alumnos/nuevo', className: 'font-weight-bold' },
+                                        'Agregar nuevo'
+                                    )
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67668,16 +67700,9 @@ var Alumnos = function (_Component) {
                                 )
                             )
                         ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'row' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'a',
-                                { href: '/index/alumnos/nuevo' },
-                                'Agregar alumnos'
-                            )
-                        )
-                    )
+                        ' '
+                    ),
+                    ' '
                 )
             );
         }
@@ -67991,7 +68016,7 @@ var Alumnos_New = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
                                 { htmlFor: 'alumno_appellidoPaterno' },
-                                'Appellido Paterno'
+                                'Apellido Paterno'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                 className: 'form-control',
