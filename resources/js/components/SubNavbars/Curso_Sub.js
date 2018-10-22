@@ -43,7 +43,7 @@ export default class Curso_Sub extends Component {
         const url = 'http://localhost:4200/api/fileupload';
         const formData = {file: this.state.image}
         return  post(url, formData)
-                .then(response => console.log(response))
+            .then(response => console.log(response))
     }
 
     toggleModal(){

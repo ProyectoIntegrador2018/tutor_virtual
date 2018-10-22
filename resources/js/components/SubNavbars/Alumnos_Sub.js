@@ -11,7 +11,7 @@ export default class Alumno_Sub extends Component {
 
                         <h4>Asignados 0</h4>
                         <h4>Pendientes 1000</h4>
-                        <h3>Filtros Rapidos </h3>
+                        <h3>Filtros Rapidos</h3>
                         
                         <div className="row p-0">
                             <div className="col-12 p-0">

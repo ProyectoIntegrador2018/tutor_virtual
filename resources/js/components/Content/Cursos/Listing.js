@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
 // ES6 Modules or TypeScript
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export default class Cursos_Listing extends Component {
 
@@ -33,7 +33,8 @@ export default class Cursos_Listing extends Component {
                 this.setState({
                     cursos: response.data
                 });
-        });
+            }
+        );
         Modal.setAppElement('body');
     }
 
@@ -195,9 +196,9 @@ export default class Cursos_Listing extends Component {
                                     </span>
                                 </div>
                                 <input value={this.state.search_info} onKeyUp={this.onEnter.bind(this)}
-                                onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
-                                placeholder="Buscar curso por nombre..." 
-                                aria-label="Username" aria-describedby="basic-addon1"/>
+                                    onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
+                                    placeholder="Buscar curso por nombre..." 
+                                    aria-label="Username" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>

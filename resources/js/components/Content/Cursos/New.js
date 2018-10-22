@@ -96,14 +96,14 @@ export default class Cursos_New extends Component {
                 'Bien',
                 'Curso agregado con exito',
                 'success'
-              )
+            )
         })
         .catch((error) => {
             swal({
                 type: 'error',
                 title: 'Error al agregar curso',
                 text: 'Porfavor verifica la informacion y vuelve a intentar'
-              })
+            })
         })
 
     }
@@ -111,95 +111,96 @@ export default class Cursos_New extends Component {
     render() {
         return (
             <Router>
-                {/*Content column*/}
-                <div className="col-8 p-4">
+                <div className="col-8 p-4"> {/*Content column*/}
+
                     <div className="row">
                         <h1>Nuevo curso</h1>
                     </div>
+
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group">
                             <label htmlFor="curso_nombre">Nombre</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_nombre"
-                            aria-describedby="nombre"
-                            value={this.state.curso_nombre}
-                            onChange={this.onChangeCurso_Nombre}/>
+                                className="form-control"
+                                id="curso_nombre"
+                                aria-describedby="nombre"
+                                value={this.state.curso_nombre}
+                                onChange={this.onChangeCurso_Nombre}/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_clave">Clave</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_clave"
-                            aria-describedby="clave"
-                            value={this.state.curso_clave}
-                            onChange={this.onChangeCurso_Clave}/>
+                                className="form-control"
+                                id="curso_clave"
+                                aria-describedby="clave"
+                                value={this.state.curso_clave}
+                                onChange={this.onChangeCurso_Clave}/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_fechaInicioInscripcion">Fecha de inicio de inscripcion</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_fechaInicioInscripcion"
-                            aria-describedby="fechaInicioInscripcion"
-                            value={this.state.curso_fechaInicioInscripcion}
-                            onChange={this.onChangeCurso_FechaInicioInscripcion}
-                            placeholder="AAAA-MM-DD"/>
+                                className="form-control"
+                                id="curso_fechaInicioInscripcion"
+                                aria-describedby="fechaInicioInscripcion"
+                                value={this.state.curso_fechaInicioInscripcion}
+                                onChange={this.onChangeCurso_FechaInicioInscripcion}
+                                placeholder="AAAA-MM-DD"/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_fechaFinInscripcion">Fecha de fin de inscripcion</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_fechaFinInscripcion"
-                            aria-describedby="fechaFinInscripcion"
-                            value={this.state.curso_fechaFinInscripcion}
-                            onChange={this.onChangeCurso_FechaFinInscripcion}
-                            placeholder="AAAA-MM-DD"/>
+                                className="form-control"
+                                id="curso_fechaFinInscripcion"
+                                aria-describedby="fechaFinInscripcion"
+                                value={this.state.curso_fechaFinInscripcion}
+                                onChange={this.onChangeCurso_FechaFinInscripcion}
+                                placeholder="AAAA-MM-DD"/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_fechaInicio">Fecha de inicio del curso</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_fechaInicio"
-                            aria-describedby="fechaInicio"
-                            value={this.state.curso_fechaInicio}
-                            onChange={this.onChangeCurso_FechaInicio}
-                            placeholder="AAAA-MM-DD"/>
+                                className="form-control"
+                                id="curso_fechaInicio"
+                                aria-describedby="fechaInicio"
+                                value={this.state.curso_fechaInicio}
+                                onChange={this.onChangeCurso_FechaInicio}
+                                placeholder="AAAA-MM-DD"/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_fechaFin">Fecha de fin del curso</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_fechaFin"
-                            aria-describedby="fechaFin"
-                            value={this.state.curso_fechaFin}
-                            onChange={this.onChangeCurso_FechaFin}
-                            placeholder="AAAA-MM-DD"/>
+                                className="form-control"
+                                id="curso_fechaFin"
+                                aria-describedby="fechaFin"
+                                value={this.state.curso_fechaFin}
+                                onChange={this.onChangeCurso_FechaFin}
+                                placeholder="AAAA-MM-DD"/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_clave">Tipo de reconocimiento</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_reconocimiento"
-                            aria-describedby="reconocimiento"
-                            value={this.state.curso_reconocimiento}
-                            onChange={this.onChangeCurso_Reconocimiento}/>
+                                className="form-control"
+                                id="curso_reconocimiento"
+                                aria-describedby="reconocimiento"
+                                value={this.state.curso_reconocimiento}
+                                onChange={this.onChangeCurso_Reconocimiento}/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="curso_clave">Duración del curso</label>
                             <input type="text"
-                            className="form-control"
-                            id="curso_horas"
-                            aria-describedby="horas"
-                            value={this.state.curso_horas}
-                            onChange={this.onChangeCurso_Horas}/>
+                                className="form-control"
+                                id="curso_horas"
+                                aria-describedby="horas"
+                                value={this.state.curso_horas}
+                                onChange={this.onChangeCurso_Horas}/>
                         </div>
 
                         <button type="submit" className="btn btn-primary btn-lg">Crear</button>

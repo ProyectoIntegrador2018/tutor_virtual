@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export default class Alumnos extends Component {
 
@@ -87,11 +87,11 @@ export default class Alumnos extends Component {
                         }
                     }
                 })
-              swal(
-                'Eliminado!',
-                'El alumno ha sido elimnado con exito',
-                'success'
-              )
+                swal(
+                    'Eliminado!',
+                    'El alumno ha sido elimnado con exito',
+                    'success'
+                )
             }
         })
     }
@@ -180,7 +180,6 @@ export default class Alumnos extends Component {
             alumno_municipio : this.state.alumnoEsp.municipio,
             alumno_genero : this.state.alumnoEsp.genero,
             alumno_fechaNacimiento : this.state.alumnoEsp.fechaNacimiento
-
         }
         
         axios.put('http://localhost:4200/api/alumno/update/' + alumno_id, alumno).then(

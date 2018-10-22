@@ -110,30 +110,33 @@ export default class Alumnos_New extends Component {
 
         axios.post('http://localhost:4200/api/alumno/store', alumno).then(
             (response) => {
-            // Success
-            swal(
-                'Bien',
-                'Alumno creado con exito',
-                'success'
-              )
-        })
+                // Success
+                swal(
+                    'Bien',
+                    'Alumno creado con exito',
+                    'success'
+                )
+            }
+        )
         .catch((error) => {
-            swal({
-                type: 'error',
-                title: 'Error al agregar alumno',
-                text: 'Porfavor verifica la informacion y vuelve a intentar'
-              })
-        })
+                swal({
+                    type: 'error',
+                    title: 'Error al agregar alumno',
+                    text: 'Porfavor verifica la información y vuelve a intentar'
+                })
+            }
+        )
     }
 
     render() {
         return (
             <Router>
-                {/*Content column*/}
-                <div className="col-8 p-4">
+                <div className="col-8 p-4"> {/*Content column*/}
+
                     <div className="row">
                         <h1>Nuevo alumno</h1>
                     </div>
+                    
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group">

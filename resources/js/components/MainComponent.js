@@ -6,12 +6,13 @@ import Cursos_Listing from './Content/Cursos/Listing';
 import Cursos_New from './Content/Cursos/New';
 import Alumnos from './Content/Alumnos/Alumnos';
 import Alumno_Sub from './SubNavbars/Alumnos_Sub';
-import Alumnos_New from './Content/Alumnos/Alumnos_New'
+import Alumnos_New from './Content/Alumnos/Alumnos_New';
 
 export default class MainComponent extends Component {
     render() {
         return (
             <Router basename="index">
+
                 <div className="row h-100">
 
                     {/* Main Navbar */}
@@ -36,7 +37,9 @@ export default class MainComponent extends Component {
 
                     <Route exact path='/alumnos' component={Alumnos}/>
                     <Route exact path='/alumnos/nuevo' component={Alumnos_New}/>
+
                 </div>
+                
             </Router>
         );
     }

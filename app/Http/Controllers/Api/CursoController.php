@@ -31,15 +31,12 @@ class CursoController extends Controller
 
     public function search($curso)
     {
-
         $request = $curso;
         $result = Curso::where('nombre','LIKE','%'.$request."%")
-        ->orWhere('clave','LIKE','%'.$request."%")
-        ->orWhere('fechaFinInscripcion','LIKE','%'.$request."%")
-        ->get();
+            ->orWhere('clave','LIKE','%'.$request."%")
+            ->orWhere('fechaFinInscripcion','LIKE','%'.$request."%")
+            ->get();
         return $result;
-        
-
     }
 
     /**
@@ -129,5 +126,4 @@ class CursoController extends Controller
         echo $curso;
         $curso->delete();
     }
-    
 }
