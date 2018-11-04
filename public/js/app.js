@@ -901,7 +901,11 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 };
 
 /***/ }),
+<<<<<<< HEAD
+/* 11 */
+=======
 /* 12 */
+>>>>>>> Dev
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -913,6 +917,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global.Sweetalert2 = factory());
 }(this, (function () { 'use strict';
+<<<<<<< HEAD
 
 function _typeof(obj) {
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -1634,6 +1639,8 @@ var renderImage = function renderImage(params) {
     }
 
     image.className = swalClasses.image;
+=======
+>>>>>>> Dev
 
     if (params.imageClass) {
       addClass(image, params.imageClass);
@@ -4665,6 +4672,10 @@ if (typeof window !== 'undefined' && window.Sweetalert2){  window.Sweetalert2.ve
 "      position: initial !important; } }");
 
 /***/ }),
+<<<<<<< HEAD
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+=======
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5329,10 +5340,664 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
+>>>>>>> Dev
+
+module.exports = __webpack_require__(47);
+
+/***/ }),
+<<<<<<< HEAD
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+=======
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+>>>>>>> Dev
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(2);
+var normalizeHeaderName = __webpack_require__(51);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(25);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(25);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
 
 
 /***/ }),
-/* 23 */
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var printWarning = function() {};
+
+if (true) {
+  var ReactPropTypesSecret = __webpack_require__(29);
+  var loggedTypeFailures = {};
+
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (true) {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error(
+              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+            );
+            err.name = 'Invariant Violation';
+            throw err;
+          }
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        if (error && !(error instanceof Error)) {
+          printWarning(
+            (componentName || 'React class') + ': type specification of ' +
+            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+            'You may have forgotten to pass an argument to the type checker ' +
+            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+            'shape all require an argument).'
+          )
+
+        }
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          printWarning(
+            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+          );
+        }
+      }
+    }
+  }
+}
+
+module.exports = checkPropTypes;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+
+
+var createTransitionManager = function createTransitionManager() {
+  var prompt = null;
+
+  var setPrompt = function setPrompt(nextPrompt) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(prompt == null, 'A history supports only one prompt at a time');
+
+    prompt = nextPrompt;
+
+    return function () {
+      if (prompt === nextPrompt) prompt = null;
+    };
+  };
+
+  var confirmTransitionTo = function confirmTransitionTo(location, action, getUserConfirmation, callback) {
+    // TODO: If another transition starts while we're still confirming
+    // the previous one, we may end up in a weird state. Figure out the
+    // best way to handle this.
+    if (prompt != null) {
+      var result = typeof prompt === 'function' ? prompt(location, action) : prompt;
+
+      if (typeof result === 'string') {
+        if (typeof getUserConfirmation === 'function') {
+          getUserConfirmation(result, callback);
+        } else {
+          __WEBPACK_IMPORTED_MODULE_0_warning___default()(false, 'A history needs a getUserConfirmation function in order to use a prompt message');
+
+          callback(true);
+        }
+      } else {
+        // Return false from a transition hook to cancel the transition.
+        callback(result !== false);
+      }
+    } else {
+      callback(true);
+    }
+  };
+
+  var listeners = [];
+
+  var appendListener = function appendListener(fn) {
+    var isActive = true;
+
+    var listener = function listener() {
+      if (isActive) fn.apply(undefined, arguments);
+    };
+
+    listeners.push(listener);
+
+    return function () {
+      isActive = false;
+      listeners = listeners.filter(function (item) {
+        return item !== listener;
+      });
+    };
+  };
+
+  var notifyListeners = function notifyListeners() {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    listeners.forEach(function (listener) {
+      return listener.apply(undefined, args);
+    });
+  };
+
+  return {
+    setPrompt: setPrompt,
+    confirmTransitionTo: confirmTransitionTo,
+    appendListener: appendListener,
+    notifyListeners: notifyListeners
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (createTransitionManager);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__ = __webpack_require__(18);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Router__["a" /* default */]);
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+/**
+ * The public API for putting history on context.
+ */
+
+var Router = function (_React$Component) {
+  _inherits(Router, _React$Component);
+
+  function Router() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Router);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
+      match: _this.computeMatch(_this.props.history.location.pathname)
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  Router.prototype.getChildContext = function getChildContext() {
+    return {
+      router: _extends({}, this.context.router, {
+        history: this.props.history,
+        route: {
+          location: this.props.history.location,
+          match: this.state.match
+        }
+      })
+    };
+  };
+
+  Router.prototype.computeMatch = function computeMatch(pathname) {
+    return {
+      path: "/",
+      url: "/",
+      params: {},
+      isExact: pathname === "/"
+    };
+  };
+
+  Router.prototype.componentWillMount = function componentWillMount() {
+    var _this2 = this;
+
+    var _props = this.props,
+        children = _props.children,
+        history = _props.history;
+
+
+    __WEBPACK_IMPORTED_MODULE_1_invariant___default()(children == null || __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.count(children) === 1, "A <Router> may have only one child element");
+
+    // Do this here so we can setState when a <Redirect> changes the
+    // location in componentWillMount. This happens e.g. when doing
+    // server rendering using a <StaticRouter>.
+    this.unlisten = history.listen(function () {
+      _this2.setState({
+        match: _this2.computeMatch(history.location.pathname)
+      });
+    });
+  };
+
+  Router.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default()(this.props.history === nextProps.history, "You cannot change <Router history>");
+  };
+
+  Router.prototype.componentWillUnmount = function componentWillUnmount() {
+    this.unlisten();
+  };
+
+  Router.prototype.render = function render() {
+    var children = this.props.children;
+
+    return children ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.only(children) : null;
+  };
+
+  return Router;
+}(__WEBPACK_IMPORTED_MODULE_2_react___default.a.Component);
+
+Router.propTypes = {
+  history: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired,
+  children: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.node
+};
+Router.contextTypes = {
+  router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object
+};
+Router.childContextTypes = {
+  router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired
+};
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Router);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
+
+
+var patternCache = {};
+var cacheLimit = 10000;
+var cacheCount = 0;
+
+var compilePath = function compilePath(pattern, options) {
+  var cacheKey = "" + options.end + options.strict + options.sensitive;
+  var cache = patternCache[cacheKey] || (patternCache[cacheKey] = {});
+
+  if (cache[pattern]) return cache[pattern];
+
+  var keys = [];
+  var re = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default()(pattern, keys, options);
+  var compiledPattern = { re: re, keys: keys };
+
+  if (cacheCount < cacheLimit) {
+    cache[pattern] = compiledPattern;
+    cacheCount++;
+  }
+
+  return compiledPattern;
+};
+
+/**
+ * Public API for matching a URL pathname to a path pattern.
+ */
+var matchPath = function matchPath(pathname) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var parent = arguments[2];
+
+  if (typeof options === "string") options = { path: options };
+
+  var _options = options,
+      path = _options.path,
+      _options$exact = _options.exact,
+      exact = _options$exact === undefined ? false : _options$exact,
+      _options$strict = _options.strict,
+      strict = _options$strict === undefined ? false : _options$strict,
+      _options$sensitive = _options.sensitive,
+      sensitive = _options$sensitive === undefined ? false : _options$sensitive;
+
+
+  if (path == null) return parent;
+
+  var _compilePath = compilePath(path, { end: exact, strict: strict, sensitive: sensitive }),
+      re = _compilePath.re,
+      keys = _compilePath.keys;
+
+  var match = re.exec(pathname);
+
+  if (!match) return null;
+
+  var url = match[0],
+      values = match.slice(1);
+
+  var isExact = pathname === url;
+
+  if (exact && !isExact) return null;
+
+  return {
+    path: path, // the path pattern used to match
+    url: path === "/" && url === "" ? "/" : url, // the matched portion of the URL
+    isExact: isExact, // whether or not we matched exactly
+    params: keys.reduce(function (memo, key, index) {
+      memo[key.name] = values[index];
+      return memo;
+    }, {})
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (matchPath);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.canUseDOM = undefined;
+
+var _exenv = __webpack_require__(103);
+
+var _exenv2 = _interopRequireDefault(_exenv);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var EE = _exenv2.default;
+
+var SafeHTMLElement = EE.canUseDOM ? window.HTMLElement : {};
+
+var canUseDOM = exports.canUseDOM = EE.canUseDOM;
+
+exports.default = SafeHTMLElement;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6770,6 +7435,7 @@ function getOppositeVariation(variation) {
   return variation;
 }
 
+<<<<<<< HEAD
 /**
  * List of accepted placements to use as values of the `placement` option.<br />
  * Valid placements are:
@@ -6778,6 +7444,25 @@ function getOppositeVariation(variation) {
  * - `right`
  * - `bottom`
  * - `left`
+=======
+
+Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
+Popper.placements = placements;
+Popper.Defaults = Defaults;
+
+/* harmony default export */ __webpack_exports__["default"] = (Popper);
+//# sourceMappingURL=popper.js.map
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(22)))
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery JavaScript Library v3.3.1
+ * https://jquery.com/
+>>>>>>> Dev
  *
  * Each placement can have a variation from this list:
  * - `-start`
@@ -7870,10 +8555,10 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(22)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(21)))
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -17341,8 +18026,14 @@ jQuery.ajaxSettings.xhr = function() {
 
 var xhrSuccessStatus = {
 
+<<<<<<< HEAD
 		// File protocol always yields status code 0, assume 200
 		0: 200,
+=======
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 		// Support: IE <=9 only
 		// #1450: sometimes IE returns 1223 when it should be 204
@@ -17363,6 +18054,7 @@ jQuery.ajaxTransport( function( options ) {
 				var i,
 					xhr = options.xhr();
 
+<<<<<<< HEAD
 				xhr.open(
 					options.type,
 					options.url,
@@ -17370,6 +18062,11 @@ jQuery.ajaxTransport( function( options ) {
 					options.username,
 					options.password
 				);
+=======
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 				// Apply custom fields if provided
 				if ( options.xhrFields ) {
@@ -17383,6 +18080,7 @@ jQuery.ajaxTransport( function( options ) {
 					xhr.overrideMimeType( options.mimeType );
 				}
 
+<<<<<<< HEAD
 				// X-Requested-With header
 				// For cross-domain requests, seeing as conditions for a preflight are
 				// akin to a jigsaw puzzle, we simply never set it to be sure.
@@ -17391,6 +18089,15 @@ jQuery.ajaxTransport( function( options ) {
 				if ( !options.crossDomain && !headers[ "X-Requested-With" ] ) {
 					headers[ "X-Requested-With" ] = "XMLHttpRequest";
 				}
+=======
+var utils = __webpack_require__(2);
+var settle = __webpack_require__(52);
+var buildURL = __webpack_require__(54);
+var parseHeaders = __webpack_require__(55);
+var isURLSameOrigin = __webpack_require__(56);
+var createError = __webpack_require__(27);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(57);
+>>>>>>> Dev
 
 				// Set headers
 				for ( i in headers ) {
@@ -17581,8 +18288,14 @@ jQuery.ajaxSetup( {
 	}
 } );
 
+<<<<<<< HEAD
 // Detect, normalize options and install callbacks for jsonp requests
 jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
+=======
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 	var callbackName, overwritten, responseContainer,
 		jsonProp = s.jsonp !== false && ( rjsonp.test( s.url ) ?
@@ -17616,8 +18329,14 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 			return responseContainer[ 0 ];
 		};
 
+<<<<<<< HEAD
 		// Force json dataType
 		s.dataTypes[ 0 ] = "json";
+=======
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 		// Install callback
 		overwritten = window[ callbackName ];
@@ -17637,8 +18356,14 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 				window[ callbackName ] = overwritten;
 			}
 
+<<<<<<< HEAD
 			// Save back as free
 			if ( s[ callbackName ] ) {
+=======
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 				// Make sure that re-using the options doesn't screw things around
 				s.jsonpCallback = originalSettings.jsonpCallback;
@@ -17662,6 +18387,12 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 
 
+<<<<<<< HEAD
+=======
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 // Support: Safari 8 only
 // In Safari 8 documents created via document.implementation.createHTMLDocument
@@ -17697,6 +18428,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		if ( support.createHTMLDocument ) {
 			context = document.implementation.createHTMLDocument( "" );
 
+<<<<<<< HEAD
 			// Set the base href for the created document
 			// so any parsed elements with URLs
 			// are based on the document's URL (gh-2965)
@@ -17707,6 +18439,11 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 			context = document;
 		}
 	}
+=======
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+>>>>>>> Dev
 
 	parsed = rsingleTag.exec( data );
 	scripts = !keepScripts && [];
@@ -17734,10 +18471,16 @@ jQuery.fn.load = function( url, params, callback ) {
 		self = this,
 		off = url.indexOf( " " );
 
+<<<<<<< HEAD
 	if ( off > -1 ) {
 		selector = stripAndCollapse( url.slice( off ) );
 		url = url.slice( 0, off );
 	}
+=======
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+>>>>>>> Dev
 
 	// If it's a function
 	if ( isFunction( params ) ) {
@@ -17854,6 +18597,7 @@ jQuery.offset = {
 			options = options.call( elem, i, jQuery.extend( {}, curOffset ) );
 		}
 
+<<<<<<< HEAD
 		if ( options.top != null ) {
 			props.top = ( options.top - curOffset.top ) + curTop;
 		}
@@ -17863,6 +18607,15 @@ jQuery.offset = {
 
 		if ( "using" in options ) {
 			options.using.call( elem, props );
+=======
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(34);
+// Written in this round about way for babel-transform-imports
+>>>>>>> Dev
 
 		} else {
 			curElem.css( props );
@@ -17872,6 +18625,7 @@ jQuery.offset = {
 
 jQuery.fn.extend( {
 
+<<<<<<< HEAD
 	// offset() relates an element's border box to the document origin
 	offset: function( options ) {
 
@@ -17883,6 +18637,23 @@ jQuery.fn.extend( {
 					jQuery.offset.setOffset( this, options, i );
 				} );
 		}
+=======
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(19);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+>>>>>>> Dev
 
 		var rect, win,
 			elem = this[ 0 ];
@@ -18098,6 +18869,12 @@ jQuery.fn.extend( {
 } );
 
 
+<<<<<<< HEAD
+=======
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
 
 jQuery.fn.extend( {
@@ -18244,7 +19021,7 @@ return jQuery;
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18262,7 +19039,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18273,7 +19050,7 @@ var settle = __webpack_require__(52);
 var buildURL = __webpack_require__(54);
 var parseHeaders = __webpack_require__(55);
 var isURLSameOrigin = __webpack_require__(56);
-var createError = __webpack_require__(27);
+var createError = __webpack_require__(26);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(57);
 
 module.exports = function xhrAdapter(config) {
@@ -18449,10 +19226,19 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 27 */
+<<<<<<< HEAD
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+=======
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
+>>>>>>> Dev
 
 
 var enhanceError = __webpack_require__(53);
@@ -18474,7 +19260,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18486,7 +19272,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18512,7 +19298,8 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 30 */
+<<<<<<< HEAD
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18522,6 +19309,22 @@ module.exports = Cancel;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+=======
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_modal__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+>>>>>>> Dev
 
 
 
@@ -18531,7 +19334,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18549,14 +19352,22 @@ var addEventListener = function addEventListener(node, event, listener) {
   return node.addEventListener ? node.addEventListener(event, listener, false) : node.attachEvent('on' + event, listener);
 };
 
+<<<<<<< HEAD
 var removeEventListener = function removeEventListener(node, event, listener) {
   return node.removeEventListener ? node.removeEventListener(event, listener, false) : node.detachEvent('on' + event, listener);
 };
+=======
+
+
+var Curso_Sub = function (_Component) {
+    _inherits(Curso_Sub, _Component);
+>>>>>>> Dev
 
 var getConfirmation = function getConfirmation(message, callback) {
   return callback(window.confirm(message));
 }; // eslint-disable-line no-alert
 
+<<<<<<< HEAD
 /**
  * Returns true if the HTML5 history API is supported. Taken from Modernizr.
  *
@@ -18568,6 +19379,115 @@ var supportsHistory = function supportsHistory() {
   var ua = window.navigator.userAgent;
 
   if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) return false;
+=======
+        var _this = _possibleConstructorReturn(this, (Curso_Sub.__proto__ || Object.getPrototypeOf(Curso_Sub)).call(this));
+
+        _this.onFormSubmit = _this.onFormSubmit.bind(_this);
+        _this.onChange = _this.onChange.bind(_this);
+        _this.fileUpload = _this.fileUpload.bind(_this);
+        _this.state = {
+            isActive: false,
+            image: ''
+        };
+        return _this;
+    }
+
+    _createClass(Curso_Sub, [{
+        key: 'onFormSubmit',
+        value: function onFormSubmit(e) {
+            e.preventDefault();
+            this.fileUpload(this.state.image);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) {
+                return;
+            }
+            this.createImage(files[0]);
+        }
+    }, {
+        key: 'createImage',
+        value: function createImage(file) {
+            var _this2 = this;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                _this2.setState({
+                    image: e.target.result
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    }, {
+        key: 'fileUpload',
+        value: function fileUpload(image) {
+            var url = 'http://localhost:4200/api/fileupload';
+            var formData = { file: this.state.image };
+            return Object(__WEBPACK_IMPORTED_MODULE_1_axios__["post"])(url, formData).then(function (response) {
+                return console.log(response);
+            });
+        }
+    }, {
+        key: 'toggleModal',
+        value: function toggleModal() {
+            this.setState({ isActive: true });
+        }
+    }, {
+        key: 'closeModal',
+        value: function closeModal() {
+            this.setState({ isActive: false });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'col-2 pt-4 px-1 bg-primary', name: 'subNav' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row justify-content-center' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-auto' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: 'btn btn-outline-light btn-lg', onClick: this.toggleModal.bind(this) },
+                            'Subir',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                            'Excel'
+                        )
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_2_react_modal___default.a,
+                    { isOpen: this.state.isActive, onRequestClose: this.closeModal.isActive },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'button',
+                        { onClick: this.closeModal.bind(this) },
+                        'Regresar'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'form',
+                        { onSubmit: this.onFormSubmit },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h1',
+                            null,
+                            'Seleccionar archivo de excel'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'file', onChange: this.onChange }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'submit' },
+                            'Agregar cursos'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+>>>>>>> Dev
 
   return window.history && 'pushState' in window.history;
 };
@@ -18587,6 +19507,7 @@ var supportsGoWithoutReloadUsingHash = function supportsGoWithoutReloadUsingHash
   return window.navigator.userAgent.indexOf('Firefox') === -1;
 };
 
+<<<<<<< HEAD
 /**
  * Returns true if a given popstate event is an extraneous WebKit event.
  * Accounts for the fact that Chrome on iOS fires real popstate events
@@ -18597,12 +19518,160 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 };
 
 /***/ }),
-/* 32 */
+/* 31 */
+=======
+if (document.getElementById('cursoSub')) {
+    __WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Curso_Sub, null), document.getElementById('cursoSub'));
+}
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = findTabbableDescendants;
+/*!
+ * Adapted from jQuery UI core
+ *
+ * http://jqueryui.com
+ *
+ * Copyright 2014 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/category/ui-core/
+ */
+
+var tabbableNode = /input|select|textarea|button|object/;
+
+function hidesContents(element) {
+  var zeroSize = element.offsetWidth <= 0 && element.offsetHeight <= 0;
+
+  // If the node is empty, this is good enough
+  if (zeroSize && !element.innerHTML) return true;
+
+  // Otherwise we need to check some styles
+  var style = window.getComputedStyle(element);
+  return zeroSize ? style.getPropertyValue("overflow") !== "visible" : style.getPropertyValue("display") == "none";
+}
+
+function visible(element) {
+  var parentElement = element;
+  while (parentElement) {
+    if (parentElement === document.body) break;
+    if (hidesContents(parentElement)) return false;
+    parentElement = parentElement.parentNode;
+  }
+  return true;
+}
+
+function focusable(element, isTabIndexNotNaN) {
+  var nodeName = element.nodeName.toLowerCase();
+  var res = tabbableNode.test(nodeName) && !element.disabled || (nodeName === "a" ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
+  return res && visible(element);
+}
+
+function tabbable(element) {
+  var tabIndex = element.getAttribute("tabindex");
+  if (tabIndex === null) tabIndex = undefined;
+  var isTabIndexNaN = isNaN(tabIndex);
+  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
+}
+
+function findTabbableDescendants(element) {
+  return [].slice.call(element.querySelectorAll("*"), 0).filter(tabbable);
+}
+module.exports = exports["default"];
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.assertNodeList = assertNodeList;
+exports.setElement = setElement;
+exports.validateElement = validateElement;
+exports.hide = hide;
+exports.show = show;
+exports.documentNotReadyOrSSRTesting = documentNotReadyOrSSRTesting;
+exports.resetForTesting = resetForTesting;
+
+var _warning = __webpack_require__(102);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _safeHTMLElement = __webpack_require__(21);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var globalElement = null;
+
+function assertNodeList(nodeList, selector) {
+  if (!nodeList || !nodeList.length) {
+    throw new Error("react-modal: No elements were found for selector " + selector + ".");
+  }
+}
+
+function setElement(element) {
+  var useElement = element;
+  if (typeof useElement === "string" && _safeHTMLElement.canUseDOM) {
+    var el = document.querySelectorAll(useElement);
+    assertNodeList(el, useElement);
+    useElement = "length" in el ? el[0] : el;
+  }
+  globalElement = useElement || globalElement;
+  return globalElement;
+}
+
+function validateElement(appElement) {
+  if (!appElement && !globalElement) {
+    (0, _warning2.default)(false, ["react-modal: App element is not defined.", "Please use `Modal.setAppElement(el)` or set `appElement={el}`.", "This is needed so screen readers don't see main content", "when modal is opened. It is not recommended, but you can opt-out", "by setting `ariaHideApp={false}`."].join(" "));
+
+    return false;
+  }
+
+  return true;
+}
+
+function hide(appElement) {
+  if (validateElement(appElement)) {
+    (appElement || globalElement).setAttribute("aria-hidden", "true");
+  }
+}
+
+function show(appElement) {
+  if (validateElement(appElement)) {
+    (appElement || globalElement).removeAttribute("aria-hidden");
+  }
+}
+
+function documentNotReadyOrSSRTesting() {
+  globalElement = null;
+}
+
+function resetForTesting() {
+  globalElement = null;
+}
+
+/***/ }),
+/* 40 */
+>>>>>>> Dev
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(3);
@@ -18611,6 +19680,18 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+>>>>>>> Dev
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18653,6 +19734,7 @@ var Link = function (_React$Component) {
       ) {
           event.preventDefault();
 
+<<<<<<< HEAD
           var history = _this.context.router.history;
           var _this$props = _this.props,
               replace = _this$props.replace,
@@ -18664,10 +19746,27 @@ var Link = function (_React$Component) {
           } else {
             history.push(to);
           }
+=======
+            var search_info = this.state.search_info;
+            if (search_info != "") {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/cursos/' + search_info).then(function (response) {
+                    _this3.setState({
+                        cursos: response.data
+                    });
+                });
+            } else {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/cursos').then(function (response) {
+                    _this3.setState({
+                        cursos: response.data
+                    });
+                });
+            }
+>>>>>>> Dev
         }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+<<<<<<< HEAD
   Link.prototype.render = function render() {
     var _props = this.props,
         replace = _props.replace,
@@ -18686,6 +19785,431 @@ var Link = function (_React$Component) {
     var href = history.createHref(location);
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", _extends({}, props, { onClick: this.handleClick, href: href, ref: innerRef }));
   };
+=======
+            console.log(curso_id);
+            __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
+                title: 'Estas seguro de borrarlo?',
+                text: "Esta accion no es reversible",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminalo!',
+                cancelButtonText: 'Cancelar'
+            }).then(function (result) {
+                if (result.value) {
+                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/cursos/delete/' + curso_id).then(function (response) {
+                        var cursos = _this4.state.cursos;
+                        for (var i = 0; i < cursos.length; i++) {
+                            if (cursos[i].id == curso_id) {
+                                cursos.splice(i, 1);
+                                _this4.setState({ cursos: cursos });
+                            }
+                        }
+                    });
+                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Eliminado!', 'El curso ha sido elimnado con exito', 'success');
+                }
+            });
+        }
+    }, {
+        key: 'toggleModal',
+        value: function toggleModal(curso_id) {
+            var _this5 = this;
+
+            console.log(curso_id);
+            this.setState({ isActive: true });
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/curso/' + curso_id).then(function (response) {
+                _this5.setState({
+                    cursoEsp: response.data
+                });
+            });
+        }
+    }, {
+        key: 'closeModal',
+        value: function closeModal() {
+            this.setState({ isActive: false });
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            var _this6 = this;
+
+            //e.preventDefault();
+            var curso_id = this.state.cursoEsp.id;
+            var curso = {
+                curso_nombre: this.state.cursoEsp.nombre,
+                curso_clave: this.state.cursoEsp.clave,
+                curso_fechaInicioInscripcion: this.state.cursoEsp.fechaInicioInscripcion,
+                curso_fechaFinInscripcion: this.state.cursoEsp.fechaFinInscripcion,
+                curso_fechaInicio: this.state.cursoEsp.fechaInicio,
+                curso_fechaFin: this.state.cursoEsp.fechaFin,
+                curso_reconocimiento: this.state.cursoEsp.reconocimiento,
+                curso_horas: this.state.cursoEsp.horas
+            };
+
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('http://localhost:4200/api/curso/update/' + curso_id, curso).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/cursos').then(function (response) {
+                    _this6.setState({
+                        cursos: response.data
+                    });
+                });
+            });
+        }
+    }, {
+        key: 'onChangeCurso_Nombre',
+        value: function onChangeCurso_Nombre(e) {
+            this.state.cursoEsp.nombre = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_Clave',
+        value: function onChangeCurso_Clave(e) {
+            this.state.cursoEsp.clave = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_FechaInicioInscripcion',
+        value: function onChangeCurso_FechaInicioInscripcion(e) {
+            this.state.cursoEsp.fechaInicioInscripcion = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_FechaFinInscripcion',
+        value: function onChangeCurso_FechaFinInscripcion(e) {
+            this.state.cursoEsp.fechaFinInscripcion = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_FechaInicio',
+        value: function onChangeCurso_FechaInicio(e) {
+            this.state.cursoEsp.fechaInicio = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_FechaFin',
+        value: function onChangeCurso_FechaFin(e) {
+            this.state.cursoEsp.fechaFin = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_Reconocimiento',
+        value: function onChangeCurso_Reconocimiento(e) {
+            this.state.cursoEsp.reconocimiento = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeCurso_Horas',
+        value: function onChangeCurso_Horas(e) {
+            this.state.cursoEsp.horas = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeSearch',
+        value: function onChangeSearch(e) {
+            this.state.search_info = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this7 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-8 p-0' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row p-0' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col-12 p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'input-group' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'input-group-prepend' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'span',
+                                        { className: 'input-group-text', id: 'basic-addon1' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'i',
+                                            { className: 'material-icons' },
+                                            'search'
+                                        )
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyUp: this.onEnter.bind(this),
+                                    onChange: this.onChangeSearch, type: 'text', className: 'form-control form-control-lg',
+                                    placeholder: 'Buscar curso por nombre...',
+                                    'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row justify-content-center p-4' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'row justify-content-between' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h1',
+                                        null,
+                                        'Cursos'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/index/cursos/nuevo', className: 'font-weight-bold' },
+                                        'Agregar nuevo'
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'table',
+                                { className: 'table table-hover' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'thead',
+                                    { className: 'thead-dark' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'tr',
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            '#'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Nombre'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Clave'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Fecha fin'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Acciones'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'tbody',
+                                    null,
+                                    this.state.cursos.map(function (curso) {
+                                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'tr',
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'th',
+                                                { scope: 'row' },
+                                                curso.id
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                curso.nombre
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                curso.clave
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                curso.fechaFin
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.onDelete.bind(_this7, curso.id) },
+                                                    'Eliminar'
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.toggleModal.bind(_this7, curso.id) },
+                                                    'Detalle'
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                __WEBPACK_IMPORTED_MODULE_4_react_modal___default.a,
+                                                { isOpen: _this7.state.isActive, onRequestClose: _this7.closeModal.isActive },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.closeModal.bind(_this7) },
+                                                    'Regresar'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_nombre' },
+                                                        'Nombre'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_nombre',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.cursoEsp.nombre,
+                                                        onChange: _this7.onChangeCurso_Nombre })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_clave' },
+                                                        'Clave'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_clave',
+                                                        'aria-describedby': 'clave',
+                                                        value: _this7.state.cursoEsp.clave,
+                                                        onChange: _this7.onChangeCurso_Clave })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_fechaInicioInscripcion' },
+                                                        'Fecha de inicio de inscripcion'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_fechaInicioInscripcion',
+                                                        'aria-describedby': 'fechaInicioInscripcion',
+                                                        value: _this7.state.cursoEsp.fechaInicioInscripcion,
+                                                        onChange: _this7.onChangeCurso_FechaInicioInscripcion,
+                                                        placeholder: 'AAAA-MM-DD' })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_fechaFinInscripcion' },
+                                                        'Fecha de fin de inscripcion'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_fechaFinInscripcion',
+                                                        'aria-describedby': 'fechaFinInscripcion',
+                                                        value: _this7.state.cursoEsp.fechaFinInscripcion,
+                                                        onChange: _this7.onChangeCurso_FechaFinInscripcion,
+                                                        placeholder: 'AAAA-MM-DD' })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_fechaInicio' },
+                                                        'Fecha de inicio del curso'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_fechaInicio',
+                                                        'aria-describedby': 'fechaInicio',
+                                                        value: _this7.state.cursoEsp.fechaInicio,
+                                                        onChange: _this7.onChangeCurso_FechaInicio,
+                                                        placeholder: 'AAAA-MM-DD' })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_fechaFin' },
+                                                        'Fecha de fin del curso'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_fechaFin',
+                                                        'aria-describedby': 'fechaFin',
+                                                        value: _this7.state.cursoEsp.fechaFin,
+                                                        onChange: _this7.onChangeCurso_FechaFin,
+                                                        placeholder: 'AAAA-MM-DD' })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_clave' },
+                                                        'Tipo de reconocimiento'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_reconocimiento',
+                                                        'aria-describedby': 'reconocimiento',
+                                                        value: _this7.state.cursoEsp.reconocimiento,
+                                                        onChange: _this7.onChangeCurso_Reconocimiento })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'curso_clave' },
+                                                        'Duraci\xF3n del curso'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'curso_horas',
+                                                        'aria-describedby': 'horas',
+                                                        value: _this7.state.cursoEsp.horas,
+                                                        onChange: _this7.onChangeCurso_Horas })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.onSubmit.bind(_this7, curso.id) },
+                                                    'Actualizar'
+                                                )
+                                            )
+                                        );
+                                    })
+                                )
+                            )
+                        ),
+                        ' '
+                    ),
+                    ' '
+                )
+            );
+        }
+    }]);
+>>>>>>> Dev
 
   return Link;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
@@ -18714,18 +20238,19 @@ Link.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Link);
 
 /***/ }),
-/* 33 */
+<<<<<<< HEAD
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__ = __webpack_require__(33);
 // Written in this round about way for babel-transform-imports
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Route__["a" /* default */]);
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18811,6 +20336,10 @@ var Route = function (_React$Component) {
     __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.component && this.props.render), "You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored");
 
     __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.component && this.props.children && !isEmptyChildren(this.props.children)), "You should not use <Route component> and <Route children> in the same route; <Route children> will be ignored");
+=======
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Dev
 
     __WEBPACK_IMPORTED_MODULE_0_warning___default()(!(this.props.render && this.props.children && !isEmptyChildren(this.props.children)), "You should not use <Route render> and <Route children> in the same route; <Route children> will be ignored");
   };
@@ -18841,18 +20370,30 @@ var Route = function (_React$Component) {
 
     if (component) return match ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(component, props) : null;
 
+<<<<<<< HEAD
     if (render) return match ? render(props) : null;
+=======
+__webpack_require__(66);
+__webpack_require__(37);
+__webpack_require__(40);
+>>>>>>> Dev
 
     if (typeof children === "function") return children(props);
 
     if (children && !isEmptyChildren(children)) return __WEBPACK_IMPORTED_MODULE_2_react___default.a.Children.only(children);
 
+<<<<<<< HEAD
     return null;
   };
+=======
+window._ = __webpack_require__(44);
+window.Popper = __webpack_require__(23).default;
+>>>>>>> Dev
 
   return Route;
 }(__WEBPACK_IMPORTED_MODULE_2_react___default.a.Component);
 
+<<<<<<< HEAD
 Route.propTypes = {
   computedMatch: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object, // private, from <Switch>
   path: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
@@ -18874,13 +20415,21 @@ Route.contextTypes = {
 Route.childContextTypes = {
   router: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object.isRequired
 };
+=======
+try {
+  window.$ = window.jQuery = __webpack_require__(24);
+>>>>>>> Dev
 
 
 /* harmony default export */ __webpack_exports__["a"] = (Route);
 
+<<<<<<< HEAD
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+window.axios = __webpack_require__(9);
+>>>>>>> Dev
 
 var isarray = __webpack_require__(84)
 
@@ -19311,11 +20860,11 @@ function pathToRegexp (path, keys, options) {
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -19356,19 +20905,15 @@ var generatePath = function generatePath() {
 /* harmony default export */ __webpack_exports__["a"] = (generatePath);
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_modal__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19380,74 +20925,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-
-
 var Curso_Sub = function (_Component) {
     _inherits(Curso_Sub, _Component);
 
     function Curso_Sub() {
         _classCallCheck(this, Curso_Sub);
 
-        var _this = _possibleConstructorReturn(this, (Curso_Sub.__proto__ || Object.getPrototypeOf(Curso_Sub)).call(this));
-
-        _this.onFormSubmit = _this.onFormSubmit.bind(_this);
-        _this.onChange = _this.onChange.bind(_this);
-        _this.fileUpload = _this.fileUpload.bind(_this);
-        _this.state = {
-            isActive: false,
-            image: ''
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Curso_Sub.__proto__ || Object.getPrototypeOf(Curso_Sub)).apply(this, arguments));
     }
 
     _createClass(Curso_Sub, [{
-        key: 'onFormSubmit',
-        value: function onFormSubmit(e) {
-            e.preventDefault();
-            this.fileUpload(this.state.image);
-        }
-    }, {
-        key: 'onChange',
-        value: function onChange(e) {
-            var files = e.target.files || e.dataTransfer.files;
-            if (!files.length) {
-                return;
-            }
-            this.createImage(files[0]);
-        }
-    }, {
-        key: 'createImage',
-        value: function createImage(file) {
-            var _this2 = this;
-
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                _this2.setState({
-                    image: e.target.result
-                });
-            };
-            reader.readAsDataURL(file);
-        }
-    }, {
-        key: 'fileUpload',
-        value: function fileUpload(image) {
-            var url = 'http://localhost:4200/api/fileupload';
-            var formData = { file: this.state.image };
-            return Object(__WEBPACK_IMPORTED_MODULE_1_axios__["post"])(url, formData).then(function (response) {
-                return console.log(response);
-            });
-        }
-    }, {
-        key: 'toggleModal',
-        value: function toggleModal() {
-            this.setState({ isActive: true });
-        }
-    }, {
-        key: 'closeModal',
-        value: function closeModal() {
-            this.setState({ isActive: false });
-        }
-    }, {
         key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -19461,34 +20948,10 @@ var Curso_Sub = function (_Component) {
                         { className: 'col-auto' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: 'btn btn-outline-light btn-lg', onClick: this.toggleModal.bind(this) },
+                            { type: 'button', className: 'btn btn-outline-light btn-lg' },
                             'Subir',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
                             'Excel'
-                        )
-                    )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_2_react_modal___default.a,
-                    { isOpen: this.state.isActive, onRequestClose: this.closeModal.isActive },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'button',
-                        { onClick: this.closeModal.bind(this) },
-                        'Regresar'
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'form',
-                        { onSubmit: this.onFormSubmit },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'h1',
-                            null,
-                            'Seleccionar archivo de excel'
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'file', onChange: this.onChange }),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'button',
-                            { type: 'submit' },
-                            'Agregar cursos'
                         )
                     )
                 )
@@ -19503,150 +20966,11 @@ var Curso_Sub = function (_Component) {
 
 
 if (document.getElementById('cursoSub')) {
-    __WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Curso_Sub, null), document.getElementById('cursoSub'));
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Curso_Sub, null), document.getElementById('cursoSub'));
 }
 
 /***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = findTabbableDescendants;
-/*!
- * Adapted from jQuery UI core
- *
- * http://jqueryui.com
- *
- * Copyright 2014 jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- *
- * http://api.jqueryui.com/category/ui-core/
- */
-
-var tabbableNode = /input|select|textarea|button|object/;
-
-function hidesContents(element) {
-  var zeroSize = element.offsetWidth <= 0 && element.offsetHeight <= 0;
-
-  // If the node is empty, this is good enough
-  if (zeroSize && !element.innerHTML) return true;
-
-  // Otherwise we need to check some styles
-  var style = window.getComputedStyle(element);
-  return zeroSize ? style.getPropertyValue("overflow") !== "visible" : style.getPropertyValue("display") == "none";
-}
-
-function visible(element) {
-  var parentElement = element;
-  while (parentElement) {
-    if (parentElement === document.body) break;
-    if (hidesContents(parentElement)) return false;
-    parentElement = parentElement.parentNode;
-  }
-  return true;
-}
-
-function focusable(element, isTabIndexNotNaN) {
-  var nodeName = element.nodeName.toLowerCase();
-  var res = tabbableNode.test(nodeName) && !element.disabled || (nodeName === "a" ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
-  return res && visible(element);
-}
-
-function tabbable(element) {
-  var tabIndex = element.getAttribute("tabindex");
-  if (tabIndex === null) tabIndex = undefined;
-  var isTabIndexNaN = isNaN(tabIndex);
-  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
-}
-
-function findTabbableDescendants(element) {
-  return [].slice.call(element.querySelectorAll("*"), 0).filter(tabbable);
-}
-module.exports = exports["default"];
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.assertNodeList = assertNodeList;
-exports.setElement = setElement;
-exports.validateElement = validateElement;
-exports.hide = hide;
-exports.show = show;
-exports.documentNotReadyOrSSRTesting = documentNotReadyOrSSRTesting;
-exports.resetForTesting = resetForTesting;
-
-var _warning = __webpack_require__(102);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var _safeHTMLElement = __webpack_require__(21);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var globalElement = null;
-
-function assertNodeList(nodeList, selector) {
-  if (!nodeList || !nodeList.length) {
-    throw new Error("react-modal: No elements were found for selector " + selector + ".");
-  }
-}
-
-function setElement(element) {
-  var useElement = element;
-  if (typeof useElement === "string" && _safeHTMLElement.canUseDOM) {
-    var el = document.querySelectorAll(useElement);
-    assertNodeList(el, useElement);
-    useElement = "length" in el ? el[0] : el;
-  }
-  globalElement = useElement || globalElement;
-  return globalElement;
-}
-
-function validateElement(appElement) {
-  if (!appElement && !globalElement) {
-    (0, _warning2.default)(false, ["react-modal: App element is not defined.", "Please use `Modal.setAppElement(el)` or set `appElement={el}`.", "This is needed so screen readers don't see main content", "when modal is opened. It is not recommended, but you can opt-out", "by setting `ariaHideApp={false}`."].join(" "));
-
-    return false;
-  }
-
-  return true;
-}
-
-function hide(appElement) {
-  if (validateElement(appElement)) {
-    (appElement || globalElement).setAttribute("aria-hidden", "true");
-  }
-}
-
-function show(appElement) {
-  if (validateElement(appElement)) {
-    (appElement || globalElement).removeAttribute("aria-hidden");
-  }
-}
-
-function documentNotReadyOrSSRTesting() {
-  globalElement = null;
-}
-
-function resetForTesting() {
-  globalElement = null;
-}
-
-/***/ }),
-/* 40 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19656,11 +20980,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19722,6 +21046,7 @@ var Cursos_Listing = function (_Component) {
             var _this3 = this;
 
             var search_info = this.state.search_info;
+
             if (search_info != "") {
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/cursos/' + search_info).then(function (response) {
                     _this3.setState({
@@ -19754,6 +21079,7 @@ var Cursos_Listing = function (_Component) {
             }).then(function (result) {
                 if (result.value) {
                     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/cursos/delete/' + curso_id).then(function (response) {
+
                         var cursos = _this4.state.cursos;
                         for (var i = 0; i < cursos.length; i++) {
                             if (cursos[i].id == curso_id) {
@@ -19776,6 +21102,7 @@ var Cursos_Listing = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/curso/' + curso_id).then(function (response) {
                 _this5.setState({
                     cursoEsp: response.data
+
                 });
             });
         }
@@ -19790,6 +21117,7 @@ var Cursos_Listing = function (_Component) {
             var _this6 = this;
 
             //e.preventDefault();
+
             var curso_id = this.state.cursoEsp.id;
             var curso = {
                 curso_nombre: this.state.cursoEsp.nombre,
@@ -19831,6 +21159,7 @@ var Cursos_Listing = function (_Component) {
     }, {
         key: 'onChangeCurso_FechaFinInscripcion',
         value: function onChangeCurso_FechaFinInscripcion(e) {
+            debugger;
             this.state.cursoEsp.fechaFinInscripcion = e.target.value;
             this.forceUpdate();
         }
@@ -19912,24 +21241,11 @@ var Cursos_Listing = function (_Component) {
                             { className: 'col p-0' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'row justify-content-between' },
+                                { className: 'row' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'col-auto' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'h1',
-                                        null,
-                                        'Cursos'
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'col-auto' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'a',
-                                        { href: '/index/cursos/nuevo', className: 'font-weight-bold' },
-                                        'Agregar nuevo'
-                                    )
+                                    'h1',
+                                    null,
+                                    'Cursos'
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -19964,9 +21280,8 @@ var Cursos_Listing = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Acciones'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
+                                            'Action'
+                                        )
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -20002,7 +21317,7 @@ var Cursos_Listing = function (_Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
                                                     { onClick: _this7.onDelete.bind(_this7, curso.id) },
-                                                    'Eliminar'
+                                                    'Delete'
                                                 )
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -20020,7 +21335,7 @@ var Cursos_Listing = function (_Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
                                                     { onClick: _this7.closeModal.bind(_this7) },
-                                                    'Regresar'
+                                                    'Hide Modal'
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -20157,9 +21472,16 @@ var Cursos_Listing = function (_Component) {
                                 )
                             )
                         ),
-                        ' '
-                    ),
-                    ' '
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '/index/cursos/nuevo' },
+                                'Agregar'
+                            )
+                        )
+                    )
                 )
             );
         }
@@ -20173,6 +21495,165 @@ var Cursos_Listing = function (_Component) {
 
 if (document.getElementById('cursos')) {
     __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Cursos, null), document.getElementById('cursos'));
+}
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Modal = __webpack_require__(98);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Modal2.default;
+module.exports = exports["default"];
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = findTabbableDescendants;
+/*!
+ * Adapted from jQuery UI core
+ *
+ * http://jqueryui.com
+ *
+ * Copyright 2014 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/category/ui-core/
+ */
+
+var tabbableNode = /input|select|textarea|button|object/;
+
+function hidesContents(element) {
+  var zeroSize = element.offsetWidth <= 0 && element.offsetHeight <= 0;
+
+  // If the node is empty, this is good enough
+  if (zeroSize && !element.innerHTML) return true;
+
+  // Otherwise we need to check some styles
+  var style = window.getComputedStyle(element);
+  return zeroSize ? style.getPropertyValue("overflow") !== "visible" : style.getPropertyValue("display") == "none";
+}
+
+function visible(element) {
+  var parentElement = element;
+  while (parentElement) {
+    if (parentElement === document.body) break;
+    if (hidesContents(parentElement)) return false;
+    parentElement = parentElement.parentNode;
+  }
+  return true;
+}
+
+function focusable(element, isTabIndexNotNaN) {
+  var nodeName = element.nodeName.toLowerCase();
+  var res = tabbableNode.test(nodeName) && !element.disabled || (nodeName === "a" ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
+  return res && visible(element);
+}
+
+function tabbable(element) {
+  var tabIndex = element.getAttribute("tabindex");
+  if (tabIndex === null) tabIndex = undefined;
+  var isTabIndexNaN = isNaN(tabIndex);
+  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
+}
+
+function findTabbableDescendants(element) {
+  return [].slice.call(element.querySelectorAll("*"), 0).filter(tabbable);
+}
+module.exports = exports["default"];
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.assertNodeList = assertNodeList;
+exports.setElement = setElement;
+exports.validateElement = validateElement;
+exports.hide = hide;
+exports.show = show;
+exports.documentNotReadyOrSSRTesting = documentNotReadyOrSSRTesting;
+exports.resetForTesting = resetForTesting;
+
+var _warning = __webpack_require__(102);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _safeHTMLElement = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var globalElement = null;
+
+function assertNodeList(nodeList, selector) {
+  if (!nodeList || !nodeList.length) {
+    throw new Error("react-modal: No elements were found for selector " + selector + ".");
+  }
+}
+
+function setElement(element) {
+  var useElement = element;
+  if (typeof useElement === "string" && _safeHTMLElement.canUseDOM) {
+    var el = document.querySelectorAll(useElement);
+    assertNodeList(el, useElement);
+    useElement = "length" in el ? el[0] : el;
+  }
+  globalElement = useElement || globalElement;
+  return globalElement;
+}
+
+function validateElement(appElement) {
+  if (!appElement && !globalElement) {
+    (0, _warning2.default)(false, ["react-modal: App element is not defined.", "Please use `Modal.setAppElement(el)` or set `appElement={el}`.", "This is needed so screen readers don't see main content", "when modal is opened. It is not recommended, but you can opt-out", "by setting `ariaHideApp={false}`."].join(" "));
+
+    return false;
+  }
+
+  return true;
+}
+
+function hide(appElement) {
+  if (validateElement(appElement)) {
+    (appElement || globalElement).setAttribute("aria-hidden", "true");
+  }
+}
+
+function show(appElement) {
+  if (validateElement(appElement)) {
+    (appElement || globalElement).removeAttribute("aria-hidden");
+  }
+}
+
+function documentNotReadyOrSSRTesting() {
+  globalElement = null;
+}
+
+function resetForTesting() {
+  globalElement = null;
 }
 
 /***/ }),
@@ -20203,8 +21684,8 @@ __webpack_require__(43);
  */
 
 __webpack_require__(66);
+__webpack_require__(36);
 __webpack_require__(37);
-__webpack_require__(40);
 
 /***/ }),
 /* 43 */
@@ -20212,7 +21693,7 @@ __webpack_require__(40);
 
 
 window._ = __webpack_require__(44);
-window.Popper = __webpack_require__(23).default;
+window.Popper = __webpack_require__(22).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -20221,7 +21702,7 @@ window.Popper = __webpack_require__(23).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(24);
+  window.$ = window.jQuery = __webpack_require__(23);
 
   __webpack_require__(46);
 } catch (e) {}
@@ -20232,7 +21713,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(9);
+window.axios = __webpack_require__(12);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -42179,7 +43660,11 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(2);
 var transformData = __webpack_require__(61);
+<<<<<<< HEAD
+var isCancel = __webpack_require__(27);
+=======
 var isCancel = __webpack_require__(28);
+>>>>>>> Dev
 var defaults = __webpack_require__(13);
 var isAbsoluteURL = __webpack_require__(62);
 var combineURLs = __webpack_require__(63);
@@ -42447,6 +43932,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Content_Alumnos_Alumnos__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__SubNavbars_Alumnos_Sub__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Content_Alumnos_Alumnos_New__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Content_Tutores_Tutores__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__SubNavbars_Tutores_Sub__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Content_Tutores_Tutores_New__ = __webpack_require__(117);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42454,6 +43942,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
 
 
 
@@ -42502,6 +43993,37 @@ var MainComponent = function (_Component) {
                                 'li',
                                 { className: 'list-group-item bg-transparent text-center' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+<<<<<<< HEAD
+                                    'li',
+                                    { className: 'list-group-item bg-transparent text-center' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+                                        { to: '/alumnos', className: 'text-white h3' },
+                                        'Alumnos'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'li',
+                                    { className: 'list-group-item bg-transparent text-center' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+                                        { to: '/tutores', className: 'text-white h3' },
+                                        'Tutores'
+                                    )
+                                )
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/cursos', component: __WEBPACK_IMPORTED_MODULE_3__SubNavbars_Curso_Sub__["default"] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/alumnos', component: __WEBPACK_IMPORTED_MODULE_7__SubNavbars_Alumnos_Sub__["a" /* default */] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/tutores', component: __WEBPACK_IMPORTED_MODULE_10__SubNavbars_Tutores_Sub__["a" /* default */] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/cursos', component: __WEBPACK_IMPORTED_MODULE_4__Content_Cursos_Listing__["default"] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/cursos/nuevo', component: __WEBPACK_IMPORTED_MODULE_5__Content_Cursos_New__["a" /* default */] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/alumnos', component: __WEBPACK_IMPORTED_MODULE_6__Content_Alumnos_Alumnos__["a" /* default */] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/alumnos/nuevo', component: __WEBPACK_IMPORTED_MODULE_8__Content_Alumnos_Alumnos_New__["a" /* default */] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/tutores', component: __WEBPACK_IMPORTED_MODULE_9__Content_Tutores_Tutores__["a" /* default */] }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/tutores/nuevo', component: __WEBPACK_IMPORTED_MODULE_11__Content_Tutores_Tutores_New__["a" /* default */] })
+                    )
+=======
                                     __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
                                     { to: '/alumnos', className: 'text-white h3' },
                                     'Alumnos'
@@ -42515,6 +44037,7 @@ var MainComponent = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/cursos/nuevo', component: __WEBPACK_IMPORTED_MODULE_5__Content_Cursos_New__["a" /* default */] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/alumnos', component: __WEBPACK_IMPORTED_MODULE_6__Content_Alumnos_Alumnos__["a" /* default */] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/alumnos/nuevo', component: __WEBPACK_IMPORTED_MODULE_8__Content_Alumnos_Alumnos_New__["a" /* default */] })
+>>>>>>> Dev
                 )
             );
         }
@@ -63287,7 +64810,11 @@ BrowserRouter.propTypes = {
 
 var assign = __webpack_require__(14);
 
+<<<<<<< HEAD
+var ReactPropTypesSecret = __webpack_require__(29);
+=======
 var ReactPropTypesSecret = __webpack_require__(30);
+>>>>>>> Dev
 var checkPropTypes = __webpack_require__(15);
 
 var printWarning = function() {};
@@ -63845,7 +65372,11 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(16);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(30);
+=======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(31);
+>>>>>>> Dev
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -64269,7 +65800,11 @@ function valueEqual(a, b) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(16);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(30);
+=======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(31);
+>>>>>>> Dev
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -64586,7 +66121,11 @@ var createHashHistory = function createHashHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(8);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(10);
+=======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(11);
+>>>>>>> Dev
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(16);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -65698,7 +67237,11 @@ var _ariaAppHider = __webpack_require__(39);
 
 var ariaAppHider = _interopRequireWildcard(_ariaAppHider);
 
+<<<<<<< HEAD
+var _safeHTMLElement = __webpack_require__(20);
+=======
 var _safeHTMLElement = __webpack_require__(21);
+>>>>>>> Dev
 
 var _safeHTMLElement2 = _interopRequireDefault(_safeHTMLElement);
 
@@ -65969,7 +67512,11 @@ var _classList = __webpack_require__(104);
 
 var classList = _interopRequireWildcard(_classList);
 
+<<<<<<< HEAD
+var _safeHTMLElement = __webpack_require__(20);
+=======
 var _safeHTMLElement = __webpack_require__(21);
+>>>>>>> Dev
 
 var _safeHTMLElement2 = _interopRequireDefault(_safeHTMLElement);
 
@@ -66351,7 +67898,7 @@ exports.popWithoutFocus = popWithoutFocus;
 exports.setupScopedFocus = setupScopedFocus;
 exports.teardownScopedFocus = teardownScopedFocus;
 
-var _tabbable = __webpack_require__(38);
+var _tabbable = __webpack_require__(39);
 
 var _tabbable2 = _interopRequireDefault(_tabbable);
 
@@ -66445,7 +67992,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = scopeTab;
 
-var _tabbable = __webpack_require__(38);
+var _tabbable = __webpack_require__(39);
 
 var _tabbable2 = _interopRequireDefault(_tabbable);
 
@@ -66644,10 +68191,14 @@ exports.dumpClassLists = dumpClassLists;
 var htmlClassList = {};
 var docBodyClassList = {};
 
+<<<<<<< HEAD
 function dumpClassLists() {
   if (true) {
     var classes = document.getElementsByTagName("html")[0].className;
     var buffer = "Show tracked classes:\n\n";
+=======
+var _tabbable = __webpack_require__(38);
+>>>>>>> Dev
 
     buffer += "<html /> (" + classes + "):\n";
     for (var x in htmlClassList) {
@@ -66920,7 +68471,7 @@ function polyfill(Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -66928,7 +68479,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
+<<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+=======
+var _tabbable = __webpack_require__(38);
+>>>>>>> Dev
 
 
 
@@ -67223,11 +68778,11 @@ if (document.getElementById('cursos')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67292,6 +68847,7 @@ var Alumnos = function (_Component) {
             var search_info = this.state.search_info;
 
             if (search_info != "") {
+
                 __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/alumnos/' + search_info).then(function (response) {
                     _this3.setState({
                         alumnos: response.data
@@ -67323,8 +68879,8 @@ var Alumnos = function (_Component) {
             }).then(function (result) {
                 if (result.value) {
                     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id).then(function (response) {
-                        var alumnos = _this4.state.alumnos;
 
+                        var alumnos = _this4.state.alumnos;
                         for (var i = 0; i < alumnos.length; i++) {
                             if (alumnos[i].id == alumno_id) {
                                 alumnos.splice(i, 1);
@@ -67346,6 +68902,7 @@ var Alumnos = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/alumno/' + alumno_id).then(function (response) {
                 _this5.setState({
                     alumnoEsp: response.data
+
                 });
             });
         }
@@ -67495,24 +69052,11 @@ var Alumnos = function (_Component) {
                             { className: 'col p-0' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'row justify-content-between' },
+                                { className: 'row' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'col-auto' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'h1',
-                                        null,
-                                        'Alumnos'
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'col-auto' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'a',
-                                        { href: '/index/alumnos/nuevo', className: 'font-weight-bold' },
-                                        'Agregar nuevo'
-                                    )
+                                    'h1',
+                                    null,
+                                    'alumno'
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67542,14 +69086,13 @@ var Alumnos = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Pais'
+                                            'Pais fin'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Acciones'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
+                                            'Action'
+                                        )
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67585,7 +69128,7 @@ var Alumnos = function (_Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
                                                     { onClick: _this7.onDelete.bind(_this7, alumno.id) },
-                                                    'Eliminar'
+                                                    'Delete'
                                                 )
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67603,7 +69146,7 @@ var Alumnos = function (_Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
                                                     { onClick: _this7.closeModal.bind(_this7) },
-                                                    'Regresar'
+                                                    'Hide Modal'
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -67766,9 +69309,16 @@ var Alumnos = function (_Component) {
                                 )
                             )
                         ),
-                        ' '
-                    ),
-                    ' '
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '/index/alumnos/nuevo' },
+                                'Agregar alumnos'
+                            )
+                        )
+                    )
                 )
             );
         }
@@ -67824,7 +69374,7 @@ var Alumno_Sub = function (_Component) {
                     { className: 'row justify-content-center' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'col' },
+                        { className: 'col-auto' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h4',
                             null,
@@ -67836,7 +69386,7 @@ var Alumno_Sub = function (_Component) {
                             'Pendientes 1000'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'h3',
+                            'h1',
                             null,
                             'Filtros Rapidos '
                         ),
@@ -67892,7 +69442,11 @@ if (document.getElementById('alumnosSub')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(11);
+=======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(12);
+>>>>>>> Dev
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -68082,7 +69636,7 @@ var Alumnos_New = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
                                 { htmlFor: 'alumno_appellidoPaterno' },
-                                'Apellido Paterno'
+                                'Appellido Paterno'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                 className: 'form-control',
@@ -68176,7 +69730,7 @@ var Alumnos_New = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
                                 { htmlFor: 'alumno_municipio' },
-                                'Municipio'
+                                'Municpio'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                 className: 'form-control',
@@ -68191,7 +69745,7 @@ var Alumnos_New = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
                                 { htmlFor: 'alumno_genero' },
-                                'G\xE9nero'
+                                'Genero'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                 className: 'form-control',
@@ -68242,6 +69796,1169 @@ if (document.getElementById('alumnos')) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(9);
+>>>>>>> Dev
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(11);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(12);
+>>>>>>> Dev
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+var Tutores = function (_Component) {
+    _inherits(Tutores, _Component);
+
+    function Tutores() {
+        _classCallCheck(this, Tutores);
+
+        var _this = _possibleConstructorReturn(this, (Tutores.__proto__ || Object.getPrototypeOf(Tutores)).call(this));
+
+        _this.onChangeTutor_Nombre = _this.onChangeTutor_Nombre.bind(_this);
+        _this.onChangeTutor_ApellidoPaterno = _this.onChangeTutor_ApellidoPaterno.bind(_this);
+        _this.onChangeTutor_ApellidoMaterno = _this.onChangeTutor_ApellidoMaterno.bind(_this);
+        _this.onChangeTutor_Correo = _this.onChangeTutor_Correo.bind(_this);
+        _this.onChangeTutor_Pais = _this.onChangeTutor_Pais.bind(_this);
+        _this.onChangeTutor_Estado = _this.onChangeTutor_Estado.bind(_this);
+        _this.onChangeTutor_Ciudad = _this.onChangeTutor_Ciudad.bind(_this);
+        _this.onChangeTutor_Municipio = _this.onChangeTutor_Municipio.bind(_this);
+        _this.onChangeTutor_Genero = _this.onChangeTutor_Genero.bind(_this);
+        _this.onChangeTutor_Curso = _this.onChangeTutor_Curso.bind(_this);
+        _this.onChangeTutor_Institucion = _this.onChangeTutor_Institucion.bind(_this);
+        _this.onChangeSearch = _this.onChangeSearch.bind(_this);
+        _this.state = {
+            tutores: [],
+            isActive: false,
+            tutorEsp: [],
+            search_info: ""
+        };
+
+        return _this;
+    }
+
+    _createClass(Tutores, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutores').then(function (response) {
+                _this2.setState({
+                    tutores: response.data
+                });
+            });
+            //Modal.setAppElement('body');
+        }
+    }, {
+        key: 'onEnter',
+        value: function onEnter(e) {
+            var _this3 = this;
+
+            var search_info = this.state.search_info;
+
+            if (search_info != "") {
+<<<<<<< HEAD
+
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/tutores/' + search_info).then(function (response) {
+=======
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/alumnos/' + search_info).then(function (response) {
+>>>>>>> Dev
+                    _this3.setState({
+                        tutores: response.data
+                    });
+                });
+            } else {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutores').then(function (response) {
+                    _this3.setState({
+                        tutores: response.data
+                    });
+                });
+            }
+        }
+    }, {
+        key: 'onChangeSearch',
+        value: function onChangeSearch(e) {
+            this.state.search_info = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onDelete',
+        value: function onDelete(tutor_id) {
+            var _this4 = this;
+
+            console.log(tutor_id);
+            __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
+                title: 'Estas seguro de borrarlo?',
+                text: "Esta accion no es reversible",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminalo!',
+                cancelButtonText: 'Cancelar'
+            }).then(function (result) {
+                if (result.value) {
+<<<<<<< HEAD
+                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/tutores/delete/' + tutor_id).then(function (response) {
+
+                        var tutores = _this4.state.tutores;
+                        for (var i = 0; i < tutores.length; i++) {
+                            if (tutores[i].id == tutor_id) {
+                                tutores.splice(i, 1);
+                                _this4.setState({ tutores: tutores });
+=======
+                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id).then(function (response) {
+                        var alumnos = _this4.state.alumnos;
+
+                        for (var i = 0; i < alumnos.length; i++) {
+                            if (alumnos[i].id == alumno_id) {
+                                alumnos.splice(i, 1);
+                                _this4.setState({ alumnos: alumnos });
+>>>>>>> Dev
+                            }
+                        }
+                    });
+                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Eliminado!', 'El tutor ha sido elimnado con exito', 'success');
+                }
+            });
+        }
+    }, {
+        key: 'toggleModal',
+        value: function toggleModal(tutor_id) {
+            var _this5 = this;
+
+            console.log(tutor_id);
+            this.setState({ isActive: true });
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutor/' + tutor_id).then(function (response) {
+                _this5.setState({
+<<<<<<< HEAD
+                    tutorEsp: response.data
+
+=======
+                    alumnoEsp: response.data
+>>>>>>> Dev
+                });
+            });
+        }
+    }, {
+        key: 'closeModal',
+        value: function closeModal() {
+            this.setState({ isActive: false });
+        }
+    }, {
+        key: 'onChangeTutor_Nombre',
+        value: function onChangeTutor_Nombre(e) {
+            this.state.tutorEsp.nombre = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_ApellidoPaterno',
+        value: function onChangeTutor_ApellidoPaterno(e) {
+            this.state.tutorEsp.appellidoPaterno = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_ApellidoMaterno',
+        value: function onChangeTutor_ApellidoMaterno(e) {
+            this.state.tutorEsp.apellidoMaterno = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Correo',
+        value: function onChangeTutor_Correo(e) {
+            this.state.tutorEsp.correo = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Pais',
+        value: function onChangeTutor_Pais(e) {
+            this.state.tutorEsp.pais = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Estado',
+        value: function onChangeTutor_Estado(e) {
+            this.state.tutorEsp.estado = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Ciudad',
+        value: function onChangeTutor_Ciudad(e) {
+            this.state.tutorEsp.ciudad = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Municipio',
+        value: function onChangeTutor_Municipio(e) {
+            this.state.tutorEsp.municipio = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Genero',
+        value: function onChangeTutor_Genero(e) {
+            this.state.tutorEsp.genero = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Curso',
+        value: function onChangeTutor_Curso(e) {
+            this.state.tutorEsp.curso = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Institucion',
+        value: function onChangeTutor_Institucion(e) {
+            this.state.tutorEsp.institucion = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            var _this6 = this;
+
+            var tutor_id = this.state.tutorEsp.id;
+            var tutor = {
+                tutor_nombre: this.state.tutorEsp.nombre,
+                tutor_appellidoPaterno: this.state.tutorEsp.appellidoPaterno,
+                tutor_apellidoMaterno: this.state.tutorEsp.apellidoMaterno,
+                tutor_correo: this.state.tutorEsp.correo,
+                tutor_pais: this.state.tutorEsp.pais,
+                tutor_estado: this.state.tutorEsp.estado,
+                tutor_ciudad: this.state.tutorEsp.ciudad,
+                tutor_municipio: this.state.tutorEsp.municipio,
+                tutor_genero: this.state.tutorEsp.genero,
+                tutor_curso: this.state.tutorEsp.curso,
+                tutor_institucion: this.state.tutorEsp.institucion
+
+            };
+
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('http://localhost:4200/api/tutor/update/' + tutor_id, tutor).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutores').then(function (response) {
+                    _this6.setState({
+                        tutores: response.data
+                    });
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this7 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-8 p-0' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row p-0' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col-12 p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'input-group' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'input-group-prepend' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'span',
+                                        { className: 'input-group-text', id: 'basic-addon1' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'i',
+                                            { className: 'material-icons' },
+                                            'search'
+                                        )
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyUp: this.onEnter.bind(this),
+                                    onChange: this.onChangeSearch, type: 'text', className: 'form-control form-control-lg',
+                                    placeholder: 'Buscar tutor por nombre...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row justify-content-center p-4' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'row justify-content-between' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+<<<<<<< HEAD
+                                    'h1',
+                                    null,
+                                    'Tutores'
+=======
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h1',
+                                        null,
+                                        'Alumnos'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/index/alumnos/nuevo', className: 'font-weight-bold' },
+                                        'Agregar nuevo'
+                                    )
+>>>>>>> Dev
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'table',
+                                { className: 'table table-hover' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'thead',
+                                    { className: 'thead-dark' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'tr',
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            '#'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Nombre'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Correo'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+<<<<<<< HEAD
+                                            'Materia'
+=======
+                                            'Pais'
+>>>>>>> Dev
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+<<<<<<< HEAD
+                                            'Grupo'
+                                        )
+=======
+                                            'Acciones'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
+>>>>>>> Dev
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'tbody',
+                                    null,
+                                    this.state.tutores.map(function (tutor) {
+                                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'tr',
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'th',
+                                                { scope: 'row' },
+                                                tutor.id
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                tutor.nombre
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                tutor.correo
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                tutor.pais
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+<<<<<<< HEAD
+                                                    { onClick: _this7.onDelete.bind(_this7, tutor.id) },
+                                                    'Delete'
+=======
+                                                    { onClick: _this7.onDelete.bind(_this7, alumno.id) },
+                                                    'Eliminar'
+>>>>>>> Dev
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.toggleModal.bind(_this7, tutor.id) },
+                                                    'Detalle'
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                __WEBPACK_IMPORTED_MODULE_4_react_modal___default.a,
+                                                { isOpen: _this7.state.isActive, onRequestClose: _this7.closeModal.isActive },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.closeModal.bind(_this7) },
+                                                    'Regresar'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_nombre' },
+                                                        'Nombre'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_nombre',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.nombre,
+                                                        onChange: _this7.onChangeTutor_Nombre })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_apellidoPaterno' },
+                                                        'Apellido Paterno'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_nombre',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.appellidoPaterno,
+                                                        onChange: _this7.onChangeTutor_ApellidoPaterno })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_apellidoMaterno' },
+                                                        'Apellido Materno'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_apellidoMaterno',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.apellidoMaterno,
+                                                        onChange: _this7.onChangeTutor_ApellidoMaterno })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_correo' },
+                                                        'Correo'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_correo',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.correo,
+                                                        onChange: _this7.onChangeTutor_Correo })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_pais' },
+                                                        'Pais'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_pais',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.pais,
+                                                        onChange: _this7.onChangeTutor_Pais })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_estado' },
+                                                        'Estado'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_estado',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.estado,
+                                                        onChange: _this7.onChangeTutor_Estado })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_ciudad' },
+                                                        'Ciudad'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_ciudad',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.ciudad,
+                                                        onChange: _this7.onChangeTutor_Ciudad })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_municipio' },
+                                                        'Municipio'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_municipio',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.municipio,
+                                                        onChange: _this7.onChangeTutor_Municipio })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_genero' },
+                                                        'Genero'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_genero',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.tutorEsp.genero,
+                                                        onChange: _this7.onChangeTutor_Genero })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_curso' },
+                                                        'Curso'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_Curso',
+                                                        'aria-describedby': 'curso',
+                                                        value: _this7.state.tutorEsp.curso,
+                                                        onChange: _this7.onChangeTutor_Curso })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_institucion' },
+                                                        'Institucion'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_Institucion',
+                                                        'aria-describedby': 'institucion',
+                                                        value: _this7.state.tutorEsp.institucion,
+                                                        onChange: _this7.onChangeTutor_Institucion })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.onSubmit.bind(_this7, tutor.id) },
+                                                    'Actualizar'
+                                                )
+                                            )
+                                        );
+                                    })
+                                )
+                            )
+                        ),
+<<<<<<< HEAD
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '/index/tutores/nuevo' },
+                                'Agregar tutores'
+                            )
+                        )
+                    )
+=======
+                        ' '
+                    ),
+                    ' '
+>>>>>>> Dev
+                )
+            );
+        }
+    }]);
+
+    return Tutores;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Tutores);
+
+
+if (document.getElementById('Tutores')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Tutores, null), document.getElementById('tutores'));
+}
+
+/***/ }),
+/* 116 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Tutores_Sub = function (_Component) {
+    _inherits(Tutores_Sub, _Component);
+
+    function Tutores_Sub() {
+        _classCallCheck(this, Tutores_Sub);
+
+        return _possibleConstructorReturn(this, (Tutores_Sub.__proto__ || Object.getPrototypeOf(Tutores_Sub)).apply(this, arguments));
+    }
+
+    _createClass(Tutores_Sub, [{
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'col-2 pt-4 px-1 bg-primary', name: 'subNav' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row justify-content-center' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+<<<<<<< HEAD
+                            'button',
+                            { type: 'button', className: 'btn btn-outline-light btn-lg' },
+                            'Subir',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                            'Excel'
+=======
+                            'h4',
+                            null,
+                            'Asignados 0'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h4',
+                            null,
+                            'Pendientes 1000'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h3',
+                            null,
+                            'Filtros Rapidos '
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'col-12 p-0' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'input-group' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'input-group-prepend' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'span',
+                                            { className: 'input-group-text', id: 'basic-addon1' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'i',
+                                                { className: 'material-icons' },
+                                                'search'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control form-control-lg', placeholder: 'Buscar por ciudad...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
+                                )
+                            )
+>>>>>>> Dev
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Tutores_Sub;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Tutores_Sub);
+
+
+if (document.getElementById('tutoresSub')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Tutores_Sub, null), document.getElementById('tutoresSub'));
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
+<<<<<<< HEAD
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(11);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(12);
+>>>>>>> Dev
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var Tutores_New = function (_Component) {
+    _inherits(Tutores_New, _Component);
+
+    //nombre apellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
+    function Tutores_New() {
+        _classCallCheck(this, Tutores_New);
+
+        var _this = _possibleConstructorReturn(this, (Tutores_New.__proto__ || Object.getPrototypeOf(Tutores_New)).call(this));
+
+        _this.onChangeTutor_Nombre = _this.onChangeTutor_Nombre.bind(_this);
+        _this.onChangeTutor_ApellidoPaterno = _this.onChangeTutor_ApellidoPaterno.bind(_this);
+        _this.onChangeTutor_ApellidoMaterno = _this.onChangeTutor_ApellidoMaterno.bind(_this);
+        _this.onChangeTutor_Correo = _this.onChangeTutor_Correo.bind(_this);
+        _this.onChangeTutor_Pais = _this.onChangeTutor_Pais.bind(_this);
+        _this.onChangeTutor_Estado = _this.onChangeTutor_Estado.bind(_this);
+        _this.onChangeTutor_Ciudad = _this.onChangeTutor_Ciudad.bind(_this);
+        _this.onChangeTutor_Municipio = _this.onChangeTutor_Municipio.bind(_this);
+        _this.onChangeTutor_Genero = _this.onChangeTutor_Genero.bind(_this);
+        _this.onChangeTutor_Curso = _this.onChangeTutor_Curso.bind(_this);
+        _this.onChangeTutor_Institucion = _this.onChangeTutor_Institucion.bind(_this);
+        _this.onSubmit = _this.onSubmit.bind(_this);
+        _this.state = {
+            tutor_nombre: "",
+            tutor_apellidoPaterno: "",
+            tutor_apellidoMaterno: "",
+            tutor_correo: "",
+            tutor_pais: "",
+            tutor_estado: "",
+            tutor_ciudad: "",
+            tutor_municipio: "",
+            tutor_genero: "",
+            tutor_curso: "",
+            tutor_institucion: ""
+        };
+        return _this;
+    }
+
+    _createClass(Tutores_New, [{
+        key: 'onChangeTutor_Nombre',
+        value: function onChangeTutor_Nombre(e) {
+            this.setState({
+                tutor_nombre: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_ApellidoPaterno',
+        value: function onChangeTutor_ApellidoPaterno(e) {
+            this.setState({
+                tutor_apellidoPaterno: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_ApellidoMaterno',
+        value: function onChangeTutor_ApellidoMaterno(e) {
+            this.setState({
+                tutor_apellidoMaterno: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Correo',
+        value: function onChangeTutor_Correo(e) {
+            this.setState({
+                tutor_correo: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Pais',
+        value: function onChangeTutor_Pais(e) {
+            this.setState({
+                tutor_pais: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Estado',
+        value: function onChangeTutor_Estado(e) {
+            this.setState({
+                tutor_estado: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Ciudad',
+        value: function onChangeTutor_Ciudad(e) {
+            this.setState({
+                tutor_ciudad: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Municipio',
+        value: function onChangeTutor_Municipio(e) {
+            this.setState({
+                tutor_municipio: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Genero',
+        value: function onChangeTutor_Genero(e) {
+            this.setState({
+                tutor_genero: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Curso',
+        value: function onChangeTutor_Curso(e) {
+            this.setState({
+                tutor_curso: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeTutor_Institucion',
+        value: function onChangeTutor_Institucion(e) {
+            this.setState({
+                tutor_institucion: e.target.value
+            });
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            e.preventDefault();
+            var tutor = {
+                tutor_nombre: this.state.tutor_nombre,
+                tutor_apellidoPaterno: this.state.tutor_apellidoPaterno,
+                tutor_apellidoMaterno: this.state.tutor_apellidoMaterno,
+                tutor_correo: this.state.tutor_correo,
+                tutor_pais: this.state.tutor_pais,
+                tutor_estado: this.state.tutor_estado,
+                tutor_ciudad: this.state.tutor_ciudad,
+                tutor_municipio: this.state.tutor_municipio,
+                tutor_genero: this.state.tutor_genero,
+                tutor_curso: this.state.tutor_curso,
+                tutor_institucion: this.state.tutor_institucion
+            };
+
+            axios.post('http://localhost:4200/api/tutor/store', tutor).then(function (response) {
+                // Success
+                __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default()('Bien', 'Tutor creado con exito', 'success');
+            }).catch(function (error) {
+                __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default()({
+                    type: 'error',
+                    title: 'Error al agregar tutor',
+                    text: 'Porfavor verifica la informacion y vuelve a intentar'
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-8 p-4' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h1',
+                            null,
+                            'Nuevo tutor'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'form',
+                        { onSubmit: this.onSubmit },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_nombre' },
+                                'Nombre'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_nombre',
+                                'aria-describedby': 'nombre',
+                                value: this.state.tutor_nombre,
+                                onChange: this.onChangeTutor_Nombre })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+<<<<<<< HEAD
+                                { htmlFor: 'tutor_apellidoPaterno' },
+=======
+                                { htmlFor: 'alumno_appellidoPaterno' },
+>>>>>>> Dev
+                                'Apellido Paterno'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_apellidoPaterno',
+                                'aria-describedby': 'apellidoPaterno',
+                                value: this.state.tutor_apellidoPaterno,
+                                onChange: this.onChangeTutor_ApellidoPaterno })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_apellidoMaterno' },
+                                'Apellido Materno'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_apellidoMaterno',
+                                'aria-describedby': 'apellidoMaterno',
+                                value: this.state.tutor_apellidoMaterno,
+                                onChange: this.onChangeTutor_ApellidoMaterno
+                            })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_correo' },
+                                'Correo'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_correo',
+                                'aria-describedby': 'correo',
+                                value: this.state.tutor_correo,
+                                onChange: this.onChangeTutor_Correo
+                            })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_pais' },
+                                'Pais'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_pais',
+                                'aria-describedby': 'pais',
+                                value: this.state.tutor_pais,
+                                onChange: this.onChangeTutor_Pais
+                            })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_estado' },
+                                'Estado'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_estado',
+                                'aria-describedby': 'estado',
+                                value: this.state.tutor_estado,
+                                onChange: this.onChangeTutor_Estado
+                            })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_ciudad' },
+                                'Ciudad'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_ciudad',
+                                'aria-describedby': 'ciudad',
+                                value: this.state.tutor_ciudad,
+                                onChange: this.onChangeTutor_Ciudad })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+<<<<<<< HEAD
+                                { htmlFor: 'tutor_municipio' },
+                                'Municpio'
+=======
+                                { htmlFor: 'alumno_municipio' },
+                                'Municipio'
+>>>>>>> Dev
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_municipio',
+                                'aria-describedby': 'municipio',
+                                value: this.state.tutor_municipio,
+                                onChange: this.onChangeTutor_Municipio })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+<<<<<<< HEAD
+                                { htmlFor: 'tutor_genero' },
+                                'Genero'
+=======
+                                { htmlFor: 'alumno_genero' },
+                                'G\xE9nero'
+>>>>>>> Dev
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_municipio',
+                                'aria-describedby': 'municipio',
+                                value: this.state.tutor_genero,
+                                onChange: this.onChangeTutor_Genero })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_curso' },
+                                'Curso'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_Curso',
+                                'aria-describedby': 'curso',
+                                value: this.state.tutor_curso,
+                                onChange: this.onChangeTutor_Curso })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'tutor_institucion' },
+                                'Institucion'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'tutor_Institucion',
+                                'aria-describedby': 'institucion',
+                                value: this.state.tutor_institucion,
+                                onChange: this.onChangeTutor_Institucion })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'submit', className: 'btn btn-primary btn-lg' },
+                            'Crear'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Tutores_New;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Tutores_New);
+
+
+if (document.getElementById('tutores')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Tutores_New, null), document.getElementById('tutores'));
+}
 
 /***/ })
 /******/ ]);

@@ -6,14 +6,37 @@ import Cursos_Listing from './Content/Cursos/Listing';
 import Cursos_New from './Content/Cursos/New';
 import Alumnos from './Content/Alumnos/Alumnos';
 import Alumno_Sub from './SubNavbars/Alumnos_Sub';
-import Alumnos_New from './Content/Alumnos/Alumnos_New'
-
+import Alumnos_New from './Content/Alumnos/Alumnos_New';
+import Tutores from './Content/Tutores/Tutores';
+import Tutores_Sub from './SubNavbars/Tutores_Sub';
+import Tutores_New from './Content/Tutores/Tutores_New';
 export default class MainComponent extends Component {
     render() {
         return (
             <Router basename="index">
                 <div className="row h-100">
 
+<<<<<<< HEAD
+                        {/* Main Navbar */}
+                        <div className="col-2 pt-4 px-1 bg-primary-dark" name="mainNav">
+                            <ul className="list-group list-group-flush bg-transparent">
+                                <li className="list-group-item bg-transparent text-center">
+                                    <Link to="/cursos" className="text-white h3">Cursos</Link>
+                                </li>
+                                <li className="list-group-item bg-transparent text-center">
+                                    <Link to="/alumnos" className="text-white h3">Alumnos</Link>
+                                </li>
+                                <li className="list-group-item bg-transparent text-center">
+                                    <Link to="/tutores" className="text-white h3">Tutores</Link>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        {/* Sub Navbars */}
+                        <Route path='/cursos' component={Curso_Sub}/>
+                        <Route path='/alumnos' component={Alumno_Sub}/>
+                        <Route path='/tutores' component={Tutores_Sub}/>
+=======
                     {/* Main Navbar */}
                     <div className="col-2 pt-4 px-1 bg-primary-dark h-100" name="mainNav">
                         <ul className="list-group list-group-flush bg-transparent">
@@ -29,13 +52,23 @@ export default class MainComponent extends Component {
                     {/* Sub Navbars - <div className="col-2 pt-4 px-1">*/}
                     <Route path='/cursos' component={Curso_Sub}/>
                     <Route path='/alumnos' component={Alumno_Sub}/>
+>>>>>>> Dev
 
                     {/* Content Areas - <div className="col-8 p-0">*/}
                     <Route exact path='/cursos' component={Cursos_Listing}/>
                     <Route exact path='/cursos/nuevo' component={Cursos_New}/>
 
+<<<<<<< HEAD
+                        <Route exact path='/alumnos' component={Alumnos}/>
+                        <Route exact path='/alumnos/nuevo' component={Alumnos_New}/>
+
+                        <Route exact path='/tutores' component={Tutores}/>
+                        <Route exact path='/tutores/nuevo' component={Tutores_New}/>
+                    </div>
+=======
                     <Route exact path='/alumnos' component={Alumnos}/>
                     <Route exact path='/alumnos/nuevo' component={Alumnos_New}/>
+>>>>>>> Dev
                 </div>
             </Router>
         );
