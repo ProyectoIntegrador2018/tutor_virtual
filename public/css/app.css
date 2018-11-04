@@ -1,4 +1,31 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
+@import url(https://fonts.googleapis.com/css?family=Nunito);body {
+  min-height: 100vh;
+}
+
+.bg-primary {
+  background: #67E478;
+}
+
+.bg-primary-dark {
+  background: #3D6D4B;
+}
+
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.container-fluid {
+  height: 100vh;
+  margin: 0;
+  min-height: 100%;
+}
+
+main {
+  height: calc(100vh - 55px);
+}
+
+/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10469,27 +10496,5 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
-}
-
-body {
-  min-height: 100%;
-}
-
-.bg-primary {
-  background: #67E478;
-}
-
-.bg-primary-dark {
-  background: #3D6D4B;
-}
-
-.row {
-  padding: 0px;
-  margin: 0px;
-}
-
-.container-fluid {
-  padding: 0px;
-  margin: 0px;
 }
 

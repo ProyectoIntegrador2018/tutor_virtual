@@ -6,7 +6,6 @@ import Modal from 'react-modal';
 // ES6 Modules or TypeScript
 import swal from 'sweetalert2'
 
-
 export default class Cursos_Listing extends Component {
 
     constructor() {
@@ -41,27 +40,25 @@ export default class Cursos_Listing extends Component {
 
     onEnter(e){
         var search_info = this.state.search_info;
-        
         if (search_info != "") {
             axios.get('http://localhost:4200/api/search/cursos/'+ search_info).then(
                 response => {
                     this.setState({
                         cursos: response.data
                     });
-            });
-            
-         }
-           else
-            {
-                axios.get('http://localhost:4200/api/cursos').then(
-                    response => {
-                        this.setState({
-                            cursos: response.data
-                        });
-                });
-            } 
-        
-
+                }
+            );
+        }
+        else
+        {
+            axios.get('http://localhost:4200/api/cursos').then(
+                response => {
+                    this.setState({
+                        cursos: response.data
+                    });
+                }
+            );
+        }
     }
 
     onDelete(curso_id){
@@ -75,29 +72,26 @@ export default class Cursos_Listing extends Component {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminalo!',
             cancelButtonText: 'Cancelar'
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
                 axios.delete('http://localhost:4200/api/cursos/delete/' + curso_id)
-                .then(response =>{
-        
-                    var cursos = this.state.cursos;
-                    for(var  i = 0; i< cursos.length; i++){
-                        if(cursos[i].id == curso_id){
-                            cursos.splice(i,1);
-                            this.setState({cursos:cursos});
+                    .then(response => {
+                        var cursos = this.state.cursos;
+                        for(var  i = 0; i< cursos.length; i++) {
+                            if(cursos[i].id == curso_id){
+                                cursos.splice(i,1);
+                                this.setState({cursos:cursos});
+                            }
                         }
-                    }
-                })
-              swal(
-                'Eliminado!',
-                'El curso ha sido elimnado con exito',
-                'success'
-              )
+                    })
+                swal(
+                    'Eliminado!',
+                    'El curso ha sido elimnado con exito',
+                    'success'
+                )
             }
-          })
-
+        })
     }
-
 
     toggleModal(curso_id){
         console.log(curso_id);
@@ -106,21 +100,17 @@ export default class Cursos_Listing extends Component {
             response => {
                 this.setState({
                     cursoEsp: response.data
-                    
                 });
-        });
+            }
+        );
     }
 
     closeModal(){
         this.setState({isActive:false});
-        
-
     }
 
     onSubmit(e) {
-        
         //e.preventDefault();
-        
         var curso_id = this.state.cursoEsp.id;
         const curso = {
             curso_nombre : this.state.cursoEsp.nombre,
@@ -140,19 +130,17 @@ export default class Cursos_Listing extends Component {
                         this.setState({
                             cursos: response.data
                         });
-                });
-                }
-            
+                    }
+                );
+            }
         );
-        
-
     }
 
     onChangeCurso_Nombre(e) { 
         this.state.cursoEsp.nombre = e.target.value;
         this.forceUpdate();
-
     }
+
     onChangeCurso_Clave(e) {
         this.state.cursoEsp.clave = e.target.value;
         this.forceUpdate();
@@ -164,7 +152,6 @@ export default class Cursos_Listing extends Component {
     }
 
     onChangeCurso_FechaFinInscripcion(e) {
-        debugger;
         this.state.cursoEsp.fechaFinInscripcion = e.target.value;
         this.forceUpdate();
     }
@@ -196,7 +183,6 @@ export default class Cursos_Listing extends Component {
     render() {
         return (
             <Router>
-                {/*Content column*/}
                 <div className="col-8 p-0">
 
                     {/*Search bar*/}
@@ -219,8 +205,15 @@ export default class Cursos_Listing extends Component {
                     {/*Content row*/}
                     <div className="row justify-content-center p-4">
                         <div className="col p-0">
-                            <div className="row">
-                                <h1>Cursos</h1>
+
+                            <div className="row justify-content-between">
+                                <div className="col-auto">
+                                    <h1>Cursos</h1>
+                                </div>
+
+                                <div className="col-auto">
+                                    <a href="/index/cursos/nuevo" className="font-weight-bold">Agregar nuevo</a>
+                                </div>
                             </div>
                             
                             <table className="table table-hover">
@@ -230,120 +223,116 @@ export default class Cursos_Listing extends Component {
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Clave</th>
                                         <th scope="col">Fecha fin</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        this.state.cursos.map(curso => {
-                                            return (
-                                                <tr>
-                                                    <th scope="row">{curso.id}</th>
-                                                    <td>{curso.nombre}</td>
-                                                    <td>{curso.clave}</td>
-                                                    <td>{curso.fechaFin}</td>
-                                                    <td><button onClick={this.onDelete.bind(this,curso.id)}>Delete</button></td>
-                                                    <td><button onClick={this.toggleModal.bind(this, curso.id)}>Detalle</button></td>
-                                                    <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                                                        <button onClick={this.closeModal.bind(this)}>Hide Modal</button>
-                                                        <div className="form-group">
-                                                        
-                            <label htmlFor="curso_nombre">Nombre</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_nombre"
-                            aria-describedby="nombre"
-                            value={this.state.cursoEsp.nombre} 
-                            onChange={this.onChangeCurso_Nombre} />
-                        </div>
+                                    {this.state.cursos.map(curso => {
+                                        return (
+                                            <tr>
+                                                <th scope="row">{curso.id}</th>
+                                                <td>{curso.nombre}</td>
+                                                <td>{curso.clave}</td>
+                                                <td>{curso.fechaFin}</td>
+                                                <td><button onClick={this.onDelete.bind(this,curso.id)}>Eliminar</button></td>
+                                                <td><button onClick={this.toggleModal.bind(this, curso.id)}>Detalle</button></td>
+                                                <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
+                                                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_nombre">Nombre</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_nombre"
+                                                            aria-describedby="nombre"
+                                                            value={this.state.cursoEsp.nombre} 
+                                                            onChange={this.onChangeCurso_Nombre} />
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_clave">Clave</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_clave"
-                            aria-describedby="clave"
-                            value={this.state.cursoEsp.clave}
-                            onChange={this.onChangeCurso_Clave}/>
-                        </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_clave">Clave</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_clave"
+                                                            aria-describedby="clave"
+                                                            value={this.state.cursoEsp.clave}
+                                                            onChange={this.onChangeCurso_Clave}/>
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_fechaInicioInscripcion">Fecha de inicio de inscripcion</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_fechaInicioInscripcion"
-                            aria-describedby="fechaInicioInscripcion"
-                            value={this.state.cursoEsp.fechaInicioInscripcion}
-                            onChange={this.onChangeCurso_FechaInicioInscripcion}
-                            placeholder="AAAA-MM-DD"/>
-                        </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_fechaInicioInscripcion">Fecha de inicio de inscripcion</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_fechaInicioInscripcion"
+                                                            aria-describedby="fechaInicioInscripcion"
+                                                            value={this.state.cursoEsp.fechaInicioInscripcion}
+                                                            onChange={this.onChangeCurso_FechaInicioInscripcion}
+                                                            placeholder="AAAA-MM-DD"/>
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_fechaFinInscripcion">Fecha de fin de inscripcion</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_fechaFinInscripcion"
-                            aria-describedby="fechaFinInscripcion"
-                            value={this.state.cursoEsp.fechaFinInscripcion}
-                            onChange={this.onChangeCurso_FechaFinInscripcion}
-                            placeholder="AAAA-MM-DD"/>
-                        </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_fechaFinInscripcion">Fecha de fin de inscripcion</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_fechaFinInscripcion"
+                                                            aria-describedby="fechaFinInscripcion"
+                                                            value={this.state.cursoEsp.fechaFinInscripcion}
+                                                            onChange={this.onChangeCurso_FechaFinInscripcion}
+                                                            placeholder="AAAA-MM-DD"/>
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_fechaInicio">Fecha de inicio del curso</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_fechaInicio"
-                            aria-describedby="fechaInicio"
-                            value={this.state.cursoEsp.fechaInicio}
-                            onChange={this.onChangeCurso_FechaInicio}
-                            placeholder="AAAA-MM-DD"/>
-                        </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_fechaInicio">Fecha de inicio del curso</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_fechaInicio"
+                                                            aria-describedby="fechaInicio"
+                                                            value={this.state.cursoEsp.fechaInicio}
+                                                            onChange={this.onChangeCurso_FechaInicio}
+                                                            placeholder="AAAA-MM-DD"/>
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_fechaFin">Fecha de fin del curso</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_fechaFin"
-                            aria-describedby="fechaFin"
-                            value={this.state.cursoEsp.fechaFin}
-                            onChange={this.onChangeCurso_FechaFin}
-                            placeholder="AAAA-MM-DD"/>
-                        </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_fechaFin">Fecha de fin del curso</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_fechaFin"
+                                                            aria-describedby="fechaFin"
+                                                            value={this.state.cursoEsp.fechaFin}
+                                                            onChange={this.onChangeCurso_FechaFin}
+                                                            placeholder="AAAA-MM-DD"/>
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_clave">Tipo de reconocimiento</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_reconocimiento"
-                            aria-describedby="reconocimiento"
-                            value={this.state.cursoEsp.reconocimiento}
-                            onChange={this.onChangeCurso_Reconocimiento}/>
-                        </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_clave">Tipo de reconocimiento</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_reconocimiento"
+                                                            aria-describedby="reconocimiento"
+                                                            value={this.state.cursoEsp.reconocimiento}
+                                                            onChange={this.onChangeCurso_Reconocimiento}/>
+                                                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="curso_clave">Duración del curso</label>
-                            <input type="text"
-                            className="form-control"
-                            id="curso_horas"
-                            aria-describedby="horas"
-                            value={this.state.cursoEsp.horas}
-                            onChange={this.onChangeCurso_Horas}/>
-                        </div>
-                        <button onClick={this.onSubmit.bind(this,curso.id)}>Actualizar</button>
-                                                    </Modal>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                    
+                                                    <div className="form-group">
+                                                        <label htmlFor="curso_clave">Duración del curso</label>
+                                                        <input type="text"
+                                                            className="form-control"
+                                                            id="curso_horas"
+                                                            aria-describedby="horas"
+                                                            value={this.state.cursoEsp.horas}
+                                                            onChange={this.onChangeCurso_Horas}/>
+                                                    </div>
+                                                    <button onClick={this.onSubmit.bind(this,curso.id)}>Actualizar</button>
+                                                </Modal>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
-                        </div>
-                        <div className="row">
-                            <a href="/index/cursos/nuevo">Agregar</a>
-                        </div>
-                    </div>
+                            
+                        </div> {/*Content column*/}
+                    </div> {/*Content row*/}
+
                 </div>
             </Router>
         );
