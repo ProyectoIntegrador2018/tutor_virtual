@@ -41,3 +41,12 @@ Route::get('/api/alumno/{id}', 'Api\\AlumnoController@show');
 Route::put('/api/alumno/update/{id}', 'Api\\AlumnoController@update');
 
 Route::get('/api/search/alumnos/{search_info}', 'Api\\AlumnoController@search');
+
+
+Route::get('/api/tutores', 'Api\\TutorController@index');
+Route::post('/api/tutor/store', 'Api\\TutorController@store');
+Route::delete('/api/tutores/delete/{id}', 'Api\\TutorController@destroy');
+Route::get('/api/tutor/{id}', 'Api\\TutorController@show');
+Route::put('/api/tutor/update/{id}', 'Api\\TutorController@update');
+
+Route::get('/api/search/tutores/{search_info}', 'Api\\TutorController@search');

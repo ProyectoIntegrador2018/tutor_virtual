@@ -6,8 +6,10 @@ import Cursos_Listing from './Content/Cursos/Listing';
 import Cursos_New from './Content/Cursos/New';
 import Alumnos from './Content/Alumnos/Alumnos';
 import Alumno_Sub from './SubNavbars/Alumnos_Sub';
-import Alumnos_New from './Content/Alumnos/Alumnos_New'
-
+import Alumnos_New from './Content/Alumnos/Alumnos_New';
+import Tutores from './Content/Tutores/Tutores';
+import Tutores_Sub from './SubNavbars/Tutores_Sub';
+import Tutores_New from './Content/Tutores/Tutores_New';
 export default class MainComponent extends Component {
     render() {
         return (
@@ -24,12 +26,16 @@ export default class MainComponent extends Component {
                                 <li className="list-group-item bg-transparent text-center">
                                     <Link to="/alumnos" className="text-white h3">Alumnos</Link>
                                 </li>
+                                <li className="list-group-item bg-transparent text-center">
+                                    <Link to="/tutores" className="text-white h3">Tutores</Link>
+                                </li>
                             </ul>
                         </div>
                         
                         {/* Sub Navbars */}
                         <Route path='/cursos' component={Curso_Sub}/>
                         <Route path='/alumnos' component={Alumno_Sub}/>
+                        <Route path='/tutores' component={Tutores_Sub}/>
 
                         {/* Content Areas */}
                         <Route exact path='/cursos' component={Cursos_Listing}/>
@@ -37,6 +43,9 @@ export default class MainComponent extends Component {
 
                         <Route exact path='/alumnos' component={Alumnos}/>
                         <Route exact path='/alumnos/nuevo' component={Alumnos_New}/>
+
+                        <Route exact path='/tutores' component={Tutores}/>
+                        <Route exact path='/tutores/nuevo' component={Tutores_New}/>
                     </div>
                 </div>
             </Router>
