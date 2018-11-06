@@ -190,6 +190,11 @@ export default class Alumnos extends Component {
                         this.setState({
                             alumnos: response.data
                         });
+                        swal(
+                            'Bien',
+                            'Curso modificado con exito',
+                            'success'
+                        )
                     }
                 );
             }
