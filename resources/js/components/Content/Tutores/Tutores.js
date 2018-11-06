@@ -200,8 +200,14 @@ onSubmit(e) {
                     this.setState({
                         tutores: response.data
                     });
-            });
-            }
+                    swal(
+                        'Bien',
+                        'Curso modificado con exito',
+                        'success'
+                      )
+                }
+            );
+        }
         
     );
     
