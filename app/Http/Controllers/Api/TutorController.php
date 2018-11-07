@@ -51,7 +51,7 @@ class TutorController extends Controller
     {
         $tutor= new tutor();
         $tutor->nombre = $request->tutor_nombre;
-        $tutor->appellidoPaterno = $request->tutor_apellidoPaterno;
+        $tutor->apellidoPaterno = $request->tutor_apellidoPaterno;
         $tutor->apellidoMaterno = $request->tutor_apellidoMaterno;
         $tutor->correo = $request->tutor_correo;
         $tutor->pais = $request->tutor_pais;
@@ -100,7 +100,7 @@ class TutorController extends Controller
         echo $request;
         $tutor = Tutor::find($id);
         $tutor->nombre = $request->tutor_nombre;
-        $tutor->appellidoPaterno = $request->tutor_appellidoPaterno;
+        $tutor->apellidoPaterno = $request->tutor_apellidoPaterno;
         $tutor->apellidoMaterno = $request->tutor_apellidoMaterno;
         $tutor->correo = $request->tutor_correo;
         $tutor->pais = $request->tutor_pais;
