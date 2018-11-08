@@ -10,6 +10,11 @@ import Alumnos_New from './Content/Alumnos/Alumnos_New';
 import Tutores from './Content/Tutores/Tutores';
 import Tutores_Sub from './SubNavbars/Tutores_Sub';
 import Tutores_New from './Content/Tutores/Tutores_New';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faInfoCircle, faSave, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faTrashAlt, faInfoCircle, faSave, faArrowLeft)
 
 export default class MainComponent extends Component {
     render() {

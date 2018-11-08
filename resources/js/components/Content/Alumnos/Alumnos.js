@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
 import swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Alumnos extends Component {
 
@@ -253,11 +254,11 @@ export default class Alumnos extends Component {
                                                 <th scope="row">{alumno.id}</th>
                                                 <td>{alumno.nombre}</td>
                                                 <td>{alumno.correo}</td>
-                                                <td><button onClick={this.onDelete.bind(this,alumno.id)}>Eliminar</button></td>
-                                                <td><button onClick={this.toggleModal.bind(this, alumno.id)}>Detalle</button></td>
+                                                <td><button className="btn btn-danger" onClick={this.onDelete.bind(this,alumno.id)}><FontAwesomeIcon icon="trash-alt" /></button></td> 
+                                                <td><button className="btn btn-info" onClick={this.toggleModal.bind(this, alumno.id)}><FontAwesomeIcon icon="info-circle" /></button></td> 
                                                 
                                                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                                                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+                                                    <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
 
                                                     <div className="form-group">                         
                                                         <label htmlFor="alumno_nombre">Nombre</label>
@@ -358,8 +359,7 @@ export default class Alumnos extends Component {
                                                             value={this.state.alumnoEsp.fechaNacimiento} 
                                                             onChange={this.onChangeAlumno_FechaNacimiento} />
                                                     </div>
-
-                                                    <button onClick={this.onSubmit.bind(this,alumno.id)}>Actualizar</button> 
+                                                    <button className="btn btn-primary" onClick={this.onSubmit.bind(this,alumno.id)}><FontAwesomeIcon icon="save" /></button> 
                                                 </Modal>
                                             </tr>
                                         )
