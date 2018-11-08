@@ -66165,7 +66165,7 @@ var Alumnos = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Alumnos.__proto__ || Object.getPrototypeOf(Alumnos)).call(this));
 
         _this.onChangeAlumno_Nombre = _this.onChangeAlumno_Nombre.bind(_this);
-        _this.onChangeAlumno_AppellidoPaterno = _this.onChangeAlumno_AppellidoPaterno.bind(_this);
+        _this.onChangeAlumno_ApellidoPaterno = _this.onChangeAlumno_ApellidoPaterno.bind(_this);
         _this.onChangeAlumno_ApellidoMaterno = _this.onChangeAlumno_ApellidoMaterno.bind(_this);
         _this.onChangeAlumno_Correo = _this.onChangeAlumno_Correo.bind(_this);
         _this.onChangeAlumno_Pais = _this.onChangeAlumno_Pais.bind(_this);
@@ -66273,9 +66273,9 @@ var Alumnos = function (_Component) {
             this.forceUpdate();
         }
     }, {
-        key: 'onChangeAlumno_AppellidoPaterno',
-        value: function onChangeAlumno_AppellidoPaterno(e) {
-            this.state.alumnoEsp.appellidoPaterno = e.target.value;
+        key: 'onChangeAlumno_ApellidoPaterno',
+        value: function onChangeAlumno_ApellidoPaterno(e) {
+            this.state.alumnoEsp.apellidoPaterno = e.target.value;
             this.forceUpdate();
         }
     }, {
@@ -66340,7 +66340,7 @@ var Alumnos = function (_Component) {
             var alumno_id = this.state.alumnoEsp.id;
             var alumno = {
                 alumno_nombre: this.state.alumnoEsp.nombre,
-                alumno_appellidoPaterno: this.state.alumnoEsp.appellidoPaterno,
+                alumno_apellidoPaterno: this.state.alumnoEsp.apellidoPaterno,
                 alumno_apellidoMaterno: this.state.alumnoEsp.apellidoMaterno,
                 alumno_correo: this.state.alumnoEsp.correo,
                 alumno_pais: this.state.alumnoEsp.pais,
@@ -66455,11 +66455,6 @@ var Alumnos = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Pais'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
                                             'Acciones'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
@@ -66486,11 +66481,6 @@ var Alumnos = function (_Component) {
                                                 'td',
                                                 null,
                                                 alumno.correo
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                alumno.pais
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
@@ -66538,15 +66528,15 @@ var Alumnos = function (_Component) {
                                                     { className: 'form-group' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'label',
-                                                        { htmlFor: 'alumno_appellidoPaterno' },
+                                                        { htmlFor: 'alumno_apellidoPaterno' },
                                                         'Apellido Paterno'
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                                         className: 'form-control',
                                                         id: 'alumno_nombre',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this7.state.alumnoEsp.appellidoPaterno,
-                                                        onChange: _this7.onChangeAlumno_AppellidoPaterno })
+                                                        value: _this7.state.alumnoEsp.apellidoPaterno,
+                                                        onChange: _this7.onChangeAlumno_ApellidoPaterno })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -66823,14 +66813,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Alumnos_New = function (_Component) {
     _inherits(Alumnos_New, _Component);
 
-    //nombre appellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
+    //nombre apellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
     function Alumnos_New() {
         _classCallCheck(this, Alumnos_New);
 
         var _this = _possibleConstructorReturn(this, (Alumnos_New.__proto__ || Object.getPrototypeOf(Alumnos_New)).call(this));
 
         _this.onChangeAlumno_Nombre = _this.onChangeAlumno_Nombre.bind(_this);
-        _this.onChangeAlumno_AppellidoPaterno = _this.onChangeAlumno_AppellidoPaterno.bind(_this);
+        _this.onChangeAlumno_ApellidoPaterno = _this.onChangeAlumno_ApellidoPaterno.bind(_this);
         _this.onChangeAlumno_ApellidoMaterno = _this.onChangeAlumno_ApellidoMaterno.bind(_this);
         _this.onChangeAlumno_Correo = _this.onChangeAlumno_Correo.bind(_this);
         _this.onChangeAlumno_Pais = _this.onChangeAlumno_Pais.bind(_this);
@@ -66842,7 +66832,7 @@ var Alumnos_New = function (_Component) {
         _this.onSubmit = _this.onSubmit.bind(_this);
         _this.state = {
             alumno_nombre: "",
-            alumno_appellidoPaterno: "",
+            alumno_apellidoPaterno: "",
             alumno_apellidoMaterno: "",
             alumno_correo: "",
             alumno_pais: "",
@@ -66863,10 +66853,10 @@ var Alumnos_New = function (_Component) {
             });
         }
     }, {
-        key: 'onChangeAlumno_AppellidoPaterno',
-        value: function onChangeAlumno_AppellidoPaterno(e) {
+        key: 'onChangeAlumno_ApellidoPaterno',
+        value: function onChangeAlumno_ApellidoPaterno(e) {
             this.setState({
-                alumno_appellidoPaterno: e.target.value
+                alumno_apellidoPaterno: e.target.value
             });
         }
     }, {
@@ -66931,7 +66921,7 @@ var Alumnos_New = function (_Component) {
             e.preventDefault();
             var alumno = {
                 alumno_nombre: this.state.alumno_nombre,
-                alumno_appellidoPaterno: this.state.alumno_appellidoPaterno,
+                alumno_apellidoPaterno: this.state.alumno_apellidoPaterno,
                 alumno_apellidoMaterno: this.state.alumno_apellidoMaterno,
                 alumno_correo: this.state.alumno_correo,
                 alumno_pais: this.state.alumno_pais,
@@ -66994,15 +66984,15 @@ var Alumnos_New = function (_Component) {
                             { className: 'form-group' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
-                                { htmlFor: 'alumno_appellidoPaterno' },
+                                { htmlFor: 'alumno_apellidoPaterno' },
                                 'Apellido Paterno'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                 className: 'form-control',
-                                id: 'alumno_appellidoPaterno',
-                                'aria-describedby': 'appellidoPaterno',
-                                value: this.state.alumno_appellidoPaterno,
-                                onChange: this.onChangeAlumno_AppellidoPaterno })
+                                id: 'alumno_apellidoPaterno',
+                                'aria-describedby': 'apellidoPaterno',
+                                value: this.state.alumno_apellidoPaterno,
+                                onChange: this.onChangeAlumno_ApellidoPaterno })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -67310,7 +67300,7 @@ var Tutores = function (_Component) {
     }, {
         key: 'onChangeTutor_ApellidoPaterno',
         value: function onChangeTutor_ApellidoPaterno(e) {
-            this.state.tutorEsp.appellidoPaterno = e.target.value;
+            this.state.tutorEsp.apellidoPaterno = e.target.value;
             this.forceUpdate();
         }
     }, {
@@ -67375,7 +67365,7 @@ var Tutores = function (_Component) {
             var tutor_id = this.state.tutorEsp.id;
             var tutor = {
                 tutor_nombre: this.state.tutorEsp.nombre,
-                tutor_appellidoPaterno: this.state.tutorEsp.appellidoPaterno,
+                tutor_apellidoPaterno: this.state.tutorEsp.apellidoPaterno,
                 tutor_apellidoMaterno: this.state.tutorEsp.apellidoMaterno,
                 tutor_correo: this.state.tutorEsp.correo,
                 tutor_pais: this.state.tutorEsp.pais,
@@ -67444,11 +67434,24 @@ var Tutores = function (_Component) {
                             { className: 'col p-0' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'row' },
+                                { className: 'row justify-content-between' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'h1',
-                                    null,
-                                    'Tutores'
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h1',
+                                        null,
+                                        'Tutores'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/index/tutores/nuevo', className: 'font-weight-bold' },
+                                        'Agregar nuevo'
+                                    )
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67478,13 +67481,14 @@ var Tutores = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Materia'
+                                            'Curso'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Grupo'
-                                        )
+                                            'Acciones'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67512,7 +67516,7 @@ var Tutores = function (_Component) {
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 null,
-                                                tutor.pais
+                                                tutor.curso
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
@@ -67520,7 +67524,7 @@ var Tutores = function (_Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
                                                     { onClick: _this7.onDelete.bind(_this7, tutor.id) },
-                                                    'Delete'
+                                                    'Eliminar'
                                                 )
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67538,7 +67542,7 @@ var Tutores = function (_Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
                                                     { onClick: _this7.closeModal.bind(_this7) },
-                                                    'Hide Modal'
+                                                    'Regresar'
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -67567,7 +67571,7 @@ var Tutores = function (_Component) {
                                                         className: 'form-control',
                                                         id: 'tutor_nombre',
                                                         'aria-describedby': 'nombre',
-                                                        value: _this7.state.tutorEsp.appellidoPaterno,
+                                                        value: _this7.state.tutorEsp.apellidoPaterno,
                                                         onChange: _this7.onChangeTutor_ApellidoPaterno })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67714,15 +67718,6 @@ var Tutores = function (_Component) {
                                         );
                                     })
                                 )
-                            )
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'row' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'a',
-                                { href: '/index/tutores/nuevo' },
-                                'Agregar tutores'
                             )
                         )
                     )

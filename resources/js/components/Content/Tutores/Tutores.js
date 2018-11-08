@@ -127,7 +127,7 @@ onChangeTutor_Nombre(e) {
     this.forceUpdate();
 }
 onChangeTutor_ApellidoPaterno(e) {
-    this.state.tutorEsp.appellidoPaterno = e.target.value;
+    this.state.tutorEsp.apellidoPaterno = e.target.value;
     this.forceUpdate();
 }
 
@@ -180,7 +180,7 @@ onSubmit(e) {
     var tutor_id = this.state.tutorEsp.id;
     const tutor = {
         tutor_nombre : this.state.tutorEsp.nombre,
-        tutor_appellidoPaterno : this.state.tutorEsp.appellidoPaterno,
+        tutor_apellidoPaterno : this.state.tutorEsp.apellidoPaterno,
         tutor_apellidoMaterno : this.state.tutorEsp.apellidoMaterno,
         tutor_correo : this.state.tutorEsp.correo,
         tutor_pais : this.state.tutorEsp.pais,
@@ -236,17 +236,25 @@ onSubmit(e) {
     {/*Content row*/}
     <div className="row justify-content-center p-4">
     <div className="col p-0">
-        <div className="row">
-            <h1>Tutores</h1>
+        <div className="row justify-content-between">
+            <div className="col-auto">
+                <h1>Tutores</h1>
+            </div>
+
+            <div className="col-auto">
+                <a href="/index/tutores/nuevo" className="font-weight-bold">Agregar nuevo</a>
+            </div>
         </div>
+
         <table className="table table-hover">
             <thead className="thead-dark">
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Materia</th>
-                <th scope="col">Grupo</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Acciones</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -257,11 +265,11 @@ onSubmit(e) {
                 <th scope="row">{tutor.id}</th>
                 <td>{tutor.nombre}</td>
                 <td>{tutor.correo}</td>
-                <td>{tutor.pais}</td>
-                <td><button onClick={this.onDelete.bind(this,tutor.id)}>Delete</button></td>
+                <td>{tutor.curso}</td>
+                <td><button onClick={this.onDelete.bind(this,tutor.id)}>Eliminar</button></td>
                 <td><button onClick={this.toggleModal.bind(this, tutor.id)}>Detalle</button></td>
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                    <button onClick={this.closeModal.bind(this)}>Hide Modal</button>
+                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
                         <div className="form-group">                         
                             <label htmlFor="tutor_nombre">Nombre</label>
                                 <input type="text"
@@ -277,7 +285,7 @@ onSubmit(e) {
                                 className="form-control"
                                 id="tutor_nombre"
                                 aria-describedby="nombre"
-                                value={this.state.tutorEsp.appellidoPaterno} 
+                                value={this.state.tutorEsp.apellidoPaterno} 
                                 onChange={this.onChangeTutor_ApellidoPaterno} />
                         </div>
                         <div className="form-group">                         
@@ -370,9 +378,6 @@ onSubmit(e) {
 }
             </tbody>
         </table>
-    </div>
-    <div className="row">
-        <a href="/index/tutores/nuevo">Agregar tutores</a>
     </div>
     </div>
     </div>
