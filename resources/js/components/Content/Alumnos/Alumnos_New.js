@@ -131,7 +131,7 @@ export default class Alumnos_New extends Component {
     render() {
         return (
             <Router>
-                <div className="col-8 p-4"> {/*Content column*/}
+                <div className="col-8 p-4 main"> {/*Content column*/}
 
                     <div className="row">
                         <h1>Nuevo alumno</h1>

@@ -6,5 +6,5 @@
 @endsection
 
 @section('content')
-<div id="mainComponent" class="h-100"></div>
+<div id="mainComponent" class="col px-0"></div>
 @endsection
