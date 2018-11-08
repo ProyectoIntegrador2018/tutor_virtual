@@ -359,7 +359,6 @@ export default class Alumnos extends Component {
                                                             value={this.state.alumnoEsp.fechaNacimiento} 
                                                             onChange={this.onChangeAlumno_FechaNacimiento} />
                                                     </div>
-
                                                     <button className="btn btn-primary" onClick={this.onSubmit.bind(this,alumno.id)}><FontAwesomeIcon icon="save" /></button> 
                                                 </Modal>
                                             </tr>
