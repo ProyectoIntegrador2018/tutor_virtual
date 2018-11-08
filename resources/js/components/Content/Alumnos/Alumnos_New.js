@@ -5,11 +5,11 @@ import swal from 'sweetalert2';
 
 export default class Alumnos_New extends Component {
 
-    //nombre appellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
+    //nombre apellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
     constructor() {
         super();
         this.onChangeAlumno_Nombre = this.onChangeAlumno_Nombre.bind(this);
-        this.onChangeAlumno_AppellidoPaterno = this.onChangeAlumno_AppellidoPaterno.bind(this);
+        this.onChangeAlumno_ApellidoPaterno = this.onChangeAlumno_ApellidoPaterno.bind(this);
         this.onChangeAlumno_ApellidoMaterno = this.onChangeAlumno_ApellidoMaterno.bind(this);
         this.onChangeAlumno_Correo = this.onChangeAlumno_Correo.bind(this);
         this.onChangeAlumno_Pais = this.onChangeAlumno_Pais.bind(this);
@@ -21,7 +21,7 @@ export default class Alumnos_New extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             alumno_nombre : "",
-            alumno_appellidoPaterno : "",
+            alumno_apellidoPaterno : "",
             alumno_apellidoMaterno : "",
             alumno_correo : "",
             alumno_pais : "",
@@ -39,9 +39,9 @@ export default class Alumnos_New extends Component {
         });
     }
 
-    onChangeAlumno_AppellidoPaterno(e) {
+    onChangeAlumno_ApellidoPaterno(e) {
         this.setState({
-            alumno_appellidoPaterno : e.target.value
+            alumno_apellidoPaterno : e.target.value
         });
     }
 
@@ -97,7 +97,7 @@ export default class Alumnos_New extends Component {
         e.preventDefault();
         const alumno = {
             alumno_nombre : this.state.alumno_nombre,
-            alumno_appellidoPaterno : this.state.alumno_appellidoPaterno,
+            alumno_apellidoPaterno : this.state.alumno_apellidoPaterno,
             alumno_apellidoMaterno : this.state.alumno_apellidoMaterno,
             alumno_correo : this.state.alumno_correo,
             alumno_pais : this.state.alumno_pais,
@@ -150,13 +150,13 @@ export default class Alumnos_New extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="alumno_appellidoPaterno">Apellido Paterno</label>
+                            <label htmlFor="alumno_apellidoPaterno">Apellido Paterno</label>
                             <input type="text"
                             className="form-control"
-                            id="alumno_appellidoPaterno"
-                            aria-describedby="appellidoPaterno"
-                            value={this.state.alumno_appellidoPaterno}
-                            onChange={this.onChangeAlumno_AppellidoPaterno}/>
+                            id="alumno_apellidoPaterno"
+                            aria-describedby="apellidoPaterno"
+                            value={this.state.alumno_apellidoPaterno}
+                            onChange={this.onChangeAlumno_ApellidoPaterno}/>
                         </div>
 
                         <div className="form-group">

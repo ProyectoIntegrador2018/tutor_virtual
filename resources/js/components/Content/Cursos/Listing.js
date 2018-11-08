@@ -131,6 +131,11 @@ export default class Cursos_Listing extends Component {
                         this.setState({
                             cursos: response.data
                         });
+                        swal(
+                            'Bien',
+                            'Curso modificado con exito',
+                            'success'
+                          )
                     }
                 );
             }
@@ -223,6 +228,7 @@ export default class Cursos_Listing extends Component {
                                         <th scope="col">Clave</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Clave</th>
+                                        <th scope="col">Fecha inicio</th>
                                         <th scope="col">Fecha fin</th>
                                         <th scope="col">Acciones</th>
                                         <th scope="col"></th>
@@ -235,6 +241,7 @@ export default class Cursos_Listing extends Component {
                                                 <th scope="row">{curso.clave}</th>
                                                 <td>{curso.nombre}</td>
                                                 <td>{curso.clave}</td>
+                                                <td>{curso.fechaInicio}</td>
                                                 <td>{curso.fechaFin}</td>
                                                 <td><button onClick={this.onDelete.bind(this,curso.id)}>Eliminar</button></td>
                                                 <td><button onClick={this.toggleModal.bind(this, curso.id)}>Detalle</button></td>

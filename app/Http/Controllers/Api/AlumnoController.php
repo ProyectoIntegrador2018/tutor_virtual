@@ -50,7 +50,7 @@ class AlumnoController extends Controller
     {
         $alumno= new alumno();
         $alumno->nombre = $request->alumno_nombre;
-        $alumno->appellidoPaterno = $request->alumno_appellidoPaterno;
+        $alumno->apellidoPaterno = $request->alumno_apellidoPaterno;
         $alumno->apellidoMaterno = $request->alumno_apellidoMaterno;
         $alumno->correo = $request->alumno_correo;
         $alumno->pais = $request->alumno_pais;
@@ -98,7 +98,7 @@ class AlumnoController extends Controller
     {
         $alumno = Alumno::find($id);
         $alumno->nombre = $request->alumno_nombre;
-        $alumno->appellidoPaterno = $request->alumno_appellidoPaterno;
+        $alumno->apellidoPaterno = $request->alumno_apellidoPaterno;
         $alumno->apellidoMaterno = $request->alumno_apellidoMaterno;
         $alumno->correo = $request->alumno_correo;
         $alumno->pais = $request->alumno_pais;

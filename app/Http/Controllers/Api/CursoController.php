@@ -36,9 +36,10 @@ class CursoController extends Controller
     {
         $request = $curso;
         $result = Curso::where('nombre','LIKE','%'.$request."%")
-            ->orWhere('clave','LIKE','%'.$request."%")
-            ->orWhere('fechaFinInscripcion','LIKE','%'.$request."%")
-            ->get();
+        ->orWhere('clave','LIKE','%'.$request."%")
+        ->orWhere('fechaInicioInscripcion','LIKE','%'.$request."%")
+        ->orWhere('fechaFinInscripcion','LIKE','%'.$request."%")
+        ->get();
         return $result;
     }
 

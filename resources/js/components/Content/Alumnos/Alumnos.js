@@ -10,7 +10,7 @@ export default class Alumnos extends Component {
     constructor() {
         super();
         this.onChangeAlumno_Nombre = this.onChangeAlumno_Nombre.bind(this);
-        this.onChangeAlumno_AppellidoPaterno = this.onChangeAlumno_AppellidoPaterno.bind(this);
+        this.onChangeAlumno_ApellidoPaterno = this.onChangeAlumno_ApellidoPaterno.bind(this);
         this.onChangeAlumno_ApellidoMaterno = this.onChangeAlumno_ApellidoMaterno.bind(this);
         this.onChangeAlumno_Correo = this.onChangeAlumno_Correo.bind(this);
         this.onChangeAlumno_Pais = this.onChangeAlumno_Pais.bind(this);
@@ -117,8 +117,8 @@ export default class Alumnos extends Component {
         this.forceUpdate();
     }
 
-    onChangeAlumno_AppellidoPaterno(e) {
-        this.state.alumnoEsp.appellidoPaterno = e.target.value;
+    onChangeAlumno_ApellidoPaterno(e) {
+        this.state.alumnoEsp.apellidoPaterno = e.target.value;
         this.forceUpdate();
     }
 
@@ -171,7 +171,7 @@ export default class Alumnos extends Component {
         var alumno_id = this.state.alumnoEsp.id;
         const alumno = {
             alumno_nombre : this.state.alumnoEsp.nombre,
-            alumno_appellidoPaterno : this.state.alumnoEsp.appellidoPaterno,
+            alumno_apellidoPaterno : this.state.alumnoEsp.apellidoPaterno,
             alumno_apellidoMaterno : this.state.alumnoEsp.apellidoMaterno,
             alumno_correo : this.state.alumnoEsp.correo,
             alumno_pais : this.state.alumnoEsp.pais,
@@ -189,6 +189,11 @@ export default class Alumnos extends Component {
                         this.setState({
                             alumnos: response.data
                         });
+                        swal(
+                            'Bien',
+                            'Curso modificado con exito',
+                            'success'
+                        )
                     }
                 );
             }
@@ -237,7 +242,6 @@ export default class Alumnos extends Component {
                                         <th scope="col">#</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Correo</th>
-                                        <th scope="col">Pais</th>
                                         <th scope="col">Acciones</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -249,7 +253,6 @@ export default class Alumnos extends Component {
                                                 <th scope="row">{alumno.id}</th>
                                                 <td>{alumno.nombre}</td>
                                                 <td>{alumno.correo}</td>
-                                                <td>{alumno.pais}</td>
                                                 <td><button onClick={this.onDelete.bind(this,alumno.id)}>Eliminar</button></td>
                                                 <td><button onClick={this.toggleModal.bind(this, alumno.id)}>Detalle</button></td>
                                                 
@@ -267,13 +270,13 @@ export default class Alumnos extends Component {
                                                     </div>
 
                                                     <div className="form-group">                         
-                                                        <label htmlFor="alumno_appellidoPaterno">Apellido Paterno</label>
+                                                        <label htmlFor="alumno_apellidoPaterno">Apellido Paterno</label>
                                                         <input type="text"
                                                             className="form-control"
                                                             id="alumno_nombre"
                                                             aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.appellidoPaterno} 
-                                                            onChange={this.onChangeAlumno_AppellidoPaterno} />
+                                                            value={this.state.alumnoEsp.apellidoPaterno} 
+                                                            onChange={this.onChangeAlumno_ApellidoPaterno} />
                                                     </div>
 
                                                     <div className="form-group">                         
