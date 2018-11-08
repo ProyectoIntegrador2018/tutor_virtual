@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Curso;
+use App\Imports\CursosImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class CursoController extends Controller
 {
@@ -31,7 +34,6 @@ class CursoController extends Controller
 
     public function search($curso)
     {
-
         $request = $curso;
         $result = Curso::where('nombre','LIKE','%'.$request."%")
         ->orWhere('clave','LIKE','%'.$request."%")
@@ -39,8 +41,6 @@ class CursoController extends Controller
         ->orWhere('fechaFinInscripcion','LIKE','%'.$request."%")
         ->get();
         return $result;
-        
-
     }
 
     /**
@@ -71,6 +71,28 @@ class CursoController extends Controller
         $curso->reconocimiento = $request->curso_reconocimiento;
         $curso->horas = $request->curso_horas;
         $curso->save();
+    }
+
+    /**
+     * Store new resources from uploaded excel file.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        try {
+            Excel::import(new CursosImport, $request['file']);
+            return response()->json($content = 'Upload successful', $status=200);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+                
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+            }   
+        }
     }
 
     /**
@@ -130,5 +152,4 @@ class CursoController extends Controller
         echo $curso;
         $curso->delete();
     }
-    
 }

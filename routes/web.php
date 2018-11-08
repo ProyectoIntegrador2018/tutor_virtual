@@ -42,6 +42,7 @@ Route::put('/api/alumno/update/{id}', 'Api\\AlumnoController@update');
 
 Route::get('/api/search/alumnos/{search_info}', 'Api\\AlumnoController@search');
 
+Route::post('/api/importCursos', 'Api\CursoController@import');
 
 Route::get('/api/tutores', 'Api\\TutorController@index');
 Route::post('/api/tutor/store', 'Api\\TutorController@store');

@@ -2,48 +2,40 @@ import React, { Component } from 'react';
 import axios, { post } from 'axios';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
+import swal from 'sweetalert2';
 
 export default class Curso_Sub extends Component {
 
     constructor() {
         super();
-        this.onFormSubmit = this.onFormSubmit.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.fileUpload = this.fileUpload.bind(this)
+        this.handleUploadImage = this.handleUploadImage.bind(this);
         this.state = {
             isActive : false,
-            image: ''
+            uploadStatus: false
         }
     }
 
-    onFormSubmit(e) {
-        e.preventDefault() 
-        this.fileUpload(this.state.image);
-    }
+    handleUploadImage(ev) {
+        ev.preventDefault();
+    
+        const data = new FormData();
+        data.append('file', this.uploadInput.files[0]);
+    
+        axios.post('/api/importCursos', data)
+        .then(function (response) {
+            this.state.isActive = false;
+        })
+        .catch(function (error) {
+            this.state.isActive = false;
+        });
 
-    onChange(e) {
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length) {
-            return;
-        }
-        this.createImage(files[0]);
-    }
-
-    createImage(file) {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            this.setState({
-            image: e.target.result
-            })
-        };
-        reader.readAsDataURL(file);
-    }
-
-    fileUpload(image){
-        const url = 'http://localhost:4200/api/fileupload';
-        const formData = {file: this.state.image}
-        return  post(url, formData)
-                .then(response => console.log(response))
+        swal(
+            'Listo',
+            'Archivo procesado!',
+            'success'
+        ).then((result) => {
+            location.reload();
+        })
     }
 
     toggleModal(){
@@ -69,10 +61,14 @@ export default class Curso_Sub extends Component {
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
                     <button onClick={this.closeModal.bind(this)}>Regresar</button>
 
-                    <form onSubmit={this.onFormSubmit}>
+                    <form onSubmit={this.handleUploadImage}>
                         <h1>Seleccionar archivo de excel</h1>
-                        <input type="file"  onChange={this.onChange} />
-                        <button type="submit">Agregar cursos</button>
+
+                        <div className="form-group">
+                            <input className="form-control"  ref={(ref) => { this.uploadInput = ref; }} type="file" />
+                        </div>
+
+                        <button className="btn btn-success" type="submit">Agregar cursos</button>
                     </form>
                 </Modal>
 

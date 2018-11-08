@@ -21,15 +21,12 @@ class AlumnoController extends Controller
     }
     public function search($alumno)
     {
-
         $request = $alumno;
         $result = Alumno::where('nombre','LIKE','%'.$request."%")
-        ->orWhere('correo','LIKE','%'.$request."%")
-        ->orWhere('pais','LIKE','%'.$request."%")
-        ->get();
+            ->orWhere('correo','LIKE','%'.$request."%")
+            ->orWhere('pais','LIKE','%'.$request."%")
+            ->get();
         return $result;
-        
-
     }
     
 

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
 // ES6 Modules or TypeScript
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export default class Cursos_Listing extends Component {
 
@@ -28,12 +28,13 @@ export default class Cursos_Listing extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4200/api/cursos').then(
+        axios.get('/api/cursos').then(
             response => {
                 this.setState({
                     cursos: response.data
                 });
-        });
+            }
+        );
         Modal.setAppElement('body');
     }
 
@@ -41,7 +42,7 @@ export default class Cursos_Listing extends Component {
     onEnter(e){
         var search_info = this.state.search_info;
         if (search_info != "") {
-            axios.get('http://localhost:4200/api/search/cursos/'+ search_info).then(
+            axios.get('/api/search/cursos/'+ search_info).then(
                 response => {
                     this.setState({
                         cursos: response.data
@@ -51,7 +52,7 @@ export default class Cursos_Listing extends Component {
         }
         else
         {
-            axios.get('http://localhost:4200/api/cursos').then(
+            axios.get('/api/cursos').then(
                 response => {
                     this.setState({
                         cursos: response.data
@@ -74,7 +75,7 @@ export default class Cursos_Listing extends Component {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                axios.delete('http://localhost:4200/api/cursos/delete/' + curso_id)
+                axios.delete('/api/cursos/delete/' + curso_id)
                     .then(response => {
                         var cursos = this.state.cursos;
                         for(var  i = 0; i< cursos.length; i++) {
@@ -96,7 +97,7 @@ export default class Cursos_Listing extends Component {
     toggleModal(curso_id){
         console.log(curso_id);
         this.setState({isActive: true});
-        axios.get('http://localhost:4200/api/curso/' + curso_id).then(
+        axios.get('/api/curso/' + curso_id).then(
             response => {
                 this.setState({
                     cursoEsp: response.data
@@ -123,9 +124,9 @@ export default class Cursos_Listing extends Component {
             curso_horas : this.state.cursoEsp.horas
         }
         
-        axios.put('http://localhost:4200/api/curso/update/' + curso_id, curso).then(
+        axios.put('/api/curso/update/' + curso_id, curso).then(
             response =>{
-                axios.get('http://localhost:4200/api/cursos').then(
+                axios.get('/api/cursos').then(
                     response => {
                         this.setState({
                             cursos: response.data
@@ -188,7 +189,7 @@ export default class Cursos_Listing extends Component {
     render() {
         return (
             <Router>
-                <div className="col-8 p-0">
+                <div className="col-8 p-0 main">
 
                     {/*Search bar*/}
                     <div className="row p-0">
@@ -200,9 +201,9 @@ export default class Cursos_Listing extends Component {
                                     </span>
                                 </div>
                                 <input value={this.state.search_info} onKeyUp={this.onEnter.bind(this)}
-                                onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
-                                placeholder="Buscar curso por nombre..." 
-                                aria-label="Username" aria-describedby="basic-addon1"/>
+                                    onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
+                                    placeholder="Buscar curso por nombre..." 
+                                    aria-label="Username" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
@@ -224,7 +225,7 @@ export default class Cursos_Listing extends Component {
                             <table className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">Clave</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Clave</th>
                                         <th scope="col">Fecha inicio</th>
@@ -237,7 +238,7 @@ export default class Cursos_Listing extends Component {
                                     {this.state.cursos.map(curso => {
                                         return (
                                             <tr>
-                                                <th scope="row">{curso.id}</th>
+                                                <th scope="row">{curso.clave}</th>
                                                 <td>{curso.nombre}</td>
                                                 <td>{curso.clave}</td>
                                                 <td>{curso.fechaInicio}</td>
