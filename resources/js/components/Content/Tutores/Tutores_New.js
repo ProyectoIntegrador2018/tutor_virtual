@@ -117,7 +117,7 @@ export default class Tutores_New extends Component {
             tutor_institucion : this.state.tutor_institucion
         }
 
-        axios.post('http://localhost:4200/api/tutor/store', tutor).then(
+        axios.post('/api/tutor/store', tutor).then(
             (response) => {
             // Success
             swal(
@@ -139,7 +139,7 @@ export default class Tutores_New extends Component {
         return (
             <Router>
                 {/*Content column*/}
-                <div className="col-8 p-4">
+                <div className="col-8 p-4 main">
                     <div className="row">
                         <h1>Nuevo tutor</h1>
                     </div>

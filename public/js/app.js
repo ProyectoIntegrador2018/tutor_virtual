@@ -67074,7 +67074,7 @@ var Cursos_New = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'col-8 p-4' },
+                    { className: 'col-8 p-4 main' },
                     ' ',
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
@@ -68058,7 +68058,7 @@ var Alumnos_New = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'col-8 p-4' },
+                    { className: 'col-8 p-4 main' },
                     ' ',
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
@@ -68314,7 +68314,7 @@ var Tutores = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutores').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/tutores').then(function (response) {
                 _this2.setState({
                     tutores: response.data
                 });
@@ -68330,13 +68330,13 @@ var Tutores = function (_Component) {
 
             if (search_info != "") {
 
-                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/search/tutores/' + search_info).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/search/tutores/' + search_info).then(function (response) {
                     _this3.setState({
                         tutores: response.data
                     });
                 });
             } else {
-                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutores').then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/tutores').then(function (response) {
                     _this3.setState({
                         tutores: response.data
                     });
@@ -68366,7 +68366,7 @@ var Tutores = function (_Component) {
                 cancelButtonText: 'Cancelar'
             }).then(function (result) {
                 if (result.value) {
-                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('http://localhost:4200/api/tutores/delete/' + tutor_id).then(function (response) {
+                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('/api/tutores/delete/' + tutor_id).then(function (response) {
 
                         var tutores = _this4.state.tutores;
                         for (var i = 0; i < tutores.length; i++) {
@@ -68387,7 +68387,7 @@ var Tutores = function (_Component) {
 
             console.log(tutor_id);
             this.setState({ isActive: true });
-            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutor/' + tutor_id).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/tutor/' + tutor_id).then(function (response) {
                 _this5.setState({
                     tutorEsp: response.data
 
@@ -68486,8 +68486,8 @@ var Tutores = function (_Component) {
 
             };
 
-            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('http://localhost:4200/api/tutor/update/' + tutor_id, tutor).then(function (response) {
-                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:4200/api/tutores').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('/api/tutor/update/' + tutor_id, tutor).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/tutores').then(function (response) {
                     _this6.setState({
                         tutores: response.data
                     });
@@ -68505,7 +68505,7 @@ var Tutores = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'col-8 p-0' },
+                    { className: 'col-8 p-0 main' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         { className: 'row p-0' },
@@ -69065,7 +69065,7 @@ var Tutores_New = function (_Component) {
                 tutor_institucion: this.state.tutor_institucion
             };
 
-            axios.post('http://localhost:4200/api/tutor/store', tutor).then(function (response) {
+            axios.post('/api/tutor/store', tutor).then(function (response) {
                 // Success
                 __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default()('Bien', 'Tutor creado con exito', 'success');
             }).catch(function (error) {
@@ -69084,7 +69084,7 @@ var Tutores_New = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'col-8 p-4' },
+                    { className: 'col-8 p-4 main' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         { className: 'row' },

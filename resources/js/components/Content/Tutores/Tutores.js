@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export default class Tutores extends Component {
 
@@ -31,7 +31,7 @@ export default class Tutores extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4200/api/tutores').then(
+    axios.get('/api/tutores').then(
         response => {
             this.setState({
                 tutores: response.data
@@ -45,7 +45,7 @@ onEnter(e){
     
     if (search_info != "") {
         
-        axios.get('http://localhost:4200/api/search/tutores/'+ search_info).then(
+        axios.get('/api/search/tutores/'+ search_info).then(
             response => {
                 this.setState({
                     tutores: response.data
@@ -55,7 +55,7 @@ onEnter(e){
      }
        else
         {
-            axios.get('http://localhost:4200/api/tutores').then(
+            axios.get('/api/tutores').then(
                 response => {
                     this.setState({
                         tutores: response.data
@@ -84,7 +84,7 @@ onDelete(tutor_id){
         cancelButtonText: 'Cancelar'
       }).then((result) => {
         if (result.value) {
-            axios.delete('http://localhost:4200/api/tutores/delete/' + tutor_id)
+            axios.delete('/api/tutores/delete/' + tutor_id)
             .then(response =>{
     
                 var tutores = this.state.tutores;
@@ -108,7 +108,7 @@ onDelete(tutor_id){
 toggleModal(tutor_id){
     console.log(tutor_id);
     this.setState({isActive: true});
-    axios.get('http://localhost:4200/api/tutor/' + tutor_id).then(
+    axios.get('/api/tutor/' + tutor_id).then(
         response => {
             this.setState({
                 tutorEsp: response.data
@@ -193,9 +193,9 @@ onSubmit(e) {
 
     }
     
-    axios.put('http://localhost:4200/api/tutor/update/' + tutor_id, tutor).then(
+    axios.put('/api/tutor/update/' + tutor_id, tutor).then(
         response =>{
-            axios.get('http://localhost:4200/api/tutores').then(
+            axios.get('/api/tutores').then(
                 response => {
                     this.setState({
                         tutores: response.data
@@ -217,7 +217,7 @@ onSubmit(e) {
         return (
 
 <Router>
-<div className="col-8 p-0">
+<div className="col-8 p-0 main">
     {/*Search bar*/}
     <div className="row p-0">
     <div className="col-12 p-0">

@@ -20,7 +20,7 @@
 </head>
 <body>
     <div id="app" class="container-fluid px-0">
-        <nav class="part navbar navbar-expand-md navbar-dark bg-dark shadow-sm px-3">
+        <nav class="part navbar navbar-expand-md navbar-dark bg-dark shadow-sm px-3 row">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <!--{{ config('app.name', 'Laravel') }}-->Tutor Virtual
             </a>
@@ -67,7 +67,7 @@
             </div>      
         </nav>
 
-        <main class="main part">
+        <main class="main part row">
             @yield('content')
         </main>
 
