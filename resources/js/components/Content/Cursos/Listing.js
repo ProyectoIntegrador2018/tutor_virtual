@@ -5,6 +5,7 @@ import axios from 'axios';
 import Modal from 'react-modal';
 // ES6 Modules or TypeScript
 import swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Cursos_Listing extends Component {
 
@@ -243,10 +244,10 @@ export default class Cursos_Listing extends Component {
                                                 <td>{curso.clave}</td>
                                                 <td>{curso.fechaInicio}</td>
                                                 <td>{curso.fechaFin}</td>
-                                                <td><button onClick={this.onDelete.bind(this,curso.id)}>Eliminar</button></td>
-                                                <td><button onClick={this.toggleModal.bind(this, curso.id)}>Detalle</button></td>
+                                                <td><button className="btn btn-danger" onClick={this.onDelete.bind(this,curso.id)}><FontAwesomeIcon icon="trash-alt" /></button></td> 
+                                                <td><button className="btn btn-info" onClick={this.toggleModal.bind(this, curso.id)}><FontAwesomeIcon icon="info-circle" /></button></td> 
                                                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                                                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+                                                    <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
                                                     <div className="form-group">
                                                         <label htmlFor="curso_nombre">Nombre</label>
                                                         <input type="text"
@@ -330,7 +331,7 @@ export default class Cursos_Listing extends Component {
                                                             value={this.state.cursoEsp.horas}
                                                             onChange={this.onChangeCurso_Horas}/>
                                                     </div>
-                                                    <button onClick={this.onSubmit.bind(this,curso.id)}>Actualizar</button>
+                                                    <button className="btn btn-primary" onClick={this.onSubmit.bind(this,curso.id)}><FontAwesomeIcon icon="save" /></button>
                                                 </Modal>
                                             </tr>
                                         )

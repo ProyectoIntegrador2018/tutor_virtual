@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
 import swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Tutores extends Component {
 
@@ -266,10 +267,10 @@ onSubmit(e) {
                 <td>{tutor.nombre}</td>
                 <td>{tutor.correo}</td>
                 <td>{tutor.curso}</td>
-                <td><button onClick={this.onDelete.bind(this,tutor.id)}>Eliminar</button></td>
-                <td><button onClick={this.toggleModal.bind(this, tutor.id)}>Detalle</button></td>
+                <td><button className="btn btn-danger"  onClick={this.onDelete.bind(this,tutor.id)}><FontAwesomeIcon icon="trash-alt" /></button></td> 
+                <td><button className="btn btn-info"  onClick={this.toggleModal.bind(this, tutor.id)}><FontAwesomeIcon icon="info-circle" /></button></td> 
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+                    <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
                         <div className="form-group">                         
                             <label htmlFor="tutor_nombre">Nombre</label>
                                 <input type="text"
@@ -370,7 +371,7 @@ onSubmit(e) {
                             value={this.state.tutorEsp.institucion}
                             onChange={this.onChangeTutor_Institucion}/>
                         </div>
-                          <button onClick={this.onSubmit.bind(this,tutor.id)}>Actualizar</button>
+                          <button className="btn btn-primary" onClick={this.onSubmit.bind(this,tutor.id)}><FontAwesomeIcon icon="save" /></button>
                 </Modal>
             </tr>
                 )
