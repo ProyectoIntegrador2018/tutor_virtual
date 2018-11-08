@@ -89,7 +89,7 @@ export default class Cursos_New extends Component {
             curso_horas : this.state.curso_horas
         }
 
-        axios.post('http://localhost:4200/api/curso/store', curso).then(
+        axios.post('/api/curso/store', curso).then(
             (response) => {
             // Success
             swal(

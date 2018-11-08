@@ -29,7 +29,7 @@ export default class Alumnos extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4200/api/alumnos').then(
+        axios.get('/api/alumnos').then(
             response => {
                 this.setState({
                     alumnos: response.data
@@ -43,7 +43,7 @@ export default class Alumnos extends Component {
         var search_info = this.state.search_info;
         
         if (search_info != "") {
-            axios.get('http://localhost:4200/api/search/alumnos/'+ search_info).then(
+            axios.get('/api/search/alumnos/'+ search_info).then(
                 response => {
                     this.setState({
                         alumnos: response.data
@@ -53,7 +53,7 @@ export default class Alumnos extends Component {
         }
         else
         {
-            axios.get('http://localhost:4200/api/alumnos').then(
+            axios.get('/api/alumnos').then(
                 response => {
                     this.setState({
                         alumnos: response.data
@@ -76,7 +76,7 @@ export default class Alumnos extends Component {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                axios.delete('http://localhost:4200/api/alumnos/delete/' + alumno_id)
+                axios.delete('/api/alumnos/delete/' + alumno_id)
                 .then(response =>{
                     var alumnos = this.state.alumnos;
 
@@ -99,7 +99,7 @@ export default class Alumnos extends Component {
     toggleModal(alumno_id){
         console.log(alumno_id);
         this.setState({isActive: true});
-        axios.get('http://localhost:4200/api/alumno/' + alumno_id).then(
+        axios.get('/api/alumno/' + alumno_id).then(
             response => {
                 this.setState({
                     alumnoEsp: response.data 
@@ -182,9 +182,9 @@ export default class Alumnos extends Component {
             alumno_fechaNacimiento : this.state.alumnoEsp.fechaNacimiento
         }
         
-        axios.put('http://localhost:4200/api/alumno/update/' + alumno_id, alumno).then(
+        axios.put('/api/alumno/update/' + alumno_id, alumno).then(
             response =>{
-                axios.get('http://localhost:4200/api/alumnos').then(
+                axios.get('/api/alumnos').then(
                     response => {
                         this.setState({
                             alumnos: response.data
@@ -198,7 +198,7 @@ export default class Alumnos extends Component {
     render() {
         return (
             <Router>
-                <div className="col-8 p-0">
+                <div className="main col-8 p-0">
 
                     {/*Search bar*/}
                     <div className="row p-0">

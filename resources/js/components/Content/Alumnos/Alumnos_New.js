@@ -108,7 +108,7 @@ export default class Alumnos_New extends Component {
             alumno_fechaNacimiento : this.state.alumno_fechaNacimiento
         }
 
-        axios.post('http://localhost:4200/api/alumno/store', alumno).then(
+        axios.post('/api/alumno/store', alumno).then(
             (response) => {
                 // Success
                 swal(

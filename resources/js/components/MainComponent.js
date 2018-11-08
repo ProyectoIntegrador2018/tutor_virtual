@@ -16,7 +16,7 @@ export default class MainComponent extends Component {
                 <div className="row h-100">
 
                     {/* Main Navbar */}
-                    <div className="col-2 pt-4 px-1 bg-primary-dark h-100" name="mainNav">
+                    <div className="col-2 pt-4 px-1 bg-primary-dark" name="mainNav">
                         <ul className="list-group list-group-flush bg-transparent">
                             <li className="list-group-item bg-transparent text-center">
                                 <Link to="/cursos" className="text-white h3">Cursos</Link>

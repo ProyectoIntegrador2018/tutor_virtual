@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model
 {
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre',
+        'clave',
+        'fechaInicioInscripcion',
+        'fechaFinInscripcion',
+        'fechaInicio',
+        'fechaFin',
+        'reconocimiento',
+        'horas'
+    ];
 }
