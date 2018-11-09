@@ -18,6 +18,9 @@ export default class Alumnos_New extends Component {
         this.onChangeAlumno_Municipio = this.onChangeAlumno_Municipio.bind(this);
         this.onChangeAlumno_Genero = this.onChangeAlumno_Genero.bind(this);
         this.onChangeAlumno_FechaNacimiento = this.onChangeAlumno_FechaNacimiento.bind(this);
+        this.onChangeAlumno_IdOrganizacion = this.onChangeAlumno_IdOrganizacion.bind(this);
+        this.onChangeAlumno_Socio = this.onChangeAlumno_Socio.bind(this);
+        this.onChangeAlumno_Periodo = this.onChangeAlumno_Periodo.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             alumno_nombre : "",
@@ -29,7 +32,10 @@ export default class Alumnos_New extends Component {
             alumno_ciudad : "",
             alumno_municipio : "",
             alumno_genero : "",
-            alumno_fechaNacimiento : ""
+            alumno_fechaNacimiento : "",
+            alumno_idOrganizacion : "",
+            alumno_socio : "",
+            alumno_periodo : ""
         }
     }
 
@@ -92,7 +98,21 @@ export default class Alumnos_New extends Component {
             alumno_fechaNacimiento : e.target.value
         });
     }
-
+    onChangeAlumno_IdOrganizacion(e) {
+        this.setState({
+            alumno_idOrganizacion : e.target.value
+        });
+    }
+    onChangeAlumno_Socio(e) {
+        this.setState({
+            alumno_socio : e.target.value
+        });
+    }
+    onChangeAlumno_Periodo(e) {
+        this.setState({
+            alumno_periodo : e.target.value
+        });
+    }
     onSubmit(e) {
         e.preventDefault();
         const alumno = {
@@ -105,7 +125,10 @@ export default class Alumnos_New extends Component {
             alumno_ciudad : this.state.alumno_ciudad,
             alumno_municipio : this.state.alumno_municipio,
             alumno_genero : this.state.alumno_genero,
-            alumno_fechaNacimiento : this.state.alumno_fechaNacimiento
+            alumno_fechaNacimiento : this.state.alumno_fechaNacimiento,
+            alumno_idOrganizacion : this.state.alumno_idOrganizacion,
+            alumno_socio : this.state.alumno_socio,
+            alumno_periodo : this.state.alumno_periodo
         }
 
         axios.post('/api/alumno/store', alumno).then(
@@ -243,6 +266,36 @@ export default class Alumnos_New extends Component {
                             onChange={this.onChangeAlumno_FechaNacimiento}
                             placeholder="AAAA-MM-DD"/>
                         </div>
+                        
+                        <div className="form-group">                         
+                            <label htmlFor="alumno_idOrganizacion">id Organizacion</label>
+                            <input type="text"
+                                className="form-control"
+                                id="alumno_idOrganizacion"
+                                aria-describedby="nombre"
+                                value={this.state.alumno_idOrganizacion} 
+                                onChange={this.onChangeAlumno_IdOrganizacion} />
+                        </div>
+
+                        <div className="form-group">                         
+                            <label htmlFor="alumno_socio">Socio</label>
+                            <input type="text"
+                                className="form-control"
+                                id="alumno_socio"
+                                aria-describedby="nombre"
+                                value={this.state.alumno_socio} 
+                                onChange={this.onChangeAlumno_Socio} />
+                        </div>
+                        
+                        <div className="form-group">                         
+                            <label htmlFor="alumno_periodo">Periodo</label>
+                            <input type="text"
+                                className="form-control"
+                                id="alumno_periodo"
+                                aria-describedby="nombre"
+                                value={this.state.alumno_periodo} 
+                                onChange={this.onChangeAlumno_Periodo} />
+                        </div> 
 
                         <button type="submit" className="btn btn-primary btn-lg">Crear</button>
                     </form>

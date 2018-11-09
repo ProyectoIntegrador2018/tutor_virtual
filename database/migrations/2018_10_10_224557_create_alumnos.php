@@ -24,7 +24,10 @@ class CreateAlumnos extends Migration
             $table->string('ciudad');
             $table->string('municipio');
             $table->string('genero');
-            $table->string('fechaNacimiento');
+            $table->date('fechaNacimiento');
+            $table->string('idOrganizacion');
+            $table->string('socio');
+            $table->string('periodo');
             $table->timestamps();
         });
     }
