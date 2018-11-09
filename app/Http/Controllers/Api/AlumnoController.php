@@ -25,6 +25,9 @@ class AlumnoController extends Controller
         $result = Alumno::where('nombre','LIKE','%'.$request."%")
             ->orWhere('correo','LIKE','%'.$request."%")
             ->orWhere('pais','LIKE','%'.$request."%")
+            ->orWhere('idOrganizacion','LIKE','%'.$request."%")
+            ->orWhere('socio','LIKE','%'.$request."%")
+            ->orWhere('periodo','LIKE','%'.$request."%")
             ->get();
         return $result;
     }
@@ -59,6 +62,9 @@ class AlumnoController extends Controller
         $alumno->municipio = $request->alumno_municipio;
         $alumno->genero = $request->alumno_genero;
         $alumno->fechaNacimiento = $request->alumno_fechaNacimiento;
+        $alumno->idOrganizacion = $request->alumno_idOrganizacion;
+        $alumno->socio = $request->alumno_socio;
+        $alumno->periodo = $request->alumno_periodo;
         
         $alumno->save();
         echo $request;
@@ -107,6 +113,9 @@ class AlumnoController extends Controller
         $alumno->municipio = $request->alumno_municipio;
         $alumno->genero = $request->alumno_genero;
         $alumno->fechaNacimiento = $request->alumno_fechaNacimiento;
+        $alumno->idOrganizacion = $request->alumno_idOrganizacion;
+        $alumno->socio = $request->alumno_socio;
+        $alumno->periodo = $request->alumno_periodo;
         $alumno->save();
     }
 
