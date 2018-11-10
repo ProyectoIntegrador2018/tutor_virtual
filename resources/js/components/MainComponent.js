@@ -7,8 +7,9 @@ import Cursos_New from './Content/Cursos/New';
 import Alumnos from './Content/Alumnos/Alumnos';
 import Alumno_Sub from './SubNavbars/Alumnos_Sub';
 import Alumnos_New from './Content/Alumnos/Alumnos_New';
-import Tutores from './Content/Tutores/Tutores';
 import Estructura from './Content/Estructura_Academica/Estructura';
+import Estructura_New from './Content/Estructura_Academica/Estructura_New';
+import Tutores from './Content/Tutores/Tutores';
 import Tutores_Sub from './SubNavbars/Tutores_Sub';
 import Tutores_New from './Content/Tutores/Tutores_New';
 
@@ -45,6 +46,7 @@ export default class MainComponent extends Component {
 
                     {/* No-Sub Navbar Content Area - <div className="col-10 p-0">*/}
                     <Route exact path='/estructura' component={Estructura}/>
+                    <Route exact path='/estructura/nuevo' component={Estructura_New}/>
 
                     {/* Content Areas - <div className="col-8 p-0">*/}
                     <Route exact path='/cursos' component={Cursos_Listing}/>

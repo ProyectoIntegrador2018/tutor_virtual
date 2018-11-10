@@ -118,6 +118,51 @@ if (true) {
 "use strict";
 
 
+function checkDCE() {
+  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+  if (
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
+  ) {
+    return;
+  }
+  if (true) {
+    // This branch is unreachable because this function is only called
+    // in production, but the condition is true only in development.
+    // Therefore if the branch is still here, dead code elimination wasn't
+    // properly applied.
+    // Don't change the message. React DevTools relies on it. Also make sure
+    // this message doesn't occur elsewhere in this function, or it will cause
+    // a false positive.
+    throw new Error('^_^');
+  }
+  try {
+    // Verify that the code above has been dead code eliminated (DCE'd).
+    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
+  } catch (err) {
+    // DevTools shouldn't crash React, no matter what.
+    // We should still report in case we break this code.
+    console.error(err);
+  }
+}
+
+if (false) {
+  // DCE check should happen before ReactDOM bundle executes so that
+  // DevTools can report bad minification during injection.
+  checkDCE();
+  module.exports = require('./cjs/react-dom.production.min.js');
+} else {
+  module.exports = __webpack_require__(68);
+}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var bind = __webpack_require__(25);
 var isBuffer = __webpack_require__(48);
 
@@ -422,108 +467,7 @@ module.exports = {
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function checkDCE() {
-  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
-  if (
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
-  ) {
-    return;
-  }
-  if (true) {
-    // This branch is unreachable because this function is only called
-    // in production, but the condition is true only in development.
-    // Therefore if the branch is still here, dead code elimination wasn't
-    // properly applied.
-    // Don't change the message. React DevTools relies on it. Also make sure
-    // this message doesn't occur elsewhere in this function, or it will cause
-    // a false positive.
-    throw new Error('^_^');
-  }
-  try {
-    // Verify that the code above has been dead code eliminated (DCE'd).
-    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
-  } catch (err) {
-    // DevTools shouldn't crash React, no matter what.
-    // We should still report in case we break this code.
-    console.error(err);
-  }
-}
-
-if (false) {
-  // DCE check should happen before ReactDOM bundle executes so that
-  // DevTools can report bad minification during injection.
-  checkDCE();
-  module.exports = require('./cjs/react-dom.production.min.js');
-} else {
-  module.exports = __webpack_require__(68);
-}
-
-
-/***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function(condition, format, a, b, c, d, e, f) {
-  if (true) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error(
-        'Minified exception occurred; use the non-minified dev environment ' +
-        'for the full error message and additional helpful warnings.'
-      );
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(
-        format.replace(/%s/g, function() { return args[argIndex++]; })
-      );
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -585,12 +529,12 @@ module.exports = invariant;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /**
- * Copyright (c) 2014-present, Facebook, Inc.
+ * Copyright (c) 2013-present, Facebook, Inc.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -599,62 +543,49 @@ module.exports = invariant;
 
 
 /**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
  */
 
-var __DEV__ = "development" !== 'production';
-
-var warning = function() {};
-
-if (__DEV__) {
-  var printWarning = function printWarning(format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
+var invariant = function(condition, format, a, b, c, d, e, f) {
+  if (true) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
     }
-    var argIndex = 0;
-    var message = 'Warning: ' +
-      format.replace(/%s/g, function() {
-        return args[argIndex++];
-      });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
   }
 
-  warning = function(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
+  if (!condition) {
+    var error;
     if (format === undefined) {
-      throw new Error(
-          '`warning(condition, format, ...args)` requires a warning ' +
-          'message argument'
+      error = new Error(
+        'Minified exception occurred; use the non-minified dev environment ' +
+        'for the full error message and additional helpful warnings.'
       );
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(
+        format.replace(/%s/g, function() { return args[argIndex++]; })
+      );
+      error.name = 'Invariant Violation';
     }
-    if (!condition) {
-      printWarning.apply(null, [format].concat(args));
-    }
-  };
-}
 
-module.exports = warning;
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -4418,6 +4349,75 @@ if (typeof window !== 'undefined' && window.Sweetalert2){  window.Sweetalert2.ve
 "      position: initial !important; } }");
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var __DEV__ = "development" !== 'production';
+
+var warning = function() {};
+
+if (__DEV__) {
+  var printWarning = function printWarning(format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    var argIndex = 0;
+    var message = 'Warning: ' +
+      format.replace(/%s/g, function() {
+        return args[argIndex++];
+      });
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  }
+
+  warning = function(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error(
+          '`warning(condition, format, ...args)` requires a warning ' +
+          'message argument'
+      );
+    }
+    if (!condition) {
+      printWarning.apply(null, [format].concat(args));
+    }
+  };
+}
+
+module.exports = warning;
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4691,7 +4691,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var normalizeHeaderName = __webpack_require__(51);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -5084,9 +5084,9 @@ var createTransitionManager = function createTransitionManager() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -18268,7 +18268,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var settle = __webpack_require__(52);
 var buildURL = __webpack_require__(54);
 var parseHeaders = __webpack_require__(55);
@@ -18605,7 +18605,7 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history__ = __webpack_require__(9);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18729,9 +18729,9 @@ Link.contextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -19367,9 +19367,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_modal__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19643,14 +19643,14 @@ function resetForTesting() {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20181,7 +20181,7 @@ if (document.getElementById('cursos')) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(42);
-module.exports = __webpack_require__(114);
+module.exports = __webpack_require__(115);
 
 
 /***/ }),
@@ -41366,7 +41366,7 @@ module.exports = function(module) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var bind = __webpack_require__(25);
 var Axios = __webpack_require__(49);
 var defaults = __webpack_require__(14);
@@ -41453,7 +41453,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(14);
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var InterceptorManager = __webpack_require__(59);
 var dispatchRequest = __webpack_require__(60);
 
@@ -41728,7 +41728,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -41808,7 +41808,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -41881,7 +41881,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -41941,7 +41941,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -42059,7 +42059,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -42119,7 +42119,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -42178,7 +42178,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var transformData = __webpack_require__(61);
 var isCancel = __webpack_require__(28);
 var defaults = __webpack_require__(14);
@@ -42271,7 +42271,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 /**
  * Transform the data for a request or a response
@@ -42439,19 +42439,20 @@ module.exports = function spread(callback) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SubNavbars_Curso_Sub__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Content_Cursos_Listing__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Content_Cursos_New__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Content_Alumnos_Alumnos__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__SubNavbars_Alumnos_Sub__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Content_Alumnos_Alumnos_New__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Content_Tutores_Tutores__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Content_Estructura_Academica_Estructura__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__SubNavbars_Tutores_Sub__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Content_Tutores_Tutores_New__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Content_Estructura_Academica_Estructura__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Content_Estructura_Academica_Estructura_New__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Content_Tutores_Tutores__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__SubNavbars_Tutores_Sub__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Content_Tutores_Tutores_New__ = __webpack_require__(114);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42459,6 +42460,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -42538,14 +42540,15 @@ var MainComponent = function (_Component) {
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/cursos', component: __WEBPACK_IMPORTED_MODULE_3__SubNavbars_Curso_Sub__["default"] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/alumnos', component: __WEBPACK_IMPORTED_MODULE_7__SubNavbars_Alumnos_Sub__["a" /* default */] }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/tutores', component: __WEBPACK_IMPORTED_MODULE_11__SubNavbars_Tutores_Sub__["a" /* default */] }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/estructura', component: __WEBPACK_IMPORTED_MODULE_10__Content_Estructura_Academica_Estructura__["a" /* default */] }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/tutores', component: __WEBPACK_IMPORTED_MODULE_12__SubNavbars_Tutores_Sub__["a" /* default */] }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/estructura', component: __WEBPACK_IMPORTED_MODULE_9__Content_Estructura_Academica_Estructura__["a" /* default */] }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/estructura/nuevo', component: __WEBPACK_IMPORTED_MODULE_10__Content_Estructura_Academica_Estructura_New__["a" /* default */] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/cursos', component: __WEBPACK_IMPORTED_MODULE_4__Content_Cursos_Listing__["default"] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/cursos/nuevo', component: __WEBPACK_IMPORTED_MODULE_5__Content_Cursos_New__["a" /* default */] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/alumnos', component: __WEBPACK_IMPORTED_MODULE_6__Content_Alumnos_Alumnos__["a" /* default */] }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/alumnos/nuevo', component: __WEBPACK_IMPORTED_MODULE_8__Content_Alumnos_Alumnos_New__["a" /* default */] }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/tutores', component: __WEBPACK_IMPORTED_MODULE_9__Content_Tutores_Tutores__["a" /* default */] }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/tutores/nuevo', component: __WEBPACK_IMPORTED_MODULE_12__Content_Tutores_Tutores_New__["a" /* default */] })
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/tutores', component: __WEBPACK_IMPORTED_MODULE_11__Content_Tutores_Tutores__["a" /* default */] }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { exact: true, path: '/tutores/nuevo', component: __WEBPACK_IMPORTED_MODULE_13__Content_Tutores_Tutores_New__["a" /* default */] })
                 )
             );
         }
@@ -63241,7 +63244,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
@@ -63871,7 +63874,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(10);
@@ -64295,7 +64298,7 @@ function valueEqual(a, b) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(10);
@@ -64782,7 +64785,7 @@ var createMemoryHistory = function createMemoryHistory() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
@@ -64858,7 +64861,7 @@ HashRouter.propTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
@@ -65034,7 +65037,7 @@ module.exports = Array.isArray || function (arr) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -65136,9 +65139,9 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__generatePath__ = __webpack_require__(36);
@@ -65272,9 +65275,9 @@ Redirect.contextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -65453,9 +65456,9 @@ StaticRouter.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(20);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65713,7 +65716,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(3);
+var _reactDom = __webpack_require__(2);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -66948,10 +66951,10 @@ function polyfill(Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67252,14 +67255,14 @@ if (document.getElementById('cursos')) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67813,7 +67816,7 @@ if (document.getElementById('Alumnos')) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67911,10 +67914,10 @@ if (document.getElementById('alumnosSub')) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -68267,14 +68270,1039 @@ if (document.getElementById('alumnos')) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+var Estructura = function (_Component) {
+    _inherits(Estructura, _Component);
+
+    function Estructura() {
+        _classCallCheck(this, Estructura);
+
+        var _this = _possibleConstructorReturn(this, (Estructura.__proto__ || Object.getPrototypeOf(Estructura)).call(this));
+
+        _this.onChangeDirectivo_Username = _this.onChangeDirectivo_Username.bind(_this);
+        _this.onChangeDirectivo_Password = _this.onChangeDirectivo_Password.bind(_this);
+        _this.onChangeDirectivo_Nombres = _this.onChangeDirectivo_Nombres.bind(_this);
+        _this.onChangeDirectivo_ApellidoPaterno = _this.onChangeDirectivo_ApellidoPaterno.bind(_this);
+        _this.onChangeDirectivo_ApellidoMaterno = _this.onChangeDirectivo_ApellidoMaterno.bind(_this);
+        _this.onChangeDirectivo_Correo = _this.onChangeDirectivo_Correo.bind(_this);
+        _this.onChangeDirectivo_Pais = _this.onChangeDirectivo_Pais.bind(_this);
+        _this.onChangeDirectivo_Estado = _this.onChangeDirectivo_Estado.bind(_this);
+        _this.onChangeDirectivo_Ciudad_Municipio = _this.onChangeDirectivo_Ciudad_Municipio.bind(_this);
+        _this.onChangeDirectivo_Socio = _this.onChangeDirectivo_Socio.bind(_this);
+        _this.onChangeDirectivo_Organizacion = _this.onChangeDirectivo_Organizacion.bind(_this);
+        _this.onChangeDirectivo_Rol = _this.onChangeDirectivo_Rol.bind(_this);
+        _this.onChangeSearch = _this.onChangeSearch.bind(_this);
+        _this.state = {
+            directivos: [],
+            isActive: false,
+            directivoEsp: [],
+            search_info: ""
+        };
+        return _this;
+    }
+
+    _createClass(Estructura, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivos').then(function (response) {
+                _this2.setState({
+                    directivos: response.data
+                });
+            });
+            //Modal.setAppElement('body');
+        }
+    }, {
+        key: 'onEnter',
+        value: function onEnter(e) {
+            var _this3 = this;
+
+            var search_info = this.state.search_info;
+
+            if (search_info != "") {
+
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/search/directivos/' + search_info).then(function (response) {
+                    _this3.setState({
+                        directivos: response.data
+                    });
+                });
+            } else {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivos').then(function (response) {
+                    _this3.setState({
+                        directivos: response.data
+                    });
+                });
+            }
+        }
+    }, {
+        key: 'onChangeSearch',
+        value: function onChangeSearch(e) {
+            this.state.search_info = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onDelete',
+        value: function onDelete(directivo_id) {
+            var _this4 = this;
+
+            console.log(directivo_id);
+            __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
+                title: 'Estas seguro de borrarlo?',
+                text: "Esta accion no es reversible",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminalo!',
+                cancelButtonText: 'Cancelar'
+            }).then(function (result) {
+                if (result.value) {
+                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('/api/directivos/delete/' + directivo_id).then(function (response) {
+
+                        var directivos = _this4.state.directivos;
+                        for (var i = 0; i < directivos.length; i++) {
+                            if (directivos[i].id == directivo_id) {
+                                directivos.splice(i, 1);
+                                _this4.setState({ directivos: directivos });
+                            }
+                        }
+                    });
+                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Eliminado!', 'El directivo ha sido elimnado con exito', 'success');
+                }
+            });
+        }
+    }, {
+        key: 'toggleModal',
+        value: function toggleModal(directivo_id) {
+            var _this5 = this;
+
+            console.log(directivo_id);
+            this.setState({ isActive: true });
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivo/' + directivo_id).then(function (response) {
+                _this5.setState({
+                    directivoEsp: response.data
+                });
+            });
+        }
+    }, {
+        key: 'closeModal',
+        value: function closeModal() {
+            this.setState({ isActive: false });
+        }
+    }, {
+        key: 'onChangeDirectivo_Username',
+        value: function onChangeDirectivo_Username(e) {
+            this.state.directivoEsp.username = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Password',
+        value: function onChangeDirectivo_Password(e) {
+            this.state.directivoEsp.password = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Nombres',
+        value: function onChangeDirectivo_Nombres(e) {
+            this.state.directivoEsp.nombres = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_ApellidoPaterno',
+        value: function onChangeDirectivo_ApellidoPaterno(e) {
+            this.state.directivoEsp.apellidoPaterno = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_ApellidoMaterno',
+        value: function onChangeDirectivo_ApellidoMaterno(e) {
+            this.state.directivoEsp.apellidoMaterno = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Correo',
+        value: function onChangeDirectivo_Correo(e) {
+            this.state.directivoEsp.correo = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Pais',
+        value: function onChangeDirectivo_Pais(e) {
+            this.state.directivoEsp.pais = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Estado',
+        value: function onChangeDirectivo_Estado(e) {
+            this.state.directivoEsp.estado = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Ciudad_Municipio',
+        value: function onChangeDirectivo_Ciudad_Municipio(e) {
+            this.state.directivoEsp.ciudad_municipio = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Socio',
+        value: function onChangeDirectivo_Socio(e) {
+            this.state.directivoEsp.socio = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Organizacion',
+        value: function onChangeDirectivo_Organizacion(e) {
+            this.state.directivoEsp.organizacion = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeDirectivo_Rol',
+        value: function onChangeDirectivo_Rol(e) {
+            this.state.directivoEsp.rol = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            var _this6 = this;
+
+            var directivo_id = this.state.directivoEsp.id;
+            var directivo = {
+                directivo_username: this.state.directivoEsp.username,
+                directivo_password: this.state.directivoEsp.password,
+                directivo_nombres: this.state.directivoEsp.nombres,
+                directivo_apellidoPaterno: this.state.directivoEsp.apellidoPaterno,
+                directivo_apellidoMaterno: this.state.directivoEsp.apellidoMaterno,
+                directivo_correo: this.state.directivoEsp.correo,
+                directivo_pais: this.state.directivoEsp.pais,
+                directivo_estado: this.state.directivoEsp.estado,
+                directivo_ciudad_municipio: this.state.directivoEsp.ciudad_municipio,
+                directivo_socio: this.state.directivoEsp.socio,
+                directivo_organizacion: this.state.directivoEsp.organizacion,
+                directivo_rol: this.state.directivoEsp.rol
+
+            };
+
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('/api/directivo/update/' + directivo_id, directivo).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivos').then(function (response) {
+                    _this6.setState({
+                        directivos: response.data
+                    });
+                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Bien', 'Directivo modificado con exito', 'success');
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this7 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-10 p-0 main' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row p-0' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col-12 p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'input-group' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'input-group-prepend' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'span',
+                                        { className: 'input-group-text', id: 'basic-addon1' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'i',
+                                            { className: 'material-icons' },
+                                            'search'
+                                        )
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyUp: this.onEnter.bind(this),
+                                    onChange: this.onChangeSearch, type: 'text', className: 'form-control form-control-lg',
+                                    placeholder: 'Buscar directivo por nombre...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row justify-content-center p-4' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col p-0' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'row justify-content-between' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h1',
+                                        null,
+                                        'Estructura acad\xE9mica'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/index/estructura/nuevo', className: 'font-weight-bold' },
+                                        'Agregar nuevo'
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'table',
+                                { className: 'table table-hover' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'thead',
+                                    { className: 'thead-dark' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'tr',
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            '#'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Username'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Nombres'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Apellido paterno'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Apellido materno'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Rol'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Acciones'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'tbody',
+                                    null,
+                                    this.state.directivos.map(function (directivo) {
+                                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'tr',
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'th',
+                                                { scope: 'row' },
+                                                directivo.id
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                directivo.username
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                directivo.nombres
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                directivo.apellidoPaterno
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                directivo.apellidoMaterno
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                directivo.rol
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.onDelete.bind(_this7, directivo.id) },
+                                                    'Eliminar'
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.toggleModal.bind(_this7, directivo.id) },
+                                                    'Detalle'
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                __WEBPACK_IMPORTED_MODULE_4_react_modal___default.a,
+                                                { isOpen: _this7.state.isActive, onRequestClose: _this7.closeModal.isActive },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.closeModal.bind(_this7) },
+                                                    'Regresar'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_username' },
+                                                        'Username'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_username',
+                                                        'aria-describedby': 'username',
+                                                        value: _this7.state.directivoEsp.username,
+                                                        onChange: _this7.onChangeDirectivo_Username })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_password' },
+                                                        'Password'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_password',
+                                                        'aria-describedby': 'password',
+                                                        value: _this7.state.directivoEsp.password,
+                                                        onChange: _this7.onChangeDirectivo_Password })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_nombres' },
+                                                        'Nombres'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_nombres',
+                                                        'aria-describedby': 'nombres',
+                                                        value: _this7.state.directivoEsp.nombres,
+                                                        onChange: _this7.onChangeDirectivo_Nombres })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_apellidoPaterno' },
+                                                        'Apellido Paterno'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_nombre',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.directivoEsp.apellidoPaterno,
+                                                        onChange: _this7.onChangeDirectivo_ApellidoPaterno })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_apellidoMaterno' },
+                                                        'Apellido Materno'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_apellidoMaterno',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.directivoEsp.apellidoMaterno,
+                                                        onChange: _this7.onChangeDirectivo_ApellidoMaterno })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_correo' },
+                                                        'Correo'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_correo',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.directivoEsp.correo,
+                                                        onChange: _this7.onChangeDirectivo_Correo })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_pais' },
+                                                        'Pais'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_pais',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.directivoEsp.pais,
+                                                        onChange: _this7.onChangeDirectivo_Pais })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_estado' },
+                                                        'Estado'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_estado',
+                                                        'aria-describedby': 'nombre',
+                                                        value: _this7.state.directivoEsp.estado,
+                                                        onChange: _this7.onChangeDirectivo_Estado })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_ciudad_municipio' },
+                                                        'Ciudad_Municipio'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_ciudad_municipio',
+                                                        'aria-describedby': 'ciudad_municipio',
+                                                        value: _this7.state.directivoEsp.ciudad_municipio,
+                                                        onChange: _this7.onChangeDirectivo_Ciudad_Municipio })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_socio' },
+                                                        'Socio'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_socio',
+                                                        'aria-describedby': 'socio',
+                                                        value: _this7.state.directivoEsp.socio,
+                                                        onChange: _this7.onChangeDirectivo_Socio })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_organizacion' },
+                                                        'Organizacion'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_organizacion',
+                                                        'aria-describedby': 'organizacion',
+                                                        value: _this7.state.directivoEsp.organizacion,
+                                                        onChange: _this7.onChangeDirectivo_Organizacion })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'directivo_rol' },
+                                                        'Rol'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'directivo_rol',
+                                                        'aria-describedby': 'rol',
+                                                        value: _this7.state.directivoEsp.rol,
+                                                        onChange: _this7.onChangeDirectivo_Rol })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'button',
+                                                    { onClick: _this7.onSubmit.bind(_this7, directivo.id) },
+                                                    'Actualizar'
+                                                )
+                                            )
+                                        );
+                                    })
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Estructura;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Estructura);
+
+
+if (document.getElementById('Estructura')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Estructura, null), document.getElementById('estructura'));
+}
+
+/***/ }),
+/* 111 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var Estructura_New = function (_Component) {
+    _inherits(Estructura_New, _Component);
+
+    //nombre apellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
+    function Estructura_New() {
+        _classCallCheck(this, Estructura_New);
+
+        var _this = _possibleConstructorReturn(this, (Estructura_New.__proto__ || Object.getPrototypeOf(Estructura_New)).call(this));
+
+        _this.onSubmit = _this.onSubmit.bind(_this);
+        _this.onChangeDirectivo_Username = _this.onChangeDirectivo_Username.bind(_this);
+        _this.onChangeDirectivo_Password = _this.onChangeDirectivo_Password.bind(_this);
+        _this.onChangeDirectivo_Nombres = _this.onChangeDirectivo_Nombres.bind(_this);
+        _this.onChangeDirectivo_ApellidoPaterno = _this.onChangeDirectivo_ApellidoPaterno.bind(_this);
+        _this.onChangeDirectivo_ApellidoMaterno = _this.onChangeDirectivo_ApellidoMaterno.bind(_this);
+        _this.onChangeDirectivo_Correo = _this.onChangeDirectivo_Correo.bind(_this);
+        _this.onChangeDirectivo_Pais = _this.onChangeDirectivo_Pais.bind(_this);
+        _this.onChangeDirectivo_Estado = _this.onChangeDirectivo_Estado.bind(_this);
+        _this.onChangeDirectivo_Ciudad_Municipio = _this.onChangeDirectivo_Ciudad_Municipio.bind(_this);
+        _this.onChangeDirectivo_Socio = _this.onChangeDirectivo_Socio.bind(_this);
+        _this.onChangeDirectivo_Organizacion = _this.onChangeDirectivo_Organizacion.bind(_this);
+        _this.onChangeDirectivo_Rol = _this.onChangeDirectivo_Rol.bind(_this);
+        _this.state = {
+            directivo_username: "",
+            directivo_password: "",
+            directivo_nombres: "",
+            directivo_apellidoPaterno: "",
+            directivo_apellidoMaterno: "",
+            directivo_correo: "",
+            directivo_pais: "",
+            directivo_estado: "",
+            directivo_ciudad_municipio: "",
+            directivo_socio: "",
+            directivo_organizacion: "",
+            directivo_rol: ""
+        };
+        return _this;
+    }
+
+    _createClass(Estructura_New, [{
+        key: 'onChangeDirectivo_Username',
+        value: function onChangeDirectivo_Username(e) {
+            this.setState({
+                directivo_username: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Password',
+        value: function onChangeDirectivo_Password(e) {
+            this.setState({
+                directivo_password: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Nombres',
+        value: function onChangeDirectivo_Nombres(e) {
+            this.setState({
+                directivo_nombres: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_ApellidoPaterno',
+        value: function onChangeDirectivo_ApellidoPaterno(e) {
+            this.setState({
+                directivo_apellidoPaterno: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_ApellidoMaterno',
+        value: function onChangeDirectivo_ApellidoMaterno(e) {
+            this.setState({
+                directivo_apellidoMaterno: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Correo',
+        value: function onChangeDirectivo_Correo(e) {
+            this.setState({
+                directivo_correo: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Pais',
+        value: function onChangeDirectivo_Pais(e) {
+            this.setState({
+                directivo_pais: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Estado',
+        value: function onChangeDirectivo_Estado(e) {
+            this.setState({
+                directivo_estado: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Ciudad_Municipio',
+        value: function onChangeDirectivo_Ciudad_Municipio(e) {
+            this.setState({
+                directivo_ciudad_municipio: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Socio',
+        value: function onChangeDirectivo_Socio(e) {
+            this.setState({
+                directivo_socio: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Organizacion',
+        value: function onChangeDirectivo_Organizacion(e) {
+            this.setState({
+                directivo_organizacion: e.target.value
+            });
+        }
+    }, {
+        key: 'onChangeDirectivo_Rol',
+        value: function onChangeDirectivo_Rol(e) {
+            this.setState({
+                directivo_rol: e.target.value
+            });
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            e.preventDefault();
+            var directivo = {
+                directivo_username: this.state.directivo_username,
+                directivo_password: this.state.directivo_password,
+                directivo_nombres: this.state.directivo_nombres,
+                directivo_apellidoPaterno: this.state.directivo_apellidoPaterno,
+                directivo_apellidoMaterno: this.state.directivo_apellidoMaterno,
+                directivo_correo: this.state.directivo_correo,
+                directivo_pais: this.state.directivo_pais,
+                directivo_estado: this.state.directivo_estado,
+                directivo_ciudad_municipio: this.state.directivo_ciudad_municipio,
+                directivo_socio: this.state.directivo_socio,
+                directivo_organizacion: this.state.directivo_organizacion,
+                directivo_rol: this.state.directivo_rol
+            };
+
+            axios.post('/api/directivo/store', directivo).then(function (response) {
+                // Success
+                __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default()('Bien', 'Directivo creado con exito', 'success');
+            }).catch(function (error) {
+                __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default()({
+                    type: 'error',
+                    title: 'Error al agregar directivo',
+                    text: 'Porfavor verifica la informacion y vuelve a intentar'
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-10 p-4 main' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h1',
+                            null,
+                            'Nuevo directivo'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'form',
+                        { onSubmit: this.onSubmit },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_username' },
+                                'Username'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_username',
+                                'aria-describedby': 'username',
+                                onChange: this.onChangeDirectivo_Username })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_password' },
+                                'Password'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_password',
+                                'aria-describedby': 'password',
+                                onChange: this.onChangeDirectivo_Password })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_nombres' },
+                                'Nombres'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_nombres',
+                                'aria-describedby': 'nombres',
+                                onChange: this.onChangeDirectivo_Nombres })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_apellidoPaterno' },
+                                'Apellido Paterno'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_nombre',
+                                'aria-describedby': 'nombre',
+                                onChange: this.onChangeDirectivo_ApellidoPaterno })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_apellidoMaterno' },
+                                'Apellido Materno'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_apellidoMaterno',
+                                'aria-describedby': 'nombre',
+                                onChange: this.onChangeDirectivo_ApellidoMaterno })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_correo' },
+                                'Correo'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_correo',
+                                'aria-describedby': 'nombre',
+                                onChange: this.onChangeDirectivo_Correo })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_pais' },
+                                'Pais'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_pais',
+                                'aria-describedby': 'nombre',
+                                onChange: this.onChangeDirectivo_Pais })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_estado' },
+                                'Estado'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_estado',
+                                'aria-describedby': 'nombre',
+                                onChange: this.onChangeDirectivo_Estado })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_ciudad_municipio' },
+                                'Ciudad_Municipio'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_ciudad_municipio',
+                                'aria-describedby': 'ciudad_municipio',
+                                onChange: this.onChangeDirectivo_Ciudad_Municipio })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_socio' },
+                                'Socio'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_socio',
+                                'aria-describedby': 'socio',
+                                onChange: this.onChangeDirectivo_Socio })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_organizacion' },
+                                'Organizacion'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_organizacion',
+                                'aria-describedby': 'organizacion',
+                                onChange: this.onChangeDirectivo_Organizacion })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'label',
+                                { htmlFor: 'directivo_rol' },
+                                'Rol'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                className: 'form-control',
+                                id: 'directivo_rol',
+                                'aria-describedby': 'rol',
+                                onChange: this.onChangeDirectivo_Rol })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'submit', className: 'btn btn-primary btn-lg' },
+                            'Crear'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Estructura_New;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Estructura_New);
+
+
+if (document.getElementById('Estructura_New')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Estructura_New, null), document.getElementById('estructura_new'));
+}
+
+/***/ }),
+/* 112 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -68857,652 +69885,13 @@ if (document.getElementById('Tutores')) {
 }
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-
-var Estructura = function (_Component) {
-    _inherits(Estructura, _Component);
-
-    function Estructura() {
-        _classCallCheck(this, Estructura);
-
-        var _this = _possibleConstructorReturn(this, (Estructura.__proto__ || Object.getPrototypeOf(Estructura)).call(this));
-
-        _this.onChangeDirectivo_Username = _this.onChangeDirectivo_Username.bind(_this);
-        _this.onChangeDirectivo_Password = _this.onChangeDirectivo_Password.bind(_this);
-        _this.onChangeDirectivo_Nombres = _this.onChangeDirectivo_Nombres.bind(_this);
-        _this.onChangeDirectivo_ApellidoPaterno = _this.onChangeDirectivo_ApellidoPaterno.bind(_this);
-        _this.onChangeDirectivo_ApellidoMaterno = _this.onChangeDirectivo_ApellidoMaterno.bind(_this);
-        _this.onChangeDirectivo_Correo = _this.onChangeDirectivo_Correo.bind(_this);
-        _this.onChangeDirectivo_Pais = _this.onChangeDirectivo_Pais.bind(_this);
-        _this.onChangeDirectivo_Estado = _this.onChangeDirectivo_Estado.bind(_this);
-        _this.onChangeDirectivo_Ciudad_Municipio = _this.onChangeDirectivo_Ciudad_Municipio.bind(_this);
-        _this.onChangeDirectivo_Socio = _this.onChangeDirectivo_Socio.bind(_this);
-        _this.onChangeDirectivo_Organizacion = _this.onChangeDirectivo_Organizacion.bind(_this);
-        _this.onChangeDirectivo_Rol = _this.onChangeDirectivo_Rol.bind(_this);
-        _this.onChangeSearch = _this.onChangeSearch.bind(_this);
-        _this.state = {
-            directivos: [],
-            isActive: false,
-            directivoEsp: [],
-            search_info: ""
-        };
-
-        return _this;
-    }
-
-    _createClass(Estructura, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivos').then(function (response) {
-                _this2.setState({
-                    directivos: response.data
-                });
-            });
-            //Modal.setAppElement('body');
-        }
-    }, {
-        key: 'onEnter',
-        value: function onEnter(e) {
-            var _this3 = this;
-
-            var search_info = this.state.search_info;
-
-            if (search_info != "") {
-
-                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/search/directivos/' + search_info).then(function (response) {
-                    _this3.setState({
-                        directivos: response.data
-                    });
-                });
-            } else {
-                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivos').then(function (response) {
-                    _this3.setState({
-                        directivos: response.data
-                    });
-                });
-            }
-        }
-    }, {
-        key: 'onChangeSearch',
-        value: function onChangeSearch(e) {
-            this.state.search_info = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onDelete',
-        value: function onDelete(directivo_id) {
-            var _this4 = this;
-
-            console.log(directivo_id);
-            __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
-                title: 'Estas seguro de borrarlo?',
-                text: "Esta accion no es reversible",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, eliminalo!',
-                cancelButtonText: 'Cancelar'
-            }).then(function (result) {
-                if (result.value) {
-                    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.delete('/api/directivos/delete/' + directivo_id).then(function (response) {
-
-                        var directivos = _this4.state.directivos;
-                        for (var i = 0; i < directivos.length; i++) {
-                            if (directivos[i].id == directivo_id) {
-                                directivos.splice(i, 1);
-                                _this4.setState({ directivos: directivos });
-                            }
-                        }
-                    });
-                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Eliminado!', 'El directivo ha sido elimnado con exito', 'success');
-                }
-            });
-        }
-    }, {
-        key: 'toggleModal',
-        value: function toggleModal(directivo_id) {
-            var _this5 = this;
-
-            console.log(directivo_id);
-            this.setState({ isActive: true });
-            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivo/' + directivo_id).then(function (response) {
-                _this5.setState({
-                    directivoEsp: response.data
-
-                });
-            });
-        }
-    }, {
-        key: 'closeModal',
-        value: function closeModal() {
-            this.setState({ isActive: false });
-        }
-    }, {
-        key: 'onChangeDirectivo_Username',
-        value: function onChangeDirectivo_Username(e) {
-            this.state.directivoEsp.username = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Password',
-        value: function onChangeDirectivo_Password(e) {
-            this.state.directivoEsp.password = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Nombres',
-        value: function onChangeDirectivo_Nombres(e) {
-            this.state.directivoEsp.nombres = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_ApellidoPaterno',
-        value: function onChangeDirectivo_ApellidoPaterno(e) {
-            this.state.directivoEsp.apellidoPaterno = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_ApellidoMaterno',
-        value: function onChangeDirectivo_ApellidoMaterno(e) {
-            this.state.directivoEsp.apellidoMaterno = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Correo',
-        value: function onChangeDirectivo_Correo(e) {
-            this.state.directivoEsp.correo = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Pais',
-        value: function onChangeDirectivo_Pais(e) {
-            this.state.directivoEsp.pais = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Estado',
-        value: function onChangeDirectivo_Estado(e) {
-            this.state.directivoEsp.estado = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Ciudad_Municipio',
-        value: function onChangeDirectivo_Ciudad_Municipio(e) {
-            this.state.directivoEsp.ciudad_municipio = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Socio',
-        value: function onChangeDirectivo_Socio(e) {
-            this.state.directivoEsp.socio = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Organizacion',
-        value: function onChangeDirectivo_Organizacion(e) {
-            this.state.directivoEsp.organizacion = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeDirectivo_Rol',
-        value: function onChangeDirectivo_Rol(e) {
-            this.state.directivoEsp.rol = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onSubmit',
-        value: function onSubmit(e) {
-            var _this6 = this;
-
-            var directivo_id = this.state.directivoEsp.id;
-            var directivo = {
-                directivo_username: this.state.directivoEsp.username,
-                directivo_password: this.state.directivoEsp.password,
-                directivo_nombres: this.state.directivoEsp.nombres,
-                directivo_apellidoPaterno: this.state.directivoEsp.apellidoPaterno,
-                directivo_apellidoMaterno: this.state.directivoEsp.apellidoMaterno,
-                directivo_correo: this.state.directivoEsp.correo,
-                directivo_pais: this.state.directivoEsp.pais,
-                directivo_estado: this.state.directivoEsp.estado,
-                directivo_ciudad_municipio: this.state.directivoEsp.ciudad_municipio,
-                directivo_socio: this.state.directivoEsp.socio,
-                directivo_organizacion: this.state.directivoEsp.organizacion,
-                directivo_rol: this.state.directivoEsp.rol
-
-            };
-
-            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('/api/directivo/update/' + directivo_id, directivo).then(function (response) {
-                __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/api/directivos').then(function (response) {
-                    _this6.setState({
-                        directivos: response.data
-                    });
-                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Bien', 'Directivo modificado con exito', 'success');
-                });
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this7 = this;
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* BrowserRouter */],
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'col-10 p-0 main' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'row p-0' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'col-12 p-0' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'input-group' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'input-group-prepend' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'span',
-                                        { className: 'input-group-text', id: 'basic-addon1' },
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'i',
-                                            { className: 'material-icons' },
-                                            'search'
-                                        )
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.search_info, onKeyUp: this.onEnter.bind(this),
-                                    onChange: this.onChangeSearch, type: 'text', className: 'form-control form-control-lg',
-                                    placeholder: 'Buscar directivo por nombre...', 'aria-label': 'Username', 'aria-describedby': 'basic-addon1' })
-                            )
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'row justify-content-center p-4' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'col p-0' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'row justify-content-between' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'col-auto' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'h1',
-                                        null,
-                                        'Estructura acad\xE9mica'
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { className: 'col-auto' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'a',
-                                        { href: '/index/estructura/nuevo', className: 'font-weight-bold' },
-                                        'Agregar nuevo'
-                                    )
-                                )
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'table',
-                                { className: 'table table-hover' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'thead',
-                                    { className: 'thead-dark' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'tr',
-                                        null,
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            '#'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            'Username'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            'Nombres'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            'Apellido paterno'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            'Apellido materno'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            'Rol'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            { scope: 'col' },
-                                            'Acciones'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('th', { scope: 'col' })
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'tbody',
-                                    null,
-                                    this.state.directivos.map(function (directivo) {
-                                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'tr',
-                                            null,
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'th',
-                                                { scope: 'row' },
-                                                directivo.id
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                directivo.username
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                directivo.nombres
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                directivo.apellidoPaterno
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                directivo.apellidoMaterno
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                directivo.rol
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'button',
-                                                    { onClick: _this7.onDelete.bind(_this7, directivo.id) },
-                                                    'Eliminar'
-                                                )
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'button',
-                                                    { onClick: _this7.toggleModal.bind(_this7, directivo.id) },
-                                                    'Detalle'
-                                                )
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                __WEBPACK_IMPORTED_MODULE_4_react_modal___default.a,
-                                                { isOpen: _this7.state.isActive, onRequestClose: _this7.closeModal.isActive },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'button',
-                                                    { onClick: _this7.closeModal.bind(_this7) },
-                                                    'Regresar'
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_username' },
-                                                        'Username'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_username',
-                                                        'aria-describedby': 'username',
-                                                        value: _this7.state.directivoEsp.username,
-                                                        onChange: _this7.onChangeDirectivo_Username })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_password' },
-                                                        'Password'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_password',
-                                                        'aria-describedby': 'password',
-                                                        value: _this7.state.directivoEsp.password,
-                                                        onChange: _this7.onChangeDirectivo_Password })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_nombres' },
-                                                        'Nombres'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_nombres',
-                                                        'aria-describedby': 'nombres',
-                                                        value: _this7.state.directivoEsp.nombres,
-                                                        onChange: _this7.onChangeDirectivo_Nombres })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_apellidoPaterno' },
-                                                        'Apellido Paterno'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_nombre',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.directivoEsp.apellidoPaterno,
-                                                        onChange: _this7.onChangeDirectivo_ApellidoPaterno })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_apellidoMaterno' },
-                                                        'Apellido Materno'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_apellidoMaterno',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.directivoEsp.apellidoMaterno,
-                                                        onChange: _this7.onChangeDirectivo_ApellidoMaterno })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_correo' },
-                                                        'Correo'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_correo',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.directivoEsp.correo,
-                                                        onChange: _this7.onChangeDirectivo_Correo })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_pais' },
-                                                        'Pais'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_pais',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.directivoEsp.pais,
-                                                        onChange: _this7.onChangeDirectivo_Pais })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_estado' },
-                                                        'Estado'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_estado',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.directivoEsp.estado,
-                                                        onChange: _this7.onChangeDirectivo_Estado })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_ciudad_municipio' },
-                                                        'Ciudad_Municipio'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_ciudad_municipio',
-                                                        'aria-describedby': 'ciudad_municipio',
-                                                        value: _this7.state.directivoEsp.ciudad_municipio,
-                                                        onChange: _this7.onChangeDirectivo_Ciudad_Municipio })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_socio' },
-                                                        'Socio'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_socio',
-                                                        'aria-describedby': 'socio',
-                                                        value: _this7.state.directivoEsp.socio,
-                                                        onChange: _this7.onChangeDirectivo_Socio })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_organizacion' },
-                                                        'Organizacion'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_organizacion',
-                                                        'aria-describedby': 'organizacion',
-                                                        value: _this7.state.directivoEsp.organizacion,
-                                                        onChange: _this7.onChangeDirectivo_Organizacion })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'directivo_rol' },
-                                                        'Rol'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'directivo_rol',
-                                                        'aria-describedby': 'rol',
-                                                        value: _this7.state.directivoEsp.rol,
-                                                        onChange: _this7.onChangeDirectivo_Rol })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'button',
-                                                    { onClick: _this7.onSubmit.bind(_this7, directivo.id) },
-                                                    'Actualizar'
-                                                )
-                                            )
-                                        );
-                                    })
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Estructura;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (Estructura);
-
-
-if (document.getElementById('Directivos')) {
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Directivos, null), document.getElementById('directivos'));
-}
-
-/***/ }),
-/* 112 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -69560,16 +69949,16 @@ if (document.getElementById('tutoresSub')) {
 }
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -69939,7 +70328,7 @@ if (document.getElementById('tutores')) {
 }
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
