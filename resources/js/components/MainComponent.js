@@ -8,6 +8,7 @@ import Alumnos from './Content/Alumnos/Alumnos';
 import Alumno_Sub from './SubNavbars/Alumnos_Sub';
 import Alumnos_New from './Content/Alumnos/Alumnos_New';
 import Tutores from './Content/Tutores/Tutores';
+import Estructura from './Content/Estructura_Academica/Estructura';
 import Tutores_Sub from './SubNavbars/Tutores_Sub';
 import Tutores_New from './Content/Tutores/Tutores_New';
 
@@ -17,10 +18,13 @@ export default class MainComponent extends Component {
             <Router basename="index">
 
                 <div className="row h-100">
-                
+
                     {/* Main Navbar */}
                     <div className="col-2 pt-4 px-1 bg-primary-dark" name="mainNav">
                         <ul className="list-group list-group-flush bg-transparent">
+                            <li className="list-group-item bg-transparent text-center">
+                                <Link to="/estructura" className="text-white h3">Est. Academica</Link>
+                            </li>
                             <li className="list-group-item bg-transparent text-center">
                                 <Link to="/cursos" className="text-white h3">Cursos</Link>
                             </li>
@@ -32,12 +36,15 @@ export default class MainComponent extends Component {
                             </li>
                         </ul>
                     </div>
-                    
+
                     {/* Sub Navbars */}
                     <Route path='/cursos' component={Curso_Sub}/>
                     <Route path='/alumnos' component={Alumno_Sub}/>
                     <Route path='/tutores' component={Tutores_Sub}/>
-                    
+
+
+                    {/* No-Sub Navbar Content Area - <div className="col-10 p-0">*/}
+                    <Route exact path='/estructura' component={Estructura}/>
 
                     {/* Content Areas - <div className="col-8 p-0">*/}
                     <Route exact path='/cursos' component={Cursos_Listing}/>
@@ -49,7 +56,7 @@ export default class MainComponent extends Component {
                     <Route exact path='/tutores' component={Tutores}/>
                     <Route exact path='/tutores/nuevo' component={Tutores_New}/>
                 </div>
-                
+
             </Router>
         );
     }
