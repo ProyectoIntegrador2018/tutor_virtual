@@ -109,7 +109,6 @@ class DirectivoController extends Controller
         $directivo->pais = $request->directivo_pais;
         $directivo->estado = $request->directivo_estado;
         $directivo->ciudad_municipio = $request->directivo_ciudad_municipio;
-        $directivo->municipio = $request->directivo_municipio;
         $directivo->socio = $request->directivo_socio;
         $directivo->organizacion = $request->directivo_organizacion;
         $directivo->rol = $request->directivo_rol;
