@@ -54,3 +54,8 @@ Route::delete('/api/directivos/delete/{id}', 'Api\\DirectivoController@destroy')
 Route::get('/api/directivo/{id}', 'Api\\DirectivoController@show');
 Route::put('/api/directivo/update/{id}', 'Api\\DirectivoController@update');
 Route::get('/api/search/directivos/{search_info}', 'Api\\DirectivoController@search');
+
+Route::get('/api/grupos', 'Api\\GrupoController@index');
+Route::delete('/api/grupos/delete/{id}', 'Api\\GrupoController@destroy');
+Route::get('/api/grupo/{id}', 'Api\\GrupoController@show');
+Route::post('/api/grupo/store', 'Api\\GrupoController@store');
