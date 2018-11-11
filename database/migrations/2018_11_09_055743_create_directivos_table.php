@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlumnos extends Migration
+class CreateDirectivosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,24 @@ class CreateAlumnos extends Migration
      */
     public function up()
     {
-        Schema::create('alumnos', function (Blueprint $table) {
+        Schema::create('directivos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('nombres');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
             $table->string('correo');
             $table->string('pais');
             $table->string('estado');
-            $table->string('ciudad');
-            $table->string('municipio');
-            $table->string('genero');
-            $table->date('fechaNacimiento');
-            $table->string('idOrganizacion');
+            $table->string('ciudad_municipio');
             $table->string('socio');
-            $table->string('periodo');
+            $table->string('organizacion');
+            $table->string('rol');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -38,6 +38,6 @@ class CreateAlumnos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cursos');
+        Schema::dropIfExists('directivos');
     }
 }
