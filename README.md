@@ -18,8 +18,8 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 ### Ambientes del Sistema
 
-* **Producción** - [TBD](TBD)
-* **Desarrollo** - [TBD](TBD)
+* **Producción** - [TutorVirtual](http://tutorvirtual.herokuapp.com/)
+* **Desarrollo** - [Dev-TutorVirtual](http://dev-tutorvirtual.herokuapp.com/)
 
 ### Equipo de trabajo
 
