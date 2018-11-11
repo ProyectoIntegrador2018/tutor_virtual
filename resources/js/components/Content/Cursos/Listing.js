@@ -124,7 +124,7 @@ export default class Cursos_Listing extends Component {
             curso_reconocimiento : this.state.cursoEsp.reconocimiento,
             curso_horas : this.state.cursoEsp.horas
         }
-        
+
         axios.put('/api/curso/update/' + curso_id, curso).then(
             response =>{
                 axios.get('/api/cursos').then(
@@ -143,7 +143,7 @@ export default class Cursos_Listing extends Component {
         );
     }
 
-    onChangeCurso_Nombre(e) { 
+    onChangeCurso_Nombre(e) {
         this.state.cursoEsp.nombre = e.target.value;
         this.forceUpdate();
     }
@@ -203,12 +203,12 @@ export default class Cursos_Listing extends Component {
                                 </div>
                                 <input value={this.state.search_info} onKeyUp={this.onEnter.bind(this)}
                                     onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
-                                    placeholder="Buscar curso por nombre..." 
+                                    placeholder="Buscar curso por nombre..."
                                     aria-label="Username" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
-                    
+
                     {/*Content row*/}
                     <div className="row justify-content-center p-4">
                         <div className="col p-0">
@@ -222,7 +222,7 @@ export default class Cursos_Listing extends Component {
                                     <a href="/index/cursos/nuevo" className="font-weight-bold">Agregar nuevo</a>
                                 </div>
                             </div>
-                            
+
                             <table className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr>
@@ -244,8 +244,8 @@ export default class Cursos_Listing extends Component {
                                                 <td>{curso.clave}</td>
                                                 <td>{curso.fechaInicio}</td>
                                                 <td>{curso.fechaFin}</td>
-                                                <td><button className="btn btn-danger" onClick={this.onDelete.bind(this,curso.id)}><FontAwesomeIcon icon="trash-alt" /></button></td> 
-                                                <td><button className="btn btn-info" onClick={this.toggleModal.bind(this, curso.id)}><FontAwesomeIcon icon="info-circle" /></button></td> 
+                                                <td><button className="btn btn-danger" onClick={this.onDelete.bind(this,curso.id)}><FontAwesomeIcon icon="trash-alt" /></button></td>
+                                                <td><button className="btn btn-info" onClick={this.toggleModal.bind(this, curso.id)}><FontAwesomeIcon icon="info-circle" /></button></td>
                                                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
                                                     <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
                                                     <div className="form-group">
@@ -254,7 +254,7 @@ export default class Cursos_Listing extends Component {
                                                             className="form-control"
                                                             id="curso_nombre"
                                                             aria-describedby="nombre"
-                                                            value={this.state.cursoEsp.nombre} 
+                                                            value={this.state.cursoEsp.nombre}
                                                             onChange={this.onChangeCurso_Nombre} />
                                                     </div>
 
@@ -338,10 +338,8 @@ export default class Cursos_Listing extends Component {
                                     })}
                                 </tbody>
                             </table>
-                            
                         </div> {/*Content column*/}
                     </div> {/*Content row*/}
-
                 </div>
             </Router>
         );
