@@ -8,6 +8,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 * [Ambientes del Sistema](#ambientes-del-sistema)
 * [Equipo de trabajo](#equipo-de-trabajo)
 * [Herramientas](#herramientas)
+* [Configuración del proyecto](#Configuración-del-proyecto)
 
 ### Detalles del Cliente
 
