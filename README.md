@@ -10,6 +10,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 * [Herramientas](#herramientas)
 * [Configuración del proyecto](#Configuración-del-proyecto)
 * [Correr el proyecto para desarrollo](#Correr-el-proyecto-para-desarrollo)
+* [Detener el proyecto](#Detener-el-proyecto)
 
 ### Detalles del Cliente
 
@@ -82,8 +83,19 @@ php artisan migrate
 ```
 
 ### Correr el proyecto para desarrollo
+
 4. Encender el servidor de manera local.
 
 ```
 php artisan serve
 ```
+
+### Detener el proyecto
+
+Para detener el servidor completamente presiona
+
+```
+$ CTRL + C
+```
+
+dentro de la terminal donde encendiste el mismo.
