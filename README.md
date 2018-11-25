@@ -79,3 +79,9 @@ composer install
 ```
 php artisan serve
 ```
+
+4. Migrar la base de datos.
+
+```
+php artisan migrate
+```
