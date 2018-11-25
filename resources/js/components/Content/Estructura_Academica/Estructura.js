@@ -194,7 +194,6 @@ export default class Estructura extends Component {
             directivo_socio : this.state.directivoEsp.socio,
             directivo_organizacion : this.state.directivoEsp.organizacion,
             directivo_rol : this.state.directivoEsp.rol
-
         }
 
         axios.put('/api/directivo/update/' + directivo_id, directivo).then(

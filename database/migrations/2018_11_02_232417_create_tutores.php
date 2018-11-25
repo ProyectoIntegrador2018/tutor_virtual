@@ -15,17 +15,19 @@ class CreateTutores extends Migration
     {
         Schema::create('tutores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('nombres');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
             $table->string('correo');
             $table->string('pais');
             $table->string('estado');
-            $table->string('ciudad');
-            $table->string('municipio');
+            $table->string('ciudad_municipio');
             $table->string('genero');
-            $table->string('curso');
-            $table->string('institucion');
+            $table->string('socio');
+            $table->string('organizacion');
+            $table->string('rol');
             $table->timestamps();
         });
     }

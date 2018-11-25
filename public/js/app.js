@@ -69965,7 +69965,6 @@ var Estructura = function (_Component) {
                 directivo_socio: this.state.directivoEsp.socio,
                 directivo_organizacion: this.state.directivoEsp.organizacion,
                 directivo_rol: this.state.directivoEsp.rol
-
             };
 
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('/api/directivo/update/' + directivo_id, directivo).then(function (response) {
@@ -70790,17 +70789,18 @@ var Tutores = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Tutores.__proto__ || Object.getPrototypeOf(Tutores)).call(this));
 
-        _this.onChangeTutor_Nombre = _this.onChangeTutor_Nombre.bind(_this);
+        _this.onChangeTutor_Username = _this.onChangeTutor_Username.bind(_this);
+        _this.onChangeTutor_Password = _this.onChangeTutor_Password.bind(_this);
+        _this.onChangeTutor_Nombres = _this.onChangeTutor_Nombres.bind(_this);
         _this.onChangeTutor_ApellidoPaterno = _this.onChangeTutor_ApellidoPaterno.bind(_this);
         _this.onChangeTutor_ApellidoMaterno = _this.onChangeTutor_ApellidoMaterno.bind(_this);
         _this.onChangeTutor_Correo = _this.onChangeTutor_Correo.bind(_this);
         _this.onChangeTutor_Pais = _this.onChangeTutor_Pais.bind(_this);
         _this.onChangeTutor_Estado = _this.onChangeTutor_Estado.bind(_this);
-        _this.onChangeTutor_Ciudad = _this.onChangeTutor_Ciudad.bind(_this);
-        _this.onChangeTutor_Municipio = _this.onChangeTutor_Municipio.bind(_this);
-        _this.onChangeTutor_Genero = _this.onChangeTutor_Genero.bind(_this);
-        _this.onChangeTutor_Curso = _this.onChangeTutor_Curso.bind(_this);
-        _this.onChangeTutor_Institucion = _this.onChangeTutor_Institucion.bind(_this);
+        _this.onChangeTutor_Ciudad_Municipio = _this.onChangeTutor_Ciudad_Municipio.bind(_this);
+        _this.onChangeTutor_Socio = _this.onChangeTutor_Socio.bind(_this);
+        _this.onChangeTutor_Organizacion = _this.onChangeTutor_Organizacion.bind(_this);
+        _this.onChangeTutor_Rol = _this.onChangeTutor_Rol.bind(_this);
         _this.onChangeSearch = _this.onChangeSearch.bind(_this);
         _this.state = {
             tutores: [],
@@ -70900,9 +70900,21 @@ var Tutores = function (_Component) {
             this.setState({ isActive: false });
         }
     }, {
-        key: 'onChangeTutor_Nombre',
-        value: function onChangeTutor_Nombre(e) {
-            this.state.tutorEsp.nombre = e.target.value;
+        key: 'onChangeTutor_Username',
+        value: function onChangeTutor_Username(e) {
+            this.state.tutorEsp.username = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Password',
+        value: function onChangeTutor_Password(e) {
+            this.state.tutorEsp.password = e.target.value;
+            this.forceUpdate();
+        }
+    }, {
+        key: 'onChangeTutor_Nombres',
+        value: function onChangeTutor_Nombres(e) {
+            this.state.tutorEsp.nombres = e.target.value;
             this.forceUpdate();
         }
     }, {
@@ -70936,33 +70948,27 @@ var Tutores = function (_Component) {
             this.forceUpdate();
         }
     }, {
-        key: 'onChangeTutor_Ciudad',
-        value: function onChangeTutor_Ciudad(e) {
-            this.state.tutorEsp.ciudad = e.target.value;
+        key: 'onChangeTutor_Ciudad_Municipio',
+        value: function onChangeTutor_Ciudad_Municipio(e) {
+            this.state.tutorEsp.ciudad_municipio = e.target.value;
             this.forceUpdate();
         }
     }, {
-        key: 'onChangeTutor_Municipio',
-        value: function onChangeTutor_Municipio(e) {
-            this.state.tutorEsp.municipio = e.target.value;
+        key: 'onChangeTutor_Socio',
+        value: function onChangeTutor_Socio(e) {
+            this.state.tutorEsp.socio = e.target.value;
             this.forceUpdate();
         }
     }, {
-        key: 'onChangeTutor_Genero',
-        value: function onChangeTutor_Genero(e) {
-            this.state.tutorEsp.genero = e.target.value;
+        key: 'onChangeTutor_Organizacion',
+        value: function onChangeTutor_Organizacion(e) {
+            this.state.tutorEsp.organizacion = e.target.value;
             this.forceUpdate();
         }
     }, {
-        key: 'onChangeTutor_Curso',
-        value: function onChangeTutor_Curso(e) {
-            this.state.tutorEsp.curso = e.target.value;
-            this.forceUpdate();
-        }
-    }, {
-        key: 'onChangeTutor_Institucion',
-        value: function onChangeTutor_Institucion(e) {
-            this.state.tutorEsp.institucion = e.target.value;
+        key: 'onChangeTutor_Rol',
+        value: function onChangeTutor_Rol(e) {
+            this.state.tutorEsp.rol = e.target.value;
             this.forceUpdate();
         }
     }, {
@@ -70972,17 +70978,18 @@ var Tutores = function (_Component) {
 
             var tutor_id = this.state.tutorEsp.id;
             var tutor = {
-                tutor_nombre: this.state.tutorEsp.nombre,
+                tutor_username: this.state.tutorEsp.username,
+                tutor_password: this.state.tutorEsp.password,
+                tutor_nombres: this.state.tutorEsp.nombres,
                 tutor_apellidoPaterno: this.state.tutorEsp.apellidoPaterno,
                 tutor_apellidoMaterno: this.state.tutorEsp.apellidoMaterno,
                 tutor_correo: this.state.tutorEsp.correo,
                 tutor_pais: this.state.tutorEsp.pais,
                 tutor_estado: this.state.tutorEsp.estado,
-                tutor_ciudad: this.state.tutorEsp.ciudad,
-                tutor_municipio: this.state.tutorEsp.municipio,
-                tutor_genero: this.state.tutorEsp.genero,
-                tutor_curso: this.state.tutorEsp.curso,
-                tutor_institucion: this.state.tutorEsp.institucion
+                tutor_ciudad_municipio: this.state.tutorEsp.ciudad_municipio,
+                tutor_socio: this.state.tutorEsp.socio,
+                tutor_organizacion: this.state.tutorEsp.organizacion,
+                tutor_rol: this.state.tutorEsp.rol
             };
 
             __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put('/api/tutor/update/' + tutor_id, tutor).then(function (response) {
@@ -70990,7 +70997,7 @@ var Tutores = function (_Component) {
                     _this6.setState({
                         tutores: response.data
                     });
-                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Bien', 'Curso modificado con exito', 'success');
+                    __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Bien', 'Tutor modificado con exito', 'success');
                 });
             });
         }
@@ -71078,17 +71085,22 @@ var Tutores = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Nombre'
+                                            'Username'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Correo'
+                                            'Nombres'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             { scope: 'col' },
-                                            'Curso'
+                                            'Apellido paterno'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'th',
+                                            { scope: 'col' },
+                                            'Apellido materno'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
@@ -71113,17 +71125,22 @@ var Tutores = function (_Component) {
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 null,
-                                                tutor.nombre
+                                                tutor.username
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 null,
-                                                tutor.correo
+                                                tutor.nombres
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 null,
-                                                tutor.curso
+                                                tutor.apellidoPaterno
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                tutor.apellidoMaterno
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
@@ -71156,15 +71173,45 @@ var Tutores = function (_Component) {
                                                     { className: 'form-group' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'label',
-                                                        { htmlFor: 'tutor_nombre' },
-                                                        'Nombre'
+                                                        { htmlFor: 'tutor_username' },
+                                                        'Username'
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                                         className: 'form-control',
-                                                        id: 'tutor_nombre',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.tutorEsp.nombre,
-                                                        onChange: _this7.onChangeTutor_Nombre })
+                                                        id: 'tutor_username',
+                                                        'aria-describedby': 'username',
+                                                        value: _this7.state.tutorEsp.username,
+                                                        onChange: _this7.onChangeTutor_Username })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_password' },
+                                                        'Password'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_password',
+                                                        'aria-describedby': 'password',
+                                                        value: _this7.state.tutorEsp.password,
+                                                        onChange: _this7.onChangeTutor_Password })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'form-group' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'label',
+                                                        { htmlFor: 'tutor_nombres' },
+                                                        'Nombres'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                                                        className: 'form-control',
+                                                        id: 'tutor_nombres',
+                                                        'aria-describedby': 'nombres',
+                                                        value: _this7.state.tutorEsp.nombres,
+                                                        onChange: _this7.onChangeTutor_Nombres })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
@@ -71246,75 +71293,60 @@ var Tutores = function (_Component) {
                                                     { className: 'form-group' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'label',
-                                                        { htmlFor: 'tutor_ciudad' },
-                                                        'Ciudad'
+                                                        { htmlFor: 'tutor_ciudad_municipio' },
+                                                        'Ciudad_Municipio'
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                                         className: 'form-control',
-                                                        id: 'tutor_ciudad',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.tutorEsp.ciudad,
-                                                        onChange: _this7.onChangeTutor_Ciudad })
+                                                        id: 'tutor_ciudad_municipio',
+                                                        'aria-describedby': 'ciudad_municipio',
+                                                        value: _this7.state.tutorEsp.ciudad_municipio,
+                                                        onChange: _this7.onChangeTutor_Ciudad_Municipio })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
                                                     { className: 'form-group' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'label',
-                                                        { htmlFor: 'tutor_municipio' },
-                                                        'Municipio'
+                                                        { htmlFor: 'tutor_socio' },
+                                                        'Socio'
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                                         className: 'form-control',
-                                                        id: 'tutor_municipio',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.tutorEsp.municipio,
-                                                        onChange: _this7.onChangeTutor_Municipio })
+                                                        id: 'tutor_socio',
+                                                        'aria-describedby': 'socio',
+                                                        value: _this7.state.tutorEsp.socio,
+                                                        onChange: _this7.onChangeTutor_Socio })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
                                                     { className: 'form-group' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'label',
-                                                        { htmlFor: 'tutor_genero' },
-                                                        'Genero'
+                                                        { htmlFor: 'tutor_organizacion' },
+                                                        'Organizacion'
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                                         className: 'form-control',
-                                                        id: 'tutor_genero',
-                                                        'aria-describedby': 'nombre',
-                                                        value: _this7.state.tutorEsp.genero,
-                                                        onChange: _this7.onChangeTutor_Genero })
+                                                        id: 'tutor_organizacion',
+                                                        'aria-describedby': 'organizacion',
+                                                        value: _this7.state.tutorEsp.organizacion,
+                                                        onChange: _this7.onChangeTutor_Organizacion })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'div',
                                                     { className: 'form-group' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'label',
-                                                        { htmlFor: 'tutor_curso' },
-                                                        'Curso'
+                                                        { htmlFor: 'tutor_rol' },
+                                                        'Rol'
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                                                         className: 'form-control',
-                                                        id: 'tutor_Curso',
-                                                        'aria-describedby': 'curso',
-                                                        value: _this7.state.tutorEsp.curso,
-                                                        onChange: _this7.onChangeTutor_Curso })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'form-group' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'label',
-                                                        { htmlFor: 'tutor_institucion' },
-                                                        'Institucion'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
-                                                        className: 'form-control',
-                                                        id: 'tutor_Institucion',
-                                                        'aria-describedby': 'institucion',
-                                                        value: _this7.state.tutorEsp.institucion,
-                                                        onChange: _this7.onChangeTutor_Institucion })
+                                                        id: 'tutor_rol',
+                                                        'aria-describedby': 'rol',
+                                                        value: _this7.state.tutorEsp.rol,
+                                                        onChange: _this7.onChangeTutor_Rol })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'button',
