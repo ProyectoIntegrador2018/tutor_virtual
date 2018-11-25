@@ -95,7 +95,7 @@ php artisan serve
 Para detener el servidor completamente presiona
 
 ```
-$ CTRL + C
+CTRL + C
 ```
 
 dentro de la terminal donde encendiste el mismo.
