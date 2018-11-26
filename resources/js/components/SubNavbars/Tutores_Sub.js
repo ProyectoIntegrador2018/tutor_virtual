@@ -3,6 +3,7 @@ import axios, { post } from 'axios';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
 import swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Tutores_Sub extends Component {
 
@@ -59,10 +60,37 @@ export default class Tutores_Sub extends Component {
                 </div>
 
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+                    <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
+
+                    <h2>Formato requerido del archivo Excel</h2>
+
+                    <p>
+                        El archivo excel a utilizar para importar <strong>tutores</strong> debe respetar el siguiente formato para una lectura adecuada.
+                    </p>
+
+                    <ul>
+                        <li>El archivo de excel deberá tener una sola hoja con la información a importar.</li>
+                        <li>La primera fila deberá tener los nombres de las columnas a importar en el siguiente orden:
+                            <ul>
+                                <li>Usuario</li>
+                                <li>Contraseña</li>
+                                <li>Nombre</li>
+                                <li>Apellido Paterno</li>
+                                <li>Apellido Materno</li>
+                                <li>Email</li>
+                                <li>Rol</li>
+                                <li>Socio</li>
+                                <li>Organización</li>
+                                <li>País</li>
+                                <li>Estado</li>
+                                <li>Municipio</li>
+                            </ul>
+                        </li>
+                        <li>Las filas siguientes deberan tener la información de los tutores a importar.</li>
+                    </ul>
 
                     <form onSubmit={this.handleUploadImage}>
-                        <h1>Seleccionar archivo de excel</h1>
+                        <h2>Seleccionar archivo de excel</h2>
 
                         <div className="form-group">
                             <input className="form-control"  ref={(ref) => { this.uploadInput = ref; }} type="file" />

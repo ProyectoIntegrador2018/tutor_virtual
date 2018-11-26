@@ -3,6 +3,7 @@ import axios, { post } from 'axios';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
 import swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Curso_Sub extends Component {
 
@@ -59,7 +60,38 @@ export default class Curso_Sub extends Component {
                 </div>
 
                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
-                    <button onClick={this.closeModal.bind(this)}>Regresar</button>
+                    <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
+
+                    <h2>Formato requerido del archivo Excel</h2>
+
+                    <p>
+                        El archivo excel a utilizar para importar <strong>cursos</strong> debe respetar el siguiente formato para una lectura adecuada.
+                    </p>
+
+                    <ul>
+                        <li>El archivo de excel deberá tener una sola hoja con la información a importar.</li>
+                        <li>La primera fila deberá tener los nombres de las columnas a importar en el siguiente orden:
+                            <ul>
+                                <li>Curso/Diplomado</li>
+                                <li>Clave de cursos (Verificar que sea únicamente la clave del curso)</li>
+                                <li>Periodo de Inscripciones
+                                    <ul>
+                                        <li>Fecha de inicio de inscipción</li>
+                                        <li>Fecha de fin de inscipción</li>
+                                    </ul>
+                                </li>
+                                <li>Duración Curso/Diplomado
+                                    <ul>
+                                        <li>Fecha de inicio</li>
+                                        <li>Fecha de fin</li>
+                                    </ul>
+                                </li>
+                                <li>Tipo de reconocimiento</li>
+                                <li>Duración del curso (ésta deberá tener sólo números)</li>
+                            </ul>
+                        </li>
+                        <li>Las filas siguientes deberan tener la información de los tutores a importar.</li>
+                    </ul>
 
                     <form onSubmit={this.handleUploadImage}>
                         <h1>Seleccionar archivo de excel</h1>
