@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Tutor;
+use App\Imports\TutoresImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class TutorController extends Controller
 {
@@ -66,6 +69,28 @@ class TutorController extends Controller
         $tutor->rol = $request->tutor_rol;
 
         $tutor->save();
+    }
+
+    /**
+     * Store new resources from uploaded excel file.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        try {
+            Excel::import(new TutoresImport, $request['file']);
+            return response()->json($content = 'Upload successful', $status=200);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+            }
+        }
     }
 
     /**

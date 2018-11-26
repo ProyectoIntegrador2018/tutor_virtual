@@ -46,6 +46,7 @@ Route::post('/api/tutor/store', 'Api\\TutorController@store');
 Route::delete('/api/tutores/delete/{id}', 'Api\\TutorController@destroy');
 Route::get('/api/tutor/{id}', 'Api\\TutorController@show');
 Route::put('/api/tutor/update/{id}', 'Api\\TutorController@update');
+Route::post('/api/importTutores', 'Api\TutorController@import');
 Route::get('/api/search/tutores/{search_info}', 'Api\\TutorController@search');
 
 Route::get('/api/directivos', 'Api\\DirectivoController@index');

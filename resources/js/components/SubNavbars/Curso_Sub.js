@@ -17,10 +17,10 @@ export default class Curso_Sub extends Component {
 
     handleUploadImage(ev) {
         ev.preventDefault();
-    
+
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
-    
+
         axios.post('/api/importCursos', data)
         .then(function (response) {
             this.state.isActive = false;
@@ -49,7 +49,7 @@ export default class Curso_Sub extends Component {
     render() {
         return (
             <div className="col-2 pt-4 px-1 bg-primary" name="subNav">
-            
+
                 <div className="row justify-content-center">
                     <div className="col-auto">
                         <button type="button" className="btn btn-outline-light btn-lg" onClick={this.toggleModal.bind(this)}>
