@@ -15,7 +15,7 @@ class CreateGrupos extends Migration
     {
         Schema::create('grupos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('curso_id');
+            $table->integer('curso_id')->nullable();
             $table->timestamps();
         });
     }

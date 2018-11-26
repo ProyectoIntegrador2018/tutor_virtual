@@ -260,7 +260,6 @@ export default class Estructura extends Component {
                                         <th scope="col">Apellido materno</th>
                                         <th scope="col">Rol</th>
                                         <th scope="col">Acciones</th>
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
 
@@ -275,8 +274,13 @@ export default class Estructura extends Component {
                                                     <td>{directivo.apellidoPaterno}</td>
                                                     <td>{directivo.apellidoMaterno}</td>
                                                     <td>{directivo.rol}</td>
-                                                    <td><button className="btn btn-danger"  onClick={this.onDelete.bind(this, directivo.id)}><FontAwesomeIcon icon="trash-alt" /></button></td>
-                                                    <td><button className="btn btn-info"  onClick={this.toggleModal.bind(this, directivo.id)}><FontAwesomeIcon icon="info-circle" /></button></td>
+                                                    <td>
+                                                        <span>
+                                                            <button className="btn btn-danger mx-1"  onClick={this.onDelete.bind(this, directivo.id)}><FontAwesomeIcon icon="trash-alt" /></button>
+                                                            <button className="btn btn-info mx-1"  onClick={this.toggleModal.bind(this, directivo.id)}><FontAwesomeIcon icon="info-circle" /></button>
+                                                        </span>
+
+                                                    </td>
 
                                                     <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
                                                         <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>

@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
-// ES6 Modules or TypeScript
 import swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class Cursos_Listing extends Component {
+export default class Cursos extends Component {
 
     constructor() {
         super();
@@ -232,7 +231,6 @@ export default class Cursos_Listing extends Component {
                                         <th scope="col">Fecha inicio</th>
                                         <th scope="col">Fecha fin</th>
                                         <th scope="col">Acciones</th>
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -244,8 +242,12 @@ export default class Cursos_Listing extends Component {
                                                 <td>{curso.clave}</td>
                                                 <td>{curso.fechaInicio}</td>
                                                 <td>{curso.fechaFin}</td>
-                                                <td><button className="btn btn-danger" onClick={this.onDelete.bind(this,curso.id)}><FontAwesomeIcon icon="trash-alt" /></button></td>
-                                                <td><button className="btn btn-info" onClick={this.toggleModal.bind(this, curso.id)}><FontAwesomeIcon icon="info-circle" /></button></td>
+                                                <td>
+                                                    <span>
+                                                        <button className="btn btn-danger mx-1" onClick={this.onDelete.bind(this,curso.id)}><FontAwesomeIcon icon="trash-alt" /></button>
+                                                        <button className="btn btn-info mx-1" onClick={this.toggleModal.bind(this, curso.id)}><FontAwesomeIcon icon="info-circle" /></button>
+                                                    </span>
+                                                </td>
                                                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
                                                     <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
                                                     <div className="form-group">

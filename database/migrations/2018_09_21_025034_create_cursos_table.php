@@ -15,14 +15,14 @@ class CreateCursosTable extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->string('clave')->unique();
-            $table->date('fechaInicioInscripcion');
-            $table->date('fechaFinInscripcion');
-            $table->date('fechaInicio');
-            $table->date('fechaFin');
-            $table->string('reconocimiento');
-            $table->integer('horas');
+            $table->date('fechaInicioInscripcion')->nullable();
+            $table->date('fechaFinInscripcion')->nullable();
+            $table->date('fechaInicio')->nullable();
+            $table->date('fechaFin')->nullable();
+            $table->string('reconocimiento')->nullable();
+            $table->integer('horas')->nullable();
             $table->timestamps();
         });
     }

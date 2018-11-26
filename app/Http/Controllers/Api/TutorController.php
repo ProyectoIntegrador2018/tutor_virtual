@@ -22,7 +22,7 @@ class TutorController extends Controller
     {
 
         $request = $tutor;
-        $result = Tutor::where('nombre','LIKE','%'.$request."%")
+        $result = Tutor::where('nombres','LIKE','%'.$request."%")
         ->orWhere('correo','LIKE','%'.$request."%")
         ->orWhere('apellidoPaterno','LIKE','%'.$request."%")
         ->orWhere('apellidoMaterno','LIKE','%'.$request."%")
@@ -100,7 +100,6 @@ class TutorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo $request;
         $tutor = Tutor::find($id);
 
         $tutor->username = $request->tutor_username;

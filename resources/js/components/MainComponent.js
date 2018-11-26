@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Curso_Sub from './SubNavbars/Curso_Sub';
-import Cursos_Listing from './Content/Cursos/Listing';
-import Cursos_New from './Content/Cursos/New';
-import Alumnos from './Content/Alumnos/Alumnos';
-import Alumno_Sub from './SubNavbars/Alumnos_Sub';
-import Alumnos_New from './Content/Alumnos/Alumnos_New';
-import Estructura from './Content/Estructura_Academica/Estructura';
-import Estructura_New from './Content/Estructura_Academica/Estructura_New';
-import Tutores from './Content/Tutores/Tutores';
-import Tutores_Sub from './SubNavbars/Tutores_Sub';
-import Tutores_New from './Content/Tutores/Tutores_New';
-import Grupos from './Content/Grupos/Grupos';
-import Grupo_Sub from './SubNavbars/Grupos_Sub';
-import Grupos_New from './Content/Grupos/Grupos_New';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faInfoCircle, faSave, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+
+import Cursos from './Content/Cursos/Cursos';
+import Curso_Sub from './SubNavbars/Curso_Sub';
+import Cursos_New from './Content/Cursos/Cursos_New';
+
+import Alumnos from './Content/Alumnos/Alumnos';
+import Alumno_Sub from './SubNavbars/Alumnos_Sub';
+import Alumnos_New from './Content/Alumnos/Alumnos_New';
+
+import Estructura from './Content/Estructura_Academica/Estructura';
+import Estructura_New from './Content/Estructura_Academica/Estructura_New';
+
+import Tutores from './Content/Tutores/Tutores';
+import Tutores_Sub from './SubNavbars/Tutores_Sub';
+import Tutores_New from './Content/Tutores/Tutores_New';
+
+import Grupos from './Content/Grupos/Grupos';
+import Grupo_Sub from './SubNavbars/Grupos_Sub';
+import Grupos_New from './Content/Grupos/Grupos_New';
 
 library.add(faTrashAlt, faInfoCircle, faSave, faArrowLeft)
 
@@ -58,11 +63,11 @@ export default class MainComponent extends Component {
                     {/* No-Sub Navbar Content Area - <div className="col-10 p-0">*/}
                     <Route exact path='/estructura' component={Estructura}/>
                     <Route exact path='/estructura/nuevo' component={Estructura_New}/>
-                    
-                    
+
+
 
                     {/* Content Areas - <div className="col-8 p-0">*/}
-                    <Route exact path='/cursos' component={Cursos_Listing}/>
+                    <Route exact path='/cursos' component={Cursos}/>
                     <Route exact path='/cursos/nuevo' component={Cursos_New}/>
 
                     <Route exact path='/alumnos' component={Alumnos}/>

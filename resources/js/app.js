@@ -14,5 +14,22 @@ require('./bootstrap');
  */
 
 require('./components/MainComponent');
+
+require('./components/Content/Cursos/Cursos');
+require('./components/Content/Cursos/Cursos_New');
 require('./components/SubNavbars/Curso_Sub');
-require('./components/Content/Cursos/Listing');
+
+require('./components/Content/Alumnos/Alumnos');
+require('./components/Content/Alumnos/Alumnos_New');
+require('./components/SubNavbars/Alumnos_Sub');
+
+require('./components/Content/Estructura_Academica/Estructura');
+require('./components/Content/Estructura_Academica/Estructura_New');
+
+require('./components/Content/Grupos/Grupos');
+require('./components/Content/Grupos/Grupos_New');
+require('./components/SubNavbars/Grupos_Sub');
+
+require('./components/Content/Tutores/Tutores');
+require('./components/Content/Tutores/Tutores_New');
+require('./components/SubNavbars/Tutores_Sub');
