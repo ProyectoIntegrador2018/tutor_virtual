@@ -17,21 +17,20 @@ class AlumnoController extends Controller
     {
         $result = Alumno::all();
         return $result;
- 
+
     }
     public function search($alumno)
     {
         $request = $alumno;
-        $result = Alumno::where('nombre','LIKE','%'.$request."%")
+        $result = Alumno::where('nombres','LIKE','%'.$request."%")
             ->orWhere('correo','LIKE','%'.$request."%")
-            ->orWhere('pais','LIKE','%'.$request."%")
-            ->orWhere('idOrganizacion','LIKE','%'.$request."%")
-            ->orWhere('socio','LIKE','%'.$request."%")
-            ->orWhere('periodo','LIKE','%'.$request."%")
+            ->orWhere('apellidoPaterno','LIKE','%'.$request."%")
+            ->orWhere('apellidoMaterno','LIKE','%'.$request."%")
+            ->orWhere('username','LIKE','%'.$request."%")
             ->get();
         return $result;
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,22 +51,21 @@ class AlumnoController extends Controller
     public function store(Request $request)
     {
         $alumno= new alumno();
-        $alumno->nombre = $request->alumno_nombre;
+        $alumno->username = $request->alumno_username;
+        $alumno->password = $request->alumno_password;
+        $alumno->nombres = $request->alumno_nombres;
         $alumno->apellidoPaterno = $request->alumno_apellidoPaterno;
         $alumno->apellidoMaterno = $request->alumno_apellidoMaterno;
         $alumno->correo = $request->alumno_correo;
         $alumno->pais = $request->alumno_pais;
         $alumno->estado = $request->alumno_estado;
-        $alumno->ciudad = $request->alumno_ciudad;
-        $alumno->municipio = $request->alumno_municipio;
-        $alumno->genero = $request->alumno_genero;
-        $alumno->fechaNacimiento = $request->alumno_fechaNacimiento;
-        $alumno->idOrganizacion = $request->alumno_idOrganizacion;
+        $alumno->ciudad_municipio = $request->alumno_ciudad_municipio;
+        $alumno->fechaDeNacimiento = $request->alumno_fechaDeNacimiento;
         $alumno->socio = $request->alumno_socio;
-        $alumno->periodo = $request->alumno_periodo;
-        
+        $alumno->organizacion = $request->alumno_organizacion;
+        $alumno->rol = $request->alumno_rol;
+
         $alumno->save();
-        echo $request;
     }
 
     /**
@@ -103,19 +101,21 @@ class AlumnoController extends Controller
     public function update(Request $request, $id)
     {
         $alumno = Alumno::find($id);
-        $alumno->nombre = $request->alumno_nombre;
+
+        $alumno->username = $request->alumno_username;
+        $alumno->password = $request->alumno_password;
+        $alumno->nombres = $request->alumno_nombres;
         $alumno->apellidoPaterno = $request->alumno_apellidoPaterno;
         $alumno->apellidoMaterno = $request->alumno_apellidoMaterno;
         $alumno->correo = $request->alumno_correo;
         $alumno->pais = $request->alumno_pais;
         $alumno->estado = $request->alumno_estado;
-        $alumno->ciudad = $request->alumno_ciudad;
-        $alumno->municipio = $request->alumno_municipio;
-        $alumno->genero = $request->alumno_genero;
-        $alumno->fechaNacimiento = $request->alumno_fechaNacimiento;
-        $alumno->idOrganizacion = $request->alumno_idOrganizacion;
+        $alumno->ciudad_municipio = $request->alumno_ciudad_municipio;
+        $alumno->fechaDeNacimiento = $request->alumno_fechaDeNacimiento;
         $alumno->socio = $request->alumno_socio;
-        $alumno->periodo = $request->alumno_periodo;
+        $alumno->organizacion = $request->alumno_organizacion;
+        $alumno->rol = $request->alumno_rol;
+
         $alumno->save();
     }
 

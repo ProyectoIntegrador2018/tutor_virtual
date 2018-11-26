@@ -8,36 +8,51 @@ export default class Tutores_New extends Component {
     //nombre apellidoPaterno apellidoMaterno correo pais estado ciudad municipio genero fechaNacimiento
     constructor() {
         super();
-        this.onChangeTutor_Nombre = this.onChangeTutor_Nombre.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeTutor_Username = this.onChangeTutor_Username.bind(this);
+        this.onChangeTutor_Password = this.onChangeTutor_Password.bind(this);
+        this.onChangeTutor_Nombres = this.onChangeTutor_Nombres.bind(this);
         this.onChangeTutor_ApellidoPaterno = this.onChangeTutor_ApellidoPaterno.bind(this);
         this.onChangeTutor_ApellidoMaterno = this.onChangeTutor_ApellidoMaterno.bind(this);
         this.onChangeTutor_Correo = this.onChangeTutor_Correo.bind(this);
         this.onChangeTutor_Pais = this.onChangeTutor_Pais.bind(this);
         this.onChangeTutor_Estado = this.onChangeTutor_Estado.bind(this);
-        this.onChangeTutor_Ciudad = this.onChangeTutor_Ciudad.bind(this);
-        this.onChangeTutor_Municipio = this.onChangeTutor_Municipio.bind(this);
-        this.onChangeTutor_Genero = this.onChangeTutor_Genero.bind(this);
-        this.onChangeTutor_Curso = this.onChangeTutor_Curso.bind(this);
-        this.onChangeTutor_Institucion = this.onChangeTutor_Institucion.bind(this);
+        this.onChangeTutor_Ciudad_Municipio = this.onChangeTutor_Ciudad_Municipio.bind(this);
+        this.onChangeTutor_Socio = this.onChangeTutor_Socio.bind(this);
+        this.onChangeTutor_Organizacion = this.onChangeTutor_Organizacion.bind(this);
+        this.onChangeTutor_Rol = this.onChangeTutor_Rol.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-            tutor_nombre : "",
+            tutor_username : "",
+            tutor_password : "",
+            tutor_nombres : "",
             tutor_apellidoPaterno : "",
             tutor_apellidoMaterno : "",
             tutor_correo : "",
             tutor_pais : "",
             tutor_estado : "",
-            tutor_ciudad : "",
-            tutor_municipio : "",
-            tutor_genero : "",
-            tutor_curso : "",
-            tutor_institucion : ""
+            tutor_ciudad_municipio : "",
+            tutor_socio : "",
+            tutor_organizacion : "",
+            tutor_rol : ""
         }
     }
 
-    onChangeTutor_Nombre(e) {
+    onChangeTutor_Username(e) {
         this.setState({
-            tutor_nombre : e.target.value
+            tutor_username : e.target.value
+        });
+    }
+
+    onChangeTutor_Password(e) {
+        this.setState({
+            tutor_password : e.target.value
+        });
+    }
+
+    onChangeTutor_Nombres(e) {
+        this.setState({
+            tutor_nombres : e.target.value
         });
     }
 
@@ -71,50 +86,45 @@ export default class Tutores_New extends Component {
         });
     }
 
-    onChangeTutor_Ciudad(e) {
+    onChangeTutor_Ciudad_Municipio(e) {
         this.setState({
-            tutor_ciudad : e.target.value
+            tutor_ciudad_municipio : e.target.value
         });
     }
 
-    onChangeTutor_Municipio(e) {
+    onChangeTutor_Socio(e) {
         this.setState({
-            tutor_municipio : e.target.value
+            tutor_socio : e.target.value
         });
     }
 
-    onChangeTutor_Genero(e) {
+    onChangeTutor_Organizacion(e) {
         this.setState({
-            tutor_genero : e.target.value
+            tutor_organizacion : e.target.value
         });
     }
 
-    onChangeTutor_Curso(e) {
+    onChangeTutor_Rol(e) {
         this.setState({
-            tutor_curso : e.target.value
+            tutor_rol : e.target.value
         });
     }
-    onChangeTutor_Institucion(e) {
-        this.setState({
-            tutor_institucion : e.target.value
-        });
-    }
-
 
     onSubmit(e) {
         e.preventDefault();
         const tutor = {
-            tutor_nombre : this.state.tutor_nombre,
+            tutor_username : this.state.tutor_username,
+            tutor_password : this.state.tutor_password,
+            tutor_nombres : this.state.tutor_nombres,
             tutor_apellidoPaterno : this.state.tutor_apellidoPaterno,
             tutor_apellidoMaterno : this.state.tutor_apellidoMaterno,
             tutor_correo : this.state.tutor_correo,
             tutor_pais : this.state.tutor_pais,
             tutor_estado : this.state.tutor_estado,
-            tutor_ciudad : this.state.tutor_ciudad,
-            tutor_municipio : this.state.tutor_municipio,
-            tutor_genero : this.state.tutor_genero,
-            tutor_curso : this.state.tutor_curso,
-            tutor_institucion : this.state.tutor_institucion
+            tutor_ciudad_municipio : this.state.tutor_ciudad_municipio,
+            tutor_socio : this.state.tutor_socio,
+            tutor_organizacion : this.state.tutor_organizacion,
+            tutor_rol : this.state.tutor_rol
         }
 
         axios.post('/api/tutor/store', tutor).then(
@@ -146,117 +156,101 @@ export default class Tutores_New extends Component {
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group">
-                            <label htmlFor="tutor_nombre">Nombre</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_nombre"
-                            aria-describedby="nombre"
-                            value={this.state.tutor_nombre}
-                            onChange={this.onChangeTutor_Nombre}/>
+                            <label htmlFor="tutor_username">Username</label>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_username"
+                                aria-describedby="username"
+                                onChange={this.onChangeTutor_Username} />
                         </div>
-
+                        <div className="form-group">
+                            <label htmlFor="tutor_password">Password</label>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_password"
+                                aria-describedby="password"
+                                onChange={this.onChangeTutor_Password} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="tutor_nombres">Nombres</label>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_nombres"
+                                aria-describedby="nombres"
+                                onChange={this.onChangeTutor_Nombres} />
+                        </div>
                         <div className="form-group">
                             <label htmlFor="tutor_apellidoPaterno">Apellido Paterno</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_apellidoPaterno"
-                            aria-describedby="apellidoPaterno"
-                            value={this.state.tutor_apellidoPaterno}
-                            onChange={this.onChangeTutor_ApellidoPaterno}/>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_nombre"
+                                aria-describedby="nombre"
+                                onChange={this.onChangeTutor_ApellidoPaterno} />
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="tutor_apellidoMaterno">Apellido Materno</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_apellidoMaterno"
-                            aria-describedby="apellidoMaterno"
-                            value={this.state.tutor_apellidoMaterno}
-                            onChange={this.onChangeTutor_ApellidoMaterno}
-                            />
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_apellidoMaterno"
+                                aria-describedby="nombre"
+                                onChange={this.onChangeTutor_ApellidoMaterno} />
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="tutor_correo">Correo</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_correo"
-                            aria-describedby="correo"
-                            value={this.state.tutor_correo}
-                            onChange={this.onChangeTutor_Correo}
-                            />
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_correo"
+                                aria-describedby="nombre"
+                                onChange={this.onChangeTutor_Correo} />
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="tutor_pais">Pais</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_pais"
-                            aria-describedby="pais"
-                            value={this.state.tutor_pais}
-                            onChange={this.onChangeTutor_Pais}
-                            />
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_pais"
+                                aria-describedby="nombre"
+                                onChange={this.onChangeTutor_Pais} />
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="tutor_estado">Estado</label>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_estado"
+                                aria-describedby="nombre"
+                                onChange={this.onChangeTutor_Estado} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="tutor_ciudad_municipio">Ciudad_Municipio</label>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_ciudad_municipio"
+                                aria-describedby="ciudad_municipio"
+                                onChange={this.onChangeTutor_Ciudad_Municipio} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="tutor_socio">Socio</label>
+                                <input type="text"
+                                className="form-control"
+                                id="tutor_socio"
+                                aria-describedby="socio"
+                                onChange={this.onChangeTutor_Socio} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="tutor_organizacion">Organizacion</label>
                             <input type="text"
                             className="form-control"
-                            id="tutor_estado"
-                            aria-describedby="estado"
-                            value={this.state.tutor_estado}
-                            onChange={this.onChangeTutor_Estado}
-                            />
+                            id="tutor_organizacion"
+                            aria-describedby="organizacion"
+                            onChange={this.onChangeTutor_Organizacion}/>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="tutor_ciudad">Ciudad</label>
+                            <label htmlFor="tutor_rol">Rol</label>
                             <input type="text"
                             className="form-control"
-                            id="tutor_ciudad"
-                            aria-describedby="ciudad"
-                            value={this.state.tutor_ciudad}
-                            onChange={this.onChangeTutor_Ciudad}/>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="tutor_municipio">Municpio</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_municipio"
-                            aria-describedby="municipio"
-                            value={this.state.tutor_municipio}
-                            onChange={this.onChangeTutor_Municipio}/>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="tutor_genero">Genero</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_municipio"
-                            aria-describedby="municipio"
-                            value={this.state.tutor_genero}
-                            onChange={this.onChangeTutor_Genero}/>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="tutor_curso">Curso</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_Curso"
-                            aria-describedby="curso"
-                            value={this.state.tutor_curso}
-                            onChange={this.onChangeTutor_Curso}/>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="tutor_institucion">Institucion</label>
-                            <input type="text"
-                            className="form-control"
-                            id="tutor_Institucion"
-                            aria-describedby="institucion"
-                            value={this.state.tutor_institucion}
-                            onChange={this.onChangeTutor_Institucion}/>
+                            id="tutor_rol"
+                            aria-describedby="rol"
+                            onChange={this.onChangeTutor_Rol}/>
                         </div>
 
                         <button type="submit" className="btn btn-primary btn-lg">Crear</button>

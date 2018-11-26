@@ -10,19 +10,19 @@ export default class Alumnos extends Component {
 
     constructor() {
         super();
-        this.onChangeAlumno_Nombre = this.onChangeAlumno_Nombre.bind(this);
+        this.onChangeAlumno_Username = this.onChangeAlumno_Username.bind(this);
+        this.onChangeAlumno_Password = this.onChangeAlumno_Password.bind(this);
+        this.onChangeAlumno_Nombres = this.onChangeAlumno_Nombres.bind(this);
         this.onChangeAlumno_ApellidoPaterno = this.onChangeAlumno_ApellidoPaterno.bind(this);
         this.onChangeAlumno_ApellidoMaterno = this.onChangeAlumno_ApellidoMaterno.bind(this);
         this.onChangeAlumno_Correo = this.onChangeAlumno_Correo.bind(this);
         this.onChangeAlumno_Pais = this.onChangeAlumno_Pais.bind(this);
         this.onChangeAlumno_Estado = this.onChangeAlumno_Estado.bind(this);
-        this.onChangeAlumno_Ciudad = this.onChangeAlumno_Ciudad.bind(this);
-        this.onChangeAlumno_Municipio = this.onChangeAlumno_Municipio.bind(this);
-        this.onChangeAlumno_Genero = this.onChangeAlumno_Genero.bind(this);
-        this.onChangeAlumno_FechaNacimiento = this.onChangeAlumno_FechaNacimiento.bind(this);
-        this.onChangeAlumno_IdOrganizacion = this.onChangeAlumno_IdOrganizacion.bind(this);
+        this.onChangeAlumno_Ciudad_Municipio = this.onChangeAlumno_Ciudad_Municipio.bind(this);
+        this.onChangeAlumno_FechaDeNacimiento = this.onChangeAlumno_FechaDeNacimiento.bind(this);
         this.onChangeAlumno_Socio = this.onChangeAlumno_Socio.bind(this);
-        this.onChangeAlumno_Periodo = this.onChangeAlumno_Periodo.bind(this);
+        this.onChangeAlumno_Organizacion = this.onChangeAlumno_Organizacion.bind(this);
+        this.onChangeAlumno_Rol = this.onChangeAlumno_Rol.bind(this);
         this.onChangeSearch = this.onChangeSearch.bind(this);
         this.state = {
             alumnos : [],
@@ -45,7 +45,7 @@ export default class Alumnos extends Component {
 
     onEnter(e){
         var search_info = this.state.search_info;
-        
+
         if (search_info != "") {
             axios.get('/api/search/alumnos/'+ search_info).then(
                 response => {
@@ -65,6 +65,11 @@ export default class Alumnos extends Component {
                 }
             );
         }
+    }
+
+    onChangeSearch(e){
+        this.state.search_info = e.target.value;
+        this.forceUpdate();
     }
 
     onDelete(alumno_id){
@@ -106,7 +111,7 @@ export default class Alumnos extends Component {
         axios.get('/api/alumno/' + alumno_id).then(
             response => {
                 this.setState({
-                    alumnoEsp: response.data 
+                    alumnoEsp: response.data
                 });
             }
         );
@@ -116,11 +121,20 @@ export default class Alumnos extends Component {
         this.setState({isActive:false});
     }
 
-    onChangeAlumno_Nombre(e) {
-        this.state.alumnoEsp.nombre = e.target.value;
+    onChangeAlumno_Username(e) {
+        this.state.alumnoEsp.username = e.target.value;
         this.forceUpdate();
     }
 
+    onChangeAlumno_Password(e) {
+        this.state.alumnoEsp.password = e.target.value;
+        this.forceUpdate();
+    }
+
+    onChangeAlumno_Nombres(e) {
+        this.state.alumnoEsp.nombres = e.target.value;
+        this.forceUpdate();
+    }
     onChangeAlumno_ApellidoPaterno(e) {
         this.state.alumnoEsp.apellidoPaterno = e.target.value;
         this.forceUpdate();
@@ -146,61 +160,49 @@ export default class Alumnos extends Component {
         this.forceUpdate();
     }
 
-    onChangeAlumno_Ciudad(e) {
-        this.state.alumnoEsp.ciudad = e.target.value;
+    onChangeAlumno_Ciudad_Municipio(e) {
+        this.state.alumnoEsp.ciudad_municipio = e.target.value;
         this.forceUpdate();
     }
 
-    onChangeAlumno_Municipio(e) {
-        this.state.alumnoEsp.municipio = e.target.value;
+    onChangeAlumno_FechaDeNacimiento(e) {
+        this.state.alumnoEsp.fechaDeNacimiento = e.target.value;
         this.forceUpdate();
     }
 
-    onChangeAlumno_Genero(e) {
-        this.state.alumnoEsp.genero = e.target.value;
-        this.forceUpdate();
-    }
-
-    onChangeAlumno_FechaNacimiento(e) {
-        this.state.alumnoEsp.fechaNacimiento = e.target.value;
-        this.forceUpdate();
-    }
-    onChangeAlumno_IdOrganizacion(e) {
-        this.state.alumnoEsp.idOrganizacion = e.target.value;
-        this.forceUpdate();
-    }
     onChangeAlumno_Socio(e) {
         this.state.alumnoEsp.socio = e.target.value;
         this.forceUpdate();
     }
-    onChangeAlumno_Periodo(e) {
-        this.state.alumnoEsp.periodo = e.target.value;
+
+    onChangeAlumno_Organizacion(e) {
+        this.state.alumnoEsp.organizacion = e.target.value;
         this.forceUpdate();
     }
-    onChangeSearch(e){
-        this.state.search_info = e.target.value;
+    onChangeAlumno_Rol(e) {
+        this.state.alumnoEsp.rol = e.target.value;
         this.forceUpdate();
     }
 
     onSubmit(e) {
-        
+
         var alumno_id = this.state.alumnoEsp.id;
         const alumno = {
-            alumno_nombre : this.state.alumnoEsp.nombre,
+            alumno_username : this.state.alumnoEsp.username,
+            alumno_password : this.state.alumnoEsp.password,
+            alumno_nombres : this.state.alumnoEsp.nombres,
             alumno_apellidoPaterno : this.state.alumnoEsp.apellidoPaterno,
             alumno_apellidoMaterno : this.state.alumnoEsp.apellidoMaterno,
             alumno_correo : this.state.alumnoEsp.correo,
             alumno_pais : this.state.alumnoEsp.pais,
             alumno_estado : this.state.alumnoEsp.estado,
-            alumno_ciudad : this.state.alumnoEsp.ciudad,
-            alumno_municipio : this.state.alumnoEsp.municipio,
-            alumno_genero : this.state.alumnoEsp.genero,
-            alumno_fechaNacimiento : this.state.alumnoEsp.fechaNacimiento,
-            alumno_idOrganizacion  : this.state.alumnoEsp.idOrganizacion,
+            alumno_ciudad_municipio : this.state.alumnoEsp.ciudad_municipio,
+            alumno_fechaDeNacimiento : this.state.alumnoEsp.fechaDeNacimiento,
             alumno_socio : this.state.alumnoEsp.socio,
-            alumno_periodo : this.state.alumnoEsp.periodo
+            alumno_organizacion : this.state.alumnoEsp.organizacion,
+            alumno_rol : this.state.alumnoEsp.rol
         }
-        
+
         axios.put('/api/alumno/update/' + alumno_id, alumno).then(
             response =>{
                 axios.get('/api/alumnos').then(
@@ -210,7 +212,7 @@ export default class Alumnos extends Component {
                         });
                         swal(
                             'Bien',
-                            'Curso modificado con exito',
+                            'Alumno modificado con exito',
                             'success'
                         )
                     }
@@ -235,7 +237,7 @@ export default class Alumnos extends Component {
                                     </span>
                                 </div>
                                 <input value={this.state.search_info} onKeyUp={this.onEnter.bind(this)}
-                                    onChange={this.onChangeSearch} type="text" className="form-control form-control-lg" 
+                                    onChange={this.onChangeSearch} type="text" className="form-control form-control-lg"
                                     placeholder="Buscar alumno por nombre..." aria-label="Username" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
@@ -259,13 +261,11 @@ export default class Alumnos extends Component {
                                 <thead className="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Correo</th>
-                                        <th scope="col">Organizacion</th>
-                                        <th scope="col">Socio</th>
-                                        <th scope="col">Periodo</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Nombres</th>
+                                        <th scope="col">Apellido paterno</th>
+                                        <th scope="col">Apellido materno</th>
                                         <th scope="col">Acciones</th>
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -273,157 +273,162 @@ export default class Alumnos extends Component {
                                         return (
                                             <tr>
                                                 <th scope="row">{alumno.id}</th>
-                                                <td>{alumno.nombre}</td>
-                                                <td>{alumno.correo}</td>
-                                                <td>{alumno.idOrganizacion}</td>
-                                                <td>{alumno.socio}</td>
-                                                <td>{alumno.periodo}</td>
-                                                <td><button className="btn btn-danger" onClick={this.onDelete.bind(this,alumno.id)}><FontAwesomeIcon icon="trash-alt" /></button></td> 
-                                                <td><button className="btn btn-info" onClick={this.toggleModal.bind(this, alumno.id)}><FontAwesomeIcon icon="info-circle" /></button></td> 
-                                                
+                                                <td>{alumno.username}</td>
+                                                <td>{alumno.nombres}</td>
+                                                <td>{alumno.apellidoPaterno}</td>
+                                                <td>{alumno.apellidoMaterno}</td>
+                                                <td>
+                                                    <span>
+                                                        <button className="btn btn-danger mx-1" onClick={this.onDelete.bind(this,alumno.id)}><FontAwesomeIcon icon="trash-alt" /></button>
+                                                        <button className="btn btn-info mx-1" onClick={this.toggleModal.bind(this, alumno.id)}><FontAwesomeIcon icon="info-circle" /></button>
+                                                    </span>
+                                                </td>
+
                                                 <Modal isOpen={this.state.isActive} onRequestClose={this.closeModal.isActive}>
                                                     <button className="btn btn-primary" onClick={this.closeModal.bind(this)}><FontAwesomeIcon icon="arrow-left" /></button>
 
-                                                    <div className="form-group">                         
-                                                        <label htmlFor="alumno_nombre">Nombre</label>
-                                                        <input type="text"
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_username">Username</label>
+                                                            <input type="text"
                                                             className="form-control"
-                                                            id="alumno_nombre"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.nombre} 
-                                                            onChange={this.onChangeAlumno_Nombre} />
+                                                            id="alumno_username"
+                                                            aria-describedby="username"
+                                                            value={this.state.alumnoEsp.username}
+                                                            onChange={this.onChangeAlumno_Username} />
                                                     </div>
 
-                                                    <div className="form-group">                         
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_password">Password</label>
+                                                            <input type="text"
+                                                            className="form-control"
+                                                            id="alumno_password"
+                                                            aria-describedby="password"
+                                                            value={this.state.alumnoEsp.password}
+                                                            onChange={this.onChangeAlumno_Password} />
+                                                    </div>
+
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_nombres">Nombres</label>
+                                                            <input type="text"
+                                                            className="form-control"
+                                                            id="alumno_nombres"
+                                                            aria-describedby="nombres"
+                                                            value={this.state.alumnoEsp.nombres}
+                                                            onChange={this.onChangeAlumno_Nombres} />
+                                                    </div>
+
+                                                    <div className="form-group">
                                                         <label htmlFor="alumno_apellidoPaterno">Apellido Paterno</label>
-                                                        <input type="text"
+                                                            <input type="text"
                                                             className="form-control"
                                                             id="alumno_nombre"
                                                             aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.apellidoPaterno} 
+                                                            value={this.state.alumnoEsp.apellidoPaterno}
                                                             onChange={this.onChangeAlumno_ApellidoPaterno} />
                                                     </div>
 
-                                                    <div className="form-group">                         
+                                                    <div className="form-group">
                                                         <label htmlFor="alumno_apellidoMaterno">Apellido Materno</label>
-                                                        <input type="text"
+                                                            <input type="text"
                                                             className="form-control"
                                                             id="alumno_apellidoMaterno"
                                                             aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.apellidoMaterno} 
+                                                            value={this.state.alumnoEsp.apellidoMaterno}
                                                             onChange={this.onChangeAlumno_ApellidoMaterno} />
                                                     </div>
 
-                                                    <div className="form-group">                         
+                                                    <div className="form-group">
                                                         <label htmlFor="alumno_correo">Correo</label>
-                                                        <input type="text"
+                                                            <input type="text"
                                                             className="form-control"
                                                             id="alumno_correo"
                                                             aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.correo} 
+                                                            value={this.state.alumnoEsp.correo}
                                                             onChange={this.onChangeAlumno_Correo} />
                                                     </div>
 
-                                                    <div className="form-group">                         
+                                                    <div className="form-group">
                                                         <label htmlFor="alumno_pais">Pais</label>
-                                                        <input type="text"
+                                                            <input type="text"
                                                             className="form-control"
                                                             id="alumno_pais"
                                                             aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.pais} 
+                                                            value={this.state.alumnoEsp.pais}
                                                             onChange={this.onChangeAlumno_Pais} />
                                                     </div>
 
-                                                    <div className="form-group">                         
+                                                    <div className="form-group">
                                                         <label htmlFor="alumno_estado">Estado</label>
-                                                        <input type="text"
+                                                            <input type="text"
                                                             className="form-control"
                                                             id="alumno_estado"
                                                             aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.estado} 
+                                                            value={this.state.alumnoEsp.estado}
                                                             onChange={this.onChangeAlumno_Estado} />
                                                     </div>
 
-                                                    <div className="form-group">                         
-                                                        <label htmlFor="alumno_ciudad">Ciudad</label>
-                                                        <input type="text"
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_ciudad_municipio">Ciudad_Municipio</label>
+                                                            <input type="text"
                                                             className="form-control"
-                                                            id="alumno_ciudad"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.ciudad} 
-                                                            onChange={this.onChangeAlumno_Ciudad} />
+                                                            id="alumno_ciudad_municipio"
+                                                            aria-describedby="ciudad_municipio"
+                                                            value={this.state.alumnoEsp.ciudad_municipio}
+                                                            onChange={this.onChangeAlumno_Ciudad_Municipio} />
                                                     </div>
 
-                                                    <div className="form-group">                         
-                                                        <label htmlFor="alumno_municipio">Municipio</label>
-                                                        <input type="text"
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_fechaDeNacimiento">Fecha de Nacimiento</label>
+                                                            <input type="text"
                                                             className="form-control"
-                                                            id="alumno_municipio"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.municipio} 
-                                                            onChange={this.onChangeAlumno_Municipio} />
+                                                            id="alumno_fechaDeNacimiento"
+                                                            aria-describedby="fechaDeNacimiento"
+                                                            value={this.state.alumnoEsp.fechaDeNacimiento}
+                                                            onChange={this.onChangeAlumno_FechaDeNacimiento}
+                                                            placeholder="AAAA-MM-DD" />
                                                     </div>
 
-                                                    <div className="form-group">                         
-                                                        <label htmlFor="alumno_genero">Genero</label>
-                                                        <input type="text"
-                                                            className="form-control"
-                                                            id="alumno_genero"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.genero} 
-                                                            onChange={this.onChangeAlumno_Genero} />
-                                                    </div>
-
-                                                    <div className="form-group">                         
-                                                        <label htmlFor="alumno_fechaNacimiento">Fecha de nacimiento</label>
-                                                        <input type="text"
-                                                            className="form-control"
-                                                            id="alumno_fechaNacimiento"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.fechaNacimiento} 
-                                                            onChange={this.onChangeAlumno_FechaNacimiento} />
-                                                    </div>
-
-                                                     <div className="form-group">                         
-                                                        <label htmlFor="alumno_idOrganizacion">id Organizacion</label>
-                                                        <input type="text"
-                                                            className="form-control"
-                                                            id="alumno_idOrganizacion"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.idOrganizacion} 
-                                                            onChange={this.onChangeAlumno_IdOrganizacion} />
-                                                    </div>
-
-                                                     <div className="form-group">                         
+                                                    <div className="form-group">
                                                         <label htmlFor="alumno_socio">Socio</label>
-                                                        <input type="text"
+                                                            <input type="text"
                                                             className="form-control"
                                                             id="alumno_socio"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.socio} 
+                                                            aria-describedby="socio"
+                                                            value={this.state.alumnoEsp.socio}
                                                             onChange={this.onChangeAlumno_Socio} />
                                                     </div>
-                                                    
-                                                    <div className="form-group">                         
-                                                        <label htmlFor="alumno_periodo">Periodo</label>
+
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_organizacion">Organizacion</label>
                                                         <input type="text"
-                                                            className="form-control"
-                                                            id="alumno_periodo"
-                                                            aria-describedby="nombre"
-                                                            value={this.state.alumnoEsp.periodo} 
-                                                            onChange={this.onChangeAlumno_Periodo} />
-                                                    </div>                                                    
-                                                    <button className="btn btn-primary" onClick={this.onSubmit.bind(this,alumno.id)}><FontAwesomeIcon icon="save" /></button> 
+                                                        className="form-control"
+                                                        id="alumno_organizacion"
+                                                        aria-describedby="organizacion"
+                                                        value={this.state.alumnoEsp.organizacion}
+                                                        onChange={this.onChangeAlumno_Organizacion}/>
+                                                    </div>
+
+                                                    <div className="form-group">
+                                                        <label htmlFor="alumno_rol">Rol</label>
+                                                        <input type="text"
+                                                        className="form-control"
+                                                        id="alumno_rol"
+                                                        aria-describedby="rol"
+                                                        value={this.state.alumnoEsp.rol}
+                                                        onChange={this.onChangeAlumno_Rol}/>
+                                                    </div>
+
+                                                    <button className="btn btn-primary" onClick={this.onSubmit.bind(this,alumno.id)}><FontAwesomeIcon icon="save" /></button>
                                                 </Modal>
                                             </tr>
                                         )
                                     })}
                                 </tbody>
                             </table>
-                            
+
                         </div> {/*Content column*/}
                     </div> {/*Content row*/}
-                
+
                 </div>
             </Router>
         );
