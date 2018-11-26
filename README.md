@@ -8,6 +8,9 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 * [Ambientes del Sistema](#ambientes-del-sistema)
 * [Equipo de trabajo](#equipo-de-trabajo)
 * [Herramientas](#herramientas)
+* [Configuración del proyecto](#Configuración-del-proyecto)
+* [Correr el proyecto para desarrollo](#Correr-el-proyecto-para-desarrollo)
+* [Detener el proyecto](#Detener-el-proyecto)
 
 ### Detalles del Cliente
 
@@ -73,8 +76,26 @@ $ git clone https://github.com/ProyectoIntegrador2018/tutor_virtual.git
 composer install
 ```
 
-3. Encender el servidor de manera local.
+3. Migrar la base de datos.
+
+```
+php artisan migrate
+```
+
+### Correr el proyecto para desarrollo
+
+4. Encender el servidor de manera local.
 
 ```
 php artisan serve
 ```
+
+### Detener el proyecto
+
+Para detener el servidor completamente presiona
+
+```
+CTRL + C
+```
+
+dentro de la terminal donde encendiste el mismo.

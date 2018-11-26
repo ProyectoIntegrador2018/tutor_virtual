@@ -64,7 +64,7 @@
                         </li>
                     @endguest
                 </ul>
-            </div>      
+            </div>
         </nav>
 
         <main class="main part row">
@@ -74,8 +74,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     @yield('scripts')
-    
 </body>
 </html>

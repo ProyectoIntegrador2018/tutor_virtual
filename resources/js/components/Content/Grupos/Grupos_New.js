@@ -9,7 +9,6 @@ export default class Grupos_New extends Component {
     constructor() {
         super();
         this.onSubmit = this.onSubmit.bind(this);
-
     }
 
     onSubmit(e) {
@@ -20,14 +19,14 @@ export default class Grupos_New extends Component {
             // Success
             swal(
                 'Bien',
-                'Grupo  creado con exito',
+                'Grupo creado con exito',
                 'success'
               )
         })
         .catch((error) => {
             swal({
                 type: 'error',
-                title: 'Error al agregar tutor',
+                title: 'Error al crear grupo',
                 text: 'Porfavor verifica la informacion y vuelve a intentar'
               })
         })
@@ -36,8 +35,7 @@ export default class Grupos_New extends Component {
     render() {
         return (
             <Router>
-                {/*Content column*/}
-                <div className="col-8 p-4 main">
+                <div className="col-8 p-4 main"> {/*Content column*/}
                     <div className="row">
                         <h1>Nuevo Grupo</h1>
                     </div>
@@ -52,5 +50,5 @@ export default class Grupos_New extends Component {
 }
 
 if (document.getElementById('grupos')) {
-    ReactDOM.render(<Gripos_New />, document.getElementById('grupos'));
+    ReactDOM.render(<Grupos_New />, document.getElementById('grupos'));
 }

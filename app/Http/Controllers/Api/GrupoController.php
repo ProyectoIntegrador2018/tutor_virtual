@@ -37,7 +37,7 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        $grupo= new grupo();
+        $grupo = new Grupo();
         $grupo->save();
     }
 

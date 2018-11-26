@@ -9,8 +9,6 @@ export default class Grupo_Sub extends Component {
                 <div className="row justify-content-center">
                     <div className="col">
 
-                        <h4>grupos 0</h4>
-                
                     </div>
                 </div>
 

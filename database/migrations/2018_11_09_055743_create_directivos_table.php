@@ -16,17 +16,17 @@ class CreateDirectivosTable extends Migration
         Schema::create('directivos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
-            $table->string('password');
-            $table->string('nombres');
-            $table->string('apellidoPaterno');
-            $table->string('apellidoMaterno');
-            $table->string('correo');
-            $table->string('pais');
-            $table->string('estado');
-            $table->string('ciudad_municipio');
-            $table->string('socio');
-            $table->string('organizacion');
-            $table->string('rol');
+            $table->string('password')->nullable();
+            $table->string('nombres')->nullable();
+            $table->string('apellidoPaterno')->nullable();
+            $table->string('apellidoMaterno')->nullable();
+            $table->string('correo')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('estado')->nullable();
+            $table->string('ciudad_municipio')->nullable();
+            $table->string('socio')->nullable();
+            $table->string('organizacion')->nullable();
+            $table->string('rol')->nullable();
             $table->timestamps();
         });
     }

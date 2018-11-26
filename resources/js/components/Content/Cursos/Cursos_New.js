@@ -211,6 +211,6 @@ export default class Cursos_New extends Component {
     }
 }
 
-if (document.getElementById('cursos')) {
-    ReactDOM.render(<Cursos_New />, document.getElementById('cursos'));
+if (document.getElementById('cursos_nuevo')) {
+    ReactDOM.render(<Cursos_New />, document.getElementById('cursos_nuevo'));
 }
