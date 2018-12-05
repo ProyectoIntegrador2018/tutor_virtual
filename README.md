@@ -1,5 +1,7 @@
 # Tutor Virtual
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/ba4ca1e8e93e5cef25d7/maintainability)](https://codeclimate.com/github/ProyectoIntegrador2018/tutor_virtual/maintainability)
+
 El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nuestra cliente, Dora Elizabeth García Olivier, perteneciente del Centro Virtual de Aprendizajes. Dentro de sus actividades que actualmente realiza de manera manual se incluyen el: Dar de alta a alumnos, profesores y directivos asociados al servicio social Aprendizaje Verde.
 
 ## Tabla de contenidos
