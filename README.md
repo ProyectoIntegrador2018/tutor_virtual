@@ -28,6 +28,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 ### Equipo de trabajo
 
+Equipo: Agos - Dic 2018
 | Nombre             | Email              | Rol          |
 | ------------------ | ------------------ | ------------ |
 | Elías Mera         | a01280762@itesm.mx | Desarrollo   |
@@ -35,13 +36,22 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 | Jorge Limón        | a01280734@itesm.mx | Scrum Master |
 | Roger Luna         | a00815024@itesm.mx | Desarrollo   |
 
+Equipo: Ene - May 2019
+| Nombre             | Email              | Rol          |
+| ------------------ | ------------------ | ------------ |
+| Hector Ortiz       | @itesm.mx          | Scrum Master |
+| Oscar Flores       | a00817333@itesm.mx | Desarrollo   |
+| Carlos Sanchez     | a01139506@itesm.mx | Desarrollo   |
+| Alfredo            | @itesm.mx          | Desarrollo   |
+| Diego Contreras    | @itesm.mx          | Desarrollo   |
+
 ### Herramientas
 
 Pide acceso a las siguientes herramientas de no ser que no lo tengas:
 
 * [Github repo](https://github.com/ProyectoIntegrador2018/tutor_virtual)
-* [Backlog]()
-* [Documentation](https://drive.com)
+* [Backlog](https://github.com/ProyectoIntegrador2018/tutor_virtual/projects/2)
+* [Documentation](https://drive.google.com/drive/folders/16hcLTaW8YtWHzEUo9VfwR-Qjewcsap-G?usp=sharing)
 
 ## Desarrollo
 
