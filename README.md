@@ -113,3 +113,15 @@ CTRL + C
 ```
 
 dentro de la terminal donde encendiste el mismo.
+
+## Stack Tecnologico
+
+### Librerias Front End:
+* Jquery
+* PopperJS
+* ReactJS
+
+### Librerias Back End:
+
+* Laravel(Framework de PHP)
+
