@@ -41,7 +41,7 @@ Equipo: Ene - May 2019
 
 | Nombre             | Email              | Rol          |
 | ------------------ | ------------------ | ------------ |
-| Hector Ortiz       | @itesm.mx          | Scrum Master |
+| Hector Ortiz       | a01032773@itesm.mx | Scrum Master |
 | Oscar Flores       | a00817333@itesm.mx | Desarrollo   |
 | Carlos Sanchez     | a01139506@itesm.mx | Desarrollo   |
 | Alfredo Sánchez    | a00397967@itesm.mx | Desarrollo   |
