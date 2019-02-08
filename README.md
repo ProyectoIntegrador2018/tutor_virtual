@@ -45,7 +45,7 @@ Equipo: Ene - May 2019
 | Oscar Flores       | a00817333@itesm.mx | Desarrollo   |
 | Carlos Sanchez     | a01139506@itesm.mx | Desarrollo   |
 | Alfredo Sánchez    | a00397967@itesm.mx | Desarrollo   |
-| Diego Contreras    | @itesm.mx          | Desarrollo   |
+| Diego Contreras    | a00817441@itesm.mx | Desarrollo   |
 
 ### Herramientas
 
