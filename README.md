@@ -107,10 +107,9 @@ dentro de la terminal donde encendiste el mismo.
 
 ### Librerias Front End:
 * Jquery
-* PopperJS
-* ReactJS
+* CSS
 
 ### Librerias Back End:
 
-* Laravel(Framework de PHP)
+* Ruby on Rails
 
