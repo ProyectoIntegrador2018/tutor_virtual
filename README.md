@@ -26,17 +26,6 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 * **Producción** - [TutorVirtual](http://tutorvirtual.herokuapp.com/)
 * **Desarrollo** - [Dev-TutorVirtual](http://dev-tutorvirtual.herokuapp.com/)
 
-### Equipo de trabajo
-
-Equipo: Agos - Dic 2018
-
-| Nombre             | Email              | Rol          |
-| ------------------ | ------------------ | ------------ |
-| Elías Mera         | a01280762@itesm.mx | Desarrollo   |
-| Estafanía Guajardo | a00813202@itesm.mx | Desarrollo   |
-| Jorge Limón        | a01280734@itesm.mx | Scrum Master |
-| Roger Luna         | a00815024@itesm.mx | Desarrollo   |
-
 Equipo: Ene - May 2019
 
 | Nombre             | Email              | Rol          |
