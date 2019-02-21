@@ -4,8 +4,6 @@
 
 El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nuestra cliente, Dora Elizabeth García Olivier, perteneciente del Centro Virtual de Aprendizajes. Dentro de sus actividades que actualmente realiza de manera manual se incluyen el: Dar de alta a alumnos, profesores y directivos asociados al servicio social Aprendizaje Verde.
 
-Caquita.com
-
 ## Tabla de contenidos
 
 * [Detalles del Cliente](#detalles-del-cliente)
