@@ -1,4 +1,4 @@
-# Tutor Virtual
+# Tutor Virtual :)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ba4ca1e8e93e5cef25d7/maintainability)](https://codeclimate.com/github/ProyectoIntegrador2018/tutor_virtual/maintainability)
 
