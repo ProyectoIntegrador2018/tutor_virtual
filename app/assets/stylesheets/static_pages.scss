@@ -1,0 +1,72 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+	margin: 0;
+	padding: 0
+}
+.container {
+	background-color: red;
+	width: 100vw;
+	height: 100vh;
+}
+
+.top {
+	height: 40vh;
+	background-color: #2979ff;
+}
+
+.bottom {
+	height: 60vh;
+	background-color: rgb(224, 224, 224);
+}
+.formContainer {
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+	height: 300px;
+	background-color: #fff;
+	position: fixed;
+	top: 20%;
+	left: 25%;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 40px;
+}
+.fa {
+	color: #2979ff;
+	padding-top: 20px;
+}
+
+.loginText{
+	font-family: Verdana;
+	color: darkgray;
+	padding-top: 5px;
+	font-size: 1.5em;
+}
+
+input {
+	padding: 10px;
+	margin: 10px;
+	width: 70%;
+	border: 0;
+	border-bottom: 1px solid darkgray;
+}
+
+button {
+	background-color: rgb(41,121,255);
+	width: 30%;
+	padding: 10px;
+	color: white;
+	border: 0;
+	margin-top: 20px;
+	
+}
+
+@media (max-width:800px){.formContainer{width:75%
+	
+	}
+		
+	
+	
+}
