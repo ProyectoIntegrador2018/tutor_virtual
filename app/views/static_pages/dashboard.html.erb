@@ -22,6 +22,7 @@
   <ul>
     <li class="head">General</li>
     <li class="active"><a href="inbox.html"><i class="fa fa-fw fa-dashboard"></i><span>Dashboard</span></a></li>
+    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
     <li><a href="#"><i class="fa fa-fw fa-inbox"></i><span class="swatch light-grey">Inbox</span></a></li>
     <li><a href="#"><i class="fa fa-fw fa-user"></i><span>Tenants</span></a></li>
     <li><a href="#"><i class="fa fa-fw fa-money"></i><span>Payments</span></a></li>
