@@ -10,12 +10,12 @@
 
 <body>
 
+
 <div class="container">
   <div class="top"></div>
   <div class="bottom" ></div>
 
   <div class="formContainer">
-    <i class="fa-4x" aria-hidden="true"><img style="width: 5em" src="assets/logo-simbolo.png"></i>
     <span class="loginText">Tutor Virtual</span>
     
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -40,5 +40,5 @@
 
 </body>
 
-
+<%= render "devise/shared/links" %>
 
