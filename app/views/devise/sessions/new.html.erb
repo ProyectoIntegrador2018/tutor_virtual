@@ -16,7 +16,9 @@
   <div class="bottom" ></div>
 
   <div class="formContainer">
-    <span class="loginText">Tutor Virtual</span>
+
+    <i class="fa-4x" aria-hidden="true"><%= image_tag "logo-simbolo.png", :id => "main-logo" %></i>
+    
     
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
