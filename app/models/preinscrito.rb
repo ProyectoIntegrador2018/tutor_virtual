@@ -1,0 +1,2 @@
+class Preinscrito < ApplicationRecord
+end

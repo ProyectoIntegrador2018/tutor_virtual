@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  resources :preinscritos
   devise_for :users
   get 'static_pages/dashboard', :as => 'dashboard'
   get 'static_pages/home',  :as => 'home'
