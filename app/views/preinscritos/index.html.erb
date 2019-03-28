@@ -1,73 +1,32 @@
-<p id="notice"><%= notice %></p>
+<h1>Preinscritos</h1>
+<div class="box">
+  <div class="body">
+    <table>
+      <thead>
+        <tr>
+        <th>Nombre</th>
+        <th>Apellido paterno</th>
+        <th>Apellido materno</th>
+        <th>Correo contacto</th>
+        <th>Cca</th>
+        <th>Estatus user mensajeria</th>
+        <th>Estatus ins mensajeria</th>
+        <th>Fecha inscripcion</th>
+        <th>Genero</th>
+        <th>Fecha nacimieto</th>
+        <th>Pais</th>
+        <th>Estado</th>
+        <th>Ciudad</th>
+        <th>Idioma</th>
+        <th>Id organizacion</th>
+        <th>Rol</th>
+        <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<!DOCTYPE html>
-<html lang="en" >
-
-<head>
-  <meta charset="UTF-8">
-  <title>Haus Dashboard</title>
-  
-
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-  
-</head>
-
-<body>
-  
-<div id="nav">
-  <div class="user-banner"><img src="assets/logo.png"/>
-    <h5 class="username">Matthew Reichardt</h5>
-  </div>
-  <ul>
-    <li class="head">General</li>
-    <li class="active"><a href="inbox.html"><i class="fa fa-fw fa-dashboard"></i><span>Dashboard</span></a></li>
-    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
-    <li><%= link_to 'Preinscritos', preinscritos_url %></li>
-    <li><a href="#"><i class="fa fa-fw fa-user-graduate"></i><span>Preinscritos</span></a></li>
-    <li><a href="#"><i class="fa fa-fw fa-user"></i><span>Tenants</span></a></li>
-    <li><a href="#"><i class="fa fa-fw fa-money"></i><span>Payments</span></a></li>
-    <li><a href="#"><i class="fa fa-fw fa-cog"></i><span>Settings</span></a></li>
-  </ul>
-</div>
-<div id="main">
-  <header>
-    <ol class="breadcrumb">
-      <li> <a href="#">haus</a></li>
-      <li class="active">dashboard</li>
-    </ol>
-  </header>
-  <div id="content">
-    <h1>Properties</h1>
-    <div class="box">
-      <div class="body">
-        <table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Apellido paterno</th>
-      <th>Apellido materno</th>
-      <th>Correo contacto</th>
-      <th>Cca</th>
-      <th>Estatus user mensajeria</th>
-      <th>Estatus ins mensajeria</th>
-      <th>Fecha inscripcion</th>
-      <th>Genero</th>
-      <th>Fecha nacimieto</th>
-      <th>Pais</th>
-      <th>Estado</th>
-      <th>Ciudad</th>
-      <th>Idioma</th>
-      <th>Id organizacion</th>
-      <th>Rol</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @preinscritos.each do |preinscrito| %>
-      <tr>
+      <tbody>
+        <% @preinscritos.each do |preinscrito| %>
+        <tr>
         <td><%= preinscrito.nombre %></td>
         <td><%= preinscrito.apellido_paterno %></td>
         <td><%= preinscrito.apellido_materno %></td>
@@ -87,22 +46,13 @@
         <td><%= link_to 'Show', preinscrito %></td>
         <td><%= link_to 'Edit', edit_preinscrito_path(preinscrito) %></td>
         <td><%= link_to 'Destroy', preinscrito, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<br>
+    <br>
 
-<%= link_to 'New Preinscrito', new_preinscrito_path %>
-      </div>
-    </div>
+    <%= link_to 'New Preinscrito', new_preinscrito_path %>
+  </div>
 </div>
-
-  
-
-
-</body>
-
-</html>
-

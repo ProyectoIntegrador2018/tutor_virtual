@@ -1,24 +1,19 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
+  host: localhost
+  username: czdiego
+  password: sergtsop
 
 development:
   <<: *default
   database: tutor-virtual_development
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['TUTOR-VIRTUAL_DATABASE_PASSWORD'] %>
 
 test:
   <<: *default
   database: tutor-virtual_test
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['TUTOR-VIRTUAL_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
   database: tutor-virtual_production
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['TUTOR-VIRTUAL_DATABASE_PASSWORD'] %>
