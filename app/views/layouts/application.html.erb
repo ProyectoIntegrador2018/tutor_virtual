@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Tutorvirtual</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
+<body>
+    
+
+    <div id="nav">
+        <div class="user-banner"><img src="assets/logo.png"/>
+            <h5 class="username">Diego Contreras</h5>
+        </div>
+        <ul>
+            <li class="head">General</li>
+
+            <li class="active"><%= link_to "Dashboard", root_path %></li>
+            <li><%= link_to 'Preinscritos', preinscritos_url%></li>
+
+            <li><a href="#"><span>Tenants</span></a></li>
+            <li><a href="#"><span>Payments</span></a></li>
+            <li><a href="#"><span>Settings</span></a></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
+        </ul>
+    </div>
+
+    <div id="main">
+    <header>
+        <ol class="breadcrumb">
+            <li> <a href="#">Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </header>
+
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+        <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+        <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= yield %>
-  </body>
+
+    <div id="content">
+        <%= yield %>
+    </div>
+
+    </body>
 </html>
