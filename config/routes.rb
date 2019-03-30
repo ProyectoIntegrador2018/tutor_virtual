@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :preinscritos
+  resources :preinscritos do
+  	collection { post :import }
+  end
   devise_for :users
   get 'static_pages/dashboard', :as => 'dashboard'
   get 'static_pages/home',  :as => 'home'

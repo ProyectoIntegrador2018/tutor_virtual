@@ -61,6 +61,11 @@ class PreinscritosController < ApplicationController
     end
   end
 
+  def import
+    Preinscrito.import(params[:file])
+    redirect_to preinscritos_path, notice: "Preinscritos added successfully"
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_preinscrito
