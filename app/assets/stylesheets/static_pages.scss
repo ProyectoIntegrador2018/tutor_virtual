@@ -95,7 +95,7 @@ button {
 
 .user-banner {
   width: 180px;
-  padding: 1px 0px 1px 0px;
+  padding: 20px;
   background: #ffffff;
   text-align: center;
 }
@@ -103,12 +103,13 @@ button {
   display: inline-block;
   vertical-align: middle;
   margin-top: 5px;
-  width: 50px;
+  width: 100px;
   margin-right: 5px;
   border-radius: 100%;
 }
 .user-banner .username {
   font-weight: bold;
+  color: grey;
 }
 
 /** IMPORT HELPER CSS **/
@@ -212,8 +213,8 @@ h2 {
 }
 #main #content {
   position: relative;
-  top: 70px;
   padding: 20px;
+  background: #DCDCDC;
 }
 #main .property-glance i {
   margin-right: 5px;
@@ -292,7 +293,7 @@ h2 {
 @media (max-width: 767px) {
   .user-banner {
     width: 66px;
-    padding: 1px 0px 1px 0px;
+    padding: 20px;
     background: #2DCC70;
     text-align: center;
   }
