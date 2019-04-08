@@ -61,6 +61,14 @@ class PreinscritosController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Preinscrito.destroy(params[:preinscrito_ids])
+    respond_to do |format|
+      format.html { redirect_to preinscritos_url }
+      format.json { head :no_content }
+    end
+  end
+
   def import
     Preinscrito.import(params[:file])
     redirect_to preinscritos_path, notice: "Preinscritos added successfully"

@@ -184,6 +184,7 @@ GEM
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
+    select_all-rails (0.3.2)
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -240,6 +241,7 @@ DEPENDENCIES
   rails (~> 5.2.2)
   roo
   sass-rails (~> 5.0)
+  select_all-rails
   selenium-webdriver
   turbolinks (~> 5)
   tzinfo-data
