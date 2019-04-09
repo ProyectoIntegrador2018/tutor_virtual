@@ -15,7 +15,7 @@ body{
 
 .top {
 	height: 40vh;
-	background-color: #2979ff;
+	background-color: #315ba3;
 }
 
 .bottom {
@@ -55,12 +55,12 @@ input {
 }
 
 button {
-	background-color: rgb(41,121,255);
+	background-color: white;
 	width: 30%;
-	padding: 10px;
-	color: white;
+	padding: 20px;
+	color: rgb(41,121,255);
 	border: 0;
-	margin-top: 20px;
+	margin-top: 10px;
 	
 }
 
@@ -294,7 +294,7 @@ h2 {
   .user-banner {
     width: 66px;
     padding: 20px;
-    background: #2DCC70;
+    background: rgb(50, 155, 94);
     text-align: center;
   }
   .user-banner img {
@@ -378,7 +378,7 @@ h2 {
   background: #fff;
   box-sizing: border-box;
   margin-bottom: 20px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(70, 70, 70, 0.1);
   border-radius: 2px;
 }
 .box h4 {
@@ -410,9 +410,9 @@ h2 {
   display: block;
   position: absolute;
   top: 21px;
-  left: -6px;
-  width: 10px;
-  height: 10px;
+  left: -8px;
+  width: 40px;
+  height: 40px;
   background: #fff;
   border-left: 1px solid #CAD5E0;
   border-top: 1px solid #CAD5E0;
