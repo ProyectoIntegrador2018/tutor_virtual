@@ -2,13 +2,13 @@ body {
   background-color: #fff;
   color: #333;
   margin: 33px;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: verdana, arial, helvetica;
   font-size: 13px;
   line-height: 18px;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: verdana, arial, helvetica;
   font-size: 13px;
   line-height: 18px;
 }
@@ -61,16 +61,16 @@ div {
   border: 2px solid red;
   padding: 7px 7px 0;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #d8d2d2;
 
   h2 {
     text-align: left;
     font-weight: bold;
     padding: 5px 5px 5px 15px;
     font-size: 12px;
-    margin: -7px -7px 0;
+    margin: -14px -14px 0;
     background-color: #c00;
-    color: #fff;
+    color: white;
   }
 
   ul li {
