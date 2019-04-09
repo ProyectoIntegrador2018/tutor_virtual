@@ -12,24 +12,24 @@ body{
 }
 
 .top {
-	height: 40vh;
-	background-color: #3f4b61;
+    height: 40vh;
+    background-color: #3f4b61;
 }
 
 .bottom {
-	height: 60vh;
-	background-color: rgb(0, 0, 0);
+    height: 60vh;
+    background-color: rgb(0, 0, 0);
 }
 .formContainer {
-	display: flex;
-	flex-direction: column;
-	width: 80%;
-	height: 619px;
-	background-color: rgb(8, 0, 0);
-	position: floor;
-	top: 25%;
-	left: 20%;
-	justify-content: flex-start;
-	align-items: right;
-	padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 619px;
+    background-color: rgb(8, 0, 0);
+    position: floor;
+    top: 25%;
+    left: 20%;
+    justify-content: flex-start;
+    align-items: right;
+    padding: 20px;
 }
