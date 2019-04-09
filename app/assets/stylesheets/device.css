@@ -1,3 +1,7 @@
 .new_user{
 	padding-left: 10px;
+	border-style: solid;
+    border-color: rgb(41,121,255);
+    border-width: 24px 24px 60px;
+    background-color: black;
 }

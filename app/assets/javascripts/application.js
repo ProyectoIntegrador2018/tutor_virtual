@@ -30,3 +30,11 @@ $(document).ready(function () {
 $(function() {
   $("#selectAll").select_all();
 });
+
+
+$('.menu-item').on('click', function() {
+  var elements=document.getElementsByClassName('menu-item');
+  while(elements.length>0) {
+    elements[0].classList.remove('active');
+  }
+});

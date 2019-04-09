@@ -4,7 +4,7 @@
     <title>Tutorvirtual</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -22,13 +22,13 @@
         <ul>
             <li class="head">General</li>
 
-            <li class="active"><%= link_to "Dashboard", root_path %></li>
-            <li><%= link_to 'Preinscritos', preinscritos_url%></li>
+            <li class="active menu-item"><%= link_to "Dashboard", root_path %></li>
+            <li class="menu-item"><%= link_to 'Preinscritos', preinscritos_url%></li>
 
-            <li><a href="#"><span>Tenants</span></a></li>
-            <li><a href="#"><span>Payments</span></a></li>
-            <li><a href="#"><span>Settings</span></a></li>
-            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
+            <li class="menu-item"><a href="#"><span>Tenants</span></a></li>
+            <li class="menu-item"><a href="#"><span>Payments</span></a></li>
+            <li class="menu-item"><a href="#"><span>Settings</span></a></li>
+            <li class="menu-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
         </ul>
     </div>
 
