@@ -1,0 +1,5 @@
+<%- headers = ['Nombre', 'Apellido'] -%>
+<%= CSV.generate_line headers %>
+<%- @preinscritos.each do |preinscrito| -%>
+<%= CSV.generate_line([preinscrito.nombre, preinscrito.apellido_paterno]) -%>
+<%- end -%>

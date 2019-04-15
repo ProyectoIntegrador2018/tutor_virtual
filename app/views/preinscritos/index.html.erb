@@ -26,7 +26,6 @@
                   <th>Idioma</th>-->
                   <th>Id organizacion</th>
                   <th>Rol</th>
-                  <th data-sort-ignore="true"><input type="checkbox" id="selectAll"></input></th>
                   <th colspan="3"></th>
                 </tr>
               </thead>
@@ -71,6 +70,9 @@
           <%= file_field_tag :file %>
           <%= submit_tag "Upload Preinscritos" %>
         <% end %>
+
+        <h3>Exportar CSV</h3>
+        <%= link_to 'Download CSV list', preinscritos_path(format: :csv) %>
 
       </div>
     </div>

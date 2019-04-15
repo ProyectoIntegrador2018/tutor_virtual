@@ -5,6 +5,13 @@ class PreinscritosController < ApplicationController
   # GET /preinscritos.json
   def index
     @preinscritos = Preinscrito.all
+    respond_to do |format| 
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"preinscrito-list\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   # GET /preinscritos/1
