@@ -3,6 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.table {
+  margin-top: 10px;
+  text-align:left;
+}
+
+
+
 body{
 	margin: 0;
 	padding: 0
@@ -123,7 +130,7 @@ body {
   margin: 0;
   font: 14px/20px "Proxima Nova", "Helvetica Neue", arial, sans-serif;
   color: #676e74;
-  background: #E9EEF1;
+  background: #DCDCDC;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -150,7 +157,7 @@ h2 {
 #nav {
   position: fixed;
   top: 0;
-  bottom: 0;
+  height: 100%;
   width: 180px;
   color: #fff;
   background: #1F2123;
@@ -192,6 +199,7 @@ h2 {
 
 #main {
   margin-left: 180px;
+  bottom: 0;
 }
 #main header {
   position: fixed;
@@ -215,6 +223,7 @@ h2 {
   position: relative;
   padding: 20px;
   background: #DCDCDC;
+  height: 100%;
 }
 #main .property-glance i {
   margin-right: 5px;

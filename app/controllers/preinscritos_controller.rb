@@ -4,13 +4,17 @@ class PreinscritosController < ApplicationController
   # GET /preinscritos
   # GET /preinscritos.json
   def index
-    @preinscritos = Preinscrito.all
-    respond_to do |format| 
-      format.html
-      format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"preinscrito-list\""
-        headers['Content-Type'] ||= 'text/csv'
-      end
+    if params[:rol] == "Todos"
+      rol_i = 0
+    else
+      rol_i = 1
+    end
+    if params[:search] && rol_i == 0
+      @preinscritos = Preinscrito.where('nombre LIKE ?', "%#{params[:search]}%")
+    elsif params[:search] && rol_i == 1
+      @preinscritos = Preinscrito.where('nombre LIKE ? AND rol LIKE ?', "%#{params[:search]}%","%#{params[:rol]}%")
+    else
+      @preinscritos = Preinscrito.all
     end
   end
 
