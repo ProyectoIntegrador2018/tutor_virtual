@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @aliado.nombre %>
+</p>
+
+<p>
+  <strong>Tipo socio:</strong>
+  <%= @aliado.tipo_socio %>
+</p>
+
+<p>
+  <strong>Correo:</strong>
+  <%= @aliado.correo %>
+</p>
+
+<p>
+  <strong>Contacto:</strong>
+  <%= @aliado.contacto %>
+</p>
+
+<%= link_to 'Edit', edit_aliado_path(@aliado) %> |
+<%= link_to 'Back', aliados_path %>
