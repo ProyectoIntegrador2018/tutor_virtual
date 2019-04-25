@@ -21,14 +21,13 @@
             <%= image_tag "logo.png"%>
             <h5 class="username">Diego Contreras</h5>
         </div>
-        <ul>
-            <li class="head">General</li>
+        <ul id="nav-ul">
 
             <% if current_page?(root_url) %>
 
                 <li class="active"><%= link_to "Dashboard", root_path, :class => "lol" %></li>
             <% else %>
-                <li><%= link_to "Dashboard", root_path, :class => "lol" %></li>
+                <li><%= link_to "Dashboard", root_path %></li>
             <% end %>
 
             
