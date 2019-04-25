@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
 
     <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,36 +17,69 @@
     
 
     <div id="nav">
-        <div class="user-banner"><img src="assets/logo.png"/>
+        <div class="user-banner">
+            <%= image_tag "logo.png"%>
             <h5 class="username">Diego Contreras</h5>
         </div>
         <ul>
             <li class="head">General</li>
 
-            <li class="active"><%= link_to "Dashboard", root_path %></li>
-            <li><%= link_to 'Preinscritos', preinscritos_url%></li>
-            <li><%= link_to 'Aliados', aliados_url%></li>
-            <% if current_user.admin %>
-                <li><%= link_to "Aliados2", aliados_url %></li>
+            <% if current_page?(root_url) %>
+
+                <li class="active"><%= link_to "Dashboard", root_path, :class => "lol" %></li>
+            <% else %>
+                <li><%= link_to "Dashboard", root_path, :class => "lol" %></li>
+            <% end %>
+
+            
+            <% if controller_name == "preinscritos" %>
+
+                <li class="active">
+                    <%= link_to 'Preinscritos', preinscritos_url%>
+                </li>
+            <% else %>
+                <li>
+                    <%= link_to 'Preinscritos', preinscritos_url%>
+                </li>
+            <% end %>
+
+            <% if controller_name == "aliados" %>
+
+                <li class="active"><%= link_to 'Aliados', aliados_url%></li>
+            <% else %>
+                <li><%= link_to 'Aliados', aliados_url%></li>
+            <% end %>
+
+            <% if controller_name == "tutores" %>
+
+                <li class="active"><a href="#"><span>Tutores</span></a></li>
+            <% else %>
+                <li><a href="#"><span>Tutores</span></a></li>
             <% end %>
             
-            <li><a href="#"><span>Tutores</span></a></li>
+
+            
+
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
         </ul>
     </div>
 
     <div id="main">
 
-    <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+        <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
 
-    <div id="content">
-        <%= yield %>
+
+        <div id="content">
+            <%= yield %>
+        </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>

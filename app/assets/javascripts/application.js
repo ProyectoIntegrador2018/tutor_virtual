@@ -14,10 +14,10 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-//= require select_all.js
+// require select_all.js
 // https://dribbble.com/shots/1640899-Freebie-Course-Dashboard
 
-$('nav a, .nav2 a').on('click', function() {
+/*$('nav a, .nav2 a').on('click', function() {
   $(this).addClass('active');  $(this).parents('li').siblings().children('a').removeClass('active');
 });
 
@@ -29,4 +29,4 @@ $(document).ready(function () {
 
 $(function() {
   $("#selectAll").select_all();
-});
+});*/
