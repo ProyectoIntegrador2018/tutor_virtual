@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  	resources :aliados
+  	resources :aliados do
+  		collection { post :import }
+  		collection { delete :destroy_multiple }
+  	end
 	resources :preinscritos do
   		collection { post :import }
   		collection { delete :destroy_multiple }
