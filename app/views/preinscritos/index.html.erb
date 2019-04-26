@@ -55,19 +55,18 @@
 						<% end %>
 					</tbody>
 				</table>
-				<%= submit_tag "Delete selected", :class => 'btn btn-primary btn-xs' %>
+				<%= submit_tag "Delete selected", :class => 'button red' %>
 				<% end %>
 		</div>
 
 		<br>
-		<%= link_to 'New Preinscrito', new_preinscrito_path %>
-		<br>
-		<%= link_to 'Download CSV list', preinscritos_path(format: :csv) %>
+		<%= link_to 'New Preinscrito', new_preinscrito_path, :class => "button" %>
+		<%= link_to 'Download CSV list', preinscritos_path(format: :csv), :class => "button"  %>
 
 		<h3>Importar CSV</h3>
 		<%= form_tag import_preinscritos_path, multipart: true do %>
 			<%= file_field_tag :file %>
-			<%= submit_tag "Upload Preinscritos" %>
+			<%= submit_tag "Upload Preinscritos" , :class => "button" %>
 		<% end %>
 
 	</div>
