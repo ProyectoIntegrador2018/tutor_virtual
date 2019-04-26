@@ -1,24 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @aliado.nombre %>
-</p>
+<div class="box">
+  	<div class="body">
+	  	<p>
+			<b>Nombre:</b>
+			<%= @aliado.nombre %>
+		</p>
 
-<p>
-  <strong>Tipo socio:</strong>
-  <%= @aliado.tipo_socio %>
-</p>
+		<p>
+			<b>Tipo socio:</b>
+			<%= @aliado.tipo_socio %>
+		</p>
 
-<p>
-  <strong>Correo:</strong>
-  <%= @aliado.correo %>
-</p>
+		<p>
+			<b>Correo:</b>
+			<%= @aliado.correo %>
+		</p>
 
-<p>
-  <strong>Contacto:</strong>
-  <%= @aliado.contacto %>
-</p>
+		<p>
+			<b>Contacto:</b>
+			<%= @aliado.contacto %>
+		</p>
 
-<%= link_to 'Edit', edit_aliado_path(@aliado) %> |
-<%= link_to 'Back', aliados_path %>
+		<%= link_to 'Edit', edit_aliado_path(@aliado) %> |
+		<%= link_to 'Back', aliados_path %>
+
+	</div>
+</div>
