@@ -2,6 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.search-bar {
+  width: 70%;
+  position: relative;
+  display: flex;
+}
+
+form {
+  width: 100%;
+}
+
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
 .dashboard-text{
   width: 70%;
   height: 100%;
@@ -42,22 +62,8 @@ body{
 	height: 60vh;
 	background-color: rgb(224, 224, 224);
 }
-.formContainer {
-	display: flex;
-	flex-direction: column;
-	width: 40%;
-	height: 400px;
-	background-color: #fff;
-	position: fixed;
-	top: 20%;
-	left: 25%;
-	justify-content: flex-start;
-	align-items: center;
-	padding: 40px;
-}
-.fa {
-	color: #2979ff;
-}
+
+
 
 .loginText{
 	font-family: 'Muli', sans-serif;
@@ -74,14 +80,22 @@ input {
 	border-bottom: 1px solid darkgray;
 }
 
-button {
-	background-color: rgb(41,121,255);
-	width: 30%;
-	padding: 10px;
-	color: white;
-	border: 0;
-	margin-top: 20px;
-	
+.button {
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 @media (max-width:800px){.formContainer{width:75%

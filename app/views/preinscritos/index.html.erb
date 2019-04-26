@@ -3,11 +3,13 @@
 	<div class="body">
 		<h1>Lista de preinscritos</h1>
 		<div class="media">
-				<div class="search-bar">
+			<div class="search-bar">
 		      <%= form_tag(preinscritos_path, method: :get) do %>
-		        <%= text_field_tag :search %>
+		        <%= text_field_tag :search,"",:class=>"searchTerm",:placeholder=>"Busqueda" %>
 		        <%= select_tag :rol,"<option>Todos</option><option>A</option><option>B</option>".html_safe %>
-		        <%= submit_tag "Buscar",:class=>"btn btn-outline-secondary" %>
+		        <%= button_tag type: 'submit', class: "button" do %>
+        			<i class="fa fa-search">Buscar</i>
+    			<% end %>
 		      <% end %>
 		    </div>
 				<%= form_tag destroy_multiple_preinscritos_path, method: :delete do %>
