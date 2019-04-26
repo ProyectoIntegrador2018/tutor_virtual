@@ -17,3 +17,71 @@
 #main-logo{
 	width: 5em;
 }
+
+#nav-ul li a{
+	font-size: 1.5rem;
+}
+
+.entity-table{
+	margin-left: auto;
+	margin-right: auto;
+	color: black;
+
+}
+
+td {
+  font-family: 'Muli', sans-serif;
+  font-size: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+b{
+	font-weight: 700;
+}
+
+input{
+	padding: 0 !important;
+	margin: 0 !important;
+	width: 100% !important;
+}
+
+.button:visited{
+	color: white;
+}
+
+.button {
+	background-color: #2DA5EE;
+	border: none;
+	color: white;
+	padding: 10px 20px !important;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 2rem;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.button:hover{
+	background-color: #2DA5EE;
+	text-decoration: none;
+	color: white;
+}
+
+.tall{
+	background-color: #00b146;
+}
+
+.tall:hover{
+	background-color: #00b146;
+}
+
+.red{
+	background-color: #ff0000;
+}
+
+.red:hover{
+	background-color: #ff0000;
+}
+

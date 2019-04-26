@@ -2,88 +2,93 @@
 
 <div class="box">
   <div class="body">
-    <p>
-      <strong>Nombre:</strong>
-      <%= @preinscrito.nombre %>
-    </p>
 
-    <p>
-      <strong>Apellido paterno:</strong>
-      <%= @preinscrito.apellido_paterno %>
-    </p>
+    <table class="entity-table">
+      <tr>
+        <td><b>Nombre</b></td>
+        <td><%= @preinscrito.nombre %></td>
+      </tr>
 
-    <p>
-      <strong>Apellido materno:</strong>
-      <%= @preinscrito.apellido_materno %>
-    </p>
+      <tr>
+        <td><b>Apellido materno</b></td>
+        <td><%= @preinscrito.apellido_materno %></td>
+      </tr>
 
-    <p>
-      <strong>Correo contacto:</strong>
-      <%= @preinscrito.correo_contacto %>
-    </p>
+      <tr>
+        <td><b>Apellido paterno</b></td>
+        <td><%= @preinscrito.apellido_paterno %></td>
+      </tr>
 
-    <p>
-      <strong>Cca:</strong>
-      <%= @preinscrito.cca %>
-    </p>
+      <tr>
+        <td><b>Correo contacto</b></td>
+        <td><%= @preinscrito.correo_contacto %></td>
+      </tr>
 
-    <p>
-      <strong>Estatus user mensajeria:</strong>
-      <%= @preinscrito.estatus_user_mensajeria %>
-    </p>
+      <tr>
+        <td><b>Cca</b></td>
+        <td><%= @preinscrito.cca %></td>
+      </tr>
 
-    <p>
-      <strong>Estatus ins mensajeria:</strong>
-      <%= @preinscrito.estatus_ins_mensajeria %>
-    </p>
+      <tr>
+        <td><b>Estatus user mensajeria</b></td>
+        <td><%= @preinscrito.estatus_user_mensajeria %></td>
+      </tr>
 
-    <p>
-      <strong>Fecha inscripcion:</strong>
-      <%= @preinscrito.fecha_inscripcion %>
-    </p>
+      <tr>
+        <td><b>Estatus ins mensajeria</b></td>
+        <td><%= @preinscrito.estatus_ins_mensajeria %></td>
+      </tr>
 
-    <p>
-      <strong>Genero:</strong>
-      <%= @preinscrito.genero %>
-    </p>
+      <tr>
+        <td><b>Fecha de inscripción</b></td>
+        <td><%= @preinscrito.fecha_inscripcion %></td>
+      </tr>
 
-    <p>
-      <strong>Fecha nacimieto:</strong>
-      <%= @preinscrito.fecha_nacimieto %>
-    </p>
+      <tr>
+        <td><b>Género</b></td>
+        <td><%= @preinscrito.genero %></td>
+      </tr>
 
-    <p>
-      <strong>Pais:</strong>
-      <%= @preinscrito.pais %>
-    </p>
+      <tr>
+        <td><b>Fecha de nacimieto</b></td>
+        <td><%= @preinscrito.fecha_nacimieto %></td>
+      </tr>
 
-    <p>
-      <strong>Estado:</strong>
-      <%= @preinscrito.estado %>
-    </p>
+      <tr>
+        <td><b>País</b></td>
+        <td><%= @preinscrito.pais %></td>
+      </tr>
 
-    <p>
-      <strong>Ciudad:</strong>
-      <%= @preinscrito.ciudad %>
-    </p>
+      <tr>
+        <td><b>Estado</b></td>
+        <td><%= @preinscrito.estado %></td>
+      </tr>
 
-    <p>
-      <strong>Idioma:</strong>
-      <%= @preinscrito.idioma %>
-    </p>
+      <tr>
+        <td><b>Ciudad</b></td>
+        <td><%= @preinscrito.ciudad %></td>
+      </tr>
 
-    <p>
-      <strong>Id organizacion:</strong>
-      <%= @preinscrito.id_organizacion %>
-    </p>
+      <tr>
+        <td><b>Idioma</b></td>
+        <td><%= @preinscrito.idioma %></td>
+      </tr>
 
-    <p>
-      <strong>Rol:</strong>
-      <%= @preinscrito.rol %>
-    </p>
+      <tr>
+        <td><b>Id organización</b></td>
+        <td><%= @preinscrito.id_organizacion %></td>
+      </tr>
 
-    <%= link_to 'Editar', edit_preinscrito_path(@preinscrito) %> |
-    <%= link_to 'Regresar', preinscritos_path %>
+      <tr>
+        <td><b>Rol</b></td>
+        <td><%= @preinscrito.rol %></td>
+      </tr>
+    </table>
+
+
+
+    <%= link_to 'Editar', edit_preinscrito_path(@preinscrito), :class=>"button" %> 
+    <%= link_to 'Regresar', preinscritos_path, :class => "button" %>
   </div>
 </div>
 
