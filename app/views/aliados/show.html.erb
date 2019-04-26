@@ -2,28 +2,32 @@
 
 <div class="box">
   	<div class="body">
-	  	<p>
-			<b>Nombre:</b>
-			<%= @aliado.nombre %>
-		</p>
 
-		<p>
-			<b>Tipo socio:</b>
-			<%= @aliado.tipo_socio %>
-		</p>
+  		<table class="entity-table">
+	      <tr>
+	        <td><b>Nombre</b></td>
+	        <td><%= @aliado.nombre %></td>
+	      </tr>
 
-		<p>
-			<b>Correo:</b>
-			<%= @aliado.correo %>
-		</p>
+	      <tr>
+	        <td><b>Tipo socio</b></td>
+	        <td><%= @aliado.tipo_socio %></td>
+	      </tr>
 
-		<p>
-			<b>Contacto:</b>
-			<%= @aliado.contacto %>
-		</p>
+	      <tr>
+	        <td><b>Correo</b></td>
+	        <td><%= @aliado.correo %></td>
+	      </tr>
 
-		<%= link_to 'Edit', edit_aliado_path(@aliado) %> |
-		<%= link_to 'Back', aliados_path %>
+	      <tr>
+	        <td><b>Contacto</b></td>
+	        <td><%= @aliado.contacto %></td>
+	      </tr>
+	    </table>
+
+
+		<%= link_to 'Edit', edit_aliado_path(@aliado), :class=>"button" %>
+		<%= link_to 'Back', aliados_path, :class=>"button"%>
 
 	</div>
 </div>
