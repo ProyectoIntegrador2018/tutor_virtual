@@ -1,10 +1,14 @@
-<p id=”alert”><%= alert %></p>
+<div class="top"></div>
+<div class="bottom" ></div>
 
-<h1>Login</h1>
+<div class="formContainer">
+
+<i class="fa-4x" aria-hidden="true"><%= image_tag "logo-simbolo.png", :id => "main-logo" %></i>
+
 
 <%= form_tag sessions_path do |form| %>
   <div class="field">
-    <%= label_tag :usuario %>
+    <%= label_tag :usuario%>
     <%= text_field_tag :usuario %>
   </div>
 
@@ -17,3 +21,7 @@
     <%= submit_tag "Login" %>
   </div>
 <% end %>
+
+</div>
+
+<p id=”alert”><%= alert %></p>

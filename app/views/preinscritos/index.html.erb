@@ -8,7 +8,7 @@
 		        <%= text_field_tag :search,"",:class=>"searchTerm",:placeholder=>"Busqueda" %>
 		        <%= select_tag :rol,"<option>Todos</option><option>A</option><option>B</option>".html_safe %>
 		        <%= button_tag type: 'submit', class: "button" do %>
-        			<i class="fa fa-search">Buscar</i>
+        			Buscar <i class="fa fa-search"></i>
     			<% end %>
 		      <% end %>
 		    </div>
@@ -42,6 +42,7 @@
       							<i class="btn fas fa-eye fa-sm text-primary" aria-hidden="true"></i>
     							<%end%>
     							</td>
+    							<% if current_user.admin %>
     							<td>
 			    					<%= link_to edit_preinscrito_path(preinscrito) do %>
 			      					<i class="btn fas fa-edit fa-sm text-primary" aria-hidden="true"></i>
@@ -53,22 +54,34 @@
 			    					<%end%>
  								</td>
 								<td><%= check_box_tag "preinscrito_ids[]", preinscrito.id, false, class: 'selectable' %></td>
+								<% end %>
 							</tr>
 						<% end %>
 					</tbody>
 				</table>
-				<%= submit_tag "Delete selected", :class => 'button red' %>
+				<% if current_user.admin %>
+					<%= submit_tag "Delete selected", :class => 'button red' %>
+				<% end %>
 				<% end %>
 		</div>
 
 		<br>
-		<%= link_to 'New Preinscrito', new_preinscrito_path, :class => "button" %>
-		<%= link_to 'Download CSV list', preinscritos_path(format: :csv), :class => "button"  %>
+		<% if current_user.admin %>
+			<%= link_to new_preinscrito_path, :class => "button" do %>
+			Crear preinscrito <i class="fa fa-plus"></i>
+	    	<% end %>
 
-		<h3>Importar CSV</h3>
-		<%= form_tag import_preinscritos_path, multipart: true do %>
-			<%= file_field_tag :file %>
-			<%= submit_tag "Upload Preinscritos" , :class => "button" %>
+			<%= link_to preinscritos_path(format: :csv), :class => "button" do %>
+				Descargar CSV <i class="fa fa-file-csv"></i>
+	    	<% end %>
+
+			<h3>Importar CSV</h3>
+			<%= form_tag import_preinscritos_path, multipart: true do %>
+				<%= file_field_tag :file %>
+				<%= button_tag type: 'submit', class: "button" do %>
+	        			Subir CSV <i class="fa fa-file-import"></i>
+	    			<% end %>
+			<% end %>
 		<% end %>
 
 	</div>

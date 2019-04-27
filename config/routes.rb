@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
-	resources :users
+	
 	resources :sessions, only: [:new, :create, :destroy]
+	
+	resources :users do
+		collection { post :import }
+		collection { delete :destroy_multiple }
+	end
 	
 	resources :aliados do
 		collection { post :import }
