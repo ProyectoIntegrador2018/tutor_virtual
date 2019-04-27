@@ -1,0 +1,20 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top {
+	height: 40vh;
+	background-color: #2979ff;
+}
+
+.bottom {
+	height: 60vh;
+	background-color: rgb(224, 224, 224);
+}
+
+.loginText{
+	font-family: 'Muli', sans-serif;
+	color: darkgray;
+	padding-top: 5px;
+	font-size: 1.5em;
+}

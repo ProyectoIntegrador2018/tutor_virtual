@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet">
 
     <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -21,7 +20,7 @@
     <div id="nav">
         <div class="user-banner">
             <%= image_tag "logo.png"%>
-            <h5 class="username"><%= current_user.email %></h5>
+            <h5 class="username">Hohoho! Feliz navidad</h5>
         </div>
         <ul id="nav-ul">
 
@@ -53,12 +52,12 @@
 
             <% if controller_name == "tutores" %>
 
-                <li class="active"><a href="#"><span>Tutores</span></a></li>
+                <li class="active"><%= link_to 'Tutores', users_url%></li>
             <% else %>
-                <li><a href="#"><span>Tutores</span></a></li>
-            <% end %>    
+                <li><%= link_to 'Tutores', users_url%></li>
+            <% end %>
 
-            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
+            <li><%= link_to "Logout", logout_path %></li>    
         </ul>
     </div>
 
