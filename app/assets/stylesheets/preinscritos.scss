@@ -1,3 +1,19 @@
 // Place all the styles related to the Preinscritos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.buttond{
+    color: white;
+    background-color: red;
+    width: 210px !important;
+    height: 40px !important;
+	border: none;
+	padding: 10px 20px !important;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 2rem;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+    /*add any other properties you want to style*/
+  }
