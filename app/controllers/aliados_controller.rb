@@ -4,7 +4,11 @@ class AliadosController < ApplicationController
   # GET /aliados
   # GET /aliados.json
   def index
-    @aliados = Aliado.all
+    if params[:search]
+      @aliados = Aliado.where('nombre LIKE ?', "%#{params[:search]}%")
+    else
+      @aliados = Aliado.all
+    end
   end
 
   # GET /aliados/1
