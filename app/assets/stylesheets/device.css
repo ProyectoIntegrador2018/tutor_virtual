@@ -1,21 +1,33 @@
 .top {
-	height: 40vh;
+	height: 20vh;
 	background-color: #2979ff;
 }
 
 .bottom {
-	height: 60vh;
-	background-color: rgb(224, 224, 224);
+  height: 30vh;
+  background-color: rgb(224, 224, 224);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 50vh;
 }
 
 .loginText{
 	font-family: 'Muli', sans-serif;
 	color: darkgray;
 	padding-top: 5px;
-	font-size: 1.5em;
+	font-size: 1.5em;	
 }
 
 .formContainer{
-	background-color: red;
-	width: 70%;
+	height: 20vh;
+	background-color: white;
+	text-align: center;	
+}
+
+label[for=usuario]
+{
+   margin-right: 13px;	
 }
