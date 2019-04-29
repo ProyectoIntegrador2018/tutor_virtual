@@ -2,8 +2,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   # GET /users
   # GET /users.json
+
   def index
-    @users = User.all
+    if params[:search]
+      @users = User.where('nombre LIKE ?', "%#{params[:search]}%")
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1

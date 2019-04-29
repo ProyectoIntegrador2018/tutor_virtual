@@ -6,7 +6,8 @@
 			<div class="search-bar">
 		      <%= form_tag(preinscritos_path, method: :get) do %>
 		        <%= text_field_tag :search,"",:class=>"searchTerm",:placeholder=>"Busqueda" %>
-		        <%= select_tag :rol,"<option>Todos</option><option>A</option><option>B</option>".html_safe %>
+		        <%= select_tag :rol,"<option>Todos</option><option>A</option><option>C</option>
+		        <option>D</option><option>X</option><option>Z</option>".html_safe %>
 		        <%= button_tag type: 'submit', class: "button" do %>
         			Buscar <i class="fa fa-search"></i>
     			<% end %>
