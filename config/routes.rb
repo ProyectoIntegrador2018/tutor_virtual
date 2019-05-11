@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 	
+  resources :cursos
 	resources :sessions, only: [:new, :create, :destroy]
 	
 	resources :users do
@@ -12,7 +13,13 @@ Rails.application.routes.draw do
 		collection { post :import }
 		collection { delete :destroy_multiple }
 	end
+	
 	resources :preinscritos do
+		collection { post :import }
+		collection { delete :destroy_multiple }
+	end
+
+	resources :cursos do
 		collection { post :import }
 		collection { delete :destroy_multiple }
 	end

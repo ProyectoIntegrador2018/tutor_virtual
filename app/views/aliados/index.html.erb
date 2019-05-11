@@ -72,7 +72,7 @@
 
       <%= link_to aliados_path(format: :csv), :class => "button" do %>
         Descargar CSV <i class="fa fa-file-csv"></i>
-        <% end %>
+      <% end %>
 
       <h3>Importar CSV</h3>
       <%= form_tag import_aliados_path, multipart: true do %>
@@ -81,6 +81,7 @@
                 Subir CSV <i class="fa fa-file-import"></i>
             <% end %>
       <% end %>
+      
     <% end %>
 
   </div>

@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def import
     User.import(params[:file])
     redirect_to users_path, notice: "User added successfully"
- end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

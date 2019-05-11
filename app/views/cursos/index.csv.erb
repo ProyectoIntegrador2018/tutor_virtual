@@ -1,0 +1,5 @@
+<%- headers = ['curso_nombre','programa','tematica','num_grupo','clave','inicio_ins','fin_ins','inicio_curso', 'fin_curso','tipo_rec','duracion','num_act','url'] -%>
+<%= CSV.generate_line headers %>
+<%- @cursos.each do |curso| -%>
+<%= CSV.generate_line([curso.curso_nombre,curso.programa,curso.tematica,curso.num_grupo,curso.clave,curso.inicio_ins,curso.fin_ins,curso.inicio_curso,curso.fin_curso,curso.tipo_rec,curso.duracion,curso.num_act,curso.url]) -%>
+<%- end -%>

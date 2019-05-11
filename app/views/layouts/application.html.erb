@@ -52,6 +52,21 @@
                 </li>
             <% end %>
 
+            <% if controller_name == "cursos" %>
+
+                <li class="active">
+                    <%= link_to cursos_url do %>
+                    <i class="fa fa-book-open"></i>Cursos
+                    <% end %>  
+                </li>
+            <% else %>
+                <li>
+                    <%= link_to cursos_url do %>
+                    <i class="fa fa-book-open"></i>Cursos
+                    <% end %>
+                </li>
+            <% end %>
+
             <% if controller_name == "aliados" %>
 
                 <li class="active">
@@ -83,6 +98,8 @@
                     </li>
                 <% end %>
             <% end %>
+
+
 
             <li>
                 <%= link_to logout_path do%>
