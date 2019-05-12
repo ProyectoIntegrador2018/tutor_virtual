@@ -7,6 +7,8 @@ gem 'select_all-rails'
 
 gem 'roo'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
+# Use Devise for user authentication
+gem 'devise'
 #
 gem 'bootstrap-sass'
 # Use Figaro to create env. variables
