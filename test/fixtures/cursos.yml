@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  curso_nombre: MyString
+  programa: MyString
+  tematica: MyString
+  num_grupo: 1
+  clave: MyString
+  inicio_ins: MyString
+  fin_ins: MyString
+  inicio_curso: MyString
+  fin_curso: MyString
+  tipo_rec: MyString
+  duracion: 1
+  num_act: 1
+  url: MyString
+
+two:
+  curso_nombre: MyString
+  programa: MyString
+  tematica: MyString
+  num_grupo: 1
+  clave: MyString
+  inicio_ins: MyString
+  fin_ins: MyString
+  inicio_curso: MyString
+  fin_curso: MyString
+  tipo_rec: MyString
+  duracion: 1
+  num_act: 1
+  url: MyString

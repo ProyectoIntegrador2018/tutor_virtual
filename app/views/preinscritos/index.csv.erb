@@ -1,0 +1,5 @@
+<%- headers = ['nombre','apellido_paterno','apellido_materno','correo_contacto','cca','estatus_user_mensajeria','estatus_ins_mensajeria','fecha_inscripcion','genero','fecha_nacimieto','pais','estado','ciudad','idioma','id_organizacion','rol'] -%>
+<%= CSV.generate_line headers %>
+<%- @preinscritos.each do |preinscrito| -%>
+<%= CSV.generate_line([preinscrito.nombre,preinscrito.apellido_paterno,preinscrito.apellido_materno,preinscrito.correo_contacto,preinscrito.cca,preinscrito.estatus_user_mensajeria,preinscrito.estatus_ins_mensajeria,preinscrito.fecha_inscripcion,preinscrito.genero,preinscrito.fecha_nacimieto,preinscrito.pais,preinscrito.estado,preinscrito.ciudad,preinscrito.idioma,preinscrito.id_organizacion,preinscrito.rol]) -%>
+<%- end -%>

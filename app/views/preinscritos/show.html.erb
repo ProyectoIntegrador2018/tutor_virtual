@@ -1,0 +1,94 @@
+<p id="notice"><%= notice %></p>
+
+<div class="box">
+  <div class="body">
+
+    <table class="entity-table">
+      <tr>
+        <td><b>Nombre</b></td>
+        <td><%= @preinscrito.nombre %></td>
+      </tr>
+
+      <tr>
+        <td><b>Apellido materno</b></td>
+        <td><%= @preinscrito.apellido_materno %></td>
+      </tr>
+
+      <tr>
+        <td><b>Apellido paterno</b></td>
+        <td><%= @preinscrito.apellido_paterno %></td>
+      </tr>
+
+      <tr>
+        <td><b>Correo contacto</b></td>
+        <td><%= @preinscrito.correo_contacto %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cca</b></td>
+        <td><%= @preinscrito.cca %></td>
+      </tr>
+
+      <tr>
+        <td><b>Estatus user mensajeria</b></td>
+        <td><%= @preinscrito.estatus_user_mensajeria %></td>
+      </tr>
+
+      <tr>
+        <td><b>Estatus ins mensajeria</b></td>
+        <td><%= @preinscrito.estatus_ins_mensajeria %></td>
+      </tr>
+
+      <tr>
+        <td><b>Fecha de inscripción</b></td>
+        <td><%= @preinscrito.fecha_inscripcion %></td>
+      </tr>
+
+      <tr>
+        <td><b>Género</b></td>
+        <td><%= @preinscrito.genero %></td>
+      </tr>
+
+      <tr>
+        <td><b>Fecha de nacimieto</b></td>
+        <td><%= @preinscrito.fecha_nacimieto %></td>
+      </tr>
+
+      <tr>
+        <td><b>País</b></td>
+        <td><%= @preinscrito.pais %></td>
+      </tr>
+
+      <tr>
+        <td><b>Estado</b></td>
+        <td><%= @preinscrito.estado %></td>
+      </tr>
+
+      <tr>
+        <td><b>Ciudad</b></td>
+        <td><%= @preinscrito.ciudad %></td>
+      </tr>
+
+      <tr>
+        <td><b>Idioma</b></td>
+        <td><%= @preinscrito.idioma %></td>
+      </tr>
+
+      <tr>
+        <td><b>Id organización</b></td>
+        <td><%= @preinscrito.id_organizacion %></td>
+      </tr>
+
+      <tr>
+        <td><b>Rol</b></td>
+        <td><%= @preinscrito.rol %></td>
+      </tr>
+    </table>
+
+
+
+    <%= link_to 'Editar', edit_preinscrito_path(@preinscrito), :class=>"button" %> 
+    <%= link_to 'Regresar', preinscritos_path, :class => "button" %>
+  </div>
+</div>
+
