@@ -3,24 +3,12 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-  username: postgres
-  host: postgres
-  port: 5432
 
 development:
   <<: *default
-  database: tutor-virtual_development
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['TUTOR-VIRTUAL_DATABASE_PASSWORD'] %>
 
 test:
   <<: *default
-  database: tutor-virtual_test
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['TUTOR-VIRTUAL_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
-  database: tutor-virtual_production
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['TUTOR-VIRTUAL_DATABASE_PASSWORD'] %>
