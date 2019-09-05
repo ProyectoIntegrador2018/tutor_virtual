@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
       target: development
     image: proyecto_integrador/tutor_virtual:development
-    entrypoint: /usr/src/entrypoint.sh
+    entrypoint: /usr/src/bin/entrypoint.sh
     volumes:
       # Mount the app code into the app containers at the "/usr/src" folder:
       - .:/usr/src
