@@ -6,37 +6,29 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 ## Tabla de contenidos
 
-* [Detalles del Cliente](#detalles-del-cliente)
-* [Ambientes del Sistema](#ambientes-del-sistema)
-* [Equipo de trabajo](#equipo-de-trabajo)
-* [Herramientas](#herramientas)
-* [Configuración del proyecto](#Configuración-del-proyecto)
-* [Correr el proyecto para desarrollo](#Correr-el-proyecto-para-desarrollo)
-* [Detener el proyecto](#Detener-el-proyecto)
+* TBD
 
-### Detalles del Cliente
+## Detalles del Cliente
 
 | Nombre              | Email               | Rol              |
 | ------------------- | ------------------- | ---------------- |
 | Dora García Olivier | degolivier@itesm.mx | Coordinador CVA  |
 
 
-### Ambientes del Sistema
+## Ambientes del Sistema
 
 * **Producción** - [TutorVirtual](http://tutorvirtual.herokuapp.com/)
 * **Desarrollo** - [Dev-TutorVirtual](http://dev-tutorvirtual.herokuapp.com/)
 
-Equipo: Ene - May 2019
+Equipo: AD 2019
 
 | Nombre             | Email              | Rol          |
 | ------------------ | ------------------ | ------------ |
-| Carlos Sanchez     | a01139506@itesm.mx | Scrum Master |
-| Oscar Flores       | a00817333@itesm.mx | Product Owner Proxy   |
-| Hector Ortiz       | a01032773@itesm.mx | Desarrollo   |
-| Alfredo Sánchez    | a00397967@itesm.mx | Desarrollo   |
-| Diego Contreras    | a00817441@itesm.mx | Desarrollo   |
+| Sergio Diaz        | a01192313@itesm.mx | Scrum Master |
+| Patricio Forbes    | A01192455@itesm.mx | PO Proxy     |
+| Arturo González    | A01193188@itesm.mx | Desarrollo   |
 
-### Herramientas
+##  Herramientas
 
 Pide acceso a las siguientes herramientas de no ser que no lo tengas:
 
@@ -44,72 +36,49 @@ Pide acceso a las siguientes herramientas de no ser que no lo tengas:
 * [Backlog](https://github.com/ProyectoIntegrador2018/tutor_virtual/projects/2)
 * [Documentation](https://drive.google.com/drive/folders/16hcLTaW8YtWHzEUo9VfwR-Qjewcsap-G?usp=sharing)
 
-## Desarrollo
+## Configuración del proyecto
 
-### Configuración del proyecto
+### Pre-condiciones
+- Install docker and docker-compose.
 
-Primero descargar [`Composer`](https://getcomposer.org/download/). Esto es para poder instalar Laravel después.
-Para instalarlo es necesario correr los siguientes comandos y mover composer a tu $PATH para usarlo con el comando ```composer``` solamente y no ```php composer.phar```:
 
-```
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-```
+### Build and Run
 
-Para instalar [`Laravel`](https://laravel.com/docs/5.7) es necesario correr el siguiente comando:
+EL siguiente comando usa un multi-stage build para usar compilaciones de
+varias etapas, y levantar la aplicación con un solo comando:
 
 ```
-composer global require "laravel/installer"
+docker-compose up web
 ```
 
-También hay que asegurarse de instalarlo en $PATH para poder usarse globalmente.
-Ahora puedes seguir los siguientes pasos:
+El comando anterior construirá la imagen si no existe, llamada: `proyecto_integrador / tutor_virtual: development`.
 
-1. Clonar repositorio en tu computadora
+### Debbuging
+La estructura del proyecto permite a cualquiera ejecutar fácilmente una consola
+de bash para poder ejecutar cualquier tipo de instrucción. Por ejemplo algo como ```rails db:create```, ```rails db:migrate```, o ```rails db:seed```
 
-```bash
-$ git clone https://github.com/ProyectoIntegrador2018/tutor_virtual.git
-```
-
-2. Correr composer dentro de la carpeta clonada para las dependencias.
-
-```bash
-composer install
-```
-
-3. Migrar la base de datos.
 
 ```
-php artisan migrate
+docker-compose run --rm web bash
 ```
 
-### Correr el proyecto para desarrollo
+### Pruebas
+Si se ejecuta ```rails db:seed```, se agregarán dos usuarios de prueba a la base
+de datos. Uno con permisos normales y otro con permisos de administrador.
+```
+user: user@example.com
+password: 123456
 
-4. Encender el servidor de manera local.
+user: admin@example.com
+password: 123456
 
 ```
-php artisan serve
-```
+## Stack Tecnológico
 
-### Detener el proyecto
-
-Para detener el servidor completamente presiona
-
-```
-CTRL + C
-```
-
-dentro de la terminal donde encendiste el mismo.
-
-## Stack Tecnologico
-
-### Librerias Front End:
+### Librerías Front End:
 * Jquery
 * CSS
 
-### Librerias Back End:
+### Librerías Back End:
 
 * Ruby on Rails
-
