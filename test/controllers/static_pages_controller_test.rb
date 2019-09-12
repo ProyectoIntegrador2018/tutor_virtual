@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
-  test "should get home" do
-    get static_pages_home_url
+  test "should redirect to login path" do
+    get root_path
+    assert_response :redirect
+    get login_path
     assert_response :success
   end
 
