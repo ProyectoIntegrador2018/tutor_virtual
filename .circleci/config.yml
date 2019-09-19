@@ -1,0 +1,77 @@
+version: 2
+jobs:
+  test:
+    docker: # use the docker executor type
+      - image: circleci/ruby:2.6.3
+        environment:
+          PGHOST: localhost
+          PGUSER: tutor_virtual
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.0.1
+
+      - image: postgres:9.5
+        environment:
+          POSTGRES_USER: tutor_virtual
+          POSTGRES_DB: tutor_virtual
+          POSTGRES_PASSWORD: ""
+
+    steps:
+      - checkout
+      # Restore Cached Dependencies
+      - type: cache-restore
+        name: Restore bundle cache
+        key: tutor_virtual-{{ checksum "Gemfile.lock" }}
+
+      - run: gem install bundler:${BUNDLER_VERSION}
+
+      # Cache Dependencies
+      - type: cache-save
+        name: Store bundle cache
+        key: tutor_virtual-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # # Bundle install dependencies
+      - run: bundle install
+
+      # Wait for DB
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # Setup the environment
+      # - run: cp .sample.env .env
+
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:migrate
+
+      # Setup the database
+      - run: bundle exec rake db:seed
+
+      # Run the tests
+      - run: bundle exec rake
+
+  deploy:
+    docker: # use the docker executor type
+      - image: docker:stable-git # the primary container, where the job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      # A remote environment will be created, and your current primary container
+      # will be configured to use it.
+      # Then, any docker-related commands you use will be safely executed in this new environment.
+      - setup_remote_docker:
+          docker_layer_caching: true # Enables Docker Layer Caching here to speed up image building
+      - run: apk add make # Add MAKE in order to get the version from trendlit's Makefile
+      - run: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+      - run: sh 'bin/docker_build.sh'
+      - run: sh 'bin/docker_check.sh'
+      - run: sh 'bin/docker_push.sh'
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
