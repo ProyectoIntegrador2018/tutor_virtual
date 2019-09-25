@@ -9,7 +9,7 @@ jobs:
           RAILS_ENV: test
           BUNDLER_VERSION: 2.0.1
 
-      - image: postgres:9.5
+      - image: postgres:11.5-alpine
         environment:
           POSTGRES_USER: tutor_virtual
           POSTGRES_DB: tutor_virtual
