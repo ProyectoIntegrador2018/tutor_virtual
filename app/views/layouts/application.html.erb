@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet">
 
-    <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    
+
 
     <div id="nav">
         <div class="user-banner">
@@ -38,7 +38,7 @@
                 </li>
             <% end %>
 
-            
+
             <% if controller_name == "preinscritos" %>
                 <li class="active">
                     <%= link_to preinscritos_url do %>
@@ -58,7 +58,7 @@
                 <li class="active">
                     <%= link_to cursos_url do %>
                     <i class="fa fa-book-open"></i>Cursos
-                    <% end %>  
+                    <% end %>
                 </li>
             <% else %>
                 <li>
@@ -73,7 +73,7 @@
                 <li class="active">
                     <%= link_to aliados_url do %>
                     <i class="fa fa-id-badge"></i>Aliados
-                    <% end %>  
+                    <% end %>
                 </li>
             <% else %>
                 <li>
@@ -89,13 +89,13 @@
                     <li class="active">
                         <%= link_to users_url do %>
                         <i class="fa fa-user-tie"></i>Tutores
-                        <% end %>  
+                        <% end %>
                     </li>
                 <% else %>
                     <li>
                         <%= link_to users_url do %>
                         <i class="fa fa-user-tie"></i>Tutores
-                        <% end %>  
+                        <% end %>
                     </li>
                 <% end %>
             <% end %>
@@ -105,7 +105,7 @@
             <li>
                 <%= link_to logout_path do%>
                 <i class="fa fa-sign-out-alt"></i>Salir
-                <% end %>   
+                <% end %>
             </li>
         </ul>
     </div>
