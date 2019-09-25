@@ -19,6 +19,11 @@ check:## Check if the tag that is going to be pushed is unique. In other words, 
 help: ##Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+
+prod:##prod: Run latest built simulating a production env.
+	@echo 'Prod triggered'
+	@./bin/docker_run_local_production.sh
+
 ##push: push docker image to docker hub
 push: check
 	@./bin/docker_push.sh
