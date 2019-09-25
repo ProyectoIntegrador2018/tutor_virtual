@@ -51,6 +51,17 @@ varias etapas, y levantar la aplicación con un solo comando:
 docker-compose up web
 ```
 
+### Test
+
+EL siguiente comando usa un multi-stage build para usar compilaciones de
+varias etapas, y levantar la aplicación en el ambiente de ```test``` con un
+solo comando:
+
+```
+docker-compose run --rm test bash
+```
+
+
 El comando anterior construirá la imagen si no existe, llamada: `proyecto_integrador / tutor_virtual: development`.
 
 ### Debbuging
