@@ -37,10 +37,11 @@ jobs:
       # Wait for DB
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: bundle exec rake db:test:prepare
+      - run: rake db:create # creates the database
+      - run: rake db:migrate
 
       # Run the tests
-      - run: bundle exec rake
+      - run: rake test
 
   build_release:
     docker: # use the docker executor type
