@@ -24,6 +24,18 @@ jobs:
 
       - run: gem install bundler:${BUNDLER_VERSION}
 
+      - restore_cache:
+          keys:
+            - bundler-{{ checksum "Gemfile.lock" }}
+            - bundler-
+
+      - run: bundle install --clean --path vendor/bundle
+
+      - save_cache:
+        key: bundler-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
       # Cache Dependencies
       - type: cache-save
         name: Store bundle cache
