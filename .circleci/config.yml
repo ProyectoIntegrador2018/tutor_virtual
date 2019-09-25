@@ -24,6 +24,8 @@ jobs:
 
       - run: gem install bundler:${BUNDLER_VERSION}
 
+      # Caching Ruby Gems 
+      # Reference: https://www.benpickles.com/articles/76-better-ruby-gem-caching-on-circleci
       - restore_cache:
           keys:
             - bundler-{{ checksum "Gemfile.lock" }}
@@ -32,9 +34,9 @@ jobs:
       - run: bundle install --clean --path vendor/bundle
 
       - save_cache:
-        key: bundler-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+          key: bundler-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
       # Cache Dependencies
       - type: cache-save
