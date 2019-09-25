@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: 3x4mpl3P455w0rd
     ports:
       - "5432:5432"
-  web:
+  web: &app
     build:
       context: .
       dockerfile: Dockerfile
@@ -56,10 +56,19 @@ services:
     depends_on:
     - postgres
     command: rails server -p 3000 -b 0.0.0.0
-    environment:
+    environment: &env
       DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/tutor_virtual_development
       RAILS_ENV: development
       RACK_ENV: development
       RAILS_LOG_TO_STDOUT: "true"
     ports:
       - ${TUTOR_VIRTUAL_WEB_PORT:-3000}:3000
+
+  test:
+    <<: *app
+    environment:
+      <<: *env
+      DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/tutor_virtual_test
+      RAILS_ENV: test
+      RACK_ENV: test
+      RAILS_LOG_TO_STDOUT: "true"
