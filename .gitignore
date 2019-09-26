@@ -32,3 +32,6 @@
 # bash history commands when someone enters the container via
 # docker-compose run --rm web bash
 .bash_history
+
+#Ignore backup Makefile
+*-e
