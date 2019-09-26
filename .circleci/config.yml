@@ -69,14 +69,11 @@ jobs:
           docker_layer_caching: true # Enables Docker Layer Caching here to speed up image building
       - run: apk add make # Add MAKE in order to get the version from trendlit's Makefile
       - run: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-      # - run: sh 'bin/docker_build.sh'
-      # - run: sh 'bin/docker_check.sh'
-      # - run: sh 'bin/docker_push.sh'
+      - run: sh 'bin/docker_build.sh'
+      - run: sh 'bin/docker_check.sh'
+      - run: sh 'bin/docker_push.sh'
       # Heroku deploy
       - run: docker login --username=_ --password=${HEROKU_TOKEN} registry.heroku.com
-      - run: sh 'bin/heroku_deploy.sh'
-
-
 
 workflows:
   version: 2
@@ -88,4 +85,4 @@ workflows:
             - test
           filters:
             branches:
-              ignore: master
+              only: master
