@@ -24,7 +24,7 @@ jobs:
 
       - run: gem install bundler:${BUNDLER_VERSION}
 
-      # Caching Ruby Gems 
+      # Caching Ruby Gems
       # Reference: https://www.benpickles.com/articles/76-better-ruby-gem-caching-on-circleci
       - restore_cache:
           keys:
@@ -72,6 +72,9 @@ jobs:
       - run: sh 'bin/docker_build.sh'
       - run: sh 'bin/docker_check.sh'
       - run: sh 'bin/docker_push.sh'
+      # Heroku deploy
+      - run: docker login --username=_ --password=${HEROKU_TOKEN} registry.heroku.com
+
 workflows:
   version: 2
   test_and_build_release:
