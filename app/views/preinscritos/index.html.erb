@@ -68,7 +68,12 @@
 
 		<br>
 		<% if current_user.admin %>
-							
+
+			<%= link_to destroy_all_preinscritos_path, method: :delete, data: { confirm: 'Esta Seguro?' }, :class => "buttond" do %>
+			Borrar Todo
+				<% end %>
+
+			<br>
 
 			<%= link_to new_preinscrito_path, :class => "button" do %>
 			Crear preinscrito <i class="fa fa-plus"></i>
@@ -89,5 +94,3 @@
 
 	</div>
 </div>
-
-
