@@ -66,17 +66,23 @@ class AliadosController < ApplicationController
   end
 
   def destroy_multiple
-    Aliado.destroy(params[:aliado_ids])
-    respond_to do |format|
-      format.html { redirect_to aliados_url }
-      format.json { head :no_content }
-    end
+      if params[:aliado_ids]
+        Aliado.destroy(params[:aliado_ids])
+        message = {notice: 'Aliado borrado con éxito.'}
+      else
+        message = {alert: 'Por favor selecciona al menos un aliado.'}
+      end
+
+      respond_to do |format|
+        format.html { redirect_to aliados_url, message }
+        format.json { head :no_content }
+      end
   end
 
   def import
     Aliado.import(params[:file])
     redirect_to aliados_path, notice: "Aliados added successfully"
-  end 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
