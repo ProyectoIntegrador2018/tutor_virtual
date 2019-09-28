@@ -66,11 +66,17 @@ class UsersController < ApplicationController
   end
 
   def destroy_multiple
-    User.destroy(params[:user_ids])
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+      if params[:user_ids]
+        User.destroy(params[:user_ids])
+        message = {notice: 'Tutor borrado con éxito.'}
+      else
+        message = {alert: 'Por favor selecciona al menos un tutor.'}
+      end
+
+      respond_to do |format|
+        format.html { redirect_to users_url, message }
+        format.json { head :no_content }
+      end
   end
 
   def import
