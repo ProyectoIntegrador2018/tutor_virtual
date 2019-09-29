@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def index
     if params[:search]
-      @users = User.where('nombre LIKE ? OR apellido_paterno LIKE ? OR apellido_materno LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+      @users = User.where('nombre LIKE ? OR apellido_paterno LIKE ? OR apellido_materno LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("nombre")
     else
-      @users = User.all
+      @users = User.order("nombre")
     end
   end
 

@@ -9,15 +9,15 @@
 		        <%= select_tag :rol,"<option>Todos</option><option>A</option><option>C</option>
 		        <option>D</option><option>X</option><option>Z</option>".html_safe %>
 		        <%= button_tag type: 'submit', class: "button" do %>
-        			Buscar <i class="fa fa-search"></i>
-    			<% end %>
+					Buscar <i class="fa fa-search"></i>
+				<% end %>
 		      <% end %>
 		    </div>
 				<%= form_tag destroy_multiple_preinscritos_path, method: :delete do %>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Nombre</th>
+							<th>Nombre</th> 
 							<th>Apellido paterno</th>
 							<th>Apellido materno</th>
 							<th>Correo contacto</th>

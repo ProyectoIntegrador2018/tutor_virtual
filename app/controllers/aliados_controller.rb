@@ -5,9 +5,9 @@ class AliadosController < ApplicationController
   # GET /aliados.json
   def index
     if params[:search]
-      @aliados = Aliado.where('nombre LIKE ?', "%#{params[:search]}%")
+      @aliados = Aliado.where('nombre LIKE ?', "%#{params[:search]}%").order("nombre")
     else
-      @aliados = Aliado.all
+      @aliados = Aliado.order("nombre")
     end
   end
 
