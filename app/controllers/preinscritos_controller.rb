@@ -10,9 +10,9 @@ class PreinscritosController < ApplicationController
       rol_i = 1
     end
     if params[:search] && rol_i == 0
-      @preinscritos = Preinscrito.where('nombre LIKE ?', "%#{params[:search]}%")
+      @preinscritos = Preinscrito.where('nombre LIKE ? OR apellido_paterno LIKE ? OR apellido_materno LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
     elsif params[:search] && rol_i == 1
-      @preinscritos = Preinscrito.where('nombre LIKE ? AND rol LIKE ?', "%#{params[:search]}%","%#{params[:rol]}%")
+      @preinscritos = Preinscrito.where('nombre LIKE ? OR apellido_paterno LIKE ? OR apellido_materno LIKE ? AND rol LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%","%#{params[:rol]}%")
     else
       @preinscritos = Preinscrito.all
     end
