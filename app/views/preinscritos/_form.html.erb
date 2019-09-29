@@ -18,18 +18,18 @@
       </tr>
 
       <tr>
-        <td><b>Apellido materno</b></td>
-        <td><%= form.text_field :apellido_materno %></td>
-      </tr>
-
-      <tr>
         <td><b>Apellido paterno</b></td>
         <td><%= form.text_field :apellido_paterno %></td>
       </tr>
 
       <tr>
+        <td><b>Apellido materno</b></td>
+        <td><%= form.text_field :apellido_materno %></td>
+      </tr>
+
+      <tr>
         <td><b>Correo contacto</b></td>
-        <td><%= form.text_field :correo_contacto %></td>
+        <td><%= form.email_field :correo_contacto %></td>
       </tr>
 
       <tr>
@@ -49,7 +49,7 @@
 
       <tr>
         <td><b>Fecha de inscripción</b></td>
-        <td><%= form.text_field :fecha_inscripcion %></td>
+        <td><%= form.date_field :fecha_inscripcion, :value => Time.now.strftime('%Y-%m-%d')  %></td>
       </tr>
 
       <tr>
@@ -59,7 +59,7 @@
 
       <tr>
         <td><b>Fecha de nacimieto</b></td>
-        <td><%= form.text_field :fecha_nacimieto %></td>
+        <td><%= form.date_field :fecha_nacimieto %></td>
       </tr>
 
       <tr>
@@ -97,5 +97,5 @@
   <div class="actions">
     <%= form.submit 'Guardar', :class => 'button tall' %>
   </div>
-  
+
 <% end %>
