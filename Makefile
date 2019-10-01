@@ -1,6 +1,6 @@
 APP=tutor_virtual
 PROJECT=github.com/ProyectoIntegrador2018/tutor_virtual
-RELEASE?=0.0.1
+RELEASE?=0.0.3
 
 COMMIT?=$(shell git rev-parse HEAD)
 BUILD_TIME?=$(shell date -u '+%Y-%m-%d_%H:%M:%S')
