@@ -60,6 +60,10 @@
           </tbody>
         </table>
         <%= submit_tag "Delete selected", :class => 'buttond red' %>
+
+        <%= link_to destroy_all_users_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
+        Borrar Todos
+          <% end %>
         <% end %>
     </div>
 
@@ -83,5 +87,3 @@
 
   </div>
 </div>
-
-

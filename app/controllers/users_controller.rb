@@ -73,6 +73,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_all
+    User.all.each do  |user|
+      if !user["admin"]
+        user.destroy
+      end
+    end
+
+    redirect_to users_path, notice: "Tutores Borrados Exitosamente"
+  end
+
   def import
     User.import(params[:file])
     redirect_to users_path, notice: "User added successfully"

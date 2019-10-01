@@ -73,10 +73,19 @@ class AliadosController < ApplicationController
     end
   end
 
+  def destroy_all
+    Aliado.all.each do  |aliado|
+      aliado.destroy
+    end
+  
+    redirect_to aliados_path, notice: "aliados Borrados Exitosamente"
+  end
+
+
   def import
     Aliado.import(params[:file])
     redirect_to aliados_path, notice: "Aliados added successfully"
-  end 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

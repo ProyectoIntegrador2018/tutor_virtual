@@ -62,13 +62,17 @@
 				</table>
 				<% if current_user.admin %>
 					<%= submit_tag "Delete selected", :class => "buttond" %>
+
+					<%= link_to destroy_all_preinscritos_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
+					Borrar Todos
+			    	<% end %>
 				<% end %>
 				<% end %>
 			</div>
 
 		<br>
 		<% if current_user.admin %>
-							
+
 
 			<%= link_to new_preinscrito_path, :class => "button" do %>
 			Crear preinscrito <i class="fa fa-plus"></i>
@@ -89,5 +93,3 @@
 
 	</div>
 </div>
-
-

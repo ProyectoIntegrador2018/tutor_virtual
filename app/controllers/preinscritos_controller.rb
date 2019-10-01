@@ -80,10 +80,18 @@ class PreinscritosController < ApplicationController
     end
   end
 
+  def destroy_all
+    Preinscrito.all.each do  |preinscrito|
+      preinscrito.destroy
+    end
+
+    redirect_to preinscritos_path, notice: "Preinscritos Borrados Exitosamente"
+  end
+
   def import
     Preinscrito.import(params[:file])
     redirect_to preinscritos_path, notice: "Preinscritos added successfully"
-  end 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

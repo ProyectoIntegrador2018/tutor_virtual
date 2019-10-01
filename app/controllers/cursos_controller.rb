@@ -73,6 +73,14 @@ class CursosController < ApplicationController
     end
   end
 
+  def destroy_all
+    Curso.all.each do  |curso|
+      curso.destroy
+    end
+
+    redirect_to cursos_path, notice: "Cursos Borrados Exitosamente"
+  end
+
   def import
     Curso.import(params[:file])
     redirect_to cursos_path, notice: "User added successfully"

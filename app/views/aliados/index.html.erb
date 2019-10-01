@@ -58,6 +58,11 @@
       </table>
       <% if current_user.admin %>
         <%= submit_tag "Delete selected", :class => 'buttond red' %>
+
+        <%= link_to destroy_all_aliados_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
+        Borrar Todos
+          <% end %>
+
         <% end %>
       <% end %>
 
@@ -81,7 +86,7 @@
                 Subir CSV <i class="fa fa-file-import"></i>
             <% end %>
       <% end %>
-      
+
     <% end %>
 
   </div>
