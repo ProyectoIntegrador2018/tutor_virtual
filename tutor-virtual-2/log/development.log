@@ -131,3 +131,83 @@ Processing by Rails::WelcomeController#index as HTML
 Completed 200 OK in 15ms (Views: 3.6ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateCourses (20191014223053)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateCourses (20191014223053)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "name" character varying, "course_code" character varying, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191014223053_create_courses.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191014223053"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateCourses (20191014223053)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE "courses"[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.8ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20191014223053"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateCourses (20191014223053)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "name" character varying, "course_code" character varying, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191014223053_create_courses.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191014223053"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
