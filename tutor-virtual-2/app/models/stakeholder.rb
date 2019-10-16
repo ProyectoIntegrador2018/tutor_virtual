@@ -1,0 +1,2 @@
+class Stakeholder < Person
+end
