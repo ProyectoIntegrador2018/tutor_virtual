@@ -1,4 +1,2 @@
-class Student < Person
-  has_and_belongs_to_many :courses
-
+class Student < ApplicationRecord
 end

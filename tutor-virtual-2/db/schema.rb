@@ -10,16 +10,116 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_223053) do
+ActiveRecord::Schema.define(version: 2019_10_16_191700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coordinators", force: :cascade do |t|
+    t.string "username"
+    t.string "internal_password"
+    t.string "name"
+    t.string "first_last_name"
+    t.string "second_last_name"
+    t.string "email"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "partner"
+    t.string "organization_code"
+    t.integer "gender"
+    t.date "dob"
+    t.string "phone_number"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_code"
     t.date "start_date"
     t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stakeholders", force: :cascade do |t|
+    t.string "username"
+    t.string "internal_password"
+    t.string "name"
+    t.string "first_last_name"
+    t.string "second_last_name"
+    t.string "email"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "partner"
+    t.string "organization_code"
+    t.integer "gender"
+    t.date "dob"
+    t.string "phone_number"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "username"
+    t.string "internal_password"
+    t.string "name"
+    t.string "first_last_name"
+    t.string "second_last_name"
+    t.string "email"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "partner"
+    t.string "organization_code"
+    t.integer "gender"
+    t.date "dob"
+    t.string "phone_number"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "supervisors", force: :cascade do |t|
+    t.string "username"
+    t.string "internal_password"
+    t.string "name"
+    t.string "first_last_name"
+    t.string "second_last_name"
+    t.string "email"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "partner"
+    t.string "organization_code"
+    t.integer "gender"
+    t.date "dob"
+    t.string "phone_number"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tutors", force: :cascade do |t|
+    t.string "username"
+    t.string "internal_password"
+    t.string "name"
+    t.string "first_last_name"
+    t.string "second_last_name"
+    t.string "email"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "partner"
+    t.string "organization_code"
+    t.integer "gender"
+    t.date "dob"
+    t.string "phone_number"
+    t.string "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

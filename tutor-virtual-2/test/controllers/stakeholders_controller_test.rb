@@ -17,7 +17,7 @@ class StakeholdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create stakeholder" do
     assert_difference('Stakeholder.count') do
-      post stakeholders_url, params: { stakeholder: {  } }
+      post stakeholders_url, params: { stakeholder: { city: @stakeholder.city, country: @stakeholder.country, dob: @stakeholder.dob, email: @stakeholder.email, first_last_name: @stakeholder.first_last_name, gender: @stakeholder.gender, internal_password: @stakeholder.internal_password, language: @stakeholder.language, name: @stakeholder.name, organization_code: @stakeholder.organization_code, partner: @stakeholder.partner, phone_number: @stakeholder.phone_number, second_last_name: @stakeholder.second_last_name, state: @stakeholder.state, username: @stakeholder.username } }
     end
 
     assert_redirected_to stakeholder_url(Stakeholder.last)
@@ -34,7 +34,7 @@ class StakeholdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update stakeholder" do
-    patch stakeholder_url(@stakeholder), params: { stakeholder: {  } }
+    patch stakeholder_url(@stakeholder), params: { stakeholder: { city: @stakeholder.city, country: @stakeholder.country, dob: @stakeholder.dob, email: @stakeholder.email, first_last_name: @stakeholder.first_last_name, gender: @stakeholder.gender, internal_password: @stakeholder.internal_password, language: @stakeholder.language, name: @stakeholder.name, organization_code: @stakeholder.organization_code, partner: @stakeholder.partner, phone_number: @stakeholder.phone_number, second_last_name: @stakeholder.second_last_name, state: @stakeholder.state, username: @stakeholder.username } }
     assert_redirected_to stakeholder_url(@stakeholder)
   end
 

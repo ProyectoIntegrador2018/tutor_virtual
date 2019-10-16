@@ -5,6 +5,21 @@
 <table>
   <thead>
     <tr>
+      <th>Username</th>
+      <th>Internal password</th>
+      <th>Name</th>
+      <th>First last name</th>
+      <th>Second last name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Partner</th>
+      <th>Organization code</th>
+      <th>Gender</th>
+      <th>Dob</th>
+      <th>Phone number</th>
+      <th>Language</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +27,21 @@
   <tbody>
     <% @stakeholders.each do |stakeholder| %>
       <tr>
+        <td><%= stakeholder.username %></td>
+        <td><%= stakeholder.internal_password %></td>
+        <td><%= stakeholder.name %></td>
+        <td><%= stakeholder.first_last_name %></td>
+        <td><%= stakeholder.second_last_name %></td>
+        <td><%= stakeholder.email %></td>
+        <td><%= stakeholder.country %></td>
+        <td><%= stakeholder.state %></td>
+        <td><%= stakeholder.city %></td>
+        <td><%= stakeholder.partner %></td>
+        <td><%= stakeholder.organization_code %></td>
+        <td><%= stakeholder.gender %></td>
+        <td><%= stakeholder.dob %></td>
+        <td><%= stakeholder.phone_number %></td>
+        <td><%= stakeholder.language %></td>
         <td><%= link_to 'Show', stakeholder %></td>
         <td><%= link_to 'Edit', edit_stakeholder_path(stakeholder) %></td>
         <td><%= link_to 'Destroy', stakeholder, method: :delete, data: { confirm: 'Are you sure?' } %></td>

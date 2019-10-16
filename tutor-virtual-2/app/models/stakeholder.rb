@@ -1,2 +1,2 @@
-class Stakeholder < Person
+class Stakeholder < ApplicationRecord
 end

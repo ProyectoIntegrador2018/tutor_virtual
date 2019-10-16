@@ -17,7 +17,7 @@ class CoordinatorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create coordinator" do
     assert_difference('Coordinator.count') do
-      post coordinators_url, params: { coordinator: {  } }
+      post coordinators_url, params: { coordinator: { city: @coordinator.city, country: @coordinator.country, dob: @coordinator.dob, email: @coordinator.email, first_last_name: @coordinator.first_last_name, gender: @coordinator.gender, internal_password: @coordinator.internal_password, language: @coordinator.language, name: @coordinator.name, organization_code: @coordinator.organization_code, partner: @coordinator.partner, phone_number: @coordinator.phone_number, second_last_name: @coordinator.second_last_name, state: @coordinator.state, username: @coordinator.username } }
     end
 
     assert_redirected_to coordinator_url(Coordinator.last)
@@ -34,7 +34,7 @@ class CoordinatorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update coordinator" do
-    patch coordinator_url(@coordinator), params: { coordinator: {  } }
+    patch coordinator_url(@coordinator), params: { coordinator: { city: @coordinator.city, country: @coordinator.country, dob: @coordinator.dob, email: @coordinator.email, first_last_name: @coordinator.first_last_name, gender: @coordinator.gender, internal_password: @coordinator.internal_password, language: @coordinator.language, name: @coordinator.name, organization_code: @coordinator.organization_code, partner: @coordinator.partner, phone_number: @coordinator.phone_number, second_last_name: @coordinator.second_last_name, state: @coordinator.state, username: @coordinator.username } }
     assert_redirected_to coordinator_url(@coordinator)
   end
 

@@ -5,6 +5,21 @@
 <table>
   <thead>
     <tr>
+      <th>Username</th>
+      <th>Internal password</th>
+      <th>Name</th>
+      <th>First last name</th>
+      <th>Second last name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Partner</th>
+      <th>Organization code</th>
+      <th>Gender</th>
+      <th>Dob</th>
+      <th>Phone number</th>
+      <th>Language</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +27,21 @@
   <tbody>
     <% @coordinators.each do |coordinator| %>
       <tr>
+        <td><%= coordinator.username %></td>
+        <td><%= coordinator.internal_password %></td>
+        <td><%= coordinator.name %></td>
+        <td><%= coordinator.first_last_name %></td>
+        <td><%= coordinator.second_last_name %></td>
+        <td><%= coordinator.email %></td>
+        <td><%= coordinator.country %></td>
+        <td><%= coordinator.state %></td>
+        <td><%= coordinator.city %></td>
+        <td><%= coordinator.partner %></td>
+        <td><%= coordinator.organization_code %></td>
+        <td><%= coordinator.gender %></td>
+        <td><%= coordinator.dob %></td>
+        <td><%= coordinator.phone_number %></td>
+        <td><%= coordinator.language %></td>
         <td><%= link_to 'Show', coordinator %></td>
         <td><%= link_to 'Edit', edit_coordinator_path(coordinator) %></td>
         <td><%= link_to 'Destroy', coordinator, method: :delete, data: { confirm: 'Are you sure?' } %></td>

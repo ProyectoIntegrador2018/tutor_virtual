@@ -5,6 +5,21 @@
 <table>
   <thead>
     <tr>
+      <th>Username</th>
+      <th>Internal password</th>
+      <th>Name</th>
+      <th>First last name</th>
+      <th>Second last name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Partner</th>
+      <th>Organization code</th>
+      <th>Gender</th>
+      <th>Dob</th>
+      <th>Phone number</th>
+      <th>Language</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +27,21 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
+        <td><%= student.username %></td>
+        <td><%= student.internal_password %></td>
+        <td><%= student.name %></td>
+        <td><%= student.first_last_name %></td>
+        <td><%= student.second_last_name %></td>
+        <td><%= student.email %></td>
+        <td><%= student.country %></td>
+        <td><%= student.state %></td>
+        <td><%= student.city %></td>
+        <td><%= student.partner %></td>
+        <td><%= student.organization_code %></td>
+        <td><%= student.gender %></td>
+        <td><%= student.dob %></td>
+        <td><%= student.phone_number %></td>
+        <td><%= student.language %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>

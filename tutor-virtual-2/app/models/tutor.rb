@@ -1,2 +1,2 @@
-class Tutor < Person
+class Tutor < ApplicationRecord
 end
