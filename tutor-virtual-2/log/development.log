@@ -414,3 +414,39 @@ Completed 200 OK in 125ms (Views: 97.6ms | ActiveRecord: 6.9ms)
   ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
   [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Create (0.8ms)[0m  [1m[32mINSERT INTO "students" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Forbes"], ["created_at", "2019-10-16 19:21:09.284022"], ["updated_at", "2019-10-16 19:21:09.284022"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStudent Load (1.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCourse Create (0.5ms)[0m  [1m[32mINSERT INTO "courses" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Math"], ["created_at", "2019-10-16 19:21:31.097014"], ["updated_at", "2019-10-16 19:21:31.097014"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateJoinTableCoursesStudents (20191016191914)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "courses_students" ("course_id" bigint NOT NULL, "student_id" bigint NOT NULL)[0m
+  ↳ db/migrate/20191016191914_create_join_table_courses_students.rb:3
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_course_id_and_student_id" ON "courses_students"  ("course_id", "student_id")[0m
+  ↳ db/migrate/20191016191914_create_join_table_courses_students.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_student_id_and_course_id" ON "courses_students"  ("student_id", "course_id")[0m
+  ↳ db/migrate/20191016191914_create_join_table_courses_students.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016191914"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCourse Load (0.8ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" INNER JOIN "courses_students" ON "courses"."id" = "courses_students"."course_id" WHERE "courses_students"."student_id" = $1 LIMIT $2[0m  [["student_id", 1], ["LIMIT", 11]]
