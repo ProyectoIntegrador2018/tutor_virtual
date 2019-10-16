@@ -17,7 +17,7 @@ class SupervisorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create supervisor" do
     assert_difference('Supervisor.count') do
-      post supervisors_url, params: { supervisor: {  } }
+      post supervisors_url, params: { supervisor: { city: @supervisor.city, country: @supervisor.country, dob: @supervisor.dob, email: @supervisor.email, first_last_name: @supervisor.first_last_name, gender: @supervisor.gender, internal_password: @supervisor.internal_password, language: @supervisor.language, name: @supervisor.name, organization_code: @supervisor.organization_code, partner: @supervisor.partner, phone_number: @supervisor.phone_number, second_last_name: @supervisor.second_last_name, state: @supervisor.state, username: @supervisor.username } }
     end
 
     assert_redirected_to supervisor_url(Supervisor.last)
@@ -34,7 +34,7 @@ class SupervisorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update supervisor" do
-    patch supervisor_url(@supervisor), params: { supervisor: {  } }
+    patch supervisor_url(@supervisor), params: { supervisor: { city: @supervisor.city, country: @supervisor.country, dob: @supervisor.dob, email: @supervisor.email, first_last_name: @supervisor.first_last_name, gender: @supervisor.gender, internal_password: @supervisor.internal_password, language: @supervisor.language, name: @supervisor.name, organization_code: @supervisor.organization_code, partner: @supervisor.partner, phone_number: @supervisor.phone_number, second_last_name: @supervisor.second_last_name, state: @supervisor.state, username: @supervisor.username } }
     assert_redirected_to supervisor_url(@supervisor)
   end
 

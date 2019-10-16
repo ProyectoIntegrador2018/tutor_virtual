@@ -5,6 +5,21 @@
 <table>
   <thead>
     <tr>
+      <th>Username</th>
+      <th>Internal password</th>
+      <th>Name</th>
+      <th>First last name</th>
+      <th>Second last name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Partner</th>
+      <th>Organization code</th>
+      <th>Gender</th>
+      <th>Dob</th>
+      <th>Phone number</th>
+      <th>Language</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +27,21 @@
   <tbody>
     <% @supervisors.each do |supervisor| %>
       <tr>
+        <td><%= supervisor.username %></td>
+        <td><%= supervisor.internal_password %></td>
+        <td><%= supervisor.name %></td>
+        <td><%= supervisor.first_last_name %></td>
+        <td><%= supervisor.second_last_name %></td>
+        <td><%= supervisor.email %></td>
+        <td><%= supervisor.country %></td>
+        <td><%= supervisor.state %></td>
+        <td><%= supervisor.city %></td>
+        <td><%= supervisor.partner %></td>
+        <td><%= supervisor.organization_code %></td>
+        <td><%= supervisor.gender %></td>
+        <td><%= supervisor.dob %></td>
+        <td><%= supervisor.phone_number %></td>
+        <td><%= supervisor.language %></td>
         <td><%= link_to 'Show', supervisor %></td>
         <td><%= link_to 'Edit', edit_supervisor_path(supervisor) %></td>
         <td><%= link_to 'Destroy', supervisor, method: :delete, data: { confirm: 'Are you sure?' } %></td>

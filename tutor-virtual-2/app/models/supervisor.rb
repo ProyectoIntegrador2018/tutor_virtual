@@ -1,2 +1,2 @@
-class Supervisor < Person
+class Supervisor < ApplicationRecord
 end

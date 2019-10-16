@@ -5,6 +5,21 @@
 <table>
   <thead>
     <tr>
+      <th>Username</th>
+      <th>Internal password</th>
+      <th>Name</th>
+      <th>First last name</th>
+      <th>Second last name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Partner</th>
+      <th>Organization code</th>
+      <th>Gender</th>
+      <th>Dob</th>
+      <th>Phone number</th>
+      <th>Language</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +27,21 @@
   <tbody>
     <% @tutors.each do |tutor| %>
       <tr>
+        <td><%= tutor.username %></td>
+        <td><%= tutor.internal_password %></td>
+        <td><%= tutor.name %></td>
+        <td><%= tutor.first_last_name %></td>
+        <td><%= tutor.second_last_name %></td>
+        <td><%= tutor.email %></td>
+        <td><%= tutor.country %></td>
+        <td><%= tutor.state %></td>
+        <td><%= tutor.city %></td>
+        <td><%= tutor.partner %></td>
+        <td><%= tutor.organization_code %></td>
+        <td><%= tutor.gender %></td>
+        <td><%= tutor.dob %></td>
+        <td><%= tutor.phone_number %></td>
+        <td><%= tutor.language %></td>
         <td><%= link_to 'Show', tutor %></td>
         <td><%= link_to 'Edit', edit_tutor_path(tutor) %></td>
         <td><%= link_to 'Destroy', tutor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
