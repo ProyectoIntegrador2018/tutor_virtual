@@ -266,3 +266,258 @@ puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
 puma (3.12.1) lib/puma/server.rb:474:in `process_client'
 puma (3.12.1) lib/puma/server.rb:334:in `block in run'
 puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateCourses (20191014223053)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "name" character varying, "course_code" character varying, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191014223053_create_courses.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191014223053"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateStudents (20191016002012)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191016002012_create_students.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016002012"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateTutors (20191016003811)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191016003811_create_tutors.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016003811"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateSupervisors (20191016004042)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "supervisors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191016004042_create_supervisors.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016004042"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateCoordinators (20191016004112)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "coordinators" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191016004112_create_coordinators.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016004112"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateStakeholders (20191016004149)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "stakeholders" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191016004149_create_stakeholders.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016004149"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+Migrating to CreateJoinTableCoursesStudents (20191016014246)
+  [1m[35m (1.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "courses_students" ("course_id" bigint NOT NULL, "student_id" bigint NOT NULL)[0m
+  ↳ db/migrate/20191016014246_create_join_table_courses_students.rb:3
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_course_id_and_student_id" ON "courses_students"  ("course_id", "student_id")[0m
+  ↳ db/migrate/20191016014246_create_join_table_courses_students.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_student_id_and_course_id" ON "courses_students"  ("student_id", "course_id")[0m
+  ↳ db/migrate/20191016014246_create_join_table_courses_students.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191016014246"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1480092826138518270)[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (135.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor-virtual-2_development"[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (134.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor-virtual-2_test"[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (272.3ms)[0m  [1m[35mCREATE DATABASE "tutor-virtual-2_development" ENCODING = 'unicode'[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (270.9ms)[0m  [1m[35mCREATE DATABASE "tutor-virtual-2_test" ENCODING = 'unicode'[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "coordinators" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "coordinators" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses" CASCADE[0m
+  ↳ db/schema.rb:38
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "name" character varying, "course_code" character varying, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:38
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses_students" CASCADE[0m
+  ↳ db/schema.rb:47
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "courses_students" ("course_id" bigint NOT NULL, "student_id" bigint NOT NULL)[0m
+  ↳ db/schema.rb:47
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_course_id_and_student_id" ON "courses_students"  ("course_id", "student_id")[0m
+  ↳ db/schema.rb:47
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_student_id_and_course_id" ON "courses_students"  ("student_id", "course_id")[0m
+  ↳ db/schema.rb:47
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "stakeholders" CASCADE[0m
+  ↳ db/schema.rb:54
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "stakeholders" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:54
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  ↳ db/schema.rb:74
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:74
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "supervisors" CASCADE[0m
+  ↳ db/schema.rb:94
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "supervisors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:94
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  ↳ db/schema.rb:114
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:114
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20191016014246)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20191016004042),
+(20191016004112),
+(20191016004149),
+(20191014223053),
+(20191016003811),
+(20191016002012);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (1.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-16 01:49:36.630292"], ["updated_at", "2019-10-16 01:49:36.630292"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "coordinators" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "coordinators" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses" CASCADE[0m
+  ↳ db/schema.rb:38
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "name" character varying, "course_code" character varying, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:38
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses_students" CASCADE[0m
+  ↳ db/schema.rb:47
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "courses_students" ("course_id" bigint NOT NULL, "student_id" bigint NOT NULL)[0m
+  ↳ db/schema.rb:47
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_course_id_and_student_id" ON "courses_students"  ("course_id", "student_id")[0m
+  ↳ db/schema.rb:47
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_student_id_and_course_id" ON "courses_students"  ("student_id", "course_id")[0m
+  ↳ db/schema.rb:47
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "stakeholders" CASCADE[0m
+  ↳ db/schema.rb:54
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "stakeholders" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:54
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  ↳ db/schema.rb:74
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:74
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "supervisors" CASCADE[0m
+  ↳ db/schema.rb:94
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "supervisors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:94
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  ↳ db/schema.rb:114
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:114
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20191016014246)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20191016004042),
+(20191016004112),
+(20191016004149),
+(20191014223053),
+(20191016003811),
+(20191016002012);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-16 01:49:36.717138"], ["updated_at", "2019-10-16 01:49:36.717138"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2019-10-16 01:49:36.720317"], ["key", "environment"]]
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/arturogonzalez/.rvm/gems/ruby-2.6.3/gems/rake-13.0.0/lib/rake/task.rb:280

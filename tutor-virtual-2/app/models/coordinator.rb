@@ -1,2 +1,2 @@
-class Coordinator < Person
+class Coordinator < ApplicationRecord
 end
