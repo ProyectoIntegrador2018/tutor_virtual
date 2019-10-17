@@ -51,6 +51,27 @@ ActiveRecord::Schema.define(version: 2019_10_16_233214) do
     t.index ["student_id", "course_id"], name: "index_courses_students_on_student_id_and_course_id"
   end
 
+  create_table "preinscritos", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.string "apellido_paterno", null: false
+    t.string "apellido_materno", null: false
+    t.string "correo_contacto"
+    t.string "cca"
+    t.boolean "estatus_user_mensajeria"
+    t.boolean "estatus_ins_mensajeria"
+    t.string "fecha_inscripcion"
+    t.string "genero"
+    t.string "fecha_nacimieto"
+    t.string "pais"
+    t.string "estado"
+    t.string "ciudad"
+    t.string "idioma"
+    t.integer "id_organizacion"
+    t.string "rol", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stakeholders", force: :cascade do |t|
     t.string "username"
     t.string "internal_password"
