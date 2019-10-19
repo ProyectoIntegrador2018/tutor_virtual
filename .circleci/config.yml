@@ -50,7 +50,6 @@ jobs:
 
       # Wait for DB
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-
       - run: rake db:create # creates the database
       - run: rake db:migrate
 
