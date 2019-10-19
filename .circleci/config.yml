@@ -28,13 +28,13 @@ jobs:
       # Reference: https://www.benpickles.com/articles/76-better-ruby-gem-caching-on-circleci
       - restore_cache:
           keys:
-            - bundler-{{ checksum "Gemfile.lock" }}
+            - bundler-{{ checksum "Gemfile.lock" }}-v1
             - bundler-
 
       - run: bundle install --clean --path vendor/bundle
 
       - save_cache:
-          key: bundler-{{ checksum "Gemfile.lock" }}
+          key: bundler-{{ checksum "Gemfile.lock" }}-v1
           paths:
             - vendor/bundle
 
@@ -45,16 +45,16 @@ jobs:
         paths:
           - vendor/bundle
 
-      # # Bundle install dependencies
+      # Bundle install dependencies
       - run: bundle install
 
       # Wait for DB
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: rake db:create # creates the database
-      - run: rails db:migrate
+      - run: rake db:migrate
 
       # Run the tests
-      - run: rails test
+      - run: rake test
 
   build_release:
     docker: # use the docker executor type
