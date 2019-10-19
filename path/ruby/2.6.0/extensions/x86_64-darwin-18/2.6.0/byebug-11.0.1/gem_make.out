@@ -1,0 +1,19 @@
+current directory: /Users/sergio/sdn/tec/tutor_virtual/path/ruby/2.6.0/gems/byebug-11.0.1/ext/byebug
+/Users/sergio/.rvm/rubies/ruby-2.6.3/bin/ruby -I /Users/sergio/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0 -r ./siteconf20191018-47188-1pg5al7.rb extconf.rb
+creating Makefile
+
+current directory: /Users/sergio/sdn/tec/tutor_virtual/path/ruby/2.6.0/gems/byebug-11.0.1/ext/byebug
+make "DESTDIR=" clean
+
+current directory: /Users/sergio/sdn/tec/tutor_virtual/path/ruby/2.6.0/gems/byebug-11.0.1/ext/byebug
+make "DESTDIR="
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.bundle
+
+current directory: /Users/sergio/sdn/tec/tutor_virtual/path/ruby/2.6.0/gems/byebug-11.0.1/ext/byebug
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 byebug.bundle ./.gem.20191018-47188-1jvhki/byebug
