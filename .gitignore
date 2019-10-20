@@ -36,3 +36,5 @@
 #Ignore backup Makefile
 *-e
 .env
+
+vendor/
