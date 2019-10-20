@@ -17,33 +17,34 @@ jobs:
 
     steps:
       - checkout
+      - run: sudo apt-get install libv8-dev
       # Restore Cached Dependencies
-      - type: cache-restore
-        name: Restore bundle cache
-        key: tutor_virtual-{{ checksum "Gemfile.lock" }}
+      # - type: cache-restore
+      #   name: Restore bundle cache
+      #   key: tutor_virtual-{{ checksum "Gemfile.lock" }}
 
       - run: gem install bundler:${BUNDLER_VERSION}
 
       # Caching Ruby Gems
       # Reference: https://www.benpickles.com/articles/76-better-ruby-gem-caching-on-circleci
-      - restore_cache:
-          keys:
-            - bundler-{{ checksum "Gemfile.lock" }}-v1
-            - bundler-
+      # - restore_cache:
+      #     keys:
+      #       - bundler-{{ checksum "Gemfile.lock" }}
+      #       - bundler-
 
-      - run: bundle install --clean --path vendor/bundle
+      # - run: bundle install --clean --path vendor/bundle
 
-      - save_cache:
-          key: bundler-{{ checksum "Gemfile.lock" }}-v1
-          paths:
-            - vendor/bundle
+      # - save_cache:
+      #     key: bundler-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - vendor/bundle
 
       # Cache Dependencies
-      - type: cache-save
-        name: Store bundle cache
-        key: tutor_virtual-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+      # - type: cache-save
+      #   name: Store bundle cache
+      #   key: tutor_virtual-{{ checksum "Gemfile.lock" }}
+      #   paths:
+      #     - vendor/bundle
 
       # Bundle install dependencies
       - run: bundle install
