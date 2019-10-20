@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
-  internal_password: MyString
-  name: MyString
-  first_last_name: MyString
-  second_last_name: MyString
-  email: MyString
-  country: MyString
-  state: MyString
-  city: MyString
-  partner: MyString
-  organization_code: MyString
+  username: JuanPerez
+  internal_password: 123456
+  name: Juan
+  first_last_name: Perez
+  second_last_name: Martinez
+  email: coordtest@example.com
+  country: Mexico
+  state: Nuevo Leon
+  city: Monterrey
+  partner:
+  organization_code:
   gender: 1
   dob: 2019-10-16
-  phone_number: MyString
-  language: MyString
+  phone_number: 8128394039
+  language: Spanish
 
 two:
   username: MyString
@@ -23,7 +23,7 @@ two:
   name: MyString
   first_last_name: MyString
   second_last_name: MyString
-  email: MyString
+  email: coordtest2@example.com
   country: MyString
   state: MyString
   city: MyString
