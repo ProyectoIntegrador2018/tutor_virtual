@@ -1,0 +1,1927 @@
+  [1m[35m (136.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor-virtual-2_test"[0m
+  [1m[35m (441.4ms)[0m  [1m[35mCREATE DATABASE "tutor-virtual-2_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "coordinators" CASCADE[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "coordinators" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses" CASCADE[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "name" character varying, "course_code" character varying, "start_date" date, "end_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses_students" CASCADE[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "courses_students" ("course_id" bigint NOT NULL, "student_id" bigint NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_course_id_and_student_id" ON "courses_students"  ("course_id", "student_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_courses_students_on_student_id_and_course_id" ON "courses_students"  ("student_id", "course_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "stakeholders" CASCADE[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "stakeholders" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "supervisors" CASCADE[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "supervisors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "username" character varying, "internal_password" character varying, "name" character varying, "first_last_name" character varying, "second_last_name" character varying, "email" character varying, "country" character varying, "state" character varying, "city" character varying, "partner" character varying, "organization_code" character varying, "gender" integer, "dob" date, "phone_number" character varying, "language" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20191016191914)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20191016191621),
+(20191016191700),
+(20191016191633),
+(20191016191056),
+(20191016191649),
+(20191016191421);
+
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2019-10-20 22:40:02.179536"], ["updated_at", "2019-10-20 22:40:02.179536"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "coordinators" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "courses_students" DISABLE TRIGGER ALL;ALTER TABLE "stakeholders" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "supervisors" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (3.1ms)[0m  [1m[31mDELETE FROM "coordinators";
+DELETE FROM "courses";
+DELETE FROM "supervisors";
+DELETE FROM "students";
+DELETE FROM "stakeholders";
+DELETE FROM "tutors";
+INSERT INTO "coordinators" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.362844', '2019-10-20 22:40:02.362844'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.362844', '2019-10-20 22:40:02.362844');
+INSERT INTO "courses" ("id", "name", "course_code", "start_date", "end_date", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2019-10-16', '2019-10-16', '2019-10-20 22:40:02.373082', '2019-10-20 22:40:02.373082'), (298486374, 'MyString', 'MyString', '2019-10-16', '2019-10-16', '2019-10-20 22:40:02.373082', '2019-10-20 22:40:02.373082');
+INSERT INTO "supervisors" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.377824', '2019-10-20 22:40:02.377824'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.377824', '2019-10-20 22:40:02.377824');
+INSERT INTO "students" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.383793', '2019-10-20 22:40:02.383793'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.383793', '2019-10-20 22:40:02.383793');
+INSERT INTO "stakeholders" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.390428', '2019-10-20 22:40:02.390428'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.390428', '2019-10-20 22:40:02.390428');
+INSERT INTO "tutors" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.400833', '2019-10-20 22:40:02.400833'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:40:02.400833', '2019-10-20 22:40:02.400833')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "coordinators" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "courses_students" ENABLE TRIGGER ALL;ALTER TABLE "stakeholders" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "supervisors" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+CoordinatorTest: test_email_validation_should_accept_valid_addresses
+--------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+CoordinatorsControllerTest: test_should_destroy_coordinator
+-----------------------------------------------------------
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+Started DELETE "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:40:02 -0500
+Processing by CoordinatorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Destroy (0.2ms)[0m  [1m[31mDELETE FROM "coordinators" WHERE "coordinators"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/coordinators
+Completed 302 Found in 9ms (ActiveRecord: 0.6ms)
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+CoordinatorsControllerTest: test_should_get_new
+-----------------------------------------------
+  [1m[36mCoordinator Load (0.6ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/new" for 127.0.0.1 at 2019-10-20 17:40:02 -0500
+Processing by CoordinatorsController#new as HTML
+  Rendering coordinators/new.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (26.4ms)
+  Rendered coordinators/new.html.erb within layouts/application (41.6ms)
+Completed 200 OK in 566ms (Views: 564.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (3.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CoordinatorsControllerTest: test_should_show_coordinator
+--------------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoordinatorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.4ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering coordinators/show.html.erb within layouts/application
+  Rendered coordinators/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 23ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoordinatorsControllerTest: test_should_get_edit
+------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/980190962/edit" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoordinatorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.4ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering coordinators/edit.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (6.5ms)
+  Rendered coordinators/edit.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 12ms (Views: 8.8ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+CoordinatorsControllerTest: test_should_create_coordinator
+----------------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+Started POST "/coordinators" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoordinatorsController#create as HTML
+  Parameters: {"coordinator"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "MyString"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering coordinators/new.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (8.9ms)
+  Rendered coordinators/new.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 21ms (Views: 10.8ms | ActiveRecord: 3.0ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+CoordinatorsControllerTest: test_should_update_coordinator
+----------------------------------------------------------
+  [1m[36mCoordinator Load (1.0ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoordinatorsController#update as HTML
+  Parameters: {"coordinator"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) AND "coordinators"."id" != $2 LIMIT $3[0m  [["email", "MyString"], ["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering coordinators/edit.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (7.0ms)
+  Rendered coordinators/edit.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 14ms (Views: 8.8ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+CoordinatorsControllerTest: test_should_get_index
+-------------------------------------------------
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoordinatorsController#index as HTML
+  Rendering coordinators/index.html.erb within layouts/application
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT "coordinators".* FROM "coordinators"[0m
+  Rendered coordinators/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+StakeholdersControllerTest: test_should_get_edit
+------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/980190962/edit" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering stakeholders/edit.html.erb within layouts/application
+  Rendered stakeholders/_form.html.erb (9.5ms)
+  Rendered stakeholders/edit.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 16ms (Views: 13.1ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+StakeholdersControllerTest: test_should_create_stakeholder
+----------------------------------------------------------
+  [1m[36mStakeholder Load (1.5ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+Started POST "/stakeholders" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#create as HTML
+  Parameters: {"stakeholder"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStakeholder Create (0.7ms)[0m  [1m[32mINSERT INTO "stakeholders" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:40:03.527993"], ["updated_at", "2019-10-20 22:40:03.527993"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders/980190963
+Completed 302 Found in 7ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+  [1m[36mStakeholder Load (0.5ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" ORDER BY "stakeholders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+StakeholdersControllerTest: test_should_destroy_stakeholder
+-----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+Started DELETE "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStakeholder Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stakeholders" WHERE "stakeholders"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders
+Completed 302 Found in 3ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+StakeholdersControllerTest: test_should_get_new
+-----------------------------------------------
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/new" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#new as HTML
+  Rendering stakeholders/new.html.erb within layouts/application
+  Rendered stakeholders/_form.html.erb (5.1ms)
+  Rendered stakeholders/new.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 9ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+StakeholdersControllerTest: test_should_update_stakeholder
+----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#update as HTML
+  Parameters: {"stakeholder"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders/980190962
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+StakeholdersControllerTest: test_should_show_stakeholder
+--------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering stakeholders/show.html.erb within layouts/application
+  Rendered stakeholders/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+StakeholdersControllerTest: test_should_get_index
+-------------------------------------------------
+  [1m[36mStakeholder Load (0.1ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StakeholdersController#index as HTML
+  Rendering stakeholders/index.html.erb within layouts/application
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT "stakeholders".* FROM "stakeholders"[0m
+  Rendered stakeholders/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+StudentsControllerTest: test_should_update_student
+--------------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/students/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#update as HTML
+  Parameters: {"student"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mStudent Load (1.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students/980190962
+Completed 302 Found in 12ms (ActiveRecord: 1.7ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+StudentsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/980190962/edit" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (1.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (5.2ms)
+  Rendered students/edit.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 13ms (Views: 9.5ms | ActiveRecord: 1.3ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+StudentsControllerTest: test_should_destroy_student
+---------------------------------------------------
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started DELETE "/students/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent::HABTM_Courses Destroy (1.5ms)[0m  [1m[31mDELETE FROM "courses_students" WHERE "courses_students"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mStudent Destroy (0.3ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students
+Completed 302 Found in 14ms (ActiveRecord: 3.1ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+StudentsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/new" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (10.3ms)
+  Rendered students/new.html.erb within layouts/application (10.8ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+StudentsControllerTest: test_should_create_student
+--------------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#create as HTML
+  Parameters: {"student"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.9ms)[0m  [1m[32mINSERT INTO "students" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:40:03.736692"], ["updated_at", "2019-10-20 22:40:03.736692"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students/980190963
+Completed 302 Found in 5ms (ActiveRecord: 1.2ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+StudentsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 5ms (Views: 3.3ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+StudentsControllerTest: test_should_show_student
+------------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoursesControllerTest: test_should_create_course
+------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+Started POST "/courses" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#create as HTML
+  Parameters: {"course"=>{"course_code"=>"MyString", "end_date"=>"2019-10-16", "name"=>"MyString", "start_date"=>"2019-10-16"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Create (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("name", "course_code", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "MyString"], ["course_code", "MyString"], ["start_date", "2019-10-16"], ["end_date", "2019-10-16"], ["created_at", "2019-10-20 22:40:03.772315"], ["updated_at", "2019-10-20 22:40:03.772315"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses/980190963
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" ORDER BY "courses"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+CoursesControllerTest: test_should_show_course
+----------------------------------------------
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  Rendered courses/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoursesControllerTest: test_should_update_course
+------------------------------------------------
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#update as HTML
+  Parameters: {"course"=>{"course_code"=>"MyString", "end_date"=>"2019-10-16", "name"=>"MyString", "start_date"=>"2019-10-16"}, "id"=>"980190962"}
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses/980190962
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+CoursesControllerTest: test_should_get_edit
+-------------------------------------------
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/980190962/edit" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.6ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering courses/edit.html.erb within layouts/application
+  Rendered courses/_form.html.erb (17.4ms)
+  Rendered courses/edit.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 33ms (Views: 28.9ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+CoursesControllerTest: test_should_get_index
+--------------------------------------------
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#index as HTML
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 5ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+CoursesControllerTest: test_should_destroy_course
+-------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+Started DELETE "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse::HABTM_Students Destroy (0.3ms)[0m  [1m[31mDELETE FROM "courses_students" WHERE "courses_students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mCourse Destroy (0.2ms)[0m  [1m[31mDELETE FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses
+Completed 302 Found in 4ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+CoursesControllerTest: test_should_get_new
+------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/new" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by CoursesController#new as HTML
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (4.8ms)
+  Rendered courses/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 11ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+SupervisorsControllerTest: test_should_get_new
+----------------------------------------------
+  [1m[36mSupervisor Load (1.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/new" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#new as HTML
+  Rendering supervisors/new.html.erb within layouts/application
+  Rendered supervisors/_form.html.erb (4.5ms)
+  Rendered supervisors/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+SupervisorsControllerTest: test_should_show_supervisor
+------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering supervisors/show.html.erb within layouts/application
+  Rendered supervisors/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+SupervisorsControllerTest: test_should_update_supervisor
+--------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#update as HTML
+  Parameters: {"supervisor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+SupervisorsControllerTest: test_should_get_edit
+-----------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/980190962/edit" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering supervisors/edit.html.erb within layouts/application
+  Rendered supervisors/_form.html.erb (7.6ms)
+  Rendered supervisors/edit.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 11ms (Views: 9.1ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+SupervisorsControllerTest: test_should_create_supervisor
+--------------------------------------------------------
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+Started POST "/supervisors" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#create as HTML
+  Parameters: {"supervisor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupervisor Create (0.3ms)[0m  [1m[32mINSERT INTO "supervisors" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:40:03.966564"], ["updated_at", "2019-10-20 22:40:03.966564"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors/980190963
+Completed 302 Found in 9ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" ORDER BY "supervisors"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+SupervisorsControllerTest: test_should_destroy_supervisor
+---------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+Started DELETE "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupervisor Destroy (0.9ms)[0m  [1m[31mDELETE FROM "supervisors" WHERE "supervisors"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors
+Completed 302 Found in 4ms (ActiveRecord: 1.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+SupervisorsControllerTest: test_should_get_index
+------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors" for 127.0.0.1 at 2019-10-20 17:40:03 -0500
+Processing by SupervisorsController#index as HTML
+  Rendering supervisors/index.html.erb within layouts/application
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT "supervisors".* FROM "supervisors"[0m
+  Rendered supervisors/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+TutorsControllerTest: test_should_show_tutor
+--------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+TutorsControllerTest: test_should_destroy_tutor
+-----------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+Started DELETE "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Destroy (0.2ms)[0m  [1m[31mDELETE FROM "tutors" WHERE "tutors"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors
+Completed 302 Found in 2ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+TutorsControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/980190962/edit" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering tutors/edit.html.erb within layouts/application
+  Rendered tutors/_form.html.erb (4.3ms)
+  Rendered tutors/edit.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 8ms (Views: 6.3ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+TutorsControllerTest: test_should_create_tutor
+----------------------------------------------
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+Started POST "/tutors" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"tutor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.4ms)[0m  [1m[32mINSERT INTO "tutors" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:40:04.074351"], ["updated_at", "2019-10-20 22:40:04.074351"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors/980190963
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" ORDER BY "tutors"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+TutorsControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#index as HTML
+  Rendering tutors/index.html.erb within layouts/application
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors"[0m
+  Rendered tutors/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+TutorsControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/new" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#new as HTML
+  Rendering tutors/new.html.erb within layouts/application
+  Rendered tutors/_form.html.erb (15.7ms)
+  Rendered tutors/new.html.erb within layouts/application (17.3ms)
+Completed 200 OK in 22ms (Views: 19.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+TutorsControllerTest: test_should_update_tutor
+----------------------------------------------
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:40:04 -0500
+Processing by TutorsController#update as HTML
+  Parameters: {"tutor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (1.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors/980190962
+Completed 302 Found in 9ms (ActiveRecord: 1.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "coordinators" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "courses_students" DISABLE TRIGGER ALL;ALTER TABLE "stakeholders" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "supervisors" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.8ms)[0m  [1m[31mDELETE FROM "coordinators";
+DELETE FROM "courses";
+DELETE FROM "supervisors";
+DELETE FROM "students";
+DELETE FROM "stakeholders";
+DELETE FROM "tutors";
+INSERT INTO "coordinators" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.148063', '2019-10-20 22:43:37.148063'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.148063', '2019-10-20 22:43:37.148063');
+INSERT INTO "courses" ("id", "name", "course_code", "start_date", "end_date", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2019-10-16', '2019-10-16', '2019-10-20 22:43:37.165296', '2019-10-20 22:43:37.165296'), (298486374, 'MyString', 'MyString', '2019-10-16', '2019-10-16', '2019-10-20 22:43:37.165296', '2019-10-20 22:43:37.165296');
+INSERT INTO "supervisors" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.178028', '2019-10-20 22:43:37.178028'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.178028', '2019-10-20 22:43:37.178028');
+INSERT INTO "students" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.184264', '2019-10-20 22:43:37.184264'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.184264', '2019-10-20 22:43:37.184264');
+INSERT INTO "stakeholders" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.189608', '2019-10-20 22:43:37.189608'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.189608', '2019-10-20 22:43:37.189608');
+INSERT INTO "tutors" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.193748', '2019-10-20 22:43:37.193748'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:43:37.193748', '2019-10-20 22:43:37.193748')[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "coordinators" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "courses_students" ENABLE TRIGGER ALL;ALTER TABLE "stakeholders" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "supervisors" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+SupervisorsControllerTest: test_should_create_supervisor
+--------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+Started POST "/supervisors" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#create as HTML
+  Parameters: {"supervisor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupervisor Create (0.2ms)[0m  [1m[32mINSERT INTO "supervisors" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:43:37.404516"], ["updated_at", "2019-10-20 22:43:37.404516"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors/980190963
+Completed 302 Found in 7ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+  [1m[36mSupervisor Load (0.1ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" ORDER BY "supervisors"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+SupervisorsControllerTest: test_should_get_edit
+-----------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/980190962/edit" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering supervisors/edit.html.erb within layouts/application
+  Rendered supervisors/_form.html.erb (18.2ms)
+  Rendered supervisors/edit.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 203ms (Views: 200.9ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+SupervisorsControllerTest: test_should_get_new
+----------------------------------------------
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/new" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#new as HTML
+  Rendering supervisors/new.html.erb within layouts/application
+  Rendered supervisors/_form.html.erb (6.1ms)
+  Rendered supervisors/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (1.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+SupervisorsControllerTest: test_should_destroy_supervisor
+---------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+Started DELETE "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupervisor Destroy (0.5ms)[0m  [1m[31mDELETE FROM "supervisors" WHERE "supervisors"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors
+Completed 302 Found in 4ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+SupervisorsControllerTest: test_should_get_index
+------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#index as HTML
+  Rendering supervisors/index.html.erb within layouts/application
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT "supervisors".* FROM "supervisors"[0m
+  Rendered supervisors/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 11ms (Views: 9.6ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+SupervisorsControllerTest: test_should_show_supervisor
+------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering supervisors/show.html.erb within layouts/application
+  Rendered supervisors/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+SupervisorsControllerTest: test_should_update_supervisor
+--------------------------------------------------------
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by SupervisorsController#update as HTML
+  Parameters: {"supervisor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors/980190962
+Completed 302 Found in 95ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+StakeholdersControllerTest: test_should_create_stakeholder
+----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+Started POST "/stakeholders" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#create as HTML
+  Parameters: {"stakeholder"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStakeholder Create (0.3ms)[0m  [1m[32mINSERT INTO "stakeholders" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:43:37.797313"], ["updated_at", "2019-10-20 22:43:37.797313"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+  [1m[36mStakeholder Load (0.1ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" ORDER BY "stakeholders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+StakeholdersControllerTest: test_should_get_index
+-------------------------------------------------
+  [1m[36mStakeholder Load (0.1ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#index as HTML
+  Rendering stakeholders/index.html.erb within layouts/application
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT "stakeholders".* FROM "stakeholders"[0m
+  Rendered stakeholders/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 7ms (Views: 4.7ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+StakeholdersControllerTest: test_should_get_new
+-----------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/new" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#new as HTML
+  Rendering stakeholders/new.html.erb within layouts/application
+  Rendered stakeholders/_form.html.erb (7.0ms)
+  Rendered stakeholders/new.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 10ms (Views: 9.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+StakeholdersControllerTest: test_should_show_stakeholder
+--------------------------------------------------------
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering stakeholders/show.html.erb within layouts/application
+  Rendered stakeholders/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+StakeholdersControllerTest: test_should_destroy_stakeholder
+-----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+Started DELETE "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStakeholder Destroy (0.2ms)[0m  [1m[31mDELETE FROM "stakeholders" WHERE "stakeholders"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders
+Completed 302 Found in 2ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+StakeholdersControllerTest: test_should_get_edit
+------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/980190962/edit" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering stakeholders/edit.html.erb within layouts/application
+  Rendered stakeholders/_form.html.erb (3.2ms)
+  Rendered stakeholders/edit.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+StakeholdersControllerTest: test_should_update_stakeholder
+----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by StakeholdersController#update as HTML
+  Parameters: {"stakeholder"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders/980190962
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+CoordinatorsControllerTest: test_should_get_new
+-----------------------------------------------
+  [1m[36mCoordinator Load (0.4ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/new" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#new as HTML
+  Rendering coordinators/new.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (5.2ms)
+  Rendered coordinators/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+CoordinatorsControllerTest: test_should_get_index
+-------------------------------------------------
+  [1m[36mCoordinator Load (0.6ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#index as HTML
+  Rendering coordinators/index.html.erb within layouts/application
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT "coordinators".* FROM "coordinators"[0m
+  Rendered coordinators/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+CoordinatorsControllerTest: test_should_update_coordinator
+----------------------------------------------------------
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#update as HTML
+  Parameters: {"coordinator"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) AND "coordinators"."id" != $2 LIMIT $3[0m  [["email", "MyString"], ["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering coordinators/edit.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (5.5ms)
+  Rendered coordinators/edit.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 12ms (Views: 7.3ms | ActiveRecord: 1.6ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+CoordinatorsControllerTest: test_should_create_coordinator
+----------------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+Started POST "/coordinators" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#create as HTML
+  Parameters: {"coordinator"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "MyString"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering coordinators/new.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (9.5ms)
+  Rendered coordinators/new.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 14ms (Views: 10.9ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+CoordinatorsControllerTest: test_should_destroy_coordinator
+-----------------------------------------------------------
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+Started DELETE "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Destroy (0.2ms)[0m  [1m[31mDELETE FROM "coordinators" WHERE "coordinators"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/coordinators
+Completed 302 Found in 1ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CoordinatorsControllerTest: test_should_show_coordinator
+--------------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering coordinators/show.html.erb within layouts/application
+  Rendered coordinators/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoordinatorsControllerTest: test_should_get_edit
+------------------------------------------------
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/980190962/edit" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoordinatorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering coordinators/edit.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (3.5ms)
+  Rendered coordinators/edit.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 5ms (Views: 4.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+CoursesControllerTest: test_should_get_new
+------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/new" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoursesController#new as HTML
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (3.0ms)
+  Rendered courses/new.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+CoursesControllerTest: test_should_get_index
+--------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoursesController#index as HTML
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+CoursesControllerTest: test_should_get_edit
+-------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/980190962/edit" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoursesController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering courses/edit.html.erb within layouts/application
+  Rendered courses/_form.html.erb (2.7ms)
+  Rendered courses/edit.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoursesControllerTest: test_should_update_course
+------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoursesController#update as HTML
+  Parameters: {"course"=>{"course_code"=>"MyString", "end_date"=>"2019-10-16", "name"=>"MyString", "start_date"=>"2019-10-16"}, "id"=>"980190962"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoursesControllerTest: test_should_create_course
+------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+Started POST "/courses" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoursesController#create as HTML
+  Parameters: {"course"=>{"course_code"=>"MyString", "end_date"=>"2019-10-16", "name"=>"MyString", "start_date"=>"2019-10-16"}}
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Create (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("name", "course_code", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "MyString"], ["course_code", "MyString"], ["start_date", "2019-10-16"], ["end_date", "2019-10-16"], ["created_at", "2019-10-20 22:43:37.994339"], ["updated_at", "2019-10-20 22:43:37.994339"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses/980190963
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" ORDER BY "courses"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+CoursesControllerTest: test_should_destroy_course
+-------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+Started DELETE "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:43:37 -0500
+Processing by CoursesController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse::HABTM_Students Destroy (0.4ms)[0m  [1m[31mDELETE FROM "courses_students" WHERE "courses_students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mCourse Destroy (0.2ms)[0m  [1m[31mDELETE FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses
+Completed 302 Found in 11ms (ActiveRecord: 1.7ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+CoursesControllerTest: test_should_show_course
+----------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  Rendered courses/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+StudentsControllerTest: test_should_destroy_student
+---------------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started DELETE "/students/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent::HABTM_Courses Destroy (0.7ms)[0m  [1m[31mDELETE FROM "courses_students" WHERE "courses_students"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mStudent Destroy (0.2ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students
+Completed 302 Found in 7ms (ActiveRecord: 1.3ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+StudentsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/new" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (5.6ms)
+  Rendered students/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+StudentsControllerTest: test_should_create_student
+--------------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#create as HTML
+  Parameters: {"student"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.3ms)[0m  [1m[32mINSERT INTO "students" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:43:38.060372"], ["updated_at", "2019-10-20 22:43:38.060372"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students/980190963
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+StudentsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+StudentsControllerTest: test_should_update_student
+--------------------------------------------------
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/students/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#update as HTML
+  Parameters: {"student"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students/980190962
+Completed 302 Found in 4ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+StudentsControllerTest: test_should_show_student
+------------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+StudentsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/980190962/edit" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (4.9ms)
+  Rendered students/edit.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+CoordinatorTest: test_email_validation_should_accept_valid_addresses
+--------------------------------------------------------------------
+  [1m[36mCoordinator Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "user@example.com"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "USER@foo.COM"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "A_US-ER@foo.bar.org"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "first.last@foo.jp"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "alice+bob@baz.cn"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+TutorsControllerTest: test_should_create_tutor
+----------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+Started POST "/tutors" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"tutor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:43:38.124042"], ["updated_at", "2019-10-20 22:43:38.124042"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors/980190963
+Completed 302 Found in 5ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" ORDER BY "tutors"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+TutorsControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#index as HTML
+  Rendering tutors/index.html.erb within layouts/application
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors"[0m
+  Rendered tutors/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+TutorsControllerTest: test_should_destroy_tutor
+-----------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+Started DELETE "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Destroy (0.4ms)[0m  [1m[31mDELETE FROM "tutors" WHERE "tutors"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors
+Completed 302 Found in 3ms (ActiveRecord: 1.0ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+TutorsControllerTest: test_should_show_tutor
+--------------------------------------------
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+TutorsControllerTest: test_should_update_tutor
+----------------------------------------------
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#update as HTML
+  Parameters: {"tutor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+TutorsControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/980190962/edit" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering tutors/edit.html.erb within layouts/application
+  Rendered tutors/_form.html.erb (8.9ms)
+  Rendered tutors/edit.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 12ms (Views: 11.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+TutorsControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/new" for 127.0.0.1 at 2019-10-20 17:43:38 -0500
+Processing by TutorsController#new as HTML
+  Rendering tutors/new.html.erb within layouts/application
+  Rendered tutors/_form.html.erb (5.4ms)
+  Rendered tutors/new.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "coordinators" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "courses_students" DISABLE TRIGGER ALL;ALTER TABLE "stakeholders" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "supervisors" DISABLE TRIGGER ALL;ALTER TABLE "tutors" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.8ms)[0m  [1m[31mDELETE FROM "coordinators";
+DELETE FROM "courses";
+DELETE FROM "supervisors";
+DELETE FROM "students";
+DELETE FROM "stakeholders";
+DELETE FROM "tutors";
+INSERT INTO "coordinators" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.123285', '2019-10-20 22:44:19.123285'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.123285', '2019-10-20 22:44:19.123285');
+INSERT INTO "courses" ("id", "name", "course_code", "start_date", "end_date", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2019-10-16', '2019-10-16', '2019-10-20 22:44:19.131957', '2019-10-20 22:44:19.131957'), (298486374, 'MyString', 'MyString', '2019-10-16', '2019-10-16', '2019-10-20 22:44:19.131957', '2019-10-20 22:44:19.131957');
+INSERT INTO "supervisors" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.134518', '2019-10-20 22:44:19.134518'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.134518', '2019-10-20 22:44:19.134518');
+INSERT INTO "students" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.137941', '2019-10-20 22:44:19.137941'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.137941', '2019-10-20 22:44:19.137941');
+INSERT INTO "stakeholders" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.141104', '2019-10-20 22:44:19.141104'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.141104', '2019-10-20 22:44:19.141104');
+INSERT INTO "tutors" ("id", "username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.144548', '2019-10-20 22:44:19.144548'), (298486374, 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', 1, '2019-10-16', 'MyString', 'MyString', '2019-10-20 22:44:19.144548', '2019-10-20 22:44:19.144548')[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "coordinators" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "courses_students" ENABLE TRIGGER ALL;ALTER TABLE "stakeholders" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "supervisors" ENABLE TRIGGER ALL;ALTER TABLE "tutors" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+StakeholdersControllerTest: test_should_update_stakeholder
+----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#update as HTML
+  Parameters: {"stakeholder"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mStakeholder Load (0.3ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders/980190962
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+StakeholdersControllerTest: test_should_create_stakeholder
+----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+Started POST "/stakeholders" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#create as HTML
+  Parameters: {"stakeholder"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStakeholder Create (0.3ms)[0m  [1m[32mINSERT INTO "stakeholders" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:44:19.232070"], ["updated_at", "2019-10-20 22:44:19.232070"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders/980190963
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" ORDER BY "stakeholders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+StakeholdersControllerTest: test_should_destroy_stakeholder
+-----------------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+Started DELETE "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStakeholder Destroy (0.2ms)[0m  [1m[31mDELETE FROM "stakeholders" WHERE "stakeholders"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/stakeholders
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "stakeholders"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+StakeholdersControllerTest: test_should_show_stakeholder
+--------------------------------------------------------
+  [1m[36mStakeholder Load (0.1ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.1ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering stakeholders/show.html.erb within layouts/application
+  Rendered stakeholders/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 158ms (Views: 157.1ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+StakeholdersControllerTest: test_should_get_index
+-------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#index as HTML
+  Rendering stakeholders/index.html.erb within layouts/application
+  [1m[36mStakeholder Load (0.5ms)[0m  [1m[34mSELECT "stakeholders".* FROM "stakeholders"[0m
+  Rendered stakeholders/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+StakeholdersControllerTest: test_should_get_new
+-----------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/new" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#new as HTML
+  Rendering stakeholders/new.html.erb within layouts/application
+  Rendered stakeholders/_form.html.erb (11.7ms)
+  Rendered stakeholders/new.html.erb within layouts/application (13.2ms)
+Completed 200 OK in 18ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+StakeholdersControllerTest: test_should_get_edit
+------------------------------------------------
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/stakeholders/980190962/edit" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StakeholdersController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStakeholder Load (0.2ms)[0m  [1m[34mSELECT  "stakeholders".* FROM "stakeholders" WHERE "stakeholders"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering stakeholders/edit.html.erb within layouts/application
+  Rendered stakeholders/_form.html.erb (4.2ms)
+  Rendered stakeholders/edit.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+CoordinatorTest: test_email_validation_should_accept_valid_addresses
+--------------------------------------------------------------------
+  [1m[36mCoordinator Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "user@example.com"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "USER@foo.COM"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "A_US-ER@foo.bar.org"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "first.last@foo.jp"], ["LIMIT", 1]]
+  [1m[36mCoordinator Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "alice+bob@baz.cn"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+SupervisorsControllerTest: test_should_destroy_supervisor
+---------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+Started DELETE "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.4ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupervisor Destroy (0.2ms)[0m  [1m[31mDELETE FROM "supervisors" WHERE "supervisors"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors
+Completed 302 Found in 3ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+SupervisorsControllerTest: test_should_get_new
+----------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/new" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#new as HTML
+  Rendering supervisors/new.html.erb within layouts/application
+  Rendered supervisors/_form.html.erb (35.5ms)
+  Rendered supervisors/new.html.erb within layouts/application (37.9ms)
+Completed 200 OK in 42ms (Views: 40.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+SupervisorsControllerTest: test_should_get_edit
+-----------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/980190962/edit" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering supervisors/edit.html.erb within layouts/application
+  Rendered supervisors/_form.html.erb (3.4ms)
+  Rendered supervisors/edit.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 5ms (Views: 4.5ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+SupervisorsControllerTest: test_should_show_supervisor
+------------------------------------------------------
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering supervisors/show.html.erb within layouts/application
+  Rendered supervisors/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+SupervisorsControllerTest: test_should_create_supervisor
+--------------------------------------------------------
+  [1m[36mSupervisor Load (0.1ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+Started POST "/supervisors" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#create as HTML
+  Parameters: {"supervisor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupervisor Create (0.3ms)[0m  [1m[32mINSERT INTO "supervisors" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:44:19.558981"], ["updated_at", "2019-10-20 22:44:19.558981"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "supervisors"[0m
+  [1m[36mSupervisor Load (0.2ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" ORDER BY "supervisors"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+SupervisorsControllerTest: test_should_get_index
+------------------------------------------------
+  [1m[36mSupervisor Load (0.1ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/supervisors" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#index as HTML
+  Rendering supervisors/index.html.erb within layouts/application
+  [1m[36mSupervisor Load (0.7ms)[0m  [1m[34mSELECT "supervisors".* FROM "supervisors"[0m
+  Rendered supervisors/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+SupervisorsControllerTest: test_should_update_supervisor
+--------------------------------------------------------
+  [1m[36mSupervisor Load (0.1ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/supervisors/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by SupervisorsController#update as HTML
+  Parameters: {"supervisor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mSupervisor Load (0.3ms)[0m  [1m[34mSELECT  "supervisors".* FROM "supervisors" WHERE "supervisors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/supervisors/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CoordinatorsControllerTest: test_should_show_coordinator
+--------------------------------------------------------
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering coordinators/show.html.erb within layouts/application
+  Rendered coordinators/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 5ms (Views: 3.3ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+CoordinatorsControllerTest: test_should_update_coordinator
+----------------------------------------------------------
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#update as HTML
+  Parameters: {"coordinator"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mCoordinator Load (0.4ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) AND "coordinators"."id" != $2 LIMIT $3[0m  [["email", "MyString"], ["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering coordinators/edit.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (7.6ms)
+  Rendered coordinators/edit.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 16ms (Views: 10.6ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------
+CoordinatorsControllerTest: test_should_create_coordinator
+----------------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+Started POST "/coordinators" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#create as HTML
+  Parameters: {"coordinator"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "coordinators" WHERE LOWER("coordinators"."email") = LOWER($1) LIMIT $2[0m  [["email", "MyString"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering coordinators/new.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (5.3ms)
+  Rendered coordinators/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 13ms (Views: 7.6ms | ActiveRecord: 1.3ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+CoordinatorsControllerTest: test_should_destroy_coordinator
+-----------------------------------------------------------
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+Started DELETE "/coordinators/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCoordinator Destroy (0.2ms)[0m  [1m[31mDELETE FROM "coordinators" WHERE "coordinators"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/coordinators
+Completed 302 Found in 2ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "coordinators"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoordinatorsControllerTest: test_should_get_edit
+------------------------------------------------
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/980190962/edit" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering coordinators/edit.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (3.2ms)
+  Rendered coordinators/edit.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+CoordinatorsControllerTest: test_should_get_index
+-------------------------------------------------
+  [1m[36mCoordinator Load (0.2ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#index as HTML
+  Rendering coordinators/index.html.erb within layouts/application
+  [1m[36mCoordinator Load (0.3ms)[0m  [1m[34mSELECT "coordinators".* FROM "coordinators"[0m
+  Rendered coordinators/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+CoordinatorsControllerTest: test_should_get_new
+-----------------------------------------------
+  [1m[36mCoordinator Load (0.1ms)[0m  [1m[34mSELECT  "coordinators".* FROM "coordinators" WHERE "coordinators"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/coordinators/new" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoordinatorsController#new as HTML
+  Rendering coordinators/new.html.erb within layouts/application
+  Rendered coordinators/_form.html.erb (3.2ms)
+  Rendered coordinators/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 4ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+StudentsControllerTest: test_should_show_student
+------------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+StudentsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/new" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (4.2ms)
+  Rendered students/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+StudentsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+StudentsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/students/980190962/edit" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (3.2ms)
+  Rendered students/edit.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+StudentsControllerTest: test_should_create_student
+--------------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#create as HTML
+  Parameters: {"student"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:44:19.707236"], ["updated_at", "2019-10-20 22:44:19.707236"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+StudentsControllerTest: test_should_destroy_student
+---------------------------------------------------
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started DELETE "/students/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mStudent Load (0.9ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent::HABTM_Courses Destroy (0.4ms)[0m  [1m[31mDELETE FROM "courses_students" WHERE "courses_students"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mStudent Destroy (0.3ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students
+Completed 302 Found in 15ms (ActiveRecord: 2.7ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+StudentsControllerTest: test_should_update_student
+--------------------------------------------------
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/students/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by StudentsController#update as HTML
+  Parameters: {"student"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/students/980190962
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+TutorsControllerTest: test_should_create_tutor
+----------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+Started POST "/tutors" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"tutor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("username", "internal_password", "name", "first_last_name", "second_last_name", "email", "country", "state", "city", "partner", "organization_code", "gender", "dob", "phone_number", "language", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["username", "MyString"], ["internal_password", "MyString"], ["name", "MyString"], ["first_last_name", "MyString"], ["second_last_name", "MyString"], ["email", "MyString"], ["country", "MyString"], ["state", "MyString"], ["city", "MyString"], ["partner", "MyString"], ["organization_code", "MyString"], ["gender", 1], ["dob", "2019-10-16"], ["phone_number", "MyString"], ["language", "MyString"], ["created_at", "2019-10-20 22:44:19.775800"], ["updated_at", "2019-10-20 22:44:19.775800"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors/980190963
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" ORDER BY "tutors"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+TutorsControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#index as HTML
+  Rendering tutors/index.html.erb within layouts/application
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors"[0m
+  Rendered tutors/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+TutorsControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/980190962/edit" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering tutors/edit.html.erb within layouts/application
+  Rendered tutors/_form.html.erb (6.6ms)
+  Rendered tutors/edit.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 12ms (Views: 9.9ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+TutorsControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/new" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#new as HTML
+  Rendering tutors/new.html.erb within layouts/application
+  Rendered tutors/_form.html.erb (3.6ms)
+  Rendered tutors/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+TutorsControllerTest: test_should_show_tutor
+--------------------------------------------
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+TutorsControllerTest: test_should_update_tutor
+----------------------------------------------
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#update as HTML
+  Parameters: {"tutor"=>{"city"=>"MyString", "country"=>"MyString", "dob"=>"2019-10-16", "email"=>"MyString", "first_last_name"=>"MyString", "gender"=>"1", "internal_password"=>"[FILTERED]", "language"=>"MyString", "name"=>"MyString", "organization_code"=>"MyString", "partner"=>"MyString", "phone_number"=>"MyString", "second_last_name"=>"MyString", "state"=>"MyString", "username"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+TutorsControllerTest: test_should_destroy_tutor
+-----------------------------------------------
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+Started DELETE "/tutors/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by TutorsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Destroy (0.3ms)[0m  [1m[31mDELETE FROM "tutors" WHERE "tutors"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tutors
+Completed 302 Found in 3ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tutors"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoursesControllerTest: test_should_create_course
+------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+Started POST "/courses" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#create as HTML
+  Parameters: {"course"=>{"course_code"=>"MyString", "end_date"=>"2019-10-16", "name"=>"MyString", "start_date"=>"2019-10-16"}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Create (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("name", "course_code", "start_date", "end_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "MyString"], ["course_code", "MyString"], ["start_date", "2019-10-16"], ["end_date", "2019-10-16"], ["created_at", "2019-10-20 22:44:19.845922"], ["updated_at", "2019-10-20 22:44:19.845922"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses/980190963
+Completed 302 Found in 4ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" ORDER BY "courses"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+CoursesControllerTest: test_should_destroy_course
+-------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+Started DELETE "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse::HABTM_Students Destroy (0.2ms)[0m  [1m[31mDELETE FROM "courses_students" WHERE "courses_students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mCourse Destroy (0.1ms)[0m  [1m[31mDELETE FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses
+Completed 302 Found in 3ms (ActiveRecord: 0.7ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "courses"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+CoursesControllerTest: test_should_update_course
+------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#update as HTML
+  Parameters: {"course"=>{"course_code"=>"MyString", "end_date"=>"2019-10-16", "name"=>"MyString", "start_date"=>"2019-10-16"}, "id"=>"980190962"}
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/courses/980190962
+Completed 302 Found in 4ms (ActiveRecord: 0.7ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+CoursesControllerTest: test_should_get_edit
+-------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/980190962/edit" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering courses/edit.html.erb within layouts/application
+  Rendered courses/_form.html.erb (3.2ms)
+  Rendered courses/edit.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+CoursesControllerTest: test_should_get_index
+--------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#index as HTML
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+CoursesControllerTest: test_should_get_new
+------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/new" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#new as HTML
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (2.7ms)
+  Rendered courses/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+CoursesControllerTest: test_should_show_course
+----------------------------------------------
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/courses/980190962" for 127.0.0.1 at 2019-10-20 17:44:19 -0500
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  Rendered courses/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
