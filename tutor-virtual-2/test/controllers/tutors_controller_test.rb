@@ -15,14 +15,6 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create tutor" do
-    assert_difference('Tutor.count') do
-      post tutors_url, params: { tutor: { city: @tutor.city, country: @tutor.country, dob: @tutor.dob, email: @tutor.email, first_last_name: @tutor.first_last_name, gender: @tutor.gender, internal_password: @tutor.internal_password, language: @tutor.language, name: @tutor.name, organization_code: @tutor.organization_code, partner: @tutor.partner, phone_number: @tutor.phone_number, second_last_name: @tutor.second_last_name, state: @tutor.state, username: @tutor.username } }
-    end
-
-    assert_redirected_to tutor_url(Tutor.last)
-  end
-
   test "should show tutor" do
     get tutor_url(@tutor)
     assert_response :success
