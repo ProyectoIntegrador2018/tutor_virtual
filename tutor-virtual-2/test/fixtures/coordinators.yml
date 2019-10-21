@@ -6,7 +6,7 @@ one:
   name: Juan
   first_last_name: Perez
   second_last_name: Martinez
-  email: coordtest@example.com
+  email: test@test.com
   country: Mexico
   state: Nuevo Leon
   city: Monterrey

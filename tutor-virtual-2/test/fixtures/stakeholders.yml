@@ -6,7 +6,7 @@ one:
   name: MyString
   first_last_name: MyString
   second_last_name: MyString
-  email: MyString
+  email: stakeholder@example.com
   country: MyString
   state: MyString
   city: MyString
@@ -23,7 +23,7 @@ two:
   name: MyString
   first_last_name: MyString
   second_last_name: MyString
-  email: MyString
+  email: stakeholder2@example.com
   country: MyString
   state: MyString
   city: MyString
