@@ -15,14 +15,6 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create student" do
-    assert_difference('Student.count') do
-      post students_url, params: { student: { city: @student.city, country: @student.country, dob: @student.dob, email: @student.email, first_last_name: @student.first_last_name, gender: @student.gender, internal_password: @student.internal_password, language: @student.language, name: @student.name, organization_code: @student.organization_code, partner: @student.partner, phone_number: @student.phone_number, second_last_name: @student.second_last_name, state: @student.state, username: @student.username } }
-    end
-
-    assert_redirected_to student_url(Student.last)
-  end
-
   test "should show student" do
     get student_url(@student)
     assert_response :success
