@@ -7,9 +7,33 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
+    <% unless !(user_signed_in?) %>
+      <div class="sidebar-container">
+
+        <div class="sidebar-logo">
+          <%= image_tag "logo.png"%>
+          <h5 class="username">Bienvenido <%= current_user.email %>!</h5>
+        </div>
+        
+        <ul class="sidebar-navigation">
+
+          <li>
+              <%= link_to home_index_url do %> Inicio <% end %>
+          </li>
+
+          <li>
+              <%= link_to courses_url do %> Cursos <% end %>
+          </li>
+
+        </ul>
+      </div>
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>
