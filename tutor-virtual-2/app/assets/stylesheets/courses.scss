@@ -1,3 +1,35 @@
 // Place all the styles related to the Courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.scroll {
+
+     max-height: 400px;
+     overflow: auto;
+}
+
+.course_name{
+  width: 25%;
+}
+
+.course_date, .course_code{
+  width: 15%;
+}
+
+.course_extra{
+  width: 7.5%;
+}
+
+.course_header{
+  width: 99% !important;
+  margin-bottom: 0px !important;
+}
+
+.jumbotron{
+  padding: 2rem !important;
+}
+
+.course_form{
+  width: 35%;
+}

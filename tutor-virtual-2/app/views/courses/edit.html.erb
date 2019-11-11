@@ -1,6 +1,15 @@
-<h1>Editing Course</h1>
 
-<%= render 'form', course: @course %>
 
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
+
+      <h1>Editing Course</h1>
+
+      <%= render 'form', course: @course %>
+
+      <%= link_to 'Show', @course %> |
+      <%= link_to 'Back', courses_path %>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,12 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    if params[:search]
+      @courses = Course.where('name ILIKE ?', "%#{params[:search]}%").order("start_date DESC", "name")
+
+    else
+      @courses = Course.order("start_date DESC", "name")
+    end
   end
 
   # GET /courses/1
@@ -15,6 +20,11 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
+  end
+
+  def import
+   Course.import(params[:file])
+   redirect_to courses_path
   end
 
   # GET /courses/1/edit
@@ -59,6 +69,29 @@ class CoursesController < ApplicationController
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:course_ids]
+      Course.destroy(params[:course_ids])
+      message = {notice: 'Curso borrado con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos un curso.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to courses_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Course.all.each do  |course|
+      course.destroy
+    end
+
+    redirect_to courses_path, notice: "Cursos Borrados Exitosamente"
   end
 
   private

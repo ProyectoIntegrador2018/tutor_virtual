@@ -10,7 +10,13 @@ Rails.application.routes.draw do
       resources :stakeholders
       resources :coordinators
       resources :students
-      resources :courses
+
+      resources :courses do
+		      collection { post :import }
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+	    end
+
       get "/logout" => "devise/sessions#destroy"
     end
 

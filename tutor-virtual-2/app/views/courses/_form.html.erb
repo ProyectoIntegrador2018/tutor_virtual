@@ -11,17 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <br>
+
+  <div class="field course_form">
+    <%= form.label :name, class: "sr-only" %>
+    <%= form.text_field :name, placeholder: "Nombre", class: "form-control" ,required: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :course_code %>
-    <%= form.text_field :course_code %>
+  <div class="field course_form">
+    <%= form.label :course_code, class: "sr-only"%>
+    <%= form.text_field :course_code, placeholder: "Codigo Del Curso", class: "form-control" %>
   </div>
 
-  <div class="field">
+
+
+  <div class="field
+
     <%= form.label :start_date %>
     <%= form.date_select :start_date %>
   </div>

@@ -18,7 +18,7 @@
           <%= image_tag "logo.png"%>
           <h5 class="username">Bienvenido <%= current_user.email %>!</h5>
         </div>
-        
+
         <ul class="sidebar-navigation">
 
           <li>
@@ -27,6 +27,10 @@
 
           <li>
               <%= link_to courses_url do %> Cursos <% end %>
+          </li>
+
+          <li>
+              <%= link_to logout_url do %> Cerrar Sesión <% end %>
           </li>
 
         </ul>
