@@ -4,7 +4,12 @@ class StakeholdersController < ApplicationController
   # GET /stakeholders
   # GET /stakeholders.json
   def index
-    @stakeholders = Stakeholder.all
+    if params[:search]
+      @stakeholders = Stakeholder.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+
+    else
+      @stakeholders = Stakeholder.order("name DESC")
+    end
   end
 
   # GET /stakeholders/1
@@ -59,6 +64,29 @@ class StakeholdersController < ApplicationController
       format.html { redirect_to stakeholders_url, notice: 'Stakeholder was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:stakeholder_ids]
+      Stakeholder.destroy(params[:stakeholder_ids])
+      message = {notice: 'borrado con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos uno.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to stakeholders_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Stakeholder.all.each do  |stakeholder|
+      stakeholder.destroy
+    end
+
+    redirect_to stakeholders_path, notice: "Borrados Exitosamente"
   end
 
   private

@@ -4,7 +4,13 @@ class CoordinatorsController < ApplicationController
   # GET /coordinators
   # GET /coordinators.json
   def index
-    @coordinators = Coordinator.all
+    if params[:search]
+      @coordinators = Coordinator.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+
+    else
+      @coordinators = Coordinator.order("name DESC")
+    end
+
   end
 
   # GET /coordinators/1
@@ -59,6 +65,29 @@ class CoordinatorsController < ApplicationController
       format.html { redirect_to coordinators_url, notice: 'Coordinator was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:coordinator_ids]
+      Coordinator.destroy(params[:coordinator_ids])
+      message = {notice: 'Borrado con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos uno.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to coordinators_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Coordinator.all.each do  |coordinator|
+      coordinator.destroy
+    end
+
+    redirect_to coordinators_path, notice: "Borrados Exitosamente"
   end
 
   private

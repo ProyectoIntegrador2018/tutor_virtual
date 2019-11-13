@@ -4,7 +4,12 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    if params[:search]
+      @students = Student.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+
+    else
+      @students = Student.order("name DESC")
+    end
   end
 
   # GET /students/1
@@ -15,6 +20,11 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+  end
+
+  def import
+   Student.import(params[:file])
+   redirect_to students_path
   end
 
   # GET /students/1/edit
@@ -59,6 +69,29 @@ class StudentsController < ApplicationController
       format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:student_ids]
+      Student.destroy(params[:student_ids])
+      message = {notice: 'Preinsctito borrados con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos un Preinsctitos.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to students_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Student.all.each do  |student|
+      student.destroy
+    end
+
+    redirect_to students_path, notice: "Preinsctitos Borrados Exitosamente"
   end
 
   private
