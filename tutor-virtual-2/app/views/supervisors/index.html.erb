@@ -1,55 +1,77 @@
-<p id="notice"><%= notice %></p>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
 
-<h1>Supervisors</h1>
+      <h1>Supervisors</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Internal password</th>
-      <th>Name</th>
-      <th>First last name</th>
-      <th>Second last name</th>
-      <th>Email</th>
-      <th>Country</th>
-      <th>State</th>
-      <th>City</th>
-      <th>Partner</th>
-      <th>Organization code</th>
-      <th>Gender</th>
-      <th>Dob</th>
-      <th>Phone number</th>
-      <th>Language</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="md-form mt-0">
+        <%= form_tag(supervisors_path, method: :get) do %>
+          <%= text_field_tag :search,"", class: "form-control", placeholder: "Busqueda" %>
+        <% end %>
+      </div><br>
 
-  <tbody>
-    <% @supervisors.each do |supervisor| %>
-      <tr>
-        <td><%= supervisor.username %></td>
-        <td><%= supervisor.internal_password %></td>
-        <td><%= supervisor.name %></td>
-        <td><%= supervisor.first_last_name %></td>
-        <td><%= supervisor.second_last_name %></td>
-        <td><%= supervisor.email %></td>
-        <td><%= supervisor.country %></td>
-        <td><%= supervisor.state %></td>
-        <td><%= supervisor.city %></td>
-        <td><%= supervisor.partner %></td>
-        <td><%= supervisor.organization_code %></td>
-        <td><%= supervisor.gender %></td>
-        <td><%= supervisor.dob %></td>
-        <td><%= supervisor.phone_number %></td>
-        <td><%= supervisor.language %></td>
-        <td><%= link_to 'Show', supervisor %></td>
-        <td><%= link_to 'Edit', edit_supervisor_path(supervisor) %></td>
-        <td><%= link_to 'Destroy', supervisor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <%= form_tag destroy_multiple_supervisors_path, method: :delete do %>
 
-<br>
+      <table class="table table-hover table-fixed course_header">
+        <!--Table head-->
+        <thead >
+          <tr>
+            <th class="">Nombre</th>
+            <th>First last name</th>
+            <th>Second last name</th>
+            <th>Username</th>
+            <th>Internal password</th>
+            <th>Email</th>
+            <th colspan="4"></th>
+          </tr>
+        </thead>
+        <!--Table head-->
+      </table>
 
-<%= link_to 'New Supervisor', new_supervisor_path %>
+      <div class="scroll">
+        <table class="table table-hover table-fixed">
+
+          <!--Table body-->
+            <tbody>
+              <% @supervisors.each do |supervisor| %>
+                <tr>
+                  <td class=""><%= supervisor.name %></td>
+                  <td><%= supervisor.first_last_name %></td>
+                  <td><%= supervisor.second_last_name %></td>
+                  <td><%= supervisor.username %></td>
+                  <td><%= supervisor.internal_password %></td>
+                  <td><%= supervisor.email %></td>
+                  <td class=""><%= link_to 'Ver', supervisor %></td>
+                  <td class=""><%= link_to 'Editar', edit_supervisor_path(supervisor) %></td>
+                  <td class=""><%= link_to 'Borrar', supervisor, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
+                  <td class=""><%= check_box_tag "supervisor_ids[]", supervisor.id, false, class: 'selectable' %></td>
+
+                </tr>
+
+              <% end %>
+            </tbody>
+          <!--Table body-->
+        </table>
+
+
+
+      </div>
+
+
+
+      <%= submit_tag "Delete selected", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
+      <% end %>
+
+
+      <%= link_to destroy_all_supervisors_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
+      Borrar Todos
+      <% end %>
+
+      <br>
+      <%= link_to '+ Crear', new_student_path, class: "btn btn-success"%>
+
+
+
+    </div>
+  </div>
+</div>

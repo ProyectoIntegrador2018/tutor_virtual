@@ -1,79 +1,87 @@
-<p id="notice"><%= notice %></p>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
 
-<p>
-  <strong>Username:</strong>
-  <%= @supervisor.username %>
-</p>
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Internal password:</strong>
-  <%= @supervisor.internal_password %>
-</p>
+      <p>
+        <strong>Username:</strong>
+        <%= @supervisor.username %>
+      </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @supervisor.name %>
-</p>
+      <p>
+        <strong>Internal password:</strong>
+        <%= @supervisor.internal_password %>
+      </p>
 
-<p>
-  <strong>First last name:</strong>
-  <%= @supervisor.first_last_name %>
-</p>
+      <p>
+        <strong>Name:</strong>
+        <%= @supervisor.name %>
+      </p>
 
-<p>
-  <strong>Second last name:</strong>
-  <%= @supervisor.second_last_name %>
-</p>
+      <p>
+        <strong>First last name:</strong>
+        <%= @supervisor.first_last_name %>
+      </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @supervisor.email %>
-</p>
+      <p>
+        <strong>Second last name:</strong>
+        <%= @supervisor.second_last_name %>
+      </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @supervisor.country %>
-</p>
+      <p>
+        <strong>Email:</strong>
+        <%= @supervisor.email %>
+      </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @supervisor.state %>
-</p>
+      <p>
+        <strong>Country:</strong>
+        <%= @supervisor.country %>
+      </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @supervisor.city %>
-</p>
+      <p>
+        <strong>State:</strong>
+        <%= @supervisor.state %>
+      </p>
 
-<p>
-  <strong>Partner:</strong>
-  <%= @supervisor.partner %>
-</p>
+      <p>
+        <strong>City:</strong>
+        <%= @supervisor.city %>
+      </p>
 
-<p>
-  <strong>Organization code:</strong>
-  <%= @supervisor.organization_code %>
-</p>
+      <p>
+        <strong>Partner:</strong>
+        <%= @supervisor.partner %>
+      </p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @supervisor.gender %>
-</p>
+      <p>
+        <strong>Organization code:</strong>
+        <%= @supervisor.organization_code %>
+      </p>
 
-<p>
-  <strong>Dob:</strong>
-  <%= @supervisor.dob %>
-</p>
+      <p>
+        <strong>Gender:</strong>
+        <%= @supervisor.gender %>
+      </p>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @supervisor.phone_number %>
-</p>
+      <p>
+        <strong>Dob:</strong>
+        <%= @supervisor.dob %>
+      </p>
 
-<p>
-  <strong>Language:</strong>
-  <%= @supervisor.language %>
-</p>
+      <p>
+        <strong>Phone number:</strong>
+        <%= @supervisor.phone_number %>
+      </p>
 
-<%= link_to 'Edit', edit_supervisor_path(@supervisor) %> |
-<%= link_to 'Back', supervisors_path %>
+      <p>
+        <strong>Language:</strong>
+        <%= @supervisor.language %>
+      </p>
+
+      <%= link_to 'Edit', edit_supervisor_path(@supervisor) %> |
+      <%= link_to 'Back', supervisors_path %>
+
+    </div>
+  </div>
+</div>
