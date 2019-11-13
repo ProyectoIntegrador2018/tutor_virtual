@@ -4,7 +4,12 @@ class SupervisorsController < ApplicationController
   # GET /supervisors
   # GET /supervisors.json
   def index
-    @supervisors = Supervisor.all
+    if params[:search]
+      @supervisors = Supervisor.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+
+    else
+      @supervisors = Supervisor.order("name DESC")
+    end
   end
 
   # GET /supervisors/1
@@ -59,6 +64,29 @@ class SupervisorsController < ApplicationController
       format.html { redirect_to supervisors_url, notice: 'Supervisor was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:supervisor_ids]
+      Supervisor.destroy(params[:supervisor_ids])
+      message = {notice: 'Borrado con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos uno.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to supervisors_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Supervisor.all.each do  |supervisor|
+      supervisor.destroy
+    end
+
+    redirect_to supervisors_path, notice: "Borrados Exitosamente"
   end
 
   private
