@@ -21,17 +21,14 @@
 
         <ul class="sidebar-navigation">
 
-          <li>
-              <%= link_to home_index_url do %> Inicio <% end %>
-          </li>
-
-          <li>
-              <%= link_to courses_url do %> Cursos <% end %>
-          </li>
-
-          <li>
-              <%= link_to logout_url do %> Cerrar Sesión <% end %>
-          </li>
+          <li><%= link_to home_index_url do %> Inicio <% end %></li>
+          <li><%= link_to courses_url do %> Cursos <% end %></li>
+          <li><%= link_to tutors_url do %> Tutores <% end %></li>
+          <li><%= link_to students_url do %> Preinscritos <% end %></li>
+          <li><%= link_to coordinators_url do %> Coordinadores <% end %></li>
+          <li><%= link_to supervisors_url do %> Supervisores <% end %></li>
+          <li><%= link_to stakeholders_url do %> Stakeholders <% end %></li>
+          <li><%= link_to logout_url do %> Cerrar Sesión <% end %></li>
 
         </ul>
       </div>

@@ -1,92 +1,100 @@
-<%= form_with(model: tutor, local: true) do |form| %>
-  <% if tutor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(tutor.errors.count, "error") %> prohibited this tutor from being saved:</h2>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
 
-      <ul>
-      <% tutor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <%= form_with(model: tutor, local: true) do |form| %>
+      <% if tutor.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(tutor.errors.count, "error") %> prohibited this tutor from being saved:</h2>
+
+        <ul>
+          <% tutor.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
       <% end %>
-      </ul>
+
+      <div class="field">
+        <%= form.label :username %>
+        <%= form.text_field :username %>
+      </div>
+
+      <div class="field">
+        <%= form.label :internal_password %>
+        <%= form.text_field :internal_password %>
+      </div>
+
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :first_last_name %>
+        <%= form.text_field :first_last_name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :second_last_name %>
+        <%= form.text_field :second_last_name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+      </div>
+
+      <div class="field">
+        <%= form.label :country %>
+        <%= form.text_field :country %>
+      </div>
+
+      <div class="field">
+        <%= form.label :state %>
+        <%= form.text_field :state %>
+      </div>
+
+      <div class="field">
+        <%= form.label :city %>
+        <%= form.text_field :city %>
+      </div>
+
+      <div class="field">
+        <%= form.label :partner %>
+        <%= form.text_field :partner %>
+      </div>
+
+      <div class="field">
+        <%= form.label :organization_code %>
+        <%= form.text_field :organization_code %>
+      </div>
+
+      <div class="field">
+        <%= form.label :gender %>
+        <%= form.number_field :gender %>
+      </div>
+
+      <div class="field">
+        <%= form.label :dob %>
+        <%= form.date_select :dob %>
+      </div>
+
+      <div class="field">
+        <%= form.label :phone_number %>
+        <%= form.text_field :phone_number %>
+      </div>
+
+      <div class="field">
+        <%= form.label :language %>
+        <%= form.text_field :language %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+      <% end %>
+      
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
   </div>
-
-  <div class="field">
-    <%= form.label :internal_password %>
-    <%= form.text_field :internal_password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :first_last_name %>
-    <%= form.text_field :first_last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :second_last_name %>
-    <%= form.text_field :second_last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= form.label :partner %>
-    <%= form.text_field :partner %>
-  </div>
-
-  <div class="field">
-    <%= form.label :organization_code %>
-    <%= form.text_field :organization_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.number_field :gender %>
-  </div>
-
-  <div class="field">
-    <%= form.label :dob %>
-    <%= form.date_select :dob %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :language %>
-    <%= form.text_field :language %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

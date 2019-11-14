@@ -4,7 +4,12 @@ class TutorsController < ApplicationController
   # GET /tutors
   # GET /tutors.json
   def index
-    @tutors = Tutor.all
+    if params[:search]
+      @tutors = Tutor.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+
+    else
+      @tutors = Tutor.order("name DESC")
+    end
   end
 
   # GET /tutors/1
@@ -15,6 +20,11 @@ class TutorsController < ApplicationController
   # GET /tutors/new
   def new
     @tutor = Tutor.new
+  end
+
+  def import
+   Tutor.import(params[:file])
+   redirect_to tutors_path
   end
 
   # GET /tutors/1/edit
@@ -59,6 +69,29 @@ class TutorsController < ApplicationController
       format.html { redirect_to tutors_url, notice: 'Tutor was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:tutor_ids]
+      Tutor.destroy(params[:tutor_ids])
+      message = {notice: 'Tutores borrados con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos un tutor.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to tutors_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Tutor.all.each do  |tutor|
+      tutor.destroy
+    end
+
+    redirect_to tutors_path, notice: "Tutores Borrados Exitosamente"
   end
 
   private

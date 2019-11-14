@@ -5,11 +5,33 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       root 'home#index', as: :authenticated_root
-      resources :tutors
-      resources :supervisors
-      resources :stakeholders
-      resources :coordinators
-      resources :students
+
+      resources :tutors do
+		      collection { post :import }
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+	    end
+
+      resources :supervisors do
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+	    end
+
+      resources :stakeholders do
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+	    end
+
+      resources :coordinators do
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+	    end
+
+      resources :students do
+		      collection { post :import }
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+	    end
 
       resources :courses do
 		      collection { post :import }

@@ -1,55 +1,83 @@
-<p id="notice"><%= notice %></p>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
 
-<h1>Students</h1>
+      <h1>Preinscritos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Internal password</th>
-      <th>Name</th>
-      <th>First last name</th>
-      <th>Second last name</th>
-      <th>Email</th>
-      <th>Country</th>
-      <th>State</th>
-      <th>City</th>
-      <th>Partner</th>
-      <th>Organization code</th>
-      <th>Gender</th>
-      <th>Dob</th>
-      <th>Phone number</th>
-      <th>Language</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="md-form mt-0">
+        <%= form_tag(students_path, method: :get) do %>
+          <%= text_field_tag :search,"", class: "form-control", placeholder: "Busqueda" %>
+        <% end %>
+      </div><br>
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.username %></td>
-        <td><%= student.internal_password %></td>
-        <td><%= student.name %></td>
-        <td><%= student.first_last_name %></td>
-        <td><%= student.second_last_name %></td>
-        <td><%= student.email %></td>
-        <td><%= student.country %></td>
-        <td><%= student.state %></td>
-        <td><%= student.city %></td>
-        <td><%= student.partner %></td>
-        <td><%= student.organization_code %></td>
-        <td><%= student.gender %></td>
-        <td><%= student.dob %></td>
-        <td><%= student.phone_number %></td>
-        <td><%= student.language %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <%= form_tag destroy_multiple_students_path, method: :delete do %>
 
-<br>
+      <table class="table table-hover table-fixed course_header">
+        <!--Table head-->
+        <thead >
+          <tr>
+            <th class="">Nombre</th>
+            <th>First last name</th>
+            <th>Second last name</th>
+            <th>Username</th>
+            <th>Internal password</th>
+            <th>Email</th>
+            <th colspan="4"></th>
+          </tr>
+        </thead>
+        <!--Table head-->
+      </table>
 
-<%= link_to 'New Student', new_student_path %>
+      <div class="scroll">
+        <table class="table table-hover table-fixed">
+
+          <!--Table body-->
+            <tbody>
+              <% @students.each do |student| %>
+                <tr>
+                  <td class=""><%= student.name %></td>
+                  <td><%= student.first_last_name %></td>
+                  <td><%= student.second_last_name %></td>
+                  <td><%= student.username %></td>
+                  <td><%= student.internal_password %></td>
+                  <td><%= student.email %></td>
+                  <td class=""><%= link_to 'Ver', student %></td>
+                  <td class=""><%= link_to 'Editar', edit_student_path(student) %></td>
+                  <td class=""><%= link_to 'Borrar', student, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
+                  <td class=""><%= check_box_tag "student_ids[]", student.id, false, class: 'selectable' %></td>
+
+                </tr>
+
+              <% end %>
+            </tbody>
+          <!--Table body-->
+        </table>
+
+
+
+      </div>
+
+      <%= submit_tag "Delete selected", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
+      <% end %>
+
+      <%= link_to destroy_all_students_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
+      Borrar Todos
+      <% end %>
+
+      <br>
+      <h3>Importar CSV </h3>
+
+      <%= form_tag import_students_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= button_tag type: 'submit', class: "button" do %>
+                Subir CSV
+            <% end %>
+      <% end %>
+
+
+      <%= link_to '+ Crear', new_student_path, class: "btn btn-success"%>
+
+
+    </div>
+  </div>
+</div>

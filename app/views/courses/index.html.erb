@@ -8,12 +8,9 @@
 
 
       <div class="md-form mt-0">
-
         <%= form_tag(courses_path, method: :get) do %>
           <%= text_field_tag :search,"", class: "form-control", placeholder: "Busqueda" %>
         <% end %>
-
-
       </div><br>
 
       <%= form_tag destroy_multiple_courses_path, method: :delete do %>
@@ -66,7 +63,7 @@
       <% end %>
 
       <br>
-      <h3>Importar CSV</h3>
+      <h3>Importar CSV </h3>
       <%= form_tag import_courses_path, multipart: true do %>
         <%= file_field_tag :file %>
         <%= button_tag type: 'submit', class: "button" do %>
