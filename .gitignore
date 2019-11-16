@@ -36,3 +36,6 @@
 #Ignore backup Makefile
 *-e
 .env
+
+# Ignore auto-generated files
+.DS*
