@@ -64,11 +64,11 @@ services:
     ports:
       - ${TUTOR_VIRTUAL_WEB_PORT:-3000}:3000
 
-  # test:
-  #   <<: *app
-  #   environment:
-  #     <<: *env
-  #     DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/tutor_virtual_test
-  #     RAILS_ENV: test
-  #     RACK_ENV: test
-  #     RAILS_LOG_TO_STDOUT: "true"
+  test:
+    <<: *app
+    environment:
+      <<: *env
+      DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/tutor_virtual_test
+      RAILS_ENV: test
+      RACK_ENV: test
+      RAILS_LOG_TO_STDOUT: "true"
