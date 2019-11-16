@@ -1,0 +1,35 @@
+@startuml
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+actor User
+
+cloud front-end {
+  package "Views" {
+    [aliados_view]
+    [application_view]
+    [cursos_view]
+    [preinscritos_view]
+    [sessions_view]
+    [users_view]
+  }
+}
+
+
+cloud back-end {
+  package "Controllers" {
+    [aliados_controller]
+    [application_controller]
+    [cursos_controller]
+    [preinscritos_controller]
+    [sessions_controller]
+    [users_controller]
+  }
+
+  database PG
+
+}
+
+User --> Views
+Views --> Controllers
+Controllers --> PG
+@enduml
