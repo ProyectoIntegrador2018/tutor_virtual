@@ -5,8 +5,9 @@ class Course < ApplicationRecord
 
   def self.import(file)
 		xlsx = Roo::Spreadsheet.open(file.path)
-    xlsx.each do |row|
-      Course.create(name: row[0], start_date: row[1], end_date: row[2], course_code: row[3])
+    xlsx.drop(1).each do |row|
+
+      Course.create(name: row[2], start_date: row[7], end_date: row[8], course_code: row[4])
     end
 	end
 
