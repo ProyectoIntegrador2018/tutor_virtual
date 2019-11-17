@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_233214) do
+ActiveRecord::Schema.define(version: 2019_11_17_205958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 2019_10_16_233214) do
     t.bigint "student_id", null: false
     t.index ["course_id", "student_id"], name: "index_courses_students_on_course_id_and_student_id"
     t.index ["student_id", "course_id"], name: "index_courses_students_on_student_id_and_course_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.integer "group_number"
+    t.bigint "course_id"
+    t.bigint "tutor_id"
+    t.bigint "supervisor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_groups_on_course_id"
+    t.index ["supervisor_id"], name: "index_groups_on_supervisor_id"
+    t.index ["tutor_id"], name: "index_groups_on_tutor_id"
   end
 
   create_table "stakeholders", force: :cascade do |t|
@@ -143,4 +155,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_233214) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "groups", "courses"
+  add_foreign_key "groups", "supervisors"
+  add_foreign_key "groups", "tutors"
 end

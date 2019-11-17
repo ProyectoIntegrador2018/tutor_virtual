@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group_number: 1
+  course: one
+  tutor: one
+  supervisor: one
+
+two:
+  group_number: 1
+  course: two
+  tutor: two
+  supervisor: two
