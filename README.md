@@ -77,6 +77,16 @@ user: admin@example.com
 password: 123456
 
 ```
+## Deployment
+Toda la información con respecto al deployment de la aplicación se encuentra
+[aquí](docs/DEPLOYMENT.md)
+
+
+## Debugging in production
+Toda la información con respecto a debbuging en producción se encuentra
+[aquí](docs/DEPLOYMENT.md)
+
+
 ## Stack Tecnológico
 
 ### Librerías Front End:
