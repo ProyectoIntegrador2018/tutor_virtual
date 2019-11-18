@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one), scope: :user
     @course = courses(:one)
   end
 

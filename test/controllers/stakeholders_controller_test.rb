@@ -2,6 +2,7 @@ require 'test_helper'
 
 class StakeholdersControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one), scope: :user
     @stakeholder = stakeholders(:one)
   end
 

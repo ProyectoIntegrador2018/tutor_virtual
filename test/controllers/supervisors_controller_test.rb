@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SupervisorsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one), scope: :user
     @supervisor = supervisors(:one)
   end
 
