@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CoordinatorsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one), scope: :user
     @coordinator = coordinators(:one)
   end
 

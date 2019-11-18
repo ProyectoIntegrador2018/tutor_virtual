@@ -1,35 +1,35 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
-  internal_password: MyString
-  name: MyString
-  first_last_name: MyString
-  second_last_name: MyString
-  email: MyString
-  country: MyString
-  state: MyString
-  city: MyString
-  partner: MyString
-  organization_code: MyString
+  username: PatoCavazos
+  internal_password: 12345
+  name: Patrico
+  first_last_name: Forbes
+  second_last_name: Cavazos
+  email: pcavazos@example.com
+  country: Mexico
+  state: Nuevo Leon
+  city: Monterrey
+  partner:
+  organization_code: 2
   gender: 1
-  dob: 2019-10-16
-  phone_number: MyString
-  language: MyString
+  dob: 1996-10-01
+  phone_number: 8119203943
+  language: Spanish
 
 two:
-  username: MyString
-  internal_password: MyString
-  name: MyString
-  first_last_name: MyString
-  second_last_name: MyString
-  email: MyString
-  country: MyString
-  state: MyString
-  city: MyString
-  partner: MyString
-  organization_code: MyString
+  username: SergioDiaz
+  internal_password: 12345
+  name: Sergio
+  first_last_name: Diaz
+  second_last_name: Perez
+  email: sdiaz@example.com
+  country: Mexico
+  state: Nuevo Leon
+  city: Monterrey
+  partner:
+  organization_code: 1
   gender: 1
-  dob: 2019-10-16
-  phone_number: MyString
-  language: MyString
+  dob: 1995-10-16
+  phone_number: 8192039382
+  language: English

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  course_code: MyString
-  start_date: 2019-10-16
-  end_date: 2019-10-16
+  name: Matematicas
+  course_code: 1
+  start_date: 2018-08-16
+  end_date: 2018-11-16
 
 two:
-  name: MyString
-  course_code: MyString
-  start_date: 2019-10-16
-  end_date: 2019-10-16
+  name: Geografia
+  course_code: 2
+  start_date: 2018-08-16
+  end_date: 2018-11-16
