@@ -87,9 +87,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy_all
-    Student.all.each do  |student|
-      student.destroy
-    end
+    Student.all.destroy_all
 
     redirect_to students_path, notice: "Preinsctitos Borrados Exitosamente"
   end

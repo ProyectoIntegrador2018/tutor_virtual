@@ -67,7 +67,7 @@
       <%= submit_tag "Delete selected", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>
 
-      
+
 
 
       <table>
@@ -77,6 +77,14 @@
       <br>
 
       <%= link_to 'New Group', new_group_path %>
+
+      <% if @groups.take != nil %>
+
+      <%= link_to groups_path(format: :csv, course_id: @groups.take.course.id), :class => "button" do %>
+        Descargar CSV
+      <% end %>
+      <% end %>
+
 
 
     </div>

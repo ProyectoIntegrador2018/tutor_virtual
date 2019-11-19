@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
 
     if params[:course_id]
       @groups = Group.where(course_id: params[:course_id])
-      puts "PARAMS ***********************"
+
 
     else
       @groups = Group.all
