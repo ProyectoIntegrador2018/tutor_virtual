@@ -17,11 +17,11 @@
         <thead >
           <tr>
             <th class="">Nombre</th>
-            <th>First last name</th>
-            <th>Second last name</th>
-            <th>Username</th>
-            <th>Internal password</th>
-            <th>Email</th>
+            <th>Apellido paterno</th>
+            <th>Apellido materno</th>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
+            <th>Correo electrónico</th>
             <th colspan="4"></th>
           </tr>
         </thead>
@@ -57,7 +57,7 @@
 
       </div>
 
-      <%= submit_tag "Delete selected", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
+      <%= submit_tag "Borrar seleccionados", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>
 
       <%= link_to destroy_all_students_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
