@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="jumbotron" >
 
-      <h1>Coordinators</h1>
+      <h1>Coordinadores</h1>
 
       <div class="md-form mt-0">
         <%= form_tag(coordinators_path, method: :get) do %>
@@ -17,11 +17,11 @@
         <thead >
           <tr>
             <th class="">Nombre</th>
-            <th>First last name</th>
-            <th>Second last name</th>
-            <th>Username</th>
-            <th>Internal password</th>
-            <th>Email</th>
+            <th>Apellido paterno</th>
+            <th>Apellido materno</th>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
+            <th>Correo electronico</th>
             <th colspan="4"></th>
           </tr>
         </thead>
@@ -59,7 +59,7 @@
 
 
 
-      <%= submit_tag "Delete selected", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
+      <%= submit_tag "Borrar seleccionado", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>
 
       <%= link_to destroy_all_coordinators_path,  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
@@ -68,7 +68,7 @@
 
       <br>
 
-      <%= link_to '+ Crear', new_student_path, class: "btn btn-success"%>
+      <%= link_to '+ Crear', new_coordinator_path, class: "btn btn-success"%>
 
 
 
