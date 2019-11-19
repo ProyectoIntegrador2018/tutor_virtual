@@ -5,10 +5,10 @@ class SupervisorsController < ApplicationController
   # GET /supervisors.json
   def index
     if params[:search]
-      @supervisors = Supervisor.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+      @supervisors = Supervisor.where('name ILIKE ?', "%#{params[:search]}%").order("name ASC")
 
     else
-      @supervisors = Supervisor.order("name DESC")
+      @supervisors = Supervisor.order("name ASC")
     end
   end
 

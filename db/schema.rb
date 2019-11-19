@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_17_205958) do
+ActiveRecord::Schema.define(version: 2019_11_18_043253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 2019_11_17_205958) do
     t.index ["course_id"], name: "index_groups_on_course_id"
     t.index ["supervisor_id"], name: "index_groups_on_supervisor_id"
     t.index ["tutor_id"], name: "index_groups_on_tutor_id"
+  end
+
+  create_table "groups_students", id: false, force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "student_id"
+    t.index ["group_id"], name: "index_groups_students_on_group_id"
+    t.index ["student_id"], name: "index_groups_students_on_student_id"
   end
 
   create_table "stakeholders", force: :cascade do |t|
@@ -158,4 +165,6 @@ ActiveRecord::Schema.define(version: 2019_11_17_205958) do
   add_foreign_key "groups", "courses"
   add_foreign_key "groups", "supervisors"
   add_foreign_key "groups", "tutors"
+  add_foreign_key "groups_students", "groups"
+  add_foreign_key "groups_students", "students"
 end

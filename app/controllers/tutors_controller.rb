@@ -5,10 +5,10 @@ class TutorsController < ApplicationController
   # GET /tutors.json
   def index
     if params[:search]
-      @tutors = Tutor.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+      @tutors = Tutor.where('name ILIKE ?', "%#{params[:search]}%").order("name ASC")
 
     else
-      @tutors = Tutor.order("name DESC")
+      @tutors = Tutor.order("name ASC")
     end
   end
 

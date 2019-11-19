@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :groups
+
   get 'home/index'
   devise_for :users
 
@@ -11,6 +11,13 @@ Rails.application.routes.draw do
 		      collection { post :import }
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+	    end
+
+      resources :groups do
+		      collection { delete :destroy_multiple }
+          collection { delete :destroy_all}
+          collection { post :add_student}
+          collection { delete :delete_student}
 	    end
 
       resources :supervisors do

@@ -4,12 +4,38 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+
+    if params[:course_id]
+      @groups = Group.where(course_id: params[:course_id])
+      puts "PARAMS ***********************"
+
+    else
+      @groups = Group.all
+
+    end
+
+    @courses = Course.order("start_date DESC", "name")
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+
+      @not_ins = []
+      @ins = []
+
+      @group.course.students.each do |student|
+        @not_ins.push(student)
+      end
+
+      Group.where(course_id: @group.course.id).each do |group|
+        group.students.each do |student|
+          @ins.push(student)
+        end
+      end
+
+      @result = @not_ins - @ins
+
   end
 
   # GET /groups/new
@@ -37,6 +63,18 @@ class GroupsController < ApplicationController
     end
   end
 
+  def add_student
+    Group.add_student(params[:group], params[:student])
+    redirect_to "#{groups_path}/#{params[:group]}"
+
+  end
+
+  def delete_student
+    Group.delete_student(params[:group], params[:student])
+    redirect_to "#{groups_path}/#{params[:group]}"
+
+  end
+
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
@@ -59,6 +97,29 @@ class GroupsController < ApplicationController
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_multiple
+
+    if params[:group_ids]
+      Group.destroy(params[:group_ids])
+      message = {notice: 'Borrado con éxito.'}
+    else
+      message = {alert: 'Por favor selecciona al menos uno.'}
+    end
+
+    respond_to do |format|
+      format.html { redirect_to groups_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_all
+    Group.all.each do  |group|
+      group.destroy
+    end
+
+    redirect_to groups_path, notice: "Borrados Exitosamente"
   end
 
   private

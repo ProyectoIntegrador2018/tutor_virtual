@@ -1,24 +1,60 @@
-<p id="notice"><%= notice %></p>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
 
-<p>
-  <strong>Group number:</strong>
-  <%= @group.group_number %>
-</p>
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Course:</strong>
-  <%= @group.course %>
-</p>
+      <h3><%= @group.course.name %></h3>
+      <h3>Grupo: <%= @group.group_number %></h3> <br>
 
-<p>
-  <strong>Tutor:</strong>
-  <%= @group.tutor %>
-</p>
+      <h2>ESTUDIANTES INSCRITOS</h2>
+      <div class="scroll">
+          <% @group.students.each do |student| %>
+          <table class="table table-hover table-fixed">
+              <tbody>
+              <tr>
+                <td><%= student.name %></td>
+                <td><%= student.first_last_name %></td>
+                <td><%= student.second_last_name %></td>
+                <td>
+                  <%= link_to delete_student_groups_path(group: @group, student: student),  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
+                  Borrar Todos
+                  <% end %>
+                </td>
 
-<p>
-  <strong>Supervisor:</strong>
-  <%= @group.supervisor %>
-</p>
+              </tr>
+            </tbody>
+          </table>
+          <% end %>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+
+      </div>
+
+      <h2>ESTUDIANTES SIN GRUPO</h2>
+
+        <div class="scroll">
+          <% @result.each do |student| %>
+          <table class="table table-hover table-fixed">
+              <tbody>
+              <tr>
+                <td><%= student.name %></td>
+                <td><%= student.first_last_name %></td>
+                <td><%= student.second_last_name %></td>
+                <td>
+                  <%= form_tag add_student_groups_path(group: @group, student: student) do %>
+                  <%= button_tag type: 'submit', class: "button" do %>
+                  ADD STUDENT
+                  <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <% end %>
+        </div>
+
+      <%= link_to 'Back', groups_path %>
+
+    </div>
+  </div>
+</div>
