@@ -5,10 +5,10 @@ class CoordinatorsController < ApplicationController
   # GET /coordinators.json
   def index
     if params[:search]
-      @coordinators = Coordinator.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+      @coordinators = Coordinator.where('name ILIKE ?', "%#{params[:search]}%").order("name ASC")
 
     else
-      @coordinators = Coordinator.order("name DESC")
+      @coordinators = Coordinator.order("name ASC")
     end
 
   end

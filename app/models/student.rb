@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
   has_and_belongs_to_many :courses
+  has_and_belongs_to_many :groups
 
   def self.import(file)
 
@@ -33,11 +34,6 @@ class Student < ApplicationRecord
       #.where(name: row[17], start_date: row[19]).take
 
       student.courses << course
-
-      puts "***********************"
-      puts student.courses.first.name
-
-      
 
 
     end

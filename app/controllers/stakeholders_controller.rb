@@ -5,10 +5,10 @@ class StakeholdersController < ApplicationController
   # GET /stakeholders.json
   def index
     if params[:search]
-      @stakeholders = Stakeholder.where('name ILIKE ?', "%#{params[:search]}%").order("name DESC")
+      @stakeholders = Stakeholder.where('name ILIKE ?', "%#{params[:search]}%").order("name ASC")
 
     else
-      @stakeholders = Stakeholder.order("name DESC")
+      @stakeholders = Stakeholder.order("name ASC")
     end
   end
 
