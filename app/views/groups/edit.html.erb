@@ -1,6 +1,15 @@
-<h1>Editing Group</h1>
 
-<%= render 'form', group: @group %>
+<div class="content-container footer-container">
+  <div class="container-fluid">
+    <div class="jumbotron" >
+      <h1>Editar Groupo</h1>
 
-<%= link_to 'Show', @group %> |
-<%= link_to 'Back', groups_path %>
+      <%= render 'form', group: @group %>
+
+      <%= link_to 'Ver', @group %> |
+      <%= link_to 'Atrás', groups_path %>
+
+
+    </div>
+  </div>
+</div>
