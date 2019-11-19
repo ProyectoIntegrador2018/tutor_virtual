@@ -1,0 +1,5 @@
+<%- headers = ['Numero Grupo']-%>
+<%= CSV.generate_line headers %>
+<%- @groups.each do |group| -%>
+<%= CSV.generate_line([group.group_number]) -%>
+<%- end -%>

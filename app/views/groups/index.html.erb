@@ -78,6 +78,14 @@
 
       <%= link_to 'Nuevo Grupo', new_group_path %>
 
+      <% if @groups.take != nil %>
+
+      <%= link_to groups_path(format: :csv, course_id: @groups.take.course.id), :class => "button" do %>
+        Descargar CSV
+      <% end %>
+      <% end %>
+
+
 
     </div>
   </div>

@@ -1,6 +1,4 @@
-<div class="content-container footer-container">
-  <div class="container-fluid">
-    <div class="jumbotron" >
+
       <%= form_with(model: supervisor, local: true) do |form| %>
       <% if supervisor.errors.any? %>
       <div id="error_explanation">
@@ -93,7 +91,6 @@
         <%= form.submit %>
       </div>
       <% end %>
-
     </div>
   </div>
 </div>
