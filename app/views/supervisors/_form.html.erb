@@ -15,77 +15,77 @@
       <% end %>
 
       <div class="field">
-        <%= form.label :username %>
+        <%= form.label :username, 'Nombre de usuario' %>
         <%= form.text_field :username %>
       </div>
 
       <div class="field">
-        <%= form.label :internal_password %>
+        <%= form.label :internal_password, 'Contraseña' %>
         <%= form.text_field :internal_password %>
       </div>
 
       <div class="field">
-        <%= form.label :name %>
+        <%= form.label :name, 'Nombre' %>
         <%= form.text_field :name %>
       </div>
 
       <div class="field">
-        <%= form.label :first_last_name %>
+        <%= form.label :first_last_name, 'Apellido paterno' %>
         <%= form.text_field :first_last_name %>
       </div>
 
       <div class="field">
-        <%= form.label :second_last_name %>
+        <%= form.label :second_last_name, 'Apellido materno' %>
         <%= form.text_field :second_last_name %>
       </div>
 
       <div class="field">
-        <%= form.label :email %>
+        <%= form.label :email, 'Correo electrónico' %>
         <%= form.text_field :email %>
       </div>
 
       <div class="field">
-        <%= form.label :country %>
+        <%= form.label :country, 'País' %>
         <%= form.text_field :country %>
       </div>
 
       <div class="field">
-        <%= form.label :state %>
+        <%= form.label :state, 'Estado' %>
         <%= form.text_field :state %>
       </div>
 
       <div class="field">
-        <%= form.label :city %>
+        <%= form.label :city, 'Ciudad' %>
         <%= form.text_field :city %>
       </div>
 
       <div class="field">
-        <%= form.label :partner %>
+        <%= form.label :partner, 'Socio' %>
         <%= form.text_field :partner %>
       </div>
 
       <div class="field">
-        <%= form.label :organization_code %>
+        <%= form.label :organization_code, 'Código de organización' %>
         <%= form.text_field :organization_code %>
       </div>
 
       <div class="field">
-        <%= form.label :gender %>
+        <%= form.label :gender, 'Género' %>
         <%= form.number_field :gender %>
       </div>
 
       <div class="field">
-        <%= form.label :dob %>
-        <%= form.date_select :dob %>
+        <%= form.label :dob, 'Fecha de nacimiento' %>
+        <%= form.date_select :dob, start_year: 1900 %>
       </div>
 
       <div class="field">
-        <%= form.label :phone_number %>
+        <%= form.label :phone_number, 'Número telefónico' %>
         <%= form.text_field :phone_number %>
       </div>
 
       <div class="field">
-        <%= form.label :language %>
+        <%= form.label :language, 'Idioma' %>
         <%= form.text_field :language %>
       </div>
 
@@ -93,7 +93,7 @@
         <%= form.submit %>
       </div>
       <% end %>
-      
+
     </div>
   </div>
 </div>
