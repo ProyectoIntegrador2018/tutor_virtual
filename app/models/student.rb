@@ -4,13 +4,25 @@ class Student < ApplicationRecord
 
   def self.import(file)
 
+    all_students = []
+    Student.all.each do |student|
+      all_students.push(student.username)
+    end
+
+    all_courses= {}
+    Course.all.each do |course|
+      all_courses[course.name] = course
+    end
+
+    puts all_courses
+
 
 		xlsx = Roo::Spreadsheet.open(file.path)
     xlsx.drop(1).each do |row|
 
       username = row[0]
-      if Student.where(username: username).take == nil
-        Student.create(
+      if !all_students.include?(username)
+        student = Student.create(
           username: row[0],
           internal_password: row[1],
           name: row[2],
@@ -26,14 +38,16 @@ class Student < ApplicationRecord
           gender: row[21],
           dob: row[22])
 
+          all_students.push(username)
+
+      else
+          student = Student.where(username: username).take
       end
 
-      courseName = row[17]
-      student = Student.where(username: username).take
-      course = Course.all.where(name: courseName).take
-      #.where(name: row[17], start_date: row[19]).take
 
-      student.courses << course
+      courseName = row[17]
+
+      student.courses << all_courses[courseName]
 
 
     end
