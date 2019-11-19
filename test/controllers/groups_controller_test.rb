@@ -2,6 +2,7 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one), scope: :user
     @group = groups(:one)
   end
 

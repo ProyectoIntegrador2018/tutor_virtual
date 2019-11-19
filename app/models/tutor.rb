@@ -1,4 +1,5 @@
 class Tutor < ApplicationRecord
+  has_many :groups, dependent: :destroy
 
   def self.import(file)
     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
