@@ -17,8 +17,7 @@ El sistema tiene como objetivo el automatizar los procesos que lleva a cabo nues
 
 ## Ambientes del Sistema
 
-* **Producción** - [TutorVirtual](http://tutorvirtual.herokuapp.com/)
-* **Desarrollo** - [Dev-TutorVirtual](http://dev-tutorvirtual.herokuapp.com/)
+* **Producción** - [TutorVirtual](http://legaltech-back.herokuapp.com/)
 
 Equipo: AD 2019
 
