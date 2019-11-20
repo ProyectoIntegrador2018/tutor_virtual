@@ -16,11 +16,11 @@
         <!--Table head-->
         <thead >
           <tr>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
             <th class="">Nombre</th>
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
             <th>Correo electrónico</th>
             <th colspan="4"></th>
           </tr>
@@ -35,11 +35,11 @@
             <tbody>
               <% @students.each do |student| %>
                 <tr>
+                  <td><%= student.username %></td>
+                  <td><%= student.internal_password %></td>
                   <td class=""><%= student.name %></td>
                   <td><%= student.first_last_name %></td>
                   <td><%= student.second_last_name %></td>
-                  <td><%= student.username %></td>
-                  <td><%= student.internal_password %></td>
                   <td><%= student.email %></td>
                   <td class=""><%= link_to 'Ver', student %></td>
                   <td class=""><%= link_to 'Editar', edit_student_path(student) %></td>

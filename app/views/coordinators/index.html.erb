@@ -16,11 +16,11 @@
         <!--Table head-->
         <thead >
           <tr>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
             <th class="">Nombre</th>
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
             <th>Correo electronico</th>
             <th colspan="4"></th>
           </tr>
@@ -35,11 +35,11 @@
             <tbody>
               <% @coordinators.each do |coordinator| %>
                 <tr>
+                  <td><%= coordinator.username %></td>
+                  <td><%= coordinator.internal_password %></td>
                   <td class=""><%= coordinator.name %></td>
                   <td><%= coordinator.first_last_name %></td>
                   <td><%= coordinator.second_last_name %></td>
-                  <td><%= coordinator.username %></td>
-                  <td><%= coordinator.internal_password %></td>
                   <td><%= coordinator.email %></td>
                   <td class=""><%= link_to 'Ver', coordinator %></td>
                   <td class=""><%= link_to 'Editar', edit_coordinator_path(coordinator) %></td>

@@ -16,11 +16,11 @@
         <!--Table head-->
         <thead >
           <tr>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
             <th class="">Nombre</th>
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
             <th>Correo electrónico</th>
             <th colspan="4"></th>
           </tr>
@@ -35,11 +35,11 @@
             <tbody>
               <% @supervisors.each do |supervisor| %>
                 <tr>
+                  <td><%= supervisor.username %></td>
+                  <td><%= supervisor.internal_password %></td>
                   <td class=""><%= supervisor.name %></td>
                   <td><%= supervisor.first_last_name %></td>
                   <td><%= supervisor.second_last_name %></td>
-                  <td><%= supervisor.username %></td>
-                  <td><%= supervisor.internal_password %></td>
                   <td><%= supervisor.email %></td>
                   <td class=""><%= link_to 'Ver', supervisor %></td>
                   <td class=""><%= link_to 'Editar', edit_supervisor_path(supervisor) %></td>

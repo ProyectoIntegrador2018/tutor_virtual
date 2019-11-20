@@ -16,11 +16,11 @@
         <!--Table head-->
         <thead >
           <tr>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
             <th class="">Nombre</th>
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
             <th>Correo electrónico</th>
             <th colspan="4"></th>
           </tr>
@@ -35,11 +35,11 @@
             <tbody>
               <% @stakeholders.each do |stakeholder| %>
                 <tr>
+                  <td><%= stakeholder.username %></td>
+                  <td><%= stakeholder.internal_password %></td>
                   <td class=""><%= stakeholder.name %></td>
                   <td><%= stakeholder.first_last_name %></td>
                   <td><%= stakeholder.second_last_name %></td>
-                  <td><%= stakeholder.username %></td>
-                  <td><%= stakeholder.internal_password %></td>
                   <td><%= stakeholder.email %></td>
                   <td class=""><%= link_to 'Ver', stakeholder %></td>
                   <td class=""><%= link_to 'Editar', edit_stakeholder_path(stakeholder) %></td>
