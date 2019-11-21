@@ -1,0 +1,9 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Buttons") do |sheet|
+
+  sheet.add_row ["Nombre Del Curso", "Inicio De Inscripcion", "Fin de Inscripcion", "Clave del Curso"]
+
+  @courses.each do |course|
+    sheet.add_row [course.name, course.start_date, course.end_date, course.course_code]
+  end
+end

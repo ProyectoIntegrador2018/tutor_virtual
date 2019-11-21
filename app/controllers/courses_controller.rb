@@ -31,6 +31,15 @@ class CoursesController < ApplicationController
   def edit
   end
 
+  def export
+      @courses = Course.all
+    respond_to do |format|
+
+      format.xlsx {render xlsx: 'export'}
+      format.html
+    end
+  end
+
   # POST /courses
   # POST /courses.json
   def create

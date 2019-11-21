@@ -31,6 +31,15 @@ class TutorsController < ApplicationController
   def edit
   end
 
+  def export
+      @tutors = Tutor.all
+    respond_to do |format|
+
+      format.xlsx {render xlsx: 'export'}
+      format.html
+    end
+  end
+
   # POST /tutors
   # POST /tutors.json
   def create

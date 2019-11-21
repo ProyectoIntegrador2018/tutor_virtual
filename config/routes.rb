@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 		      collection { post :import }
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+          collection { get :export}
 	    end
 
       resources :groups do
@@ -33,18 +34,22 @@ Rails.application.routes.draw do
       resources :coordinators do
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+
 	    end
 
       resources :students do
 		      collection { post :import }
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+          collection { get :export}
 	    end
 
       resources :courses do
 		      collection { post :import }
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+          collection { get :export}
+
 	    end
 
       get "/logout" => "devise/sessions#destroy"
