@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="jumbotron" >
 
-      <h1>Stakeholders</h1>
+      <h1>Administradores</h1>
 
       <div class="md-form mt-0">
         <%= form_tag(stakeholders_path, method: :get) do %>
@@ -12,51 +12,39 @@
 
       <%= form_tag destroy_multiple_stakeholders_path, method: :delete do %>
 
-      <table class="table table-hover table-fixed course_header">
-        <!--Table head-->
-        <thead >
-          <tr>
-            <th class="">Nombre</th>
-            <th>Apellido paterno</th>
-            <th>Apellido materno</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
-            <th>Correo electrónico</th>
-            <th colspan="4"></th>
-          </tr>
-        </thead>
-        <!--Table head-->
-      </table>
-
       <div class="scroll">
-        <table class="table table-hover table-fixed">
+        <table class="table table-hover table-fixed course_header">
+          <!--Table head-->
+          <thead >
+            <tr>
+              <th>Nombre de usuario</th>
+              <th>Contraseña</th>
+              <th class="">Nombre</th>
+              <th>Apellido paterno</th>
+              <th>Apellido materno</th>
+              <th>Correo electrónico</th>
+              <th colspan="4"></th>
+            </tr>
+          </thead>
 
-          <!--Table body-->
-            <tbody>
-              <% @stakeholders.each do |stakeholder| %>
-                <tr>
-                  <td class=""><%= stakeholder.name %></td>
-                  <td><%= stakeholder.first_last_name %></td>
-                  <td><%= stakeholder.second_last_name %></td>
-                  <td><%= stakeholder.username %></td>
-                  <td><%= stakeholder.internal_password %></td>
-                  <td><%= stakeholder.email %></td>
-                  <td class=""><%= link_to 'Ver', stakeholder %></td>
-                  <td class=""><%= link_to 'Editar', edit_stakeholder_path(stakeholder) %></td>
-                  <td class=""><%= link_to 'Borrar', stakeholder, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
-                  <td class=""><%= check_box_tag "stakeholder_ids[]", stakeholder.id, false, class: 'selectable' %></td>
-
-                </tr>
-
-              <% end %>
-            </tbody>
-          <!--Table body-->
+          <tbody>
+            <% @stakeholders.each do |stakeholder| %>
+              <tr>
+                <td><%= stakeholder.username %></td>
+                <td><%= stakeholder.internal_password %></td>
+                <td class=""><%= stakeholder.name %></td>
+                <td><%= stakeholder.first_last_name %></td>
+                <td><%= stakeholder.second_last_name %></td>
+                <td><%= stakeholder.email %></td>
+                <td class=""><%= link_to 'Ver', stakeholder %></td>
+                <td class=""><%= link_to 'Editar', edit_stakeholder_path(stakeholder) %></td>
+                <td class=""><%= link_to 'Borrar', stakeholder, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
+                <td class=""><%= check_box_tag "stakeholder_ids[]", stakeholder.id, false, class: 'selectable' %></td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
-
-
-
       </div>
-
 
       <%= submit_tag "Borrar seleccionado", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>

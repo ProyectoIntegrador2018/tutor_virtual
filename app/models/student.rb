@@ -36,7 +36,10 @@ class Student < ApplicationRecord
           organization_code: row[6],
           language: row[13],
           gender: row[21],
-          dob: row[22])
+          dob: row[22],
+          cca: row[11],
+          promoter_name: row[23],
+          promoter_email: row[24])
 
           all_students.push(username)
 

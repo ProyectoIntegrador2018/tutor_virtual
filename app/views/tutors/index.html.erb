@@ -12,50 +12,42 @@
 
       <%= form_tag destroy_multiple_tutors_path, method: :delete do %>
 
-      <table class="table table-hover table-fixed course_header">
-        <!--Table head-->
-        <thead >
-          <tr>
-            <th class="">Nombre</th>
-            <th>Apellido paterno</th>
-            <th>Apellido materno</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
-            <th>Correo electrónico</th>
-            <th colspan="4"></th>
-          </tr>
-        </thead>
-        <!--Table head-->
-      </table>
-
       <div class="scroll">
-        <table class="table table-hover table-fixed">
+        <table class="table table-hover table-fixed course_header">
+          <!--Table head-->
+          <thead >
+            <tr>
+              <th>Nombre de usuario</th>
+              <th>Contraseña</th>
+              <th class="">Nombre</th>
+              <th>Apellido paterno</th>
+              <th>Apellido materno</th>
+              <th>Correo electrónico</th>
+              <th>Campus</th>
+              <th colspan="4"></th>
+            </tr>
+          </thead>
 
-          <!--Table body-->
-            <tbody>
-              <% @tutors.each do |tutor| %>
-                <tr>
-                  <td class=""><%= tutor.name %></td>
-                  <td><%= tutor.first_last_name %></td>
-                  <td><%= tutor.second_last_name %></td>
-                  <td><%= tutor.username %></td>
-                  <td><%= tutor.internal_password %></td>
-                  <td><%= tutor.email %></td>
-                  <td class=""><%= link_to 'Ver', tutor %></td>
-                  <td class=""><%= link_to 'Editar', edit_tutor_path(tutor) %></td>
-                  <td class=""><%= link_to 'Borrar', tutor, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
-                  <td class=""><%= check_box_tag "tutor_ids[]", tutor.id, false, class: 'selectable' %></td>
-
-                </tr>
-
-              <% end %>
-            </tbody>
-          <!--Table body-->
+          <tbody>
+            <% @tutors.each do |tutor| %>
+              <tr>
+                <td><%= tutor.username %></td>
+                <td><%= tutor.internal_password %></td>
+                <td class=""><%= tutor.name %></td>
+                <td><%= tutor.first_last_name %></td>
+                <td><%= tutor.second_last_name %></td>
+                <td><%= tutor.email %></td>
+                <td><%= tutor.organization_code %></td>
+                <td class=""><%= link_to 'Ver', tutor %></td>
+                <td class=""><%= link_to 'Editar', edit_tutor_path(tutor) %></td>
+                <td class=""><%= link_to 'Borrar', tutor, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
+                <td class=""><%= check_box_tag "tutor_ids[]", tutor.id, false, class: 'selectable' %></td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
-
-
-
       </div>
+
 
       <%= submit_tag "Borrar seleccionados", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>
