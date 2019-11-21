@@ -77,6 +77,8 @@
 
       <%= link_to '+ Crear', new_student_path, class: "btn btn-success"%>
 
+      <%= link_to 'Download spreadsheet', export_students_path(format: :xlsx) %>
+
 
     </div>
   </div>
