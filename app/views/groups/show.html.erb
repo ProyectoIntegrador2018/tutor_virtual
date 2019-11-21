@@ -7,7 +7,7 @@
       <h3><%= @group.course.name %></h3>
       <h3>Grupo: <%= @group.group_number %></h3> <br>
 
-      <h2>ESTUDIANTES INSCRITOS</h2>
+      <h2>PARTICIPANTES INSCRITOS</h2>
       <div class="scroll">
           <% @group.students.each do |student| %>
           <table class="table table-hover table-fixed">
@@ -30,7 +30,7 @@
 
       </div>
 
-      <h2>ESTUDIANTES SIN GRUPO</h2>
+      <h2>PARTICIPANTES SIN GRUPO</h2>
 
         <div class="scroll">
           <% @result.each do |student| %>
@@ -43,7 +43,7 @@
                 <td>
                   <%= form_tag add_student_groups_path(group: @group, student: student) do %>
                   <%= button_tag type: 'submit', class: "button" do %>
-                  ADD STUDENT
+                  AGREGAR PARTICIPANTE
                   <% end %>
                   <% end %>
                 </td>
