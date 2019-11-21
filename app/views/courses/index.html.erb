@@ -26,35 +26,26 @@
             <th colspan="4"></th>
           </tr>
         </thead>
-        <!--Table head-->
+
+        <tbody>
+          <% @courses.each do |course| %>
+            <tr>
+              <td class="course_name"><%= course.name %></td>
+              <td class="course_date"><%= course.start_date %></td>
+              <td class="course_date"><%= course.end_date %></td>
+              <td class="course_code"><%= course.course_code %></td>
+              <td class="course_extra"><%= link_to 'Ver', course %></td>
+              <td class="course_extra"><%= link_to 'Editar', edit_course_path(course) %></td>
+              <td class="course_extra"><%= link_to 'Borrar', course, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
+
+              <td class="course_extra"><%= check_box_tag "course_ids[]", course.id, false, class: 'selectable' %></td>
+
+            </tr>
+
+          <% end %>
+        </tbody>
       </table>
 
-      <div class="scroll">
-        <table class="table table-hover table-fixed">
-
-          <!--Table body-->
-            <tbody>
-              <% @courses.each do |course| %>
-                <tr>
-                  <td class="course_name"><%= course.name %></td>
-                  <td class="course_date"><%= course.start_date %></td>
-                  <td class="course_date"><%= course.end_date %></td>
-                  <td class="course_code"><%= course.course_code %></td>
-                  <td class="course_extra"><%= link_to 'Ver', course %></td>
-                  <td class="course_extra"><%= link_to 'Editar', edit_course_path(course) %></td>
-                  <td class="course_extra"><%= link_to 'Borrar', course, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
-
-                  <td class="course_extra"><%= check_box_tag "course_ids[]", course.id, false, class: 'selectable' %></td>
-
-                </tr>
-
-              <% end %>
-            </tbody>
-          <!--Table body-->
-        </table>
-
-
-      </div>
       <%= submit_tag "Borrar seleccionados", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>
 

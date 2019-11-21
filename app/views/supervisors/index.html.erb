@@ -25,39 +25,24 @@
             <th colspan="4"></th>
           </tr>
         </thead>
-        <!--Table head-->
+
+        <tbody>
+          <% @supervisors.each do |supervisor| %>
+            <tr>
+              <td><%= supervisor.username %></td>
+              <td><%= supervisor.internal_password %></td>
+              <td class=""><%= supervisor.name %></td>
+              <td><%= supervisor.first_last_name %></td>
+              <td><%= supervisor.second_last_name %></td>
+              <td><%= supervisor.email %></td>
+              <td class=""><%= link_to 'Ver', supervisor %></td>
+              <td class=""><%= link_to 'Editar', edit_supervisor_path(supervisor) %></td>
+              <td class=""><%= link_to 'Borrar', supervisor, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
+              <td class=""><%= check_box_tag "supervisor_ids[]", supervisor.id, false, class: 'selectable' %></td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
-
-      <div class="scroll">
-        <table class="table table-hover table-fixed">
-
-          <!--Table body-->
-            <tbody>
-              <% @supervisors.each do |supervisor| %>
-                <tr>
-                  <td><%= supervisor.username %></td>
-                  <td><%= supervisor.internal_password %></td>
-                  <td class=""><%= supervisor.name %></td>
-                  <td><%= supervisor.first_last_name %></td>
-                  <td><%= supervisor.second_last_name %></td>
-                  <td><%= supervisor.email %></td>
-                  <td class=""><%= link_to 'Ver', supervisor %></td>
-                  <td class=""><%= link_to 'Editar', edit_supervisor_path(supervisor) %></td>
-                  <td class=""><%= link_to 'Borrar', supervisor, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
-                  <td class=""><%= check_box_tag "supervisor_ids[]", supervisor.id, false, class: 'selectable' %></td>
-
-                </tr>
-
-              <% end %>
-            </tbody>
-          <!--Table body-->
-        </table>
-
-
-
-      </div>
-
-
 
       <%= submit_tag "Borrar seleccionados", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
       <% end %>
@@ -69,8 +54,6 @@
 
       <br>
       <%= link_to '+ Crear', new_supervisor_path, class: "btn btn-success"%>
-
-
 
     </div>
   </div>
