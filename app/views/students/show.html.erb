@@ -78,6 +78,21 @@
         <%= @student.language %>
       </p>
 
+      <p>
+        <strong>CCA:</strong>
+        <%= @student.cca %>
+      </p>
+
+      <p>
+        <strong>Promotor:</strong>
+        <%= @student.promoter_name %>
+      </p>
+
+      <p>
+        <strong>Correo de promotor:</strong>
+        <%= @student.promoter_email %>
+      </p>
+
       <%= link_to 'Editar', edit_student_path(@student) %> |
       <%= link_to 'Atrás', students_path %>
 
