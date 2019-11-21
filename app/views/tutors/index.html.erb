@@ -22,6 +22,7 @@
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
             <th>Correo electrónico</th>
+            <th>Campus</th>
             <th colspan="4"></th>
           </tr>
         </thead>
@@ -35,6 +36,7 @@
               <td><%= tutor.first_last_name %></td>
               <td><%= tutor.second_last_name %></td>
               <td><%= tutor.email %></td>
+              <td><%= tutor.organization_code %></td>
               <td class=""><%= link_to 'Ver', tutor %></td>
               <td class=""><%= link_to 'Editar', edit_tutor_path(tutor) %></td>
               <td class=""><%= link_to 'Borrar', tutor, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %></td>
