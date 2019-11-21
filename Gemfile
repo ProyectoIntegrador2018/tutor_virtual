@@ -19,6 +19,10 @@ gem 'uglifier', '>= 1.3.0'
 # Enables Bootstrap v.4
 gem 'bootstrap', '~> 4.3.1'
 
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'
+
 # Enables JQuery
 gem 'jquery-rails'
 
