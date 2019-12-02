@@ -7,9 +7,9 @@
       <h3><%= @group.course.name %></h3>
       <h3>Grupo: <%= @group.group_number %></h3> <br>
 
-      <h2>PARTICIPANTES INSCRITOS</h2>
+      <h2>Partcipantes Inscritos</h2>
+      <%= form_tag remove_students_groups_path(group: @group), method: :delete do %>
       <div class="scroll">
-          <% @group.students.each do |student| %>
           <table class="table table-hover table-fixed">
             <thead >
               <tr>
@@ -24,6 +24,7 @@
               </tr>
             </thead>
 
+            <% @group.students.each do |student| %>
               <tbody>
               <tr>
                 <td><%= student.name %></td>
@@ -34,24 +35,30 @@
                 <td><%= student.promoter_email %></td>
                 <td><%= student.partner %></td>
                 <td><%= student.country %></td>
+
                 <td>
-                  <%= link_to delete_student_groups_path(group: @group, student: student),  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' } do %>
-                  Borrar Todos
+                  <%= link_to delete_student_groups_path(group: @group, student: student),  method: :delete, :class => "buttond", data: { confirm: 'Esta Seguro?' }, class: "btn btn-sm" do %>
+                  Borrar
                   <% end %>
                 </td>
 
+                <td class=""><%= check_box_tag "student_ids[]", student.id, false, class: 'selectable' %></td>
+
               </tr>
             </tbody>
+            <% end %>
           </table>
-          <% end %>
 
 
       </div>
+      <br>
+      <%= submit_tag "Borrar seleccionados", :class => "btn", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
+      <% end %>
+      <br>
 
-      <h2>PARTICIPANTES SIN GRUPO</h2>
-
+      <h2>Partcipantes No Inscritos</h2>
+        <%= form_tag add_many_students_groups_path(group: @group), method: :post do %>
         <div class="scroll">
-          <% @result.each do |student| %>
           <table class="table table-hover table-fixed">
               <thead >
                 <tr>
@@ -66,29 +73,41 @@
                 </tr>
               </thead>
 
+              <% @result.each do |student| %>
               <tbody>
               <tr>
                 <td><%= student.name %></td>
                 <td><%= student.first_last_name %></td>
                 <td><%= student.second_last_name %></td>
+                <td><%= student.cca %></td>
                 <td><%= student.promoter_name %></td>
                 <td><%= student.promoter_email %></td>
                 <td><%= student.partner %></td>
                 <td><%= student.country %></td>
                 <td>
                   <%= form_tag add_student_groups_path(group: @group, student: student) do %>
-                  <%= button_tag type: 'submit', class: "button" do %>
-                  AGREGAR PARTICIPANTE
+                  <%= button_tag type: 'submit', class: "btn btn-sm" do %>
+                  Agregar
                   <% end %>
-                  <% end %>
+                <% end %>
                 </td>
+
+                <td class=""><%= check_box_tag "student_ids[]", student.id, false, class: 'selectable' %></td>
+
               </tr>
             </tbody>
+            <% end %>
           </table>
-          <% end %>
         </div>
 
-      <%= link_to 'Back', groups_path %>
+        <br>
+
+        <%= submit_tag "Agregar seleccionados", :class => "btn", data: { confirm: '¿Desea Continuar?' } %>
+        <% end %>
+        <br>
+
+
+      <%= link_to 'Regresar', groups_path, class: "btn"%>
 
     </div>
   </div>
