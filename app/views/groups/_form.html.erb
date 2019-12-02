@@ -13,22 +13,37 @@
 
   <div class="field">
     <%= form.label :group_number, 'Número de grupo' %>
-    <%= form.number_field :group_number %>
+    <%= form.number_field :group_number, value: @group_num%>
   </div>
 
-  <div class="field">
-    <%= form.label :course_id, 'Curso' %>
-    <%= form.text_field :course_id %>
-  </div>
+  <%  if params[:course_id] %>
+
+    <div class="field">
+      <%= form.label :course_id, "#{@course.name}" %>
+
+      <%= form.text_field :course_id, value: params[:course_id]  %>
+
+    </div>
+
+  <% else %>
+
+    <div class="field">
+      <%= form.label :course_id, 'Curso' %>
+      <%= form.text_field :course_id %>
+    </div>
+
+  <% end %>
+
+
 
   <div class="field">
     <%= form.label :tutor_id, 'Tutor' %>
-    <%= form.text_field :tutor_id %>
+    <%= select("group", "tutor_id", @tutors.collect {|tutor| [ "#{tutor.organization_code} __________ #{tutor.name} #{tutor.first_last_name}  #{tutor.second_last_name}", tutor.id ] })%>
   </div>
 
   <div class="field">
     <%= form.label :supervisor_id, 'Supervisor' %>
-    <%= form.text_field :supervisor_id %>
+    <%= select("group", "supervisor_id", @supervisors.collect {|supervisor| [ "#{supervisor.organization_code} __________ #{supervisor.name} #{supervisor.first_last_name}  #{supervisor.second_last_name}", supervisor.id ] })%>
   </div>
 
   <div class="actions">

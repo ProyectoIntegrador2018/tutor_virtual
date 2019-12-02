@@ -41,10 +41,67 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
+    @course = Course.all.where(id: params[:course_id]).take
+
+    last_group = Group.where(course_id: params[:course_id]).last
+    if last_group == nil
+      @group_num = 1
+    else
+      @group_num = last_group.group_number + 1
+    end
+
+
+
+    tutors_ins = []
+    tutors_not_ins = []
+
+     Tutor.all.order("organization_code").each do |tutor|
+       tutors_not_ins.push(tutor)
+     end
+
+    Group.all.each do |group|
+      tutors_ins.push(group.tutor)
+    end
+
+
+    @tutors = (tutors_not_ins - tutors_ins)
+
+    @supervisors = Supervisor.all
+
   end
 
   # GET /groups/1/edit
   def edit
+
+    @group_num = @group.group_number
+
+    tutors_ins = []
+    tutors_not_ins = []
+
+     Tutor.all.order("organization_code").each do |tutor|
+       tutors_not_ins.push(tutor)
+     end
+
+    Group.all.each do |group|
+      tutors_ins.push(group.tutor)
+    end
+
+
+    @tutors = [@group.tutor] + (tutors_not_ins - tutors_ins)
+
+    @supervisors = [@group.supervisor] + Supervisor.all
+  end
+
+  def export
+    @groups = Group.where(course_id: params[:course_id])
+    @coordinator = Coordinator.all.take
+    @stakeholders = Stakeholder.all.take
+
+    respond_to do |format|
+
+      format.xlsx {render xlsx: 'export'}
+      format.html
+    end
   end
 
   # POST /groups
@@ -69,8 +126,30 @@ class GroupsController < ApplicationController
 
   end
 
+  def add_many_students
+    if params[:student_ids]
+      params[:student_ids].each do |student|
+        Group.add_student(params[:group], student)
+      end
+    end
+
+    redirect_to "#{groups_path}/#{params[:group]}"
+
+  end
+
   def delete_student
     Group.delete_student(params[:group], params[:student])
+    redirect_to "#{groups_path}/#{params[:group]}"
+
+  end
+
+  def remove_students
+    if params[:student_ids]
+      params[:student_ids].each do |student|
+        Group.delete_student(params[:group], student)
+      end
+    end
+
     redirect_to "#{groups_path}/#{params[:group]}"
 
   end

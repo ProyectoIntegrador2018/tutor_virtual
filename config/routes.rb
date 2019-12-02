@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
           collection { get :export}
+
 	    end
 
       resources :groups do
@@ -19,6 +20,10 @@ Rails.application.routes.draw do
           collection { delete :destroy_all}
           collection { post :add_student}
           collection { delete :delete_student}
+          collection { get :export}
+
+          collection { delete :remove_students}
+          collection { post :add_many_students}
 	    end
 
       resources :supervisors do

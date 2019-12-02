@@ -47,9 +47,9 @@
               <td><%= group.group_number %></td>
               <td><%= group.tutor.name %></td>
               <td><%= group.supervisor.name %></td>
-              <td><%= link_to 'Show', group %></td>
-              <td><%= link_to 'Edit', edit_group_path(group) %></td>
-              <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Ver', group %></td>
+              <td><%= link_to 'Editar', edit_group_path(group) %></td>
+              <td><%= link_to 'Eliminar', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               <td class=""><%= check_box_tag "group_ids[]", group.id, false, class: 'selectable' %></td>
             </tr>
             <% end %>
@@ -57,26 +57,34 @@
         </table>
       </div>
 
-      <%= submit_tag "Borrar seleccionados", :class => "buttond", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
-      <% end %>
-
-
-
-
-      <table>
-
-      </table>
-
       <br>
 
-      <%= link_to 'Nuevo Grupo', new_group_path %>
 
-      <% if @groups.take != nil %>
 
-      <%= link_to groups_path(format: :csv, course_id: @groups.take.course.id), :class => "button" do %>
-        Descargar CSV
+      <%= submit_tag "Borrar seleccionados", :class => "btn", data: { confirm: '¿Esta seguro que desea eliminar este curso de forma permanente?' } %>
+
       <% end %>
+
+      <br>
+      <%  if params[:course_id] %>
+
+      <%= link_to 'Nuevo Grupo', new_group_path(course_id: params[:course_id]), class: "btn "  %>
+
+        <% if @groups.take != nil %>
+
+        <%= link_to 'Descargar Excel', export_groups_path(format: :xlsx, course_id: @groups.take.course.id), class: "btn" %>
+
+        <% end %>
+
       <% end %>
+
+
+
+
+
+
+
+
 
 
 

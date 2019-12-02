@@ -65,6 +65,7 @@
       <% end %>
 
       <%= link_to '+ Crear Curso', new_course_path, class: "btn btn-success"%>
+      <%= link_to 'Download spreadsheet', export_courses_path(format: :xlsx) %>
 
 
     </div>
