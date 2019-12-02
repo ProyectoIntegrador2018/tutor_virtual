@@ -22,6 +22,11 @@ class CoordinatorsController < ApplicationController
     @coordinator = Coordinator.new
   end
 
+  def import
+   Coordinator.import(params[:file])
+   redirect_to coordinators_path
+  end
+
   # GET /coordinators/1/edit
   def edit
   end

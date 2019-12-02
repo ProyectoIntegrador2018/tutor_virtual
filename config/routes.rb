@@ -29,14 +29,17 @@ Rails.application.routes.draw do
       resources :supervisors do
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+          collection { post :import }
 	    end
 
       resources :stakeholders do
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
+          collection { post :import }
 	    end
 
       resources :coordinators do
+          collection { post :import }
 		      collection { delete :destroy_multiple }
           collection { delete :destroy_all}
 

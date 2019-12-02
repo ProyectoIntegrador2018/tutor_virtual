@@ -56,6 +56,16 @@
       <br>
       <%= link_to '+ Crear', new_supervisor_path, class: "btn btn-success"%>
 
+      <br>
+      <h3>Importar Excel</h3>
+
+      <%= form_tag import_supervisors_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= button_tag type: 'submit', class: "button" do %>
+                Subir CSV
+            <% end %>
+      <% end %>
+
     </div>
   </div>
 </div>
