@@ -12,6 +12,9 @@ class Tutor < ApplicationRecord
 
 		xlsx = Roo::Spreadsheet.open(file.path)
     xlsx.drop(1).each do |row|
+
+      username = row[0]
+
       if !all_tutors.include?(username)
         str = (0...6).map { o[rand(o.length)] }.join
         Tutor.create(
