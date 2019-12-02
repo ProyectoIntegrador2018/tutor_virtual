@@ -14,9 +14,6 @@ class Student < ApplicationRecord
       all_courses[course.name] = course
     end
 
-    puts all_courses
-
-
 		xlsx = Roo::Spreadsheet.open(file.path)
     xlsx.drop(1).each do |row|
 

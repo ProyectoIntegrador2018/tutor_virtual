@@ -1,9 +1,38 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Buttons") do |sheet|
 
-  sheet.add_row ["Usuario", "Contraseña", "Nombre", "Paterno", "Materno"]
+  sheet.add_row [ "Usuario",
+                  "Contraseña",
+                  "Nombre",
+                  "Paterno",
+                  "Materno",
+                  "Email",
+                  "Correo",
+                  "Pais",
+                  "Estado",
+                  "Ciudad/Municipio",
+                  "Socio",
+                  "Organización",
+                  "Idioma",
+                  "Género (F / M)",
+                  "Fecha de nacimiento",
+                  "Teléfono",]
 
   @tutors.each do |tutor|
-    sheet.add_row [tutor.username, tutor.internal_password, tutor.name, tutor.first_last_name, tutor.second_last_name]
+    sheet.add_row [ tutor.username,
+                    tutor.internal_password,
+                    tutor.name,
+                    tutor.first_last_name,
+                    tutor.second_last_name,
+                    tutor.email,
+                    tutor.country,
+                    tutor.state,
+                    tutor.city,
+                    tutor.partner,
+                    tutor.organization_code,
+                    tutor.language,
+                    tutor.gender,
+                    tutor.dob,
+                    tutor.phone_number]
   end
 end

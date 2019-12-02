@@ -15,7 +15,7 @@ wb.add_worksheet(name: "Buttons") do |sheet|
                   "Rol",
                   "Clave_curso",
                   "Clave_grupo",
-                  "idioma",
+                  "Idioma",
                   "Estatus_usuario",
                   "Estatus_inscripcion",
                   "ABC Comando Ed.Continua",

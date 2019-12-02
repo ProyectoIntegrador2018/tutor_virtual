@@ -21,6 +21,11 @@ class StakeholdersController < ApplicationController
     @stakeholder = Stakeholder.new
   end
 
+  def import
+   Stakeholder.import(params[:file])
+   redirect_to stakeholders_path
+  end
+
   # GET /stakeholders/1/edit
   def edit
   end

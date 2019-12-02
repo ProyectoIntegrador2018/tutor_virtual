@@ -21,6 +21,11 @@ class SupervisorsController < ApplicationController
     @supervisor = Supervisor.new
   end
 
+  def import
+   Supervisor.import(params[:file])
+   redirect_to supervisors_path
+  end
+
   # GET /supervisors/1/edit
   def edit
   end
